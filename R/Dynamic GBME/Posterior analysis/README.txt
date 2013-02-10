@@ -1,0 +1,1 @@
+The file posterior.analysis.R generates graphs and tables in the paper. Output folders output.y and output.m must be contained in this directory for this to work.
