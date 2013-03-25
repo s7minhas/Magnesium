@@ -43,12 +43,14 @@ layout.svd3 <- function (graph, d = shortest.paths(graph), ...)
 # Plotting networks
 setwd(pathGraphics)
 years <- seq(1971, 2000, 1)
-pdf(file='weightedNetworkPlot.pdf', height=12, width=16)
+pdf(file='SanctionNetworkPlot.pdf', height=12, width=16)
 par(mfrow=c(6,5),mar=c(2, 2, 2, 2)*0.5, mgp=c(0,0,0), oma=c(0,0,0,0))
 for(ii in 1:length(sanctionDyadData)){
 	sanctions<- sanctionDyadData[[ii]]
 	# Drop -99s
 	sanctions <- sanctions[1:(nrow(sanctions)-1), 1:(ncol(sanctions)-1)]
+	sanctions <- sanctions/sanctions
+	sanctions[is.na(sanctions)] <- 0
 	rows<-rowSums(sanctions)==0
 	cols<-colSums(sanctions)==0
 	both<-rows*cols
@@ -60,8 +62,8 @@ for(ii in 1:length(sanctionDyadData)){
 	plot(sanction.grW, layout=layout.kamada.kawai, main=years[ii],vertex.size=4,
 	          vertex.label=V(sanction.grW)$name, vertex.label.dist=0.5,
 	          vertex.color="gray", vertex.label.color="black", 
-	          edge.arrow.size=0.5, edge.color='deepskyblue3',
-	          edge.width=E(sanction.grW)$weight,
+	          edge.arrow.size=0.1, edge.color='deepskyblue3',
+	          edge.width=E(sanction.grW)$weight/10,
 	          vertex.label.cex=.74,edge.curved=T, vertex.label.dist=0.5)
 }
 dev.off()

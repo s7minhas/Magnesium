@@ -33,8 +33,24 @@ load('dataStructure.rda')
 # Add a -99 code for each year in cowPanel, makes it easier to 
 # deal with -99 in sanctionData
 cowPanel <- rbind(cowPanel, cbind(cowcode=-99, year=years))
+# These are all temporary fixes they are needed because these countries are
+# listed as having sanctions before they are classified as being existing
+# by the COW codes in the cshapes package
+# Lithuania Fix
+cowPanel <- rbind(cowPanel, cbind(cowcode=368, year=c(1990,1991)))
+# Latvia Fix
+cowPanel <- rbind(cowPanel, cbind(cowcode=367, year=c(1990,1991)))
+# Estonia Fix
+cowPanel <- rbind(cowPanel, cbind(cowcode=366, year=c(1990,1991)))
+# Slovenia Fix
+cowPanel <- rbind(cowPanel, cbind(cowcode=349, year=c(1990,1991)))
+# Azerbaijan Fix
+cowPanel <- rbind(cowPanel, cbind(cowcode=373, year=c(1991)))
+# Armenia Fix
+cowPanel <- rbind(cowPanel, cbind(cowcode=371, year=c(1991)))
 # Germany Fix
 cowPanel$cowcode[cowPanel$cowcode==260] <- 255
+cowPanel$cowcode[cowPanel$cowcode==265] <- 255
 
 
 # Setting up list of country names in existence for time period of analysis
@@ -48,9 +64,12 @@ for(ii in 1:length(years)){
 sanctionData$endyear2 <- sanctionData$endyear
 sanctionData$endyear2[sanctionData$endyear2==-99] <- 2020
 sanctionData <- sanctionData[sanctionData$targetstate!=1000,]
+sanctionData <- sanctionData[sanctionData$targetstate!=1001,]
+sanctionData <- sanctionData[sanctionData$targetstate!=1002,]
 
 # Germany Fix
 sanctionData$targetstate[sanctionData$targetstate==260] <- 255
+sanctionData$targetstate[sanctionData$targetstate==265] <- 255
 sanctionData$sender1[sanctionData$sender1==260] <- 255
 sanctionData$sender2[sanctionData$sender2==260] <- 255
 sanctionData$sender3[sanctionData$sender3==260] <- 255
@@ -64,18 +83,22 @@ for(ii in 1:length(years)){
 	temp <- sanctionData[years[ii]>=sanctionData$startyear & years[ii]<=sanctionData$endyear2, 
 		c('startyear', 'endyear2', 'sender1', 'sender2', 'sender3', 'sender4', 'sender5', 
 			'primarysender', 'targetstate')]  
+	
+	cntry <- cowcodesYear[[ii]]
+	temp3 <- matrix(0, nrow=length(cntry), ncol=length(cntry), dimnames=list(cntry, cntry))
+	
 	for(jj in 1:ncol(t(temp))){
 		senders <- as.character(as.vector(t(temp)[3:7,jj]))
 		senderPrim <- as.character(as.vector(t(temp)[8,jj]))
 		target <- as.character(as.vector(t(temp)[9,jj]))
+
+		temp2 <- matrix(0, nrow=length(cntry), ncol=length(cntry), dimnames=list(cntry, cntry))
+		temp2[senders, target] <- 1
+		temp2[senderPrim, target] <- 2
+		temp3 <- temp3 + temp2
 	}
 
-	cntry <- cowcodesYear[[ii]]
-	temp2 <- matrix(NA, nrow=length(cntry), ncol=length(cntry), dimnames=list(cntry, cntry))
-	temp2[senders, target] <- 1
-	temp2[senderPrim, target] <- 2
-	temp2[is.na(temp2)] <- 0
-	sanctionDyadData[[ii]] <- temp2
+	sanctionDyadData[[ii]] <- temp3
 }
 
 setwd(pathData)
