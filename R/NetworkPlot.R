@@ -13,6 +13,11 @@ if(Sys.info()["user"]=="janus829")
 setwd(pathData)
 load('sanction.rda')
 
+# Clean sanctions network data by dropping -99s
+remove <- '-99'
+sanctionDyadData <- lapply(sanctionDyadData, 
+	function(x) FUN=x[!rownames(x) %in% remove, !colnames(x) %in% remove])
+
 ###################################################
 # Loading libraries and functions
 library(bipartite)
@@ -47,8 +52,7 @@ pdf(file='SanctionNetworkPlot.pdf', height=12, width=16)
 par(mfrow=c(6,5),mar=c(2, 2, 2, 2)*0.5, mgp=c(0,0,0), oma=c(0,0,0,0))
 for(ii in 1:length(sanctionDyadData)){
 	sanctions<- sanctionDyadData[[ii]]
-	# Drop -99s
-	sanctions <- sanctions[1:(nrow(sanctions)-1), 1:(ncol(sanctions)-1)]
+	# Not accounting for sender prim
 	sanctions <- sanctions/sanctions
 	sanctions[is.na(sanctions)] <- 0
 	rows<-rowSums(sanctions)==0
@@ -59,7 +63,9 @@ for(ii in 1:length(sanctionDyadData)){
 
 	sanction.grW <- graph.adjacency(sanctions, mode='directed', weighted=T, diag=F)
 
-	plot(sanction.grW, layout=layout.kamada.kawai, main=years[ii],vertex.size=4,
+	# layout.kamada.kawai
+	# layout.fruchterman.reingold
+	plot(sanction.grW, layout=layout.fruchterman.reingold, main=years[ii],vertex.size=4,
 	          vertex.label=V(sanction.grW)$name, vertex.label.dist=0.5,
 	          vertex.color="gray", vertex.label.color="black", 
 	          edge.arrow.size=0.1, edge.color='deepskyblue3',
