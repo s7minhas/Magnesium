@@ -94,7 +94,7 @@ for(ii in 1:length(years)){
 
 		temp2 <- matrix(0, nrow=length(cntry), ncol=length(cntry), dimnames=list(cntry, cntry))
 		temp2[senders, target] <- 1
-		temp2[senderPrim, target] <- 2
+		temp2[senderPrim, target] <- 1
 		temp3 <- temp3 + temp2
 	}
 
