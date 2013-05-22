@@ -48,7 +48,7 @@ layout.svd3 <- function (graph, d = shortest.paths(graph), ...)
 # Plotting networks
 setwd(pathGraphics)
 years <- seq(1971, 2000, 1)
-pdf(file='SanctionNetworkPlot.pdf', height=12, width=16)
+# pdf(file='SanctionNetworkPlot.pdf', height=12, width=16)
 par(mfrow=c(6,5),mar=c(2, 2, 2, 2)*0.5, mgp=c(0,0,0), oma=c(0,0,0,0))
 for(ii in 1:length(sanctionDyadData)){
 	sanctions<- sanctionDyadData[[ii]]
@@ -59,7 +59,8 @@ for(ii in 1:length(sanctionDyadData)){
 	cols<-colSums(sanctions)==0
 	both<-rows*cols
 	bothsub<-both[both==0]
-	sanctions <- sanctions[match(names(bothsub),rownames(sanctions)),match(names(bothsub),colnames(sanctions))]
+	sanctions <- sanctions[match(names(bothsub),rownames(sanctions)),
+		match(names(bothsub),colnames(sanctions))]
 
 	sanction.grW <- graph.adjacency(sanctions, mode='directed', weighted=T, diag=F)
 
@@ -71,8 +72,10 @@ for(ii in 1:length(sanctionDyadData)){
 	          edge.arrow.size=0.1, edge.color='deepskyblue3',
 	          edge.width=E(sanction.grW)$weight/10,
 	          vertex.label.cex=.74,edge.curved=T, vertex.label.dist=0.5)
+
+
 }
-dev.off()
+# dev.off()
 ###################################################
 
 setwd(pathData)

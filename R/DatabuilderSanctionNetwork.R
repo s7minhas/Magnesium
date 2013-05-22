@@ -11,7 +11,7 @@ if(Sys.info()["user"]=="janus829")
 
 # Loading Excel data from UNC
 setwd(pathData)
-sanctionData <- read.csv('SanctionsDataV3.5.csv')
+sanctionData <- read.csv('SanctionsDataV3.5vSM_GermanyFix.csv')
 
 # Creating frame for dataset
 # date params for cshapes
@@ -49,8 +49,8 @@ cowPanel <- rbind(cowPanel, cbind(cowcode=373, year=c(1991)))
 # Armenia Fix
 cowPanel <- rbind(cowPanel, cbind(cowcode=371, year=c(1991)))
 # Germany Fix
-cowPanel$cowcode[cowPanel$cowcode==260] <- 255
-cowPanel$cowcode[cowPanel$cowcode==265] <- 255
+# cowPanel$cowcode[cowPanel$cowcode==260] <- 255
+# cowPanel$cowcode[cowPanel$cowcode==265] <- 255
 
 
 # Setting up list of country names in existence for time period of analysis
@@ -68,14 +68,14 @@ sanctionData <- sanctionData[sanctionData$targetstate!=1001,]
 sanctionData <- sanctionData[sanctionData$targetstate!=1002,]
 
 # Germany Fix
-sanctionData$targetstate[sanctionData$targetstate==260] <- 255
-sanctionData$targetstate[sanctionData$targetstate==265] <- 255
-sanctionData$sender1[sanctionData$sender1==260] <- 255
-sanctionData$sender2[sanctionData$sender2==260] <- 255
-sanctionData$sender3[sanctionData$sender3==260] <- 255
-sanctionData$sender4[sanctionData$sender4==260] <- 255
-sanctionData$sender5[sanctionData$sender5==260] <- 255
-sanctionData$primarysender[sanctionData$primarysender==260] <- 255
+# sanctionData$targetstate[sanctionData$targetstate==260] <- 255
+# sanctionData$targetstate[sanctionData$targetstate==265] <- 255
+# sanctionData$sender1[sanctionData$sender1==260] <- 255
+# sanctionData$sender2[sanctionData$sender2==260] <- 255
+# sanctionData$sender3[sanctionData$sender3==260] <- 255
+# sanctionData$sender4[sanctionData$sender4==260] <- 255
+# sanctionData$sender5[sanctionData$sender5==260] <- 255
+# sanctionData$primarysender[sanctionData$primarysender==260] <- 255
 cowPanel$sanction <- NA
 
 sanctionDyadData <- list()
@@ -103,29 +103,3 @@ for(ii in 1:length(years)){
 
 setwd(pathData)
 save(sanctionDyadData, file='sanction.rda')
-
-###################################################
-# Building data for prelim model
-# Structure: dyadic
-# DV: regime stability
-# IVs: sanction, sanction weighted by trade, 
-
-
-## Zachary's karate club
-g <- graph.famous("Zachary")
-
-## We put everything into a big 'try' block, in case 
-## igraph was compiled without GLPK support
-
-try({
-  ## The calculation only takes a couple of seconds
-  oc <- optimal.community(g)
-
-  ## Double check the result
-  print(modularity(oc))
-  print(modularity(g, membership(oc)))
-
-  ## Compare to the greedy optimizer
-  fc <- fastgreedy.community(g)
-  print(modularity(fc))
-}, silent=TRUE)
