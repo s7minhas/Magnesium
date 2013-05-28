@@ -13,7 +13,6 @@ if(Sys.info()["user"]=="janus829")
 	pathDataC="~/Dropbox/Research/Magnesium/Data/Components"}
 
 # Libraries and functions
-require(plm)
 require(lme4)
 ####################################################################################	
 
@@ -22,17 +21,15 @@ require(lme4)
 setwd(pathData)
 load('dataForAnalysisV1.rda')
 modelData <- na.omit(analysisData)
-modelData <- modelData[,c(2,6:11)]
-modelData <- pdata.frame(modelData, c('ccode', 'year'))
 ####################################################################################	
 
 ####################################################################################	
 # Running model
 results1 <- lmer(int_conflict ~ polity + log(gdp_capita) + sancTrade +
- (1 | ccode), data=analysisData)
+ (1 | ccode), data=modelData)
 summary(results1)
 
 results2 <- lmer(govt_stab ~ polity + log(gdp_capita) + sancTrade +
- (1 | ccode), data=analysisData)
+ (1 | ccode), data=modelData)
 summary(results2)
 ####################################################################################
