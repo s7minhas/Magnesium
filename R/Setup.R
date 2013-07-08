@@ -9,6 +9,12 @@ if(Sys.info()["user"]=="janus829")
 	pathFunctions="~/Desktop/Prog Notes/R Functions";
 	pathData="~/Dropbox/Research/Magnesium/Data"}
 
+
+if(Sys.info()["user"]=="cassydorff")
+{pathMain="~/ProjectsGit/Magnesium/R";
+	pathGraphics="~/Dropbox/My Research/Magnesium";
+	pathData="~/Dropbox/My Research/Magnesium/Data"}
+
 # Loading libraries and functions
 library(ggplot2)
 theme_set(theme_bw())
