@@ -1,7 +1,6 @@
 # Need to pull out sanction variable for use in analysis
 # Clearing workspace
 rm(list=ls())
-
 # Setting working directory
 if(Sys.info()["user"]=="janus829")
 {pathMain="~/Desktop/Research/Magnesium/R";
@@ -16,7 +15,9 @@ if(Sys.info()["user"]=="cassydorff")
 	pathData="~/Dropbox/My Research/Magnesium/Data"}
 
 # Loading libraries and functions
-library(ggplot2)
+require(ggplot2)
 theme_set(theme_bw())
-library(reshape)
-library(foreign)
+require(reshape)
+require(foreign)
+require(cshapes)
+require(countrycode)
