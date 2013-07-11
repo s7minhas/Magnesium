@@ -30,7 +30,7 @@ ctyNameSend5<-t(t((countrycode(to.change5, "cown", "country.name"))))
 
 sancIDs<-data.frame(unique(cbind(
 	rbind(to.change, to.changeps, to.change1,to.change2, to.change3, to.change4, to.change5),
-	rbind(ctyNameTar, ctyNameSendps, ctyNameSend1,ctyNameSend2, ctyNameSend3, ctyNameSend4, ctyNameSend5)) ) )
+	rbind(ctyNameTar, ctyNameSendps, ctyNameSend1,ctyNameSend2, ctyNameSend3, ctyNameSend4, ctyNameSend5))))
 
 sancIDs[is.na(sancIDs$X2),]
 
