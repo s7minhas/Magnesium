@@ -21,3 +21,6 @@ require(reshape)
 require(foreign)
 require(cshapes)
 require(countrycode)
+
+# Additional functions
+trim <- function (x) gsub("^\\s+|\\s+$", "", x)
