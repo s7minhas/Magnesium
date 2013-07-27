@@ -320,5 +320,6 @@ warFINAL <- war3
 #-------
 #saving cleaned cow data
 #-------
+setwd(pathData)
 save(tradeFINAL, igoFINAL, allianceFINAL, religionFINAL, warFINAL,
 	file='megaDataClean.rda')
