@@ -11,58 +11,6 @@ load('~/Desktop/Research/BuildingPanelData/panel.rda')
 ###############################################################
 # Organizing WB data
 ### Fx for Melting/Cleaning WB Data for Merge
-
-cleanWbData <- function(data, variable){
-	var <- variable
-	mdata <- melt(data, id=c('Country.Name', 'Country.Code'))
-	names(mdata)[4] <- var
-	mdata$year <-  as.numeric(as.character(substring(mdata$variable,2)))
-	mdata <- mdata[,c(1,2,5,4)]
-
-	# Remove non-country observations and small islands/territories
-	drop <- c('Arab World', 'Caribbean small states', 
-		'East Asia & Pacific (all income levels)', 
-		'East Asia & Pacific (developing only)', 'Euro area', 
-		'Europe & Central Asia (all income levels)', 
-		'Europe & Central Asia (developing only)', 
-		'European Union', 'Heavily indebted poor countries (HIPC)', 
-		'High income', 'High income: nonOECD', 'High income: OECD', 
-		'Latin America & Caribbean (all income levels)', 
-		'Latin America & Caribbean (developing only)', 
-		'Least developed countries: UN classification', 
-		'Low & middle income', 'Low income', 'Lower middle income', 
-		'Middle East & North Africa (all income levels)', 
-		'Middle East & North Africa (developing only)', 'Middle income', 
-		'North America', 'Not classified', 'OECD members', 
-		'Other small states', 'Pacific island small states', 
-		'Small states', 'South Asia', 
-		'Sub-Saharan Africa (all income levels)', 
-		'Sub-Saharan Africa (developing only)', 'Upper middle income', 
-		'World',
-		 "American Samoa",            "Aruba",                    
-		 "Bermuda",                   "Cayman Islands", "Channel Islands",          
-		 "Curacao",                   "Faeroe Islands",           
-		 "French Polynesia",          "Greenland",                
-		 "Guam",                      "Hong Kong SAR, China",     
-		 "Isle of Man",               "Macao SAR, China",         
-		 "New Caledonia",             "Northern Mariana Islands", 
-		 "Puerto Rico",               "Sint Maarten (Dutch part)",
-		 "St. Martin (French part)",  "Turks and Caicos Islands", 
-		 "Virgin Islands (U.S.)",     "West Bank and Gaza")
-	mdata <- mdata[which(!mdata$Country.Name %in% drop),]
-
-	# Setting standardized countryname for WB data
-	mdata$Country.Name <- as.character(mdata$Country.Name)
-	mdata$Country.Name[mdata$Country.Name=='Korea, Dem. Rep.'] <- 'North Korea' 
-	mdata$Country.Name[mdata$Country.Name=='Korea, Rep.'] <- 'South Korea' 
-	mdata$cname <- countrycode(mdata$Country.Name, 'country.name', 'country.name')
-	mdata$cnameYear <- paste(mdata$cname, mdata$year, sep='')
-	
-	# Adding in codes from panel
-	mdata$ccode <- panel$ccode[match(mdata$cname,panel$cname)]
-	mdata$cyear <- paste(mdata$ccode, mdata$year, sep='')
-	mdata }
-
 setwd(paste(pathData, '/Components',sep=''))
 WBgdp <- read.csv('NY.GDP.MKTP.CD_Indicator_MetaData_en_EXCEL.csv')
 WBgdpCap <- read.csv('NY.GDP.PCAP.CD_Indicator_MetaData_en_EXCEL.csv')

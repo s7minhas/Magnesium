@@ -5,33 +5,28 @@
 #Setup
 source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 load('/Users/janus829/Desktop/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
-
 # source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
 # load('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/BuildingPanelData/panel.rda')
 
-# Data
+###############################################################
+# Load Data
 # setwd(paste(pathData, '/Components/COW_Trade_3.0', sep=''))
 # trade <- read.csv('dyadic_trade_3.0vSM.csv')
-
 # setwd(paste(pathData, '/Components/COW_IGO', sep=''))
 # igo <- read.dta('IGO_dyadunit_stata_v2.3.dta')
-
 # setwd(paste(pathData, '/Components/COW_Religion', sep=''))
 # religion <- read.csv('WRD_national.csv')
-
 # setwd(paste(pathData, '/Components/PRIO_ArmedConflict', sep=''))
 # war <- read.csv('ucdp.prio.armed.conflict.v4.2013.csv')
-
 # setwd(paste(pathData, '/Components/COW_Alliances/version4.1_stata', sep=''))
 # alliance <- read.dta('alliance_v4.1_by_directed_yearly.dta')
-
 setwd(paste(pathData, '/Components',sep=''))
 # save(trade, igo, religion, war, alliance, file='megaData.rda')
 load('megaData.rda')
+###############################################################
 
-#-------
-#trade
-#-------
+###############################################################
+# Clean Trade
 trade$ccode1<-as.numeric(as.character(trade$ccode1))
 trade$ccode2<-as.numeric(as.character(trade$ccode2))
 
@@ -88,10 +83,10 @@ trade2$cname_1 <- sancIDs2$cname[match(trade2$cowcode1, sancIDs2$cowcode)]
 trade2$cname_2 <- sancIDs2$cname[match(trade2$cowcode2, sancIDs2$cowcode)]
 
 tradeFINAL <- trade2
+###############################################################
 
-#-------
-#igo
-#-------
+###############################################################
+# Clean IGO data
 igo$ccode1<-as.numeric(as.character(igo$ccode1))
 igo$ccode2<-as.numeric(as.character(igo$ccode2))
 
@@ -152,10 +147,10 @@ igo2$cname_1 <- sancIDs2$cname[match(igo2$cowcode1, sancIDs2$cowcode)]
 igo2$cname_2 <- sancIDs2$cname[match(igo2$cowcode2, sancIDs2$cowcode)]
 
 igoFINAL <- igo2
+###############################################################
 
-#-------
-#religion
-#-------
+###############################################################
+# Clean religion data
 religion$state<-as.numeric(as.character(religion$state))
 ctyNameA<-(countrycode(religion$state, "cown", "country.name"))
 sancIDs<-data.frame(unique(cbind(religion$state, ctyNameA)))
@@ -189,11 +184,10 @@ religion$ccode <- sancIDs2$ccode[match(religion$state, sancIDs2$cowcode)]
 religion$cname <- sancIDs2$cname[match(religion$state, sancIDs2$cowcode)]
 
 religionFINAL <- religion
+###############################################################
 
-#-------
-#alliance
-#-------
-
+###############################################################
+# Clean alliance data
 alliance$ccode1<-as.numeric(as.character(alliance$ccode1))
 alliance$ccode2<-as.numeric(as.character(alliance$ccode2))
 
@@ -247,10 +241,11 @@ alliance2$cname_1 <- sancIDs2$cname[match(alliance2$cowcode1, sancIDs2$cowcode)]
 alliance2$cname_2 <- sancIDs2$cname[match(alliance2$cowcode2, sancIDs2$cowcode)]
 
 allianceFINAL <- na.omit(alliance2)
+###############################################################
 
 
 ###############################################################
-# PRIO war
+# Clean PRIO War Data
 war2 <- war[war$Type==2,]
 war2 <- unique(war2[,c('ID','SideA', 'SideA2nd', 'SideB',  'SideB2nd', 'YEAR')])
 war2 <- war2[1:(nrow(war2)-1),]
@@ -315,6 +310,11 @@ war3 <- war3[!is.na(war3$ccode_1),]
 war3 <- war3[!is.na(war3$ccode_2),]
 
 warFINAL <- war3
+###############################################################
+
+###############################################################
+# Building matrices
+
 ###############################################################
 
 #-------
