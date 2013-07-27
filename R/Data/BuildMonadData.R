@@ -41,7 +41,6 @@ wbData <- data.frame(cbind(WBgdpClean,
 	fdi=WBfdiClean[,4],
 	fdiGdp=WBfdiGdpClean[,4],
 	population=WBpopClean[,4] ) )
-save(wbData, file='wbData.rda')
 ###############################################################
 
 ###############################################################
@@ -195,34 +194,25 @@ table(icrg2$cyear)[table(icrg2$cyear)>1] # Dupe check
 
 ###############################################################
 # Combining data
-setwd(pathData)
-save(icrg2, polity2, wbData,
-	constraints2, banks2,
-	file='cleanedData.rda')
-
-### Load setup
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
-setwd(pathData)
-load('cleanedData.rda')
-load('~/Desktop/Research/BuildingPanelData/panel.rda')
-
 frame <- unique(panel[,c('ccode', 'cname')])
 dframe <- NULL; frame$year <- NA; years <- seq(1960,2012,1)
 for(ii in 1:length(years)){
 	frame$year <- years[ii]; dframe <- rbind(dframe, frame) }
 dframe$cyear <- paste(dframe$ccode, dframe$year, sep='')
 dim(dframe)
-combData <- merge(dframe, wbData[,c(4,8:ncol(wbData))],by='cyear',all.x=T,all.y=F)
-unique(combData[is.na(combData$ccode), 1:5]); dim(combData)
-combData <- merge(combData, polity2[,c(7:35,ncol(polity2))],by='cyear',all.x=T,all.y=F)
-unique(combData[is.na(combData$ccode), 1:5]); dim(combData)
-combData <- merge(combData, icrg2[,c(5:16,ncol(icrg2))],by='cyear',all.x=T,all.y=F)
-unique(combData[is.na(combData$ccode), 1:5]); dim(combData)
-combData <- merge(combData, banks2[,c(5:13,ncol(banks2))],by='cyear',all.x=T,all.y=F)
-unique(combData[is.na(combData$ccode), 1:5]); dim(combData)
-combData <- merge(combData, constraints2[,c(8:10,ncol(constraints2))],by='cyear',all.x=T,all.y=F)
-unique(combData[is.na(combData$ccode), 1:5]); dim(combData)
+monadData <- merge(dframe, wbData[,c(4,8:ncol(wbData))],by='cyear',all.x=T,all.y=F)
+unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
+monadData <- merge(monadData, polity2[,c(7:35,ncol(polity2))],by='cyear',all.x=T,all.y=F)
+unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
+monadData <- merge(monadData, icrg2[,c(5:16,ncol(icrg2))],by='cyear',all.x=T,all.y=F)
+unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
+monadData <- merge(monadData, banks2[,c(5:13,ncol(banks2))],by='cyear',all.x=T,all.y=F)
+unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
+monadData <- merge(monadData, constraints2[,c(8:10,ncol(constraints2))],by='cyear',all.x=T,all.y=F)
+unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 
-save(combData, file='combinedData.rda')
-write.csv(combData, file='combinedData.csv')
+monadData <- monadData[monadData$year>=1960 & monadData$year<=2012,]
+
+setwd(pathData)
+save(monadData, file='monadData.rda')
 ###############################################################

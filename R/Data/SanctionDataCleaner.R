@@ -6,11 +6,13 @@
 source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 load('/Users/janus829/Desktop/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
 
+###############################################################
 setwd(paste(pathData, '/Components', sep=''))
-
-#data
+#data [sanction data extends from 1946 to 2012]
 sanctionData <- read.csv('TIESv4.csv')
+###############################################################
 
+###############################################################
 #add country names
 to.change<-t(t(sanctionData$targetstate))
 to.changeps<-t(t(sanctionData$primarysender))
@@ -51,8 +53,9 @@ sancIDs$cname[sancIDs$cname=='Yugoslavia'] <- 'SERBIA'
 sancIDs$cname[sancIDs$cname=='Czechoslovakia'] <- 'CZECH REPUBLIC'
 sancIDs$ccode <- panel$ccode[match(sancIDs$cname, panel$cname)]
 sancIDs[sancIDs$cname=='EU', 'ccode'] <- 1000
+###############################################################
 
-###
+###############################################################
 addMatcher <- function(newVarFromPanel, matchFromData, matchFromPanel){
 	newVarFromPanel[match(matchFromData, matchFromPanel)] }
 
@@ -64,6 +67,12 @@ temp2 <- apply(sanctionData[,vars], 2, function(x) FUN=addMatcher(sancIDs$ccode,
 colnames(temp2) <- paste(vars, '_ccode', sep='')
 
 sanctionDataFinal <- cbind(sanctionData, temp1, temp2)
+###############################################################
+
+###############################################################
+# Need to subset by relevant type of sanction and limit to 
+## only vars necessary
+###############################################################
 
 setwd(pathData)
 save(sanctionDataFinal, file='sanctionData.rda')

@@ -11,7 +11,7 @@ load('/Users/janus829/Desktop/Research/Magnesium/R/Data/BuildingPanelData/panel.
 ###############################################################
 # Load Data
 # setwd(paste(pathData, '/Components/COW_Trade_3.0', sep=''))
-# trade <- read.csv('dyadic_trade_3.0vSM.csv')
+# trade <- read.csv('dyadic_trade_3.0.csv')
 # setwd(paste(pathData, '/Components/COW_IGO', sep=''))
 # igo <- read.dta('IGO_dyadunit_stata_v2.3.dta')
 # setwd(paste(pathData, '/Components/COW_Religion', sep=''))
@@ -20,174 +20,97 @@ load('/Users/janus829/Desktop/Research/Magnesium/R/Data/BuildingPanelData/panel.
 # war <- read.csv('ucdp.prio.armed.conflict.v4.2013.csv')
 # setwd(paste(pathData, '/Components/COW_Alliances/version4.1_stata', sep=''))
 # alliance <- read.dta('alliance_v4.1_by_directed_yearly.dta')
-setwd(paste(pathData, '/Components',sep=''))
+setwd(pathData)
 # save(trade, igo, religion, war, alliance, file='megaData.rda')
 load('megaData.rda')
 ###############################################################
 
 ###############################################################
-# Clean Trade
-trade$ccode1<-as.numeric(as.character(trade$ccode1))
-trade$ccode2<-as.numeric(as.character(trade$ccode2))
+# Clean Trade [extends from 1860 to 2009]
+trade2 <- trade[,c('importer1', 'importer2', 'year', 'flow1', 'flow2')]
+colnames(trade2) <- c('state_name1', 'state_name2', 'year', 'imports', 'exports')
+trade2 <- trade2[trade2$year>=1970,]
 
-ctyNameA<-(countrycode(trade$ccode1, "cown", "country.name"))
-ctyNameB<-(countrycode(trade$ccode2, "cown", "country.name"))
+trade2$state_name1 <- as.character(trade2$state_name1)
+trade2$state_name2 <- as.character(trade2$state_name2)
 
-sancIDs<-data.frame(unique(cbind(trade$ccode1, trade$ccode2, ctyNameA, ctyNameB)))
+trade2$imports[trade2$imports==-9] <- 0 # setting missing to 0
+trade2$exports[trade2$exports==-9] <- 0 # setting missing to 0
 
-sancIDs$V1<- as.numeric(as.character(sancIDs$V1))
-sancIDs$V2 <- as.numeric(as.character(sancIDs$V2))
-sancIDs$ctyNameA <-as.character(sancIDs$ctyNameA)
-sancIDs$ctyNameB <-as.character(sancIDs$ctyNameB)
+trade2$state_name1[trade2$state_name1=='Democratic Republic of t'] <- 'Congo, Democratic Republic of'
+trade2$state_name2[trade2$state_name2=='Democratic Republic of t'] <- 'Congo, Democratic Republic of'
 
-#fix time
-sancIDs[sancIDs$V1==260,'ctyNameA'] <- 'GERMANY'
-sancIDs[sancIDs$V2==260,'ctyNameB'] <- 'GERMANY'
-sancIDs[sancIDs$V1==731,'ctyNameA'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
-sancIDs[sancIDs$V2==731,'ctyNameB'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
-sancIDs[sancIDs$V1==678,'ctyNameA'] <- 'YEMEN'
-sancIDs[sancIDs$V2==678,'ctyNameB'] <- 'YEMEN'
-sancIDs[sancIDs$V1==680,'ctyNameA'] <- 'S. YEMEN' 
-sancIDs[sancIDs$V2==680,'ctyNameB'] <- 'S. YEMEN' 
-sancIDs[sancIDs$V1==817,'ctyNameA'] <- 'S. VIETNAM'
-sancIDs[sancIDs$V2==817,'ctyNameB'] <- 'S. VIETNAM'
-sancIDs[sancIDs$V1==345,'ctyNameA'] <- 'SERBIA'
-sancIDs[sancIDs$V2==345,'ctyNameB'] <- 'SERBIA'
-sancIDs[sancIDs$V1==315,'ctyNameA'] <- 'CZECH REPUBLIC'
-sancIDs[sancIDs$V2==315,'ctyNameB'] <- 'CZECH REPUBLIC'
+trade2$state_name1[trade2$state_name1=='Democratic Republic of the Con'] <- 'Congo, Democratic Republic of'
+trade2$state_name2[trade2$state_name2=='Democratic Republic of the Con'] <- 'Congo, Democratic Republic of'
 
-sancIDs2 <- unique(
-	data.frame(cbind(
-			rbind(cowcode=t(t(sancIDs[,c(1)])), cowcode=t(t(sancIDs[,c(2)]))),
-			rbind(country=t(t(sancIDs[,c(3)])), country=t(t(sancIDs[,c(4)]))) ) ) )
-names(sancIDs2) <- c('cowcode', 'country')
+trade2$state_name1[trade2$state_name1=='Federated States of Micr'] <- 'Micronesia'
+trade2$state_name2[trade2$state_name2=='Federated States of Micr'] <- 'Micronesia'
 
-sancIDs2$cowcode <- as.numeric(as.character(sancIDs2$cowcode))
-sancIDs2$country <- as.character(sancIDs2$country)
+trade2 <- trade2[trade2$state_name1!="Yemen People's Republic",]
+trade2 <- trade2[trade2$state_name2!="Yemen People's Republic",]
 
-# Add in the data from the panel
-sancIDs2$ccode <- panel$ccode[match(sancIDs2$country, panel$cname)]
-sancIDs2$cname <- panel$cname[match(sancIDs2$country, panel$cname)]
+states <- unique(append(trade2$state_name1, trade2$state_name2))
+temp <- data.frame(cbind(
+	states, cname=countrycode(states, 'country.name', 'country.name')))
+temp$cname <- as.character(temp$cname)
+temp$cname[temp$cname=='Yugoslavia'] <- 'SERBIA'
+temp$cname[temp$cname=='Czechoslovakia'] <- 'CZECH REPUBLIC'
+temp$ccode <- panel$ccode[match(temp$cname,panel$cname)]
 
-sancIDs2[is.na(sancIDs2$ccode),]	# Checks for NAs
-sancIDs2[is.na(sancIDs2$cname),] 
+trade2$cname_1 <- temp$cname[match(trade2$state_name1,temp$states)]
+trade2$cname_2 <- temp$cname[match(trade2$state_name2,temp$states)]
 
-# Add back into trade
-trade2 <- trade
-names(trade2)[1:2] <- c('cowcode1','cowcode2')
+trade2$ccode_1 <- temp$ccode[match(trade2$state_name1,temp$states)]
+trade2$ccode_2 <- temp$ccode[match(trade2$state_name2,temp$states)]
 
-trade2$ccode_1 <- sancIDs2$ccode[match(trade2$cowcode1, sancIDs2$cowcode)]
-trade2$ccode_2 <- sancIDs2$ccode[match(trade2$cowcode2, sancIDs2$cowcode)]
+trade2 <- trade2[!is.na(trade2$ccode_1),]
+trade2 <- trade2[!is.na(trade2$ccode_2),]
 
-trade2$cname_1 <- sancIDs2$cname[match(trade2$cowcode1, sancIDs2$cowcode)]
-trade2$cname_2 <- sancIDs2$cname[match(trade2$cowcode2, sancIDs2$cowcode)]
+trade2$cyear_1 <- as.numeric(as.character(paste(trade2$ccode_1, trade2$year, sep='')))
+trade2$cyear_2 <- as.numeric(as.character(paste(trade2$ccode_2, trade2$year, sep='')))
 
-tradeFINAL <- trade2
+# Removing duplicates	
+trade2$drop <- 0
+# trade2[trade2$state_name1=='German Federal Republic' & trade2$year==1990,]
+trade2[trade2$state_name1=='Germany' & trade2$year==1990, 'drop'] <- 1
+trade2[trade2$state_name2=='Germany' & trade2$year==1990, 'drop'] <- 1
+trade2[trade2$state_name1=='Yemen Arab Republic' & trade2$year==1990, 'drop'] <- 1
+trade2[trade2$state_name2=='Yemen Arab Republic' & trade2$year==1990, 'drop'] <- 1
+trade2 <- trade2[trade2$drop!=1,]; trade2 <- trade2[,c(1:(ncol(trade2)-1))]
+
+# Time [trimming to 1960 to 2005]
+trade2 <- trade2[trade2$year>=1960 & trade2$year<=2005,]
+
+### ASIDE
+# Create a separate export & import dataset
+temp1 <- trade2[,c('ccode_1','ccode_2','year','exports')]
+colnames(temp1) <- c('ccode_1','ccode_2','year','exports')
+temp2 <- trade2[,c('ccode_2','ccode_1','year','imports')]
+colnames(temp2) <- c('ccode_1','ccode_2','year','exports')
+exports <- rbind(temp1, temp2)
+exports$exports <- exports$exports*1000000
+
+temp1 <- trade2[,c('ccode_1','ccode_2','year','imports')]
+colnames(temp1) <- c('ccode_1','ccode_2','year','imports')
+temp2 <- trade2[,c('ccode_2','ccode_1','year','exports')]
+colnames(temp2) <- c('ccode_1','ccode_2','year','imports')
+imports <- rbind(temp1, temp2)
+imports$imports <- imports$imports*1000000
+
+trade3 <- cbind(imports[,1:3], trade=imports[,4]+exports[,4])
+trade3$cyear_1 <- paste(trade3$ccode_1, trade3$year, sep='')
+trade3$cyear_2 <- paste(trade3$ccode_2, trade3$year, sep='')
+trade3$cname_1 <- panel$cname[match(trade3$ccode_1, panel$ccode)]
+trade3$cname_2 <- panel$cname[match(trade3$ccode_2, panel$ccode)]
+
+# Subsetting to relevant vars
+tradeTot <- trade3[,c(
+	'ccode_1','ccode_2','cname_1','cname_2', 'cyear_1', 'cyear_2', 'year',
+	'trade')]
 ###############################################################
 
 ###############################################################
-# Clean IGO data
-igo$ccode1<-as.numeric(as.character(igo$ccode1))
-igo$ccode2<-as.numeric(as.character(igo$ccode2))
-
-ctyNameA<-(countrycode(igo$ccode1, "cown", "country.name"))
-ctyNameB<-(countrycode(igo$ccode2, "cown", "country.name"))
-
-sancIDs<-data.frame(unique(cbind(igo$ccode1, igo$ccode2, ctyNameA, ctyNameB)))
-
-sancIDs$V1<- as.numeric(as.character(sancIDs$V1))
-sancIDs$V2 <- as.numeric(as.character(sancIDs$V2))
-sancIDs$ctyNameA <-as.character(sancIDs$ctyNameA)
-sancIDs$ctyNameB <-as.character(sancIDs$ctyNameB)
-
-#fix time
-sancIDs[sancIDs$V1==260,'ctyNameA'] <- 'GERMANY'
-sancIDs[sancIDs$V2==260,'ctyNameB'] <- 'GERMANY'
-sancIDs[sancIDs$V1==731,'ctyNameA'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
-sancIDs[sancIDs$V2==731,'ctyNameB'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
-sancIDs[sancIDs$V1==678,'ctyNameA'] <- 'YEMEN'
-sancIDs[sancIDs$V2==678,'ctyNameB'] <- 'YEMEN'
-sancIDs[sancIDs$V1==680,'ctyNameA'] <- 'S. YEMEN' 
-sancIDs[sancIDs$V2==680,'ctyNameB'] <- 'S. YEMEN' 
-sancIDs[sancIDs$V1==817,'ctyNameA'] <- 'S. VIETNAM'
-sancIDs[sancIDs$V2==817,'ctyNameB'] <- 'S. VIETNAM'
-sancIDs[sancIDs$V1==345,'ctyNameA'] <- 'SERBIA'
-sancIDs[sancIDs$V2==345,'ctyNameB'] <- 'SERBIA'
-sancIDs[sancIDs$V1==315,'ctyNameA'] <- 'CZECH REPUBLIC'
-sancIDs[sancIDs$V2==315,'ctyNameB'] <- 'CZECH REPUBLIC'
-sancIDs[sancIDs$V1==730,'ctyNameA'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
-sancIDs[sancIDs$V2==730,'ctyNameB'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
-
-sancIDs2 <- unique(
-	data.frame(cbind(
-			rbind(cowcode=t(t(sancIDs[,c(1)])), cowcode=t(t(sancIDs[,c(2)]))),
-			rbind(country=t(t(sancIDs[,c(3)])), country=t(t(sancIDs[,c(4)]))) ) ) )
-names(sancIDs2) <- c('cowcode', 'country')
-
-sancIDs2$cowcode <- as.numeric(as.character(sancIDs2$cowcode))
-sancIDs2$country <- as.character(sancIDs2$country)
-
-# Add in the data from the panel
-sancIDs2$ccode <- panel$ccode[match(sancIDs2$country, panel$cname)]
-sancIDs2$cname <- panel$cname[match(sancIDs2$country, panel$cname)]
-
-sancIDs2[is.na(sancIDs2$ccode),]	# Checks for NAs
-sancIDs2[is.na(sancIDs2$cname),] 
-
-# Add back into igo
-igo2 <- igo
-names(igo2)[1] <- 'cowcode1'
-names(igo2)[3] <- 'cowcode2'
-
-igo2$ccode_1 <- sancIDs2$ccode[match(igo2$cowcode1, sancIDs2$cowcode)]
-igo2$ccode_2 <- sancIDs2$ccode[match(igo2$cowcode2, sancIDs2$cowcode)]
-
-
-igo2$cname_1 <- sancIDs2$cname[match(igo2$cowcode1, sancIDs2$cowcode)]
-igo2$cname_2 <- sancIDs2$cname[match(igo2$cowcode2, sancIDs2$cowcode)]
-
-igoFINAL <- igo2
-###############################################################
-
-###############################################################
-# Clean religion data
-religion$state<-as.numeric(as.character(religion$state))
-ctyNameA<-(countrycode(religion$state, "cown", "country.name"))
-sancIDs<-data.frame(unique(cbind(religion$state, ctyNameA)))
-sancIDs$V1<- as.numeric(as.character(sancIDs$V1))
-sancIDs$ctyNameA <-as.character(sancIDs$ctyNameA)
-
-sancIDs2 <- sancIDs
-names(sancIDs2) <- c('cowcode', 'country')
-
-sancIDs2$cowcode <- as.numeric(as.character(sancIDs2$cowcode))
-sancIDs2$country <- as.character(sancIDs2$country)
-
-#fix time (same as the others! How consistent)
-sancIDs2[sancIDs2$cowcode==260,'country'] <- 'GERMANY'
-sancIDs2[sancIDs2$cowcode==731,'country'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
-sancIDs2[sancIDs2$cowcode==678,'country'] <- 'YEMEN'
-sancIDs2[sancIDs2$cowcode==680,'country'] <- 'S. YEMEN' 
-sancIDs2[sancIDs2$cowcode==817,'country'] <- 'S. VIETNAM'
-sancIDs2[sancIDs2$cowcode==345,'country'] <- 'SERBIA'
-sancIDs2[sancIDs2$cowcode==315,'country'] <- 'CZECH REPUBLIC'
-
-# Add in the data from the panel
-sancIDs2$ccode <- panel$ccode[match(sancIDs2$country, panel$cname)]
-sancIDs2$cname <- panel$cname[match(sancIDs2$country, panel$cname)]
-
-sancIDs2[is.na(sancIDs2$ccode),]	# Checks for NAs
-sancIDs2[is.na(sancIDs2$cname),] 
-
-# Add back to religion
-religion$ccode <- sancIDs2$ccode[match(religion$state, sancIDs2$cowcode)]
-religion$cname <- sancIDs2$cname[match(religion$state, sancIDs2$cowcode)]
-
-religionFINAL <- religion
-###############################################################
-
-###############################################################
-# Clean alliance data
+# Clean alliance data [extends from 1816 to 2012]
 alliance$ccode1<-as.numeric(as.character(alliance$ccode1))
 alliance$ccode2<-as.numeric(as.character(alliance$ccode2))
 
@@ -245,7 +168,7 @@ allianceFINAL <- na.omit(alliance2)
 
 
 ###############################################################
-# Clean PRIO War Data
+# Clean PRIO War Data [first rec'd war in 1946 last in 2012]
 war2 <- war[war$Type==2,]
 war2 <- unique(war2[,c('ID','SideA', 'SideA2nd', 'SideB',  'SideB2nd', 'YEAR')])
 war2 <- war2[1:(nrow(war2)-1),]
@@ -313,13 +236,143 @@ warFINAL <- war3
 ###############################################################
 
 ###############################################################
-# Building matrices
+# matrix builder for undirected dyad data from monadic data
+years <- 1960:2005
+cntryList <- lapply(years, function(x) FUN=panel[panel$year==x,'ccode'])
+names(cntryList) <- years
+
+exportMats <- DyadBuild(variable='exports', dyadData=exports, 
+	time=years, countryList=cntryList, directed=TRUE)
+
+tradeTotMats <- DyadBuild(variable='trade', dyadData=tradeTot, 
+	time=years, countryList=cntryList, directed=TRUE)
+
+allyMats <- DyadBuild(variable='ally', dyadData=alliance2, 
+	time=years, countryList=cntryList, directed=FALSE)
+
+warMats <- DyadBuild(variable='war', dyadData=war3, 
+	time=years, countryList=cntryList, directed=FALSE)
+###############################################################
+
+###############################################################
+# Clean IGO data [extends from 1820 to 2005]
+igo$ccode1<-as.numeric(as.character(igo$ccode1))
+igo$ccode2<-as.numeric(as.character(igo$ccode2))
+
+ctyNameA<-(countrycode(igo$ccode1, "cown", "country.name"))
+ctyNameB<-(countrycode(igo$ccode2, "cown", "country.name"))
+
+sancIDs<-data.frame(unique(cbind(igo$ccode1, igo$ccode2, ctyNameA, ctyNameB)))
+
+sancIDs$V1<- as.numeric(as.character(sancIDs$V1))
+sancIDs$V2 <- as.numeric(as.character(sancIDs$V2))
+sancIDs$ctyNameA <-as.character(sancIDs$ctyNameA)
+sancIDs$ctyNameB <-as.character(sancIDs$ctyNameB)
+
+#fix time
+sancIDs[sancIDs$V1==260,'ctyNameA'] <- 'GERMANY'
+sancIDs[sancIDs$V2==260,'ctyNameB'] <- 'GERMANY'
+sancIDs[sancIDs$V1==731,'ctyNameA'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
+sancIDs[sancIDs$V2==731,'ctyNameB'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
+sancIDs[sancIDs$V1==678,'ctyNameA'] <- 'YEMEN'
+sancIDs[sancIDs$V2==678,'ctyNameB'] <- 'YEMEN'
+sancIDs[sancIDs$V1==680,'ctyNameA'] <- 'S. YEMEN' 
+sancIDs[sancIDs$V2==680,'ctyNameB'] <- 'S. YEMEN' 
+sancIDs[sancIDs$V1==817,'ctyNameA'] <- 'S. VIETNAM'
+sancIDs[sancIDs$V2==817,'ctyNameB'] <- 'S. VIETNAM'
+sancIDs[sancIDs$V1==345,'ctyNameA'] <- 'SERBIA'
+sancIDs[sancIDs$V2==345,'ctyNameB'] <- 'SERBIA'
+sancIDs[sancIDs$V1==315,'ctyNameA'] <- 'CZECH REPUBLIC'
+sancIDs[sancIDs$V2==315,'ctyNameB'] <- 'CZECH REPUBLIC'
+sancIDs[sancIDs$V1==730,'ctyNameA'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
+sancIDs[sancIDs$V2==730,'ctyNameB'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
+
+sancIDs2 <- unique(
+	data.frame(cbind(
+			rbind(cowcode=t(t(sancIDs[,c(1)])), cowcode=t(t(sancIDs[,c(2)]))),
+			rbind(country=t(t(sancIDs[,c(3)])), country=t(t(sancIDs[,c(4)]))) ) ) )
+names(sancIDs2) <- c('cowcode', 'country')
+
+sancIDs2$cowcode <- as.numeric(as.character(sancIDs2$cowcode))
+sancIDs2$country <- as.character(sancIDs2$country)
+
+# Add in the data from the panel
+sancIDs2$ccode <- panel$ccode[match(sancIDs2$country, panel$cname)]
+sancIDs2$cname <- panel$cname[match(sancIDs2$country, panel$cname)]
+
+sancIDs2[is.na(sancIDs2$ccode),]	# Checks for NAs
+sancIDs2[is.na(sancIDs2$cname),] 
+
+# Add back into igo
+igo2 <- igo
+names(igo2)[1] <- 'cowcode1'
+names(igo2)[3] <- 'cowcode2'
+
+igo2$ccode_1 <- sancIDs2$ccode[match(igo2$cowcode1, sancIDs2$cowcode)]
+igo2$ccode_2 <- sancIDs2$ccode[match(igo2$cowcode2, sancIDs2$cowcode)]
+
+
+igo2$cname_1 <- sancIDs2$cname[match(igo2$cowcode1, sancIDs2$cowcode)]
+igo2$cname_2 <- sancIDs2$cname[match(igo2$cowcode2, sancIDs2$cowcode)]
+
+# Finalize IGO dataset
+igoFINAL <- igo2
+igoFINAL <- igoFINAL[igoFINAL$year>=1960,c(534:535,5,6:533)]
+igoFINAL <- data.matrix(igoFINAL)
+# Set all igo codes of 3, -9, and -1 for IGO membership
+## to 0 and for igo codes of 1 and 2 set to 1
 
 ###############################################################
 
-#-------
-#saving cleaned cow data
-#-------
+###############################################################
+# Clean religion data [extends from 1945 to 2010]
+religion$state<-as.numeric(as.character(religion$state))
+ctyNameA<-(countrycode(religion$state, "cown", "country.name"))
+sancIDs<-data.frame(unique(cbind(religion$state, ctyNameA)))
+sancIDs$V1<- as.numeric(as.character(sancIDs$V1))
+sancIDs$ctyNameA <-as.character(sancIDs$ctyNameA)
+
+sancIDs2 <- sancIDs
+names(sancIDs2) <- c('cowcode', 'country')
+
+sancIDs2$cowcode <- as.numeric(as.character(sancIDs2$cowcode))
+sancIDs2$country <- as.character(sancIDs2$country)
+
+#fix time (same as the others! How consistent)
+sancIDs2[sancIDs2$cowcode==260,'country'] <- 'GERMANY'
+sancIDs2[sancIDs2$cowcode==731,'country'] <- "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
+sancIDs2[sancIDs2$cowcode==678,'country'] <- 'YEMEN'
+sancIDs2[sancIDs2$cowcode==680,'country'] <- 'S. YEMEN' 
+sancIDs2[sancIDs2$cowcode==817,'country'] <- 'S. VIETNAM'
+sancIDs2[sancIDs2$cowcode==345,'country'] <- 'SERBIA'
+sancIDs2[sancIDs2$cowcode==315,'country'] <- 'CZECH REPUBLIC'
+
+# Add in the data from the panel
+sancIDs2$ccode <- panel$ccode[match(sancIDs2$country, panel$cname)]
+sancIDs2$cname <- panel$cname[match(sancIDs2$country, panel$cname)]
+
+sancIDs2[is.na(sancIDs2$ccode),]	# Checks for NAs
+sancIDs2[is.na(sancIDs2$cname),] 
+
+# Add back to religion
+religion$ccode <- sancIDs2$ccode[match(religion$state, sancIDs2$cowcode)]
+religion$cname <- sancIDs2$cname[match(religion$state, sancIDs2$cowcode)]
+
+religionFINAL <- religion
+###############################################################
+
+###############################################################
+# matrix builder for undirected dyad data from monadic data
+years <- 1984:2009
+cntryList <- lapply(years, function(x) FUN=srDatav3[srDatav3$year==x,'ccode'])
+names(cntryList) <- years
+
+invProfMats <- undirDyadBuild_fMonad(var='Investment.Profile', 
+	monadData=srDatav3, time=years, countryList=cntryList)
+###############################################################
+
+###############################################################
+#saving cleaned data
 setwd(pathData)
-save(tradeFINAL, igoFINAL, allianceFINAL, religionFINAL, warFINAL,
-	file='megaDataClean.rda')
+
+###############################################################
