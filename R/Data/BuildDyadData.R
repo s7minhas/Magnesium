@@ -330,10 +330,10 @@ for(ii in 1:length(years)){
 	sList <- lapply(4:ncol(slice), function(x) FUN=slice[,c(1:3,x)])
 	sList2 <- lapply(sList, function(x) FUN=x[which(!x[,4] %in% drop),])
 	sList3 <- sList2[which(numSM(summary(sList2)[,1])>0)]
-	sList4 <- lapply(sList3, function(x){ 
-			cbind( paste(x[,1], x[,2], sep='_'), 
-				year=x[,3], 
-				igo=colnames(x)[4] ) } )
+	sList4 <- lapply(sList3, function(x){
+		temp <- matrix(x, ncol=4); paste(temp[,1],temp[,2],sep='_') })
+	yearIGOs <- unlist(sList4)
+	t(t(table(yearIGOs)))
 }
 ###############################################################
 
