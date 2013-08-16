@@ -323,7 +323,18 @@ igoFINAL <- igoFINAL[igoFINAL$year>=1960,c(534:535,5,6:533)]
 igoFINAL <- data.matrix(igoFINAL)
 # Set all igo codes of 3, -9, and -1 for IGO membership
 ## to 0 and for igo codes of 1 and 2 set to 1
-
+drop <- c(3, -9, -1, 0)
+years <- 1960:2005
+for(ii in 1:length(years)){
+	slice <- igoFINAL[which(igoFINAL[,'year']==years[ii]),]
+	sList <- lapply(4:ncol(slice), function(x) FUN=slice[,c(1:3,x)])
+	sList2 <- lapply(sList, function(x) FUN=x[which(!x[,4] %in% drop),])
+	sList3 <- sList2[which(numSM(summary(sList2)[,1])>0)]
+	sList4 <- lapply(sList3, function(x){ 
+			cbind( paste(x[,1], x[,2], sep='_'), 
+				year=x[,3], 
+				igo=colnames(x)[4] ) } )
+}
 ###############################################################
 
 ###############################################################
