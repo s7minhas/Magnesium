@@ -164,6 +164,7 @@ alliance2$cname_1 <- sancIDs2$cname[match(alliance2$cowcode1, sancIDs2$cowcode)]
 alliance2$cname_2 <- sancIDs2$cname[match(alliance2$cowcode2, sancIDs2$cowcode)]
 
 allianceFINAL <- na.omit(alliance2)
+allianceFINAL$ally <- 1
 ###############################################################
 
 
@@ -208,7 +209,7 @@ for(ii in 1:nrow(war2)){
 
 # Adding in cname and ccode
 war3$YEAR <- as.numeric(as.character(war3$YEAR))
-colnames(war3) <- c('state_name1','state_name2','Year')
+colnames(war3) <- c('state_name1','state_name2','year')
 
 war3 <- war3[war3$state_name1!='Hyderabad',]
 war3 <- war3[war3$state_name2!='Hyderabad',]
@@ -233,6 +234,7 @@ war3 <- war3[!is.na(war3$ccode_1),]
 war3 <- war3[!is.na(war3$ccode_2),]
 
 warFINAL <- war3
+warFINAL$war <- 1
 ###############################################################
 
 ###############################################################
@@ -247,10 +249,10 @@ exportMats <- DyadBuild(variable='exports', dyadData=exports,
 tradeTotMats <- DyadBuild(variable='trade', dyadData=tradeTot, 
 	time=years, countryList=cntryList, directed=TRUE)
 
-allyMats <- DyadBuild(variable='ally', dyadData=alliance2, 
+allyMats <- DyadBuild(variable='ally', dyadData=allianceFINAL, 
 	time=years, countryList=cntryList, directed=FALSE)
 
-warMats <- DyadBuild(variable='war', dyadData=war3, 
+warMats <- DyadBuild(variable='war', dyadData=warFINAL, 
 	time=years, countryList=cntryList, directed=FALSE)
 ###############################################################
 
