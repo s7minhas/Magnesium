@@ -321,10 +321,12 @@ igo2$cname_2 <- sancIDs2$cname[match(igo2$cowcode2, sancIDs2$cowcode)]
 igoFINAL <- igo2
 igoFINAL <- igoFINAL[igoFINAL$year>=1960,c(534:535,5,6:533)]
 igoFINAL <- data.matrix(igoFINAL)
+
 # Set all igo codes of 3, -9, and -1 for IGO membership
 ## to 0 and for igo codes of 1 and 2 set to 1
 drop <- c(3, -9, -1, 0)
-years <- 1960:2005
+years <- c(1960,1965:2005)
+igoData <- NULL
 for(ii in 1:length(years)){
 	slice <- igoFINAL[which(igoFINAL[,'year']==years[ii]),]
 	sList <- lapply(4:ncol(slice), function(x) FUN=slice[,c(1:3,x)])
@@ -332,9 +334,24 @@ for(ii in 1:length(years)){
 	sList3 <- sList2[which(numSM(summary(sList2)[,1])>0)]
 	sList4 <- lapply(sList3, function(x){
 		temp <- matrix(x, ncol=4); paste(temp[,1],temp[,2],sep='_') })
-	yearIGOs <- unlist(sList4)
-	t(t(table(yearIGOs)))
+	yearIGOs <- t(t(table( unlist(sList4) )))
+	yearIGOs <- cbind(yearIGOs, year=years[ii])
+	igoData <- rbind(igoData, yearIGOs)
+	print(years[ii])
 }
+
+# Cleaning
+igoDataFINAL <- data.frame(cbind(rownames(igoData), igoData), row.names=NULL)
+colnames(igoDataFINAL) <- c('ccodes', 'igo', 'year')
+ccodes <- matrix(
+	unlist(strsplit(as.character(igoDataFINAL[,'ccodes']), '_')) 
+	,ncol=2,byrow=T)
+colnames(ccodes) <- c('ccode_1','ccode_2')
+igoDataFINAL <- cbind(ccodes, igoDataFINAL[,c('year','igo')])
+igoDataFINAL <- data.frame(apply(igoDataFINAL,2,numSM))
+
+igoMats <- DyadBuild(variable='igo', dyadData=igoDataFINAL, 
+	time=years, countryList=cntryList, directed=FALSE)
 ###############################################################
 
 ###############################################################
