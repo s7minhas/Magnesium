@@ -391,10 +391,11 @@ religion$cname <- sancIDs2$cname[match(religion$state, sancIDs2$cowcode)]
 religionData <- religion[,c('year','state',
 	names(religion)[which(substrRight(names(religion),6)=='genpct')]
 	)]
-
-temp <- unlist(apply(religionData, 1, function(x)
-	FUN=names(religionData)[which(x == max(x[3:ncol(religionData)]))] ) )
-religionFINAL <- cbind(religionData, majrelig=temp)
+majorRelig <- apply(religionData, 1, function(x)
+	FUN=names(religionData)[which(x == max(x[3:ncol(religionData)]))] )
+majorRelig[[1481]] <- 0
+majorRelig <- unlist(majorRelig)
+religionFINAL <- cbind(religionData[,1:2], majrelig=majorRelig)
 ###############################################################
 
 ###############################################################
