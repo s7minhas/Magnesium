@@ -388,24 +388,18 @@ sancIDs2[is.na(sancIDs2$cname),]
 religion$ccode <- sancIDs2$ccode[match(religion$state, sancIDs2$cowcode)]
 religion$cname <- sancIDs2$cname[match(religion$state, sancIDs2$cowcode)]
 
-religionData <- religion[,c('year','state',
+religionData <- religion[,c('year','ccode',
 	names(religion)[which(substrRight(names(religion),6)=='genpct')]
 	)]
 majorRelig <- apply(religionData, 1, function(x)
 	FUN=names(religionData)[which(x == max(x[3:ncol(religionData)]))] )
 majorRelig[[1481]] <- 0
 majorRelig <- unlist(majorRelig)
-religionFINAL <- cbind(religionData[,1:2], majrelig=majorRelig)
-###############################################################
+religionFINAL <- cbind(religionData[,1:2], majRelig=majorRelig)
 
-###############################################################
-# matrix builder for undirected dyad data from monadic data
-years <- 1984:2009
-cntryList <- lapply(years, function(x) FUN=srDatav3[srDatav3$year==x,'ccode'])
-names(cntryList) <- years
-
-invProfMats <- undirDyadBuild_fMonad(var='Investment.Profile', 
-	monadData=srDatav3, time=years, countryList=cntryList)
+years <- seq(1945,2010,5)
+religMats <- undirDyadBuild_fMonad(variable='majRelig',
+	monadData=religionFINAL, time=years, countryList=cntryList)
 ###############################################################
 
 ###############################################################

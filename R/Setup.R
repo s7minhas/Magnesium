@@ -189,7 +189,8 @@ DyadBuild <- function(variable, dyadData, time, countryList, directed=FALSE){
 # ccode and the time aspect by a variable called by year
 # time is a simple vector of years
 # countryList is a list containing ccodes for each year
-undirDyadBuild_fMonad <- function(variable, monadData, time, countryList){
+undirDyadBuild_fMonad <- function(variable, monadData, 
+	time, countryList, oper){
 	monadData <- monadData[,c('ccode','year',variable)]
 	monadData <- data.matrix(monadData)
 	rownames(monadData) <- monadData[,'ccode']
@@ -206,8 +207,9 @@ undirDyadBuild_fMonad <- function(variable, monadData, time, countryList){
 		for(jj in 1:nrow(yearMatrix)){
 			cntryRating <- data[as.character(countries[jj]),variable]
 			others <- data[as.character(countries),variable]
-			diffs <- abs(cntryRating-others)
-			yearMatrix[jj,] <- diffs
+			if(oper==diff){relates <- abs(cntryRating-others)}
+			if(oper==same){relates <- as.numeric(cntryRating==others)}
+			yearMatrix[jj,] <- relates
 		}
 
 		undirectMats[[ii]] <- yearMatrix
