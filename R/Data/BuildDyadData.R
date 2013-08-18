@@ -393,17 +393,22 @@ religionData <- religion[,c('year','ccode',
 	)]
 majorRelig <- apply(religionData, 1, function(x)
 	FUN=names(religionData)[which(x == max(x[3:ncol(religionData)]))] )
-majorRelig[[1481]] <- 0
+majorRelig[[1481]] <- 'noMajor'
 majorRelig <- unlist(majorRelig)
 religionFINAL <- cbind(religionData[,1:2], majRelig=majorRelig)
+religionFINAL <- religionFINAL[religionFINAL$year>=1960 & religionFINAL$year<=2005,]
 
-years <- seq(1945,2010,5)
-religMats <- undirDyadBuild_fMonad(variable='majRelig',
+years <- seq(1960,2005,5)
+cntryList <- lapply(years, function(x) FUN=religionFINAL[religionFINAL$year==x,'ccode'])
+names(cntryList) <- years
+
+religMats <- DyadBuild_fMonad(variable='majRelig', oper='same',
 	monadData=religionFINAL, time=years, countryList=cntryList)
 ###############################################################
 
 ###############################################################
 #saving cleaned data
 setwd(pathData)
-
+save(exportMats, tradeTotMats, allyMats, warMats, igoMats, religMats
+	,file='dyadMats.rda')
 ###############################################################
