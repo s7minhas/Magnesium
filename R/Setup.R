@@ -22,8 +22,12 @@ require(foreign)
 require(cshapes)
 require(countrycode)
 
-# Additional functions
+# Helper functions
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+
+substrRight <- function(x, n){
+  substr(x, nchar(x)-n+1, nchar(x))
+}
 
 # Log transformations for vars with negative values
 logNeg <- function(z){
