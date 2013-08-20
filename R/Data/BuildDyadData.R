@@ -1,5 +1,4 @@
 #Purpose: This file adds country names to the cow dataset
-#Author: CD
 #Date: 07/11/2013
 
 #Setup

@@ -182,7 +182,7 @@ DyadBuild <- function(variable, dyadData, time, countryList, directed=FALSE){
 	Mats
 }
 
-# Build undirected dyad dataset from monadic data
+# Build dyad dataset from monadic data
 # This only works if the units listed in countrylist exactly
 # match the units listed in the monad dataset
 # Monad data must identify country by a variable called 
