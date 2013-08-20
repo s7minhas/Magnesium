@@ -3,32 +3,44 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 
 # Loading Excel data from UNC
 setwd(pathData)
-sanctionData <- read.csv('SanctionsDataV3.5vSM_GermanyFix.csv')
+load('sanctionData.rda')
+load('monadData.rda')
+
+# Subsetting to economic sanctions (issue = 4, 12, 13, 14)
+econ <- c(4, 12, 13, 14)
+sanctionDataFinal$issue1[is.na(sanctionDataFinal$issue1)] <- 0
+sanctionDataFinal$issue2[is.na(sanctionDataFinal$issue2)] <- 0
+sanctionDataFinal$issue3[is.na(sanctionDataFinal$issue3)] <- 0
+sanctionData <- sanctionDataFinal[sanctionDataFinal$issue1==econ |
+	sanctionDataFinal$issue2==econ |
+	sanctionDataFinal$issue3==econ, ]
 
 # Pulling out vars
 # compliance is defined as 2, 5, and 7
-vars <- c('CaseID', 'startyear', 'endyear', 'targetstate', 'finaloutcome')
+# threat timeframe = startyear, endyear
+# sanction timeframe = sancimpositionstartyear
+comp <- c(1,2,5,6,7,10)
+vars <- c('caseid', 'startyear', 'endyear', 
+	'targetstate', 'finaloutcome')
 sanctionSlice <- sanctionData[,vars]
+# names(sanctionSlice)[2] <- 'startyear'
+sanctionSlice$startyear <- numSM(sanctionSlice$startyear)
+sanctionSlice$endyear <- numSM(sanctionSlice$endyear)
+sanctionSlice$endyear[is.na(sanctionSlice$endyear)] <- -99
+
 sanctionSlice$compliance <- 0
-sanctionSlice$compliance[sanctionSlice$finaloutcome==2 | sanctionSlice$finaloutcome==5 | 
-							sanctionSlice$finaloutcome==7] <- 1
+sanctionSlice$compliance[which(sanctionSlice$finaloutcome %in% comp)] <- 1
+
 sanctionSlice$time <- NA
 sanctionSlice[sanctionSlice$endyear!=-99 & sanctionSlice$compliance==1, 'time'] <-
  sanctionSlice$endyear[sanctionSlice$endyear!=-99 & sanctionSlice$compliance==1] - 
  sanctionSlice$startyear[sanctionSlice$endyear!=-99 & sanctionSlice$compliance==1] + 1
-head(sanctionSlice)
 
-# plot(sort(sanctionSlice$time))
-# plot(sort(sanctionSlice[sanctionSlice$endyear==-99,'startyear']))
-# t1 <- t(t(round(table(sanctionSlice$endyear)/sum(table(sanctionSlice$endyear)),2)))
-# t2 <- t(t(table(sanctionSlice$endyear)))
-# cbind(t2,t1)
-# sanctionSlice$time2 <- sanctionSlice$time
-# sanctionSlice$time2[sanctionSlice$time2==-99] <- 100
-# temp <- sanctionSlice[is.na(sanctionSlice$time) & sanctionSlice$finaloutcome!=11,]
+sanctionSliceComp <- sanctionSlice[sanctionSlice$compliance==1 &
+ sanctionSlice$endyear!=-99,]
+head(sanctionSliceComp)
 
 # Set up frame
-sanctionSliceComp <- sanctionSlice[sanctionSlice$compliance==1 & sanctionSlice$endyear!=-99,]
 durData <- NULL
 ii=1
 for(ii in 1:nrow(sanctionSliceComp)){
