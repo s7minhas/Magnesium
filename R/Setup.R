@@ -6,13 +6,14 @@ if(Sys.info()["user"]=="janus829")
 {pathMain="~/Desktop/Research/Magnesium/R";
 	pathGraphics="~/Dropbox/Research/Magnesium/Graphics";
 	pathFunctions="~/Desktop/Prog Notes/R Functions";
-	pathData="~/Dropbox/Research/Magnesium/Data"}
-
+	pathData="~/Dropbox/Research/Magnesium/Data";
+	pathPData="~/Desktop/Research/Magnesium/R/Data/BuildingPanelData"}
 
 if(Sys.info()["user"]=="cassydorff")
 {pathMain="~/ProjectsGit/Magnesium/R";
 	pathGraphics="~/Dropbox/My Research/Magnesium";
-	pathData="~/Dropbox/My Research/Magnesium/Data"}
+	pathData="~/Dropbox/My Research/Magnesium/Data";
+	pathPData="~/ProjectsGit/Magnesium/R/Data/BuildingPanelData"}
 
 # Loading libraries and functions
 require(ggplot2)
