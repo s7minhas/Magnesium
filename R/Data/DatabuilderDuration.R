@@ -51,11 +51,12 @@ for(ii in 1:nrow(sanctionSlice)){
 	year <- seq(slice$startyear, slice$endyear, 1)
 	tcountry <- slice$targetstate; case <- slice$CaseID
 	temp <- cbind(slice$caseid, slice$targetstate, 
+		slice$compliance, slice$time,
 		year, duration=seq(1,length(year), 1))
 	durData <- rbind(durData, temp) }
 
 durData <- data.frame(durData)
-colnames(durData)[1:2] <- c('caseid', 'targetstate')
+colnames(durData)[1:4] <- c('caseid', 'targetstate', 'compliance', 'slength')
 durData$tyear <- paste(durData$targetstate, durData$year, sep='')
 
 # Subsetting duration dataset
@@ -68,7 +69,7 @@ senders[senders==1000] <- NA # Turning cases where EU is sender to NA
 durData <- merge(x=durData, y=senders, by='caseid')
 
 # Strange issue where some cases have no senders...wtf
-noS <- apply(durData[,6:ncol(durData)], 1, function(x) FUN=sum(!is.na(x)) )
+noS <- apply(durData[,8:ncol(durData)], 1, function(x) FUN=sum(!is.na(x)) )
 durData <- cbind(durData, noS)
 
 # Dropping cases where therea are zero senders
