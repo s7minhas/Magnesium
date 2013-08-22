@@ -68,6 +68,10 @@ senders <- sanctionDataFinal[,c(1,75:80)]
 senders[senders==1000] <- NA # Turning cases where EU is sender to NA
 durData <- merge(x=durData, y=senders, by='caseid')
 
+# Adding in add'l caseid info for surv object
+durData <- merge(x=durData, y=sanctionSlice[,c(1:3)], by='caseid', all.x=T)
+durData$endyear2 <- durData$endyear + 1
+
 # Strange issue where some cases have no senders...wtf
 noS <- apply(durData[,8:ncol(durData)], 1, function(x) FUN=sum(!is.na(x)) )
 durData <- cbind(durData, noS)
