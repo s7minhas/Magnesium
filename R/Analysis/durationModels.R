@@ -29,7 +29,7 @@ krust <- read.dta('duration.dta')
 # dv1<- Surv(aData$year, aData$compliance, type="right")
 
 # # For left truncated right- censored data, three arguments are needed
-# dv2<-Surv(aData$startyear, aData$endyear2, aData$compliance)
+# dv2 <- Surv(aData$startyear, aData$endyear2, aData$compliance)
 
 # ##########################
 # # models
@@ -71,11 +71,7 @@ krust <- read.dta('duration.dta')
 # cph2Rep<-coxph(Surv(krust$strtyr, krust$marker) ~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo, data=krust)
 
 ############################################################
-############################################################
-############################################################
-############################################################
-############################################################
-############################################################
+# SM replication of Krustev Table 1, Model 1
 krust$begin <- as.Date(paste(krust[,'strtyr'], 
 	krust[,'strtmnth'], krust[,'strtday'],sep='-'))
 krust$end <- as.Date(paste(krust[,'endyear'], 
@@ -89,7 +85,19 @@ krust2$cens2 <- krust2$censored
 krust2$cens2[krust2$cens2==1] <- 0
 krust2$cens2[is.na(krust2$cens2)] <- 1
 
-cpMod2 <- coxph(Surv(krust2$calcdur, krust2$cens2, type="right") 
+# Time fixed covariate model
+
+cpModKr <- coxph(Surv(krust2$calcdur, krust2$cens2, type="right") 
 	~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo,
 	 data=krust2)
-summary(cpMod2)
+summary(cpModKr)
+
+############################################################
+# Returning to our modeling
+cpMod <- coxph(
+	Surv(aData$startyear, aData$endyear2, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict,
+	data=aData)
+summary(cpMod)
+
+plot(survfit(cpMod))
