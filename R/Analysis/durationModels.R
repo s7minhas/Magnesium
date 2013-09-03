@@ -94,10 +94,18 @@ summary(cpModKr)
 
 ############################################################
 # Returning to our modeling
+cpModF <- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict,
+	data=aData)
+summary(cpModF)
+plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
+
 cpMod <- coxph(
 	Surv(aData$startyear, aData$endyear2, aData$compliance) ~
 	noS + gdpCAP + polity + Internal.Conflict,
 	data=aData)
 summary(cpMod)
 
-plot(survfit(cpMod))
+plot(survfit(cpMod), conf.int=T, ylim=c(0.8, 1))
+cox.zph(cpMod)
