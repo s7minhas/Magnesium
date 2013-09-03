@@ -23,6 +23,8 @@ require(foreign)
 require(cshapes)
 require(countrycode)
 require(survival)
+require(OIsurv)
+require(eha)
 
 # Helper functions
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
