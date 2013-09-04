@@ -8,6 +8,7 @@ load('panel.rda')
 setwd(pathData)
 load('sanctionData.rda')
 load('monadData.rda')
+load('dyadMats.rda')
 ###############################################################
 
 ###############################################################
@@ -68,12 +69,17 @@ senders <- sanctionDataFinal[,c(1,75:80)]
 senders[senders==1000] <- NA # Turning cases where EU is sender to NA
 durData <- merge(x=durData, y=senders, by='caseid')
 
+# Dropping fucked up cases
+durData <- durData[which(
+	paste(durData$targetstate, durData$year, sep='') %in% 
+	panel$ccodeYear),]
+
 # Adding in add'l caseid info for surv object
 durData <- merge(x=durData, y=sanctionSlice[,c(1:3)], by='caseid', all.x=T)
 durData$endyear2 <- durData$endyear + 1
 
 # Strange issue where some cases have no senders...wtf
-noS <- apply(durData[,8:ncol(durData)], 1, function(x) FUN=sum(!is.na(x)) )
+noS <- apply(durData[,9:13], 1, function(x) FUN=sum(!is.na(x)) )
 durData <- cbind(durData, noS)
 
 # Dropping cases where therea are zero senders
@@ -85,6 +91,39 @@ durData <- durData[durData$noS!=0,]
 aData <- merge(x=durData, y=monadData[,c(1,3,5:ncol(monadData))], 
 	by.x='tyear', by.y='cyear', all.x=T)
 
-setwd(pathData)
+aData <- aData[aData$year<=2005,]
+###############################################################
+
+###############################################################
+# Building network data
+senders <- aData[,c(6, 3, 9:13)]
+# dyadic datasets: exportMats, tradeTotMats, allyMats, warMats, igoMats, religMats
+igoMats$'1961' <- igoMats$'1960'; igoMats$'1962' <- igoMats$'1960'
+igoMats$'1963' <- igoMats$'1960'; igoMats$'1964' <- igoMats$'1960'
+igoMats$'1965' <- igoMats$'1960'
+
+ndata <- NULL
+for(ii in 1:nrow(senders)){
+	slice <- senders[ii,]
+	sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
+	tar <- as.character(slice$targetstate)
+
+	# Row standardize
+	ddata <- exportMats[[as.character(slice$year)]]
+	matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
+	ddata <- ddata/matDenom
+
+	# Row/Col Rel.	
+	ddata[tar, sen]
+
+	# Network measure
+	ddata <- mean(ddata)
+
+	# Combine
+	ndata <- rbind(ndata, ddata)
+}
+
+aData <- cbind(aData, ndata)
+
 save(aData, file='forCassyDurPractice.rda')
 ###############################################################
