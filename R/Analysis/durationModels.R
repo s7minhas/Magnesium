@@ -11,7 +11,9 @@
 # load("~/Dropbox/My Research/Magnesium/Data/forCassyDurPractice.rda")
 # krust<-read.dta("~/Dropbox/My Research/Magnesium/Data/Replication Krustev/duration.dta")
 
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+#source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
+
 
 setwd(pathData)
 load('forCassyDurPractice.rda')
@@ -86,7 +88,6 @@ krust2$cens2[krust2$cens2==1] <- 0
 krust2$cens2[is.na(krust2$cens2)] <- 1
 
 # Time fixed covariate model
-
 cpModKr <- coxph(Surv(krust2$calcdur, krust2$cens2, type="right") 
 	~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo,
 	 data=krust2)
