@@ -110,3 +110,27 @@ summary(cpMod)
 
 plot(survfit(cpMod), conf.int=T, ylim=c(0.8, 1))
 cox.zph(cpMod)
+
+############################################################
+# Modeling with net data
+############################################################
+
+model1<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict +ndata,
+	data=aData)
+summary(model1)
+plot(survfit(model1), conf.int=T, ylim=c(0.8, 1))
+
+model2<-cpModF <- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + Government.Stability + ndata,
+	data=aData)
+summary(model2)
+plot(survfit(model2), conf.int=T, ylim=c(0.8, 1))
+
+model3<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + ndata, data=aData)
+summary(model3)
+plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
