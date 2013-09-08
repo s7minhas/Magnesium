@@ -129,7 +129,7 @@ plot(survfit(tmodel2), conf.int=T, ylim=c(0.8, 1))
 
 tmodel3<- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + tdata, data=aData)
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + tdata +polity*tdata, data=aData)
 summary(tmodel3)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 
