@@ -1,19 +1,7 @@
-# # Purpose: Some basic duration modeling attempts for magnesium 
-# # Author: CD 
-
-# rm(list=ls())
-# library(survival)
-# library(OIsurv)
-# library(foreign)
-# #library(eha)
-
-# #Lazy laoding of our data and krustev rep
-# load("~/Dropbox/My Research/Magnesium/Data/forCassyDurPractice.rda")
-# krust<-read.dta("~/Dropbox/My Research/Magnesium/Data/Replication Krustev/duration.dta")
+# Purpose: Some basic duration modeling attempts for magnesium 
 
 #source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
-
 
 setwd(pathData)
 load('forCassyDurPractice.rda')
@@ -74,6 +62,8 @@ krust <- read.dta('duration.dta')
 
 ############################################################
 # SM replication of Krustev Table 1, Model 1
+############################################################
+
 krust$begin <- as.Date(paste(krust[,'strtyr'], 
 	krust[,'strtmnth'], krust[,'strtday'],sep='-'))
 krust$end <- as.Date(paste(krust[,'endyear'], 
@@ -95,25 +85,8 @@ summary(cpModKr)
 
 ############################################################
 # Returning to our modeling
-cpModF <- coxph(
-	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict,
-	data=aData)
-summary(cpModF)
-plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
-
-cpMod <- coxph(
-	Surv(aData$startyear, aData$endyear2, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict,
-	data=aData)
-summary(cpMod)
-
-plot(survfit(cpMod), conf.int=T, ylim=c(0.8, 1))
-cox.zph(cpMod)
-
 ############################################################
-# Modeling with net data
-############################################################
+# Modeling with net data (edata = exports)
 
 model1<- coxph(
 	Surv(aData$slength, aData$compliance) ~
@@ -133,4 +106,53 @@ model3<- coxph(
 	Surv(aData$slength, aData$compliance) ~
 	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + ndata, data=aData)
 summary(model3)
+plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
+
+
+############################################################
+# Modeling with net data (tdata = trade)
+############################################################
+
+tmodel1<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + tdata,
+	data=aData)
+summary(tmodel1)
+plot(survfit(tmodel1), conf.int=T, ylim=c(0.8, 1))
+
+tmodel2<-cpModF <- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + Government.Stability + tdata,
+	data=aData)
+summary(tmodel2)
+plot(survfit(tmodel2), conf.int=T, ylim=c(0.8, 1))
+
+tmodel3<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + tdata, data=aData)
+summary(tmodel3)
+plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
+
+############################################################
+# Modeling with net data (allydata = trade)
+############################################################
+
+allymodel1<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + allydata,
+	data=aData)
+summary(allymodel1)
+plot(survfit(allymodel1), conf.int=T, ylim=c(0.8, 1))
+
+allymodel2<-cpModF <- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + Government.Stability + allydata,
+	data=aData)
+summary(allymodel2)
+plot(survfit(allymodel2), conf.int=T, ylim=c(0.8, 1))
+
+allymodel3<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + allydata, data=aData)
+summary(allymodel3)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))

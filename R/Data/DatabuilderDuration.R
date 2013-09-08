@@ -1,5 +1,6 @@
 # setup workspace
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+#source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
 
 ###############################################################
 # Loading Excel data from UNC
@@ -11,6 +12,7 @@ load('monadData.rda')
 load('dyadMats.rda')
 ###############################################################
 
+
 ###############################################################
 # Subsetting to economic sanctions (issue = 4, 12, 13, 14)
 econ <- c(4, 12, 13, 14)
@@ -21,6 +23,7 @@ sanctionData <- sanctionDataFinal[sanctionDataFinal$issue1==econ |
 	sanctionDataFinal$issue2==econ |
 	sanctionDataFinal$issue3==econ, ]
 ###############################################################
+
 
 ###############################################################
 # Pulling out vars
@@ -43,6 +46,7 @@ sanctionSlice$compliance[which(sanctionSlice$finaloutcome %in% comp)] <- 1
 sanctionSlice$time <- NA
 sanctionSlice$time <- sanctionSlice$endyear - sanctionSlice$startyear + 1
 ###############################################################
+
 
 ###############################################################
 # Set up duration frame
@@ -102,7 +106,7 @@ igoMats$'1961' <- igoMats$'1960'; igoMats$'1962' <- igoMats$'1960'
 igoMats$'1963' <- igoMats$'1960'; igoMats$'1964' <- igoMats$'1960'
 igoMats$'1965' <- igoMats$'1960'
 
-ndata <- NULL
+edata <- NULL
 for(ii in 1:nrow(senders)){
 	slice <- senders[ii,]
 	sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
@@ -120,10 +124,55 @@ for(ii in 1:nrow(senders)){
 	ddata <- mean(ddata)
 
 	# Combine
-	ndata <- rbind(ndata, ddata)
+	edata <- rbind(edata, ddata)
 }
 
-aData <- cbind(aData, ndata)
+###############################################################
+
+tdata <- NULL
+for(ii in 1:nrow(senders)){
+	slice <- senders[ii,]
+	sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
+	tar <- as.character(slice$targetstate)
+
+	# Row standardize
+	ddata <- tradeTotMats[[as.character(slice$year)]]
+	matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
+	ddata <- ddata/matDenom
+
+	# Row/Col Rel.	
+	ddata[tar, sen]
+
+	# Network measure
+	ddata <- mean(ddata)
+
+	# Combine
+	tdata <- rbind(tdata, ddata)
+}
+
+###############################################################
+
+allydata <- NULL
+for(ii in 1:nrow(senders)){
+	slice <- senders[ii,]
+	sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
+	tar <- as.character(slice$targetstate)
+
+	# Row standardize
+	ddata <- allyMats[[as.character(slice$year)]]
+	matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
+	ddata <- ddata/matDenom
+
+	# Row/Col Rel.	
+	ddata[tar, sen]
+
+	# Network measure
+	ddata <- mean(ddata)
+
+	# Combine
+	allydata <- rbind(allydata, ddata)
+}
+
+aData <- cbind(aData, edata, tdata, allydata)
 
 save(aData, file='forCassyDurPractice.rda')
-###############################################################
