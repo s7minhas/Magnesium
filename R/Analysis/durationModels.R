@@ -177,6 +177,7 @@ model3<- coxph(
 summary(model3)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 
+#model partly inspired by gibson article
 model4<- coxph(
 	Surv(aData$slength, aData$compliance) ~
 	noS + gdpCAP + polity  + Democratic.Accountability + Internal.Conflict + External.Conflict  + Ethnic.Tensions + edata + tdata + allydata +Ethnic.Tensions*allydata, data=aData)
