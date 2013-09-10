@@ -8,8 +8,6 @@ load('forCassyDurPractice.rda')
 setwd(paste(pathData, '/Replication Krustev', sep=''))
 krust <- read.dta('duration.dta')
 
-# head(aData)
-# head(krust)
 
 # ##########################
 # # create survival objects
@@ -22,15 +20,8 @@ krust <- read.dta('duration.dta')
 # dv2 <- Surv(aData$startyear, aData$endyear2, aData$compliance)
 
 # ##########################
-# # models
+# # model types & examples
 # ##########################
-
-# # model, simple example
-# survfit(dv1 ~1)
-# fitOne <- survfit(dv1 ~1)
-# summary(fitOne)
-# plot(fitOne, main="Kaplan-Meier estimate with 95% confidence bounds",
-# xlab="time", ylab="survival function")
 
 # # model, weibull
 # wFit<-survreg(dv1 ~ autoc, data=aData, dist='weibull') 
@@ -87,24 +78,25 @@ summary(cpModKr)
 # Returning to our modeling
 ############################################################
 # Modeling with net data (edata = exports)
+	# Finding thus far: in almost all models, ethnic tensions / internal conflict is significant
 
-model1<- coxph(
+emodel1<- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict +ndata,
+	noS + gdpCAP + polity + Internal.Conflict + edata,
 	data=aData)
 summary(model1)
 plot(survfit(model1), conf.int=T, ylim=c(0.8, 1))
 
-model2<-cpModF <- coxph(
+emodel2<-cpModF <- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + Government.Stability + ndata,
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + Government.Stability + edata,
 	data=aData)
 summary(model2)
 plot(survfit(model2), conf.int=T, ylim=c(0.8, 1))
 
-model3<- coxph(
+emodel3<- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + ndata, data=aData)
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + edata, data=aData)
 summary(model3)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 
@@ -112,7 +104,7 @@ plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 ############################################################
 # Modeling with net data (tdata = trade)
 ############################################################
-
+	# here too, ethnic tensions and internal conflict play a role
 tmodel1<- coxph(
 	Surv(aData$slength, aData$compliance) ~
 	noS + gdpCAP + polity + Internal.Conflict + tdata,
@@ -156,3 +148,42 @@ allymodel3<- coxph(
 	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + allydata, data=aData)
 summary(allymodel3)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
+
+############################################################
+# Modeling with net data (multiple)
+############################################################
+	#ethnic tensions still play a role
+	#external conflict and internal conflict matter! 
+    # so does Democratic.Accountability, so domestic stuff seems important
+	#interestingly in the last model, allydata becomes sig at the .1 level.
+	#also, note the changes from model 3 to 4, kinda interesting.
+model1<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + edata + tdata + allydata,
+	data=aData)
+summary(model1)
+plot(survfit(allymodel1), conf.int=T, ylim=c(0.8, 1))
+
+model2<-cpModF <- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + Government.Stability + edata + tdata +  allydata,
+	data=aData)
+summary(model2)
+plot(survfit(allymodel2), conf.int=T, ylim=c(0.8, 1))
+
+model3<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity  + Democratic.Accountability + Internal.Conflict + Ethnic.Tensions + External.Conflict + edata + tdata + allydata, data=aData)
+summary(model3)
+plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
+
+model4<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity  + Democratic.Accountability + Internal.Conflict + External.Conflict  + Ethnic.Tensions + edata + tdata + allydata +Ethnic.Tensions*allydata, data=aData)
+summary(model4)
+plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
+
+
+#things I tried and dropped: 
+#xropen
+#Bureaucracy.Quality
