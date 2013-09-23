@@ -1,0 +1,176 @@
+%!TEX TS-program = xelatex
+% NOTE: as of 17 Sept 2012, this compiles in xelatex
+
+\documentclass{beamer}
+% \usetheme{Madrid} % My favorite!
+% \usetheme{Antibes}
+% \usetheme{Bergen} % This template has nagivation on the left
+% \usetheme{Berkeley} % Nice details
+%\usetheme{Berlin}
+% \usetheme{Boadilla} % Pretty neat, soft color.
+% \usetheme{Copenhagen} % sim to default, pretty sure Sunshine uses this
+% \usetheme{Darmstadt} % not so good
+% \usetheme{Dresden} % sim to Berlin
+% \usetheme{default} 
+% \usetheme{Frankfurt} % Similar to the default 
+% \usetheme{Goettingen} % Navigation on right
+% \usetheme{Hannover} % Navigation on left, soft color
+% \usetheme{Ilmenau}
+% \usetheme{Juanlespins} % don't have this .sty
+% \usetheme{Madrid}
+% \usetheme{Malmoe} % pretty good. No stuff on top, sim to Warsaw on bottom
+% \usetheme{Marburg} % Nice Navigation on right
+% \usetheme{Montpellier} % yuck
+% \usetheme{Paloalto} % don't have this .sty
+% \usetheme{Pittsburg} % don't have this .sty
+% \usetheme{Rochester} % very plain
+%\usetheme{Singapore} % similar to default
+\usetheme{Warsaw}
+%with an extra region at the top.
+%\usecolortheme{seahorse} % Simple and clean template
+% Uncomment the following line if you want %
+%page numbers and using Warsaw theme%
+%\setbeamertemplate{footline}[page number]
+%\setbeamercovered{transparent}
+\setbeamercovered{invisible}
+% To remove the navigation symbols from 
+% the bottom of slides%
+\setbeamertemplate{navigation symbols}{} 
+%\setbeamercovered{transparent}
+%\usecolortheme{albatross}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{seagull}
+%\usecolortheme{wolverine}
+%\usecolortheme{beaver} % I like this one
+%
+\usepackage{coordsys} % for number lines
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subfig}
+\usepackage{tikz}
+%\usepackage{bm}         % For typesetting bold math (not \mathbold)
+%\logo{\includegraphics[height=0.6cm]{yourlogo.eps}}
+%
+
+% font customization
+% \usepackage{mathspec}
+% \usepackage{xunicode}
+% \usepackage{xltxtra}
+% \setmainfont{Gill Sans}
+% \setmathsfont(Digits,Latin,Greek){Gill Sans}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[When Do States Say Uncle? \hspace{14em} \insertframenumber/
+\inserttotalframenumber]{Sanction Compliance}
+\author{Shahryar Minhas}
+\institute[Duke University]
+{
+{\emph{sfm12@duke.edu}} \\
+\medskip
+Duke University 
+}
+\date{\today}
+
+\graphicspath{{/Users/janus829/Dropbox/Research/Magnesium/Graphics/}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\titlepage
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Intro:
+	General question: 
+		Role of network on sanction compliance
+	Initial charts with network of sanctions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Literature Review 1
+	Marinov
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Literature Review 2
+	Skyler Cramner
+	Mike
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Our own hypotheses: 1
+	network pressure
+		rel. between senders and receivers
+		number of senders
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Our own hypotheses: 2
+	polity
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}
+% \frametitle{Summary}
+% \scriptsize{
+% 	\begin{itemize}
+% 		\item In this presentation deck, we show replications of papers by Sorens \& Ruger (2012) and Lee (2013) Both these papers originally employed Amelia to impute missing values in their dataset. In the following slides, we show replications of their Amelia results and compare them to similar models run through a Bayesian framework using Sbgcop to impute missing values. 
+% 		\item To implement Sbgcop we created 5,000 imputed datasets and then within the MCMCs for the models we randomly chose one of those datasets to use in estimating the parameters. 
+% 	\end{itemize}
+% 	}
+% \end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{Replication of Sorens \& Ruger Model 3}
+% \scriptsize{On the left hand side, we show the results of a Bayesian (black) and Frequenstist (grey) approach with listwise deletion. On the right hand side, we show the same but with having imputed values through Sbgcop and Amelia.}
+% \begin{figure}
+% 	\centering
+% 	\begin{tabular}{ll}
+% 		\subfloat{
+% 		\includegraphics[width=0.48\textwidth]{/SorensRugerReplication/Graphics/coefpM3_noIMP.pdf}
+% 		\label{fig:Smod1Latent}} &
+% 		\subfloat{
+% 		\includegraphics[width=0.48\textwidth]{/SorensRugerReplication/Graphics/coefpM3.pdf}
+% 		\label{fig:Smod1Legend}}				
+% 	\end{tabular}
+% \end{figure}
+% \end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{Replication of Sorens \& Ruger Model 4}
+% \scriptsize{On the left hand side, we show the results of a Bayesian (black) and Frequenstist (grey) approach with listwise deletion. On the right hand side, we show the same but with having imputed values through Sbgcop and Amelia.}
+% \begin{figure}
+% 	\centering
+% 	\begin{tabular}{ll}
+% 		\subfloat{
+% 		\includegraphics[width=0.48\textwidth]{/SorensRugerReplication/Graphics/coefpM4_noIMP.pdf}
+% 		\label{fig:Smod1Latent}} &
+% 		\subfloat{
+% 		\includegraphics[width=0.48\textwidth]{/SorensRugerReplication/Graphics/coefpM4.pdf}
+% 		\label{fig:Smod1Legend}}				
+% 	\end{tabular}
+% \end{figure}
+% \end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{Replication of Lee}
+% \scriptsize{On the left hand side, we show the results of a Bayesian (black) and Frequenstist (grey) approach with listwise deletion. On the right hand side, we show the same but with having imputed values through Sbgcop and Amelia.}
+% \begin{figure}
+% 	\centering
+% 	\begin{tabular}{ll}
+% 		\subfloat{
+% 		\includegraphics[width=0.48\textwidth]{/LeeReplication/Graphics/LEE_bVm_coefpV2_noImputation.pdf}
+% 		\label{fig:Smod1Latent}} &
+% 		\subfloat{
+% 		\includegraphics[width=0.48\textwidth]{/LeeReplication/Graphics/LEE_bVm_coefpV2.pdf}
+% 		\label{fig:Smod1Legend}}				
+% 	\end{tabular}
+% \end{figure}
+% \end{frame}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % End of slides
+% \end{document} 
