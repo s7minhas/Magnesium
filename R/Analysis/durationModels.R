@@ -125,8 +125,16 @@ tmodel3<- coxph(
 summary(tmodel3)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 
+#no of Senders influential 
+tmodel4<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + 
+	tdata +polity*tdata +noS, data=aData)
+summary(tmodel4)
+plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
+
 ############################################################
-# Modeling with net data (allydata = trade)
+# Modeling with net data (allydata)
 ############################################################
 
 allymodel1<- coxph(
@@ -153,37 +161,49 @@ plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 # Modeling with net data (multiple)
 ############################################################
 	#ethnic tensions still play a role
-	#external conflict and internal conflict matter! 
+	#internal conflict matter! 
     # so does Democratic.Accountability, so domestic stuff seems important
 	#interestingly in the last model, allydata becomes sig at the .1 level.
 	#also, note the changes from model 3 to 4, kinda interesting.
 model1<- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict + edata + tdata + allydata,
-	data=aData)
+	noS + gdpCAP + polity + Internal.Conflict + tdata +
+	 allydata, data=aData)
 summary(model1)
 plot(survfit(allymodel1), conf.int=T, ylim=c(0.8, 1))
 
 model2<-cpModF <- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + Government.Stability + edata + tdata +  allydata,
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions
+	+ Government.Stability + tdata +  allydata,
 	data=aData)
 summary(model2)
 plot(survfit(allymodel2), conf.int=T, ylim=c(0.8, 1))
 
 model3<- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity  + Democratic.Accountability + Internal.Conflict + Ethnic.Tensions + External.Conflict + edata + tdata + allydata, data=aData)
+	noS + gdpCAP + polity  + Democratic.Accountability + Internal.Conflict 
+	+ Ethnic.Tensions + tdata + allydata, data=aData)
 summary(model3)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 
 #model partly inspired by gibson article
+#ethnic tensions * ally, makes ethnic tensions drop
 model4<- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity  + Democratic.Accountability + Internal.Conflict + External.Conflict  + Ethnic.Tensions + edata + tdata + allydata +Ethnic.Tensions*allydata, data=aData)
+	noS + gdpCAP + polity  + Democratic.Accountability 
+	+ Internal.Conflict + External.Conflict  + Ethnic.Tensions 
+    + tdata + allydata +Ethnic.Tensions*allydata, data=aData)
 summary(model4)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 
+model5<- coxph(
+	Surv(aData$slength, aDat
+		a$compliance) ~
+	noS + gdpCAP + polity  + Democratic.Accountability
+	+ Internal.Conflict + Ethnic.Tensions + tdata
+	+ allydata + polity*allydata, data=aData)
+summary(model5)
 
 #things I tried and dropped: 
 #xropen
