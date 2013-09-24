@@ -292,11 +292,13 @@ netMelt <- function(meltData, meltID, meltYr, netList, rst=TRUE, netStat=functio
 				matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
 				ddata <- ddata/matDenom}
 
-		# Row/Col Rel.	
-		ddata <- ddata[tar, sen]
-
-		# Network measure
-		ddata <- netStat(ddata)
+		if(sum(tar==rownames(ddata)) & sum(sen==rownames(ddata))){
+			# Row/Col Rel.	
+			ddata <- ddata[tar, sen]
+			# Network measure
+			ddata <- netStat(ddata) } else {
+				ddata <- NA
+			}
 
 		# Combine
 		ndata <- rbind(ndata, ddata)
