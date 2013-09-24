@@ -1,4 +1,3 @@
-# Need to pull out sanction variable for use in analysis
 # Clearing workspace
 rm(list=ls())
 # Setting working directory
