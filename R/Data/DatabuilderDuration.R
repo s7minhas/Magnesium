@@ -106,55 +106,18 @@ igoMats$'1961' <- igoMats$'1960'; igoMats$'1962' <- igoMats$'1960'
 igoMats$'1963' <- igoMats$'1960'; igoMats$'1964' <- igoMats$'1960'
 igoMats$'1965' <- igoMats$'1960'
 
-# edata=netMelt(senders, 'targetstate', 'year', exportMats)
-# tdata=netMelt(senders, 'targetstate', 'year', tradeTotMats)
-# allydata=netMelt(senders, 'targetstate', 'year', allyMats)
-# igodata=netMelt(senders, 'targetstate', 'year', igoMats)
-# religdata=netMelt(senders, 'targetstate', 'year', igoMats, rst=FALSE)
+religMats2 <- rep(religMats, 5)
+religMats2 <- religMats2[sort(names(religMats2))]
+names(religMats2) <- 1960:2009
+religMats2 <- religMats2[as.character(1960:2005)]
 
-meltData=senders
-meltID='targetstate'
-meltYr='year'
-netList=igoMats
-ndata <- NULL
-rst=TRUE
-netStat=function(x){mean(x)}
+round(1961/100,1)*100
 
-for(ii in 1:nrow(meltData)){
-	slice <- meltData[ii,]
-	sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
-	tar <- as.character(slice[,meltID])
-
-	ddata <- netList[[as.character(slice[,meltYr])]]
-
-	if(rst==TRUE){
-			# Row standardize
-			matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
-			ddata <- ddata/matDenom}
-
-	if(sum(tar==rownames(ddata)) & sum(sen==rownames(ddata))){
-		# Row/Col Rel.	
-		ddata <- ddata[tar, sen]
-		# Network measure
-		ddata <- netStat(ddata) } else {
-			ddata <- NA
-		}
-
-	# Combine
-	ndata <- rbind(ndata, ddata)
-
-	# Progress
-	if(ii==1 | ii%%100==0 | ii==nrow(meltData)){
-		cat(paste(round(100*ii/nrow(meltData),0),'% ',sep=''))}
-}
-
-
-n <- 10
-vec <- rep(NA, n)
-for (j in 1:n)
-{tryCatch(ifelse(j==5, vec[j] <- j, j), finally=print("oh dear"))}
-vec
-
+edata=netMelt(senders, 'targetstate', 'year', exportMats)
+tdata=netMelt(senders, 'targetstate', 'year', tradeTotMats)
+allydata=netMelt(senders, 'targetstate', 'year', allyMats)
+igodata=netMelt(senders, 'targetstate', 'year', igoMats)
+religdata=netMelt(senders, 'targetstate', 'year', igoMats, rst=FALSE)
 ###############################################################
 
 ###############################################################
