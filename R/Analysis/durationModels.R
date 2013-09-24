@@ -9,48 +9,6 @@ setwd(paste(pathData, '/Replication Krustev', sep=''))
 krust <- read.dta('duration.dta')
 
 
-# ##########################
-# # create survival objects
-# ##########################
-
-# # For right-censored data, only two arguments are needed in the Surv() function: a vector of times and a vector indicating which times are observed and censored.
-# dv1<- Surv(aData$year, aData$compliance, type="right")
-
-# # For left truncated right- censored data, three arguments are needed
-# dv2 <- Surv(aData$startyear, aData$endyear2, aData$compliance)
-
-# ##########################
-# # model types & examples
-# ##########################
-
-# # model, weibull
-# wFit<-survreg(dv1 ~ autoc, data=aData, dist='weibull') 
-# summary(wFit)
-
-# # more basic examples 
-# fitTwo<-survfit(dv1~ aData$Ethnic.Tensions)
-# summary(fitTwo)
-
-# fitThree<-survfit(dv1~ autoc + Government.Stability + parcomp, data=aData)
-# summary(fitThree)
-
-# cb<-confBands(dv1,confLevel=.95, type="hall")
-# plot(fitThree, xlim=c(100,600), xlab="time",  ylab="Estimated Survival Function")
-# lines(cb$time, cb$lower, lty=3, type="s")
-# lines(cb$time, cb$upper, lty=3, type="s")
-# legend(100, 0.3, legend=c("K-M survival estimate","pointwise intervals","confidence bands"), lty=1:3)
-
-# # Slightly diff exampe
-# model1<-weibreg(dv1 ~ autoc + Government.Stability + change + parcomp, data=aData, shape=0)
-# summary(model1) 
-# model1$coefficients
-# plot.weibreg(model1)
-
-# #semi parametric cox proportional hazards model KRUSTEV replication
-# cph1Rep<- coxph(Surv(krust$year, krust$marker, type="right") ~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo, data=krust)
-# summary(cph1Rep)
-# cph2Rep<-coxph(Surv(krust$strtyr, krust$marker) ~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo, data=krust)
-
 ############################################################
 # SM replication of Krustev Table 1, Model 1
 ############################################################
@@ -125,8 +83,16 @@ tmodel3<- coxph(
 summary(tmodel3)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 
+#no of Senders influential 
+tmodel4<- coxph(
+	Surv(aData$slength, aData$compliance) ~
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + 
+	tdata +polity*tdata +noS, data=aData)
+summary(tmodel4)
+plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
+
 ############################################################
-# Modeling with net data (allydata = trade)
+# Modeling with net data (allydata)
 ############################################################
 
 allymodel1<- coxph(
@@ -153,38 +119,107 @@ plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 # Modeling with net data (multiple)
 ############################################################
 	#ethnic tensions still play a role
-	#external conflict and internal conflict matter! 
+	#internal conflict matter! 
     # so does Democratic.Accountability, so domestic stuff seems important
 	#interestingly in the last model, allydata becomes sig at the .1 level.
 	#also, note the changes from model 3 to 4, kinda interesting.
 model1<- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict + edata + tdata + allydata,
-	data=aData)
+	noS + gdpCAP + polity + Internal.Conflict + tdata +
+	 allydata, data=aData)
 summary(model1)
 plot(survfit(allymodel1), conf.int=T, ylim=c(0.8, 1))
 
+#add ethnic tensions and gov stability (latter doesn't matter)
 model2<-cpModF <- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions + Government.Stability + edata + tdata +  allydata,
+	noS + gdpCAP + polity + Internal.Conflict + Ethnic.Tensions
+	+ Government.Stability + tdata +  allydata,
 	data=aData)
 summary(model2)
 plot(survfit(allymodel2), conf.int=T, ylim=c(0.8, 1))
 
+#add demo accountability **THIS might be one of the most interesting
+#of the models
 model3<- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity  + Democratic.Accountability + Internal.Conflict + Ethnic.Tensions + External.Conflict + edata + tdata + allydata, data=aData)
+	noS + gdpCAP + polity  + Democratic.Accountability + Internal.Conflict 
+	+ Ethnic.Tensions + tdata + allydata, data=aData)
 summary(model3)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 
 #model partly inspired by gibson article
+#ethnic tensions * ally, makes ethnic tensions drop
+
 model4<- coxph(
 	Surv(aData$slength, aData$compliance) ~
-	noS + gdpCAP + polity  + Democratic.Accountability + Internal.Conflict + External.Conflict  + Ethnic.Tensions + edata + tdata + allydata +Ethnic.Tensions*allydata, data=aData)
+	noS + gdpCAP + polity  + Democratic.Accountability 
+	+ Internal.Conflict + Ethnic.Tensions 
+    + tdata + allydata + Internal.Conflict *allydata, data=aData)
 summary(model4)
 plot(survfit(cpModF), conf.int=T, ylim=c(0.8, 1))
 
+model5<- coxph(
+	Surv(aData$slength, aDat
+		a$compliance) ~
+	noS + gdpCAP + polity  + Democratic.Accountability
+	+ Internal.Conflict + Ethnic.Tensions + tdata
+	+ allydata + polity*tdata, data=aData)
+summary(model5)
 
 #things I tried and dropped: 
 #xropen
 #Bureaucracy.Quality
+
+
+
+
+
+
+
+
+
+
+
+# ##########################
+# # create survival objects
+# ##########################
+
+# # For right-censored data, only two arguments are needed in the Surv() function: a vector of times and a vector indicating which times are observed and censored.
+# dv1<- Surv(aData$year, aData$compliance, type="right")
+
+# # For left truncated right- censored data, three arguments are needed
+# dv2 <- Surv(aData$startyear, aData$endyear2, aData$compliance)
+
+# ##########################
+# # model types & examples
+# ##########################
+
+# # model, weibull
+# wFit<-survreg(dv1 ~ autoc, data=aData, dist='weibull') 
+# summary(wFit)
+
+# # more basic examples 
+# fitTwo<-survfit(dv1~ aData$Ethnic.Tensions)
+# summary(fitTwo)
+
+# fitThree<-survfit(dv1~ autoc + Government.Stability + parcomp, data=aData)
+# summary(fitThree)
+
+# cb<-confBands(dv1,confLevel=.95, type="hall")
+# plot(fitThree, xlim=c(100,600), xlab="time",  ylab="Estimated Survival Function")
+# lines(cb$time, cb$lower, lty=3, type="s")
+# lines(cb$time, cb$upper, lty=3, type="s")
+# legend(100, 0.3, legend=c("K-M survival estimate","pointwise intervals","confidence bands"), lty=1:3)
+
+# # Slightly diff exampe
+# model1<-weibreg(dv1 ~ autoc + Government.Stability + change + parcomp, data=aData, shape=0)
+# summary(model1) 
+# model1$coefficients
+# plot.weibreg(model1)
+
+# #semi parametric cox proportional hazards model KRUSTEV replication
+# cph1Rep<- coxph(Surv(krust$year, krust$marker, type="right") ~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo, data=krust)
+# summary(cph1Rep)
+# cph2Rep<-coxph(Surv(krust$strtyr, krust$marker) ~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo, data=krust)
+
