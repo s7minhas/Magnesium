@@ -1,6 +1,6 @@
 # setup workspace
-#source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
+source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+# source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
 
 ###############################################################
 # Loading Excel data from UNC
@@ -106,73 +106,15 @@ igoMats$'1961' <- igoMats$'1960'; igoMats$'1962' <- igoMats$'1960'
 igoMats$'1963' <- igoMats$'1960'; igoMats$'1964' <- igoMats$'1960'
 igoMats$'1965' <- igoMats$'1960'
 
-edata <- NULL
-for(ii in 1:nrow(senders)){
-	slice <- senders[ii,]
-	sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
-	tar <- as.character(slice$targetstate)
-
-	# Row standardize
-	ddata <- exportMats[[as.character(slice$year)]]
-	matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
-	ddata <- ddata/matDenom
-
-	# Row/Col Rel.	
-	ddata[tar, sen]
-
-	# Network measure
-	ddata <- mean(ddata)
-
-	# Combine
-	edata <- rbind(edata, ddata)
-}
+edata=netMelt(senders, 'targetstate', 'year', exportMats)
+tdata=netMelt(senders, 'targetstate', 'year', tradeTotMats)
+allydata=netMelt(senders, 'targetstate', 'year', allyMats)
+igodata=netMelt(senders, 'targetstate', 'year', igoMats)
+religdata=netMelt(senders, 'targetstate', 'year', igoMats, rst=FALSE)
 
 ###############################################################
 
-tdata <- NULL
-for(ii in 1:nrow(senders)){
-	slice <- senders[ii,]
-	sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
-	tar <- as.character(slice$targetstate)
-
-	# Row standardize
-	ddata <- tradeTotMats[[as.character(slice$year)]]
-	matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
-	ddata <- ddata/matDenom
-
-	# Row/Col Rel.	
-	ddata[tar, sen]
-
-	# Network measure
-	ddata <- mean(ddata)
-
-	# Combine
-	tdata <- rbind(tdata, ddata)
-}
-
 ###############################################################
-
-allydata <- NULL
-for(ii in 1:nrow(senders)){
-	slice <- senders[ii,]
-	sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
-	tar <- as.character(slice$targetstate)
-
-	# Row standardize
-	ddata <- allyMats[[as.character(slice$year)]]
-	matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
-	ddata <- ddata/matDenom
-
-	# Row/Col Rel.	
-	ddata[tar, sen]
-
-	# Network measure
-	ddata <- mean(ddata)
-
-	# Combine
-	allydata <- rbind(allydata, ddata)
-}
-
 aData <- cbind(aData, edata, tdata, allydata)
 
 save(aData, file='forCassyDurPractice.rda')

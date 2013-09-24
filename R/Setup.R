@@ -276,3 +276,34 @@ spatialBuild <- function(spatList, varData, years, variable, sp_suffix, invert=F
 	spatData$cyear <- paste(spatData$ccode, spatData$year, sep='') 
 	spatData
 }
+
+# Melts network data down to use for sanction case analyis
+netMelt <- function(meltData, meltID, meltYr, netList, rst=TRUE, netStat=function(x){mean(x)}){
+	ndata <- NULL
+	for(ii in 1:nrow(meltData)){
+		slice <- meltData[ii,]
+		sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
+		tar <- as.character(slice[,meltID])
+
+		ddata <- netList[[as.character(slice[,meltYr])]]
+
+		if(rst==TRUE){
+				# Row standardize
+				matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
+				ddata <- ddata/matDenom}
+
+		# Row/Col Rel.	
+		ddata <- ddata[tar, sen]
+
+		# Network measure
+		ddata <- netStat(ddata)
+
+		# Combine
+		ndata <- rbind(ndata, ddata)
+
+		# Progress
+		if(ii==1 | ii%%100==0 | ii==nrow(meltData)){
+			cat(paste(round(100*ii/nrow(meltData),0),'% ',sep=''))}
+	}
+	print(' Completed '); ndata
+}

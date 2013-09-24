@@ -193,6 +193,25 @@ table(icrg2$cyear)[table(icrg2$cyear)>1] # Dupe check
 ###############################################################
 
 ###############################################################
+# PRIO Civil War
+setwd(paste(pathData, '/Components/PRIO_ArmedConflict', sep=''))
+war <- read.csv('ucdp.prio.armed.conflict.v4.2013.csv')
+civwar <- unique(war[war$Type==3 | war$Type==4,c('SideA', 'YEAR')])
+
+# Cleaning country names
+civwar$SideA <- as.character(civwar$SideA)
+civwar <- civwar[civwar$SideA!='Hyderabad',]
+civwar$SideA[civwar$SideA=='United Arab Emirate'] <- 'United Arab Emirates'
+civwar$SideA[civwar$SideA=='Rumania'] <- 'Romania'
+civwar$SideA[civwar$SideA=='Serbia (Yugoslavia)'] <- 'SERBIA'
+civwar$cname <- countrycode(civwar$SideA, 'country.name', 'country.name')
+civwar$cname[civwar$cname=='Czechoslovakia'] <- 'CZECH REPUBLIC'
+civwar$ccode <- panel$ccode[match(civwar$cname,panel$cname)]
+civwar$cyear <- paste(civwar$ccode, civwar$YEAR, sep='')
+civwar$civwar <- 1
+###############################################################
+
+###############################################################
 # Combining data
 frame <- unique(panel[,c('ccode', 'cname')])
 dframe <- NULL; frame$year <- NA; years <- seq(1960,2012,1)
@@ -209,6 +228,8 @@ unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData <- merge(monadData, banks2[,c(5:13,ncol(banks2))],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData <- merge(monadData, constraints2[,c(8:10,ncol(constraints2))],by='cyear',all.x=T,all.y=F)
+unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
+monadData <- merge(monadData, civwar[,5:ncol(civwar)],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 
 monadData <- monadData[monadData$year>=1960 & monadData$year<=2012,]
