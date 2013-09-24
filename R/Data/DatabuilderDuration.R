@@ -10,6 +10,7 @@ setwd(pathData)
 load('sanctionData.rda')
 load('monadData.rda')
 load('dyadMats.rda')
+load('mindistMatrices.rda')
 ###############################################################
 
 
@@ -101,26 +102,41 @@ aData <- aData[aData$year<=2005,]
 ###############################################################
 # Building network data
 senders <- aData[,c(6, 3, 9:13)]
+
 # dyadic datasets: exportMats, tradeTotMats, allyMats, warMats, igoMats, religMats
+edata=netMelt(senders, 'targetstate', 'year', exportMats)
+tdata=netMelt(senders, 'targetstate', 'year', tradeTotMats)
+allydata=netMelt(senders, 'targetstate', 'year', allyMats)
+
 igoMats$'1961' <- igoMats$'1960'; igoMats$'1962' <- igoMats$'1960'
 igoMats$'1963' <- igoMats$'1960'; igoMats$'1964' <- igoMats$'1960'
 igoMats$'1965' <- igoMats$'1960'
+igodata=netMelt(senders, 'targetstate', 'year', igoMats)
 
 religMats2 <- rep(religMats, 5)
 religMats2 <- religMats2[sort(names(religMats2))]
 names(religMats2) <- 1960:2009
 religMats2 <- religMats2[as.character(1960:2005)]
+religdata=netMelt(senders, 'targetstate', 'year', religMats2, rst=FALSE)
 
-round(1961/100,1)*100
+religMats2 <- rep(CreligMats, 5)
+religMats2 <- religMats2[sort(names(religMats2))]
+names(religMats2) <- 1960:2009
+religMats2 <- religMats2[as.character(1960:2005)]
+Creligdata=netMelt(senders, 'targetstate', 'year', religMats2, rst=FALSE)
 
-edata=netMelt(senders, 'targetstate', 'year', exportMats)
-tdata=netMelt(senders, 'targetstate', 'year', tradeTotMats)
-allydata=netMelt(senders, 'targetstate', 'year', allyMats)
-igodata=netMelt(senders, 'targetstate', 'year', igoMats)
-religdata=netMelt(senders, 'targetstate', 'year', igoMats, rst=FALSE)
+distMats <- distMats[as.character(1960:2005)]
+distdata=netMelt(senders, 'targetstate', 'year', distMats)
+
+DdistMats <- lapply(distMats, function(x){
+	x <- ifelse(x<=200,1,0); diag(x) <- 0; x })
+Ddistdata=netMelt(senders, 'targetstate', 'year', DdistMats, rst=FALSE)
+
+aData$noS <- apply(aData[,c(9:13)], 1, function(x) {sum(!is.na(x))} )
 ###############################################################
 
 ###############################################################
-aData <- cbind(aData, edata, tdata, allydata)
-
-save(aData, file='forCassyDurPractice.rda')
+aData <- cbind(aData, edata, tdata, allydata, igodata, 
+	religdata, Creligdata, distdata, Ddistdata)
+save(aData, file='durData.rda')
+###############################################################

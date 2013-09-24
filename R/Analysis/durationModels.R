@@ -4,7 +4,7 @@
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
 
 setwd(pathData)
-load('forCassyDurPractice.rda')
+load('durData.rda')
 setwd(paste(pathData, '/Replication Krustev', sep=''))
 krust <- read.dta('duration.dta')
 

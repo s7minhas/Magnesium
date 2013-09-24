@@ -282,7 +282,8 @@ netMelt <- function(meltData, meltID, meltYr, netList, rst=TRUE, netStat=functio
 	ndata <- NULL
 	for(ii in 1:nrow(meltData)){
 		slice <- meltData[ii,]
-		sen <- as.character(na.omit(t(slice[,3:7]))[[1]])
+		sen <- as.character(t(slice[,3:7]))
+		sen <- sen[!is.na(sen)]
 		tar <- as.character(slice[,meltID])
 
 		ddata <- netList[[as.character(slice[,meltYr])]]
@@ -292,7 +293,7 @@ netMelt <- function(meltData, meltID, meltYr, netList, rst=TRUE, netStat=functio
 				matDenom <- apply(ddata, 1, sum); matDenom[matDenom==0] <- 1
 				ddata <- ddata/matDenom}
 
-		if(sum(tar==rownames(ddata)) & sum(sen==rownames(ddata))){
+		if(!is.na(sum(match(c(tar,sen),rownames(ddata))))){
 			# Row/Col Rel.	
 			ddata <- ddata[tar, sen]
 			# Network measure

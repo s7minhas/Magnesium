@@ -388,8 +388,9 @@ religion$ccode <- sancIDs2$ccode[match(religion$state, sancIDs2$cowcode)]
 religion$cname <- sancIDs2$cname[match(religion$state, sancIDs2$cowcode)]
 
 religionData <- religion[,c('year','ccode',
-	names(religion)[which(substrRight(names(religion),6)=='genpct')]
-	)]
+	names(religion)[which(substrRight(names(religion),6)=='genpct')] )]
+
+# Do countries have the same majority religion
 majorRelig <- apply(religionData, 1, function(x)
 	FUN=names(religionData)[which(x == max(x[3:ncol(religionData)]))] )
 majorRelig[[1481]] <- 'noMajor'
@@ -403,11 +404,29 @@ names(cntryList) <- years
 
 religMats <- DyadBuild_fMonad(variable='majRelig', oper='same',
 	monadData=religionFINAL, time=years, countryList=cntryList)
+
+# Use correlation to test similarity of religions between cnt-yrs
+
+# Dropping extra cases
+religionData$temp <- 1:nrow(religionData)
+religionData <- religionData[religionData$temp!=566,] # Extra case of Germany in 1990
+religionData <- religionData[religionData$temp!=1537,] # Extra case of Yemen in 1990
+religionData <- religionData[,1:(ncol(religionData)-1)]
+
+CreligMats <- list()
+years <- seq(1960,2005,5)
+for(ii in 1:length(years)){
+	temp <- religionData[religionData$year==years[ii],]	
+	rownames(temp) <- temp$ccode
+	ttemp <- t(temp[,3:ncol(temp)])
+	CreligMats[[ii]] <- cor(ttemp)
+}
+names(CreligMats) <- years
 ###############################################################
 
 ###############################################################
 #saving cleaned data
 setwd(pathData)
-save(exportMats, tradeTotMats, allyMats, warMats, igoMats, religMats
+save(exportMats, tradeTotMats, allyMats, warMats, igoMats, religMats, CreligMats
 	,file='dyadMats.rda')
 ###############################################################
