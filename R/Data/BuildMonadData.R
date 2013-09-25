@@ -227,7 +227,7 @@ monadData <- merge(monadData, icrg2[,c(5:16,ncol(icrg2))],by='cyear',all.x=T,all
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData <- merge(monadData, banks2[,c(5:13,ncol(banks2))],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
-monadData <- merge(monadData, constraints2[,c(8:10,ncol(constraints2))],by='cyear',all.x=T,all.y=F)
+monadData <- merge(monadData, constraints2[,c(1,8:10)],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData <- merge(monadData, civwar[,5:ncol(civwar)],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)

@@ -106,12 +106,12 @@ senders <- aData[,c(6, 3, 9:13)]
 # dyadic datasets: exportMats, tradeTotMats, allyMats, warMats, igoMats, religMats
 edata=netMelt(senders, 'targetstate', 'year', exportMats)
 tdata=netMelt(senders, 'targetstate', 'year', tradeTotMats)
-allydata=netMelt(senders, 'targetstate', 'year', allyMats)
+allydata=netMelt(senders, 'targetstate', 'year', allyMats, rst=FALSE)
 
 igoMats$'1961' <- igoMats$'1960'; igoMats$'1962' <- igoMats$'1960'
 igoMats$'1963' <- igoMats$'1960'; igoMats$'1964' <- igoMats$'1960'
 igoMats$'1965' <- igoMats$'1960'
-igodata=netMelt(senders, 'targetstate', 'year', igoMats)
+igodata=netMelt(senders, 'targetstate', 'year', igoMats, rst=FALSE)
 
 religMats2 <- rep(religMats, 5)
 religMats2 <- religMats2[sort(names(religMats2))]
