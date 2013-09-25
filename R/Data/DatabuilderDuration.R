@@ -132,7 +132,18 @@ DdistMats <- lapply(distMats, function(x){
 	x <- ifelse(x<=200,1,0); diag(x) <- 0; x })
 Ddistdata=netMelt(senders, 'targetstate', 'year', DdistMats, rst=FALSE)
 
+# Other Network Variables
+
+# Number of senders
 aData$noS <- apply(aData[,c(9:13)], 1, function(x) {sum(!is.na(x))} )
+
+# Number of sanctions being received by targt state
+require(doBy)
+summaryBy(targetstate ~ targetstate + year, data=aData, FUN=length)
+
+# Number of sanctions being sent by senders
+
+
 ###############################################################
 
 ###############################################################
