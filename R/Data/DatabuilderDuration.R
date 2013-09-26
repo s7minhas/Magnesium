@@ -102,10 +102,17 @@ durData <- durData[durData$noS!=0,]
 
 ###############################################################
 # Add in monadic variables for target state
+monadData$lgdp=log(monadData$gdp)
+monadData$lgdpCAP=log(monadData$gdpCAP)
+monadData$lpopulation=log(monadData$population)
+monadData$domSUM=sum(monadData$domestic1, monadData$domestic2, monadData$domestic3,
+	monadData$domestic4,monadData$domestic5,monadData$domestic6,monadData$domestic7,
+	monadData$domestic8)
+monadData$autocBIN=ifelse(monadData$autoc>=6,1,0)
+monadData$democBIN=ifelse(monadData$autoc>=6,1,0)
+
 aData <- merge(x=durData, y=monadData[,c(1,3,5:ncol(monadData))], 
 	by.x='tyear', by.y='cyear', all.x=T)
-
-aData <- aData[aData$year<=2005,]
 ###############################################################
 
 ###############################################################
@@ -127,27 +134,28 @@ igodata=netMelt(senders, 'targetstate', 'year', igoMats, rst=FALSE)
 
 religMats2 <- rep(religMats, 5)
 religMats2 <- religMats2[sort(names(religMats2))]
-names(religMats2) <- 1960:2009
-religMats2 <- religMats2[as.character(1960:2005)]
+names(religMats2) <- 1960:2014
+religMats2 <- religMats2[as.character(1960:2010)]
 religdata=netMelt(senders, 'targetstate', 'year', religMats2, rst=FALSE)
 
 religMats2 <- rep(CreligMats, 5)
 religMats2 <- religMats2[sort(names(religMats2))]
-names(religMats2) <- 1960:2009
-religMats2 <- religMats2[as.character(1960:2005)]
+names(religMats2) <- 1960:2014
+religMats2 <- religMats2[as.character(1960:2010)]
 Creligdata=netMelt(senders, 'targetstate', 'year', religMats2, rst=FALSE)
 
-distMats <- distMats[as.character(1960:2005)]
+distMats <- distMats[as.character(1960:2011)]
 distdata=netMelt(senders, 'targetstate', 'year', distMats)
 
 DdistMats <- lapply(distMats, function(x){
 	x <- ifelse(x<=200,1,0); diag(x) <- 0; x })
 Ddistdata=netMelt(senders, 'targetstate', 'year', DdistMats, rst=FALSE)
 
+rownames(aData) <- 1:nrow(aData)
 aData <- cbind(aData, edata, tdata, allydata, igodata, 
 	religdata, Creligdata, distdata, Ddistdata)
-# Other Network Variables
 
+# Other Network Variables
 # Number of senders
 aData$noS <- apply(aData[,sVars], 1, function(x) {sum(!is.na(x))} )
 
@@ -175,6 +183,12 @@ for(ii in 1:nrow(aData)){
 	cntSumm=mean(senCntSlice$sancSenCnt)
 
 	aData$sancSenCnt[ii]=cntSumm }
+###############################################################
+
+###############################################################
+# Lagging variables
+aData <- lagDataSM(aData, 'tyear', 'targetstate', 
+	names(aData)[c(18,20:95)],1)
 ###############################################################
 
 ###############################################################

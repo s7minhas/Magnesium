@@ -238,10 +238,6 @@ warFINAL$war <- 1
 
 ###############################################################
 # matrix builder for undirected dyad data from monadic data
-years <- 1960:2005
-cntryList <- lapply(years, function(x) FUN=panel[panel$year==x,'ccode'])
-names(cntryList) <- years
-
 exportMats <- DyadBuild(variable='exports', dyadData=exports, 
 	time=1960:2009, panel=panel, directed=TRUE)
 
@@ -350,7 +346,7 @@ igoDataFINAL <- cbind(ccodes, igoDataFINAL[,c('year','igo')])
 igoDataFINAL <- data.frame(apply(igoDataFINAL,2,numSM))
 
 igoMats <- DyadBuild(variable='igo', dyadData=igoDataFINAL, 
-	time=years, countryList=cntryList, directed=FALSE)
+	time=1960:2005, panel=panel, directed=FALSE)
 ###############################################################
 
 ###############################################################
@@ -396,9 +392,9 @@ majorRelig <- apply(religionData, 1, function(x)
 majorRelig[[1481]] <- 'noMajor'
 majorRelig <- unlist(majorRelig)
 religionFINAL <- cbind(religionData[,1:2], majRelig=majorRelig)
-religionFINAL <- religionFINAL[religionFINAL$year>=1960 & religionFINAL$year<=2005,]
+religionFINAL <- religionFINAL[religionFINAL$year>=1960 & religionFINAL$year<=2010,]
 
-years <- seq(1960,2005,5)
+years <- seq(1960,2010,5)
 cntryList <- lapply(years, function(x) FUN=religionFINAL[religionFINAL$year==x,'ccode'])
 names(cntryList) <- years
 
@@ -414,7 +410,7 @@ religionData <- religionData[religionData$temp!=1537,] # Extra case of Yemen in 
 religionData <- religionData[,1:(ncol(religionData)-1)]
 
 CreligMats <- list()
-years <- seq(1960,2005,5)
+years <- seq(1960,2010,5)
 for(ii in 1:length(years)){
 	temp <- religionData[religionData$year==years[ii],]	
 	rownames(temp) <- temp$ccode
