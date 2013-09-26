@@ -310,3 +310,59 @@ netMelt <- function(meltData, meltID, meltYr, netList, rst=TRUE, netStat=functio
 	}
 	print(' Completed '); ndata
 }
+
+# Modified from CRISP pacakge to work in this case
+buildDuration <- function (data, y, trainingend = NULL, teststart = NULL, dataend = NULL) 
+{
+    if (is.null(data)) 
+        stop("No data supplied")
+    if (is.null(teststart)) 
+        stop("teststart not defined")
+    if (is.null(trainingend)) 
+        stop("testend not defined")
+    if (is.null(dataend)) 
+        stop("dataend (end of data available) is not defined")
+    if (!y %in% names(data)) 
+        stop("Var. name y not in provided data.")
+    durationConvert <- function(data, y, lastdate = NULL) {
+        lastdate <- as.Date(lastdate)
+        data <- subset(data, date <= lastdate)
+        data <- data[order(data$ccode, data$date), ]
+        failure <- function(x) return(c(0, pmax(0, diff(x))))
+        data$failure <- unlist(by(data[, y], data$ccode, failure))
+        data <- subset(data, !(get(y) == 1 & failure == 0))
+        data$end.spell <- ifelse(data$date == as.Date(lastdate), 
+            1, 0)
+        data$end.spell <- ifelse(data$failure == 1, 1, data$end.spell)
+        data$spellID <- rev(cumsum(rev(data$end.spell)))
+        failedspells <- data$spellID[data$failure == 1]
+        helper <- cbind(failedspells, 1)
+        colnames(helper) <- c("spellID", "c")
+        data <- merge(data, helper, by = ("spellID"), all.x = TRUE)
+        data$c[is.na(data$c)] <- 0
+        helper <- rep(1, dim(data)[1])
+        data <- data[order(data$spellID, data$date), ]
+        data$duration <- unlist(by(helper, data$spellID, cumsum))
+        data <- data[order(data$ccode, data$date), ]
+        return(data)
+    }
+    training <- durationConvert(data, y, lastdate = trainingend)
+    full <- durationConvert(data, y, lastdate = dataend)
+    test <- subset(full, date >= as.Date(teststart))
+    predData <- subset(test, date == as.Date(dataend))
+    missing <- setdiff(unique(data$ccode), unique(predData$ccode))
+    endData=data[data$date == as.Date(dataend), ]
+    if(length(intersect(unique(endData$ccode), missing))>0){
+        missing <- subset(endData, ccode %in% missing)
+        missing$failure <- 0
+        missing$end.spell <- NA
+        missing$spellID <- NA
+        missing$c <- 1
+        missing$duration <- 1
+        predData <- rbind(predData, missing)}
+    training$t.0 <- training$duration - 1
+    test$t.0 <- test$duration - 1
+    predData$t.0 <- predData$duration - 1
+    output <- list(full=full, training=training, test=test, predData=predData)
+    return(output)
+}

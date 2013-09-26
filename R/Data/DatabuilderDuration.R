@@ -58,7 +58,7 @@ for(ii in 1:nrow(sanctionSlice)){
 	year <- seq(slice$startyear, slice$endyear, 1)
 	tcountry <- slice$targetstate; case <- slice$caseid
 	temp <- cbind(slice$caseid, slice$targetstate, 
-		slice$time, year, duration=seq(1,length(year), 1))
+		slice$time, year, durationSM=seq(1,length(year), 1))
 	if(slice$compliance==1){
 		temp=cbind(temp, c(rep(0,nrow(temp)-1),1))} else {
 			temp=cbind(temp, rep(0,nrow(temp)))
@@ -66,10 +66,10 @@ for(ii in 1:nrow(sanctionSlice)){
 	durData <- rbind(durData, temp) }
 
 durData <- data.frame(durData)
-colnames(durData) <- c('caseid', 'targetstate', 'slength', 'year', 'duration', 'compliance')
+colnames(durData) <- c('caseid', 'targetstate', 'slength', 'year', 'durationSM', 'compliance')
 durData$tyear <- paste(durData$targetstate, durData$year, sep='')
 
-# Subsetting duration dataset
+# Subsetting durationSM dataset
 durData <- durData[durData$year>=1960 & durData$year<=2012,]
 durData <- durData[durData$targetstate!=1000,] # Eliminating cases where EU is sanction target
 senders <- sanctionDataFinal[,c(1,75:80)]
