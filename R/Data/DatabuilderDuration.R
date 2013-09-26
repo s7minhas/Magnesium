@@ -38,11 +38,13 @@ names(sanctionSlice) <- c('caseid', 'startyear', 'endyear',
 
 sanctionSlice$startyear <- numSM(sanctionSlice$startyear)
 sanctionSlice$endyear <- numSM(sanctionSlice$endyear)
+# ~40% of cases right censored [i.e., sanctions unresolved]
 sanctionSlice$endyear[is.na(sanctionSlice$endyear)] <- 2013
 
 comp <- c(1,2,5,6,7,10)
 sanctionSlice$compliance <- 0
 sanctionSlice$compliance[which(sanctionSlice$finaloutcome %in% comp)] <- 1
+table(sanctionSlice$compliance)/nrow(sanctionSlice) # ~58% compliance
 
 sanctionSlice$time <- NA
 sanctionSlice$time <- sanctionSlice$endyear - sanctionSlice$startyear + 1

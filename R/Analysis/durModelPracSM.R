@@ -49,3 +49,29 @@ mod.allison.2 <- coxph(Surv(start, stop, arrest.time) ~
 	fin + age + race + wexp + mar + paro + prio + employed,
 	data=Rossi.2)
 summary(mod.allison.2)
+
+############################################################
+# SM replication of Krustev Table 1, Model 1
+############################################################
+
+setwd(paste(pathData, '/Replication Krustev', sep=''))
+krust <- read.dta('duration.dta')
+
+krust$begin <- as.Date(paste(krust[,'strtyr'], 
+	krust[,'strtmnth'], krust[,'strtday'],sep='-'))
+krust$end <- as.Date(paste(krust[,'endyear'], 
+	krust[,'endmnth'], krust[,'endday'],sep='-'))
+krust$temp <- krust$end - krust$begin
+krust[1:10, c(6:8, 10:12, 18:19, 23, 48:49)]
+
+
+krust2 <- krust[krust$marker==1,]
+krust2$cens2 <- krust2$censored
+krust2$cens2[krust2$cens2==1] <- 0
+krust2$cens2[is.na(krust2$cens2)] <- 1
+
+# Time fixed covariate model
+cpModKr <- coxph(Surv(krust2$calcdur, krust2$cens2, type="right") 
+	~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo,
+	 data=krust2)
+summary(cpModKr)
