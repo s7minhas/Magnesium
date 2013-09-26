@@ -50,21 +50,23 @@ sanctionSlice$time <- NA
 sanctionSlice$time <- sanctionSlice$endyear - sanctionSlice$startyear + 1
 ###############################################################
 
-
 ###############################################################
 # Set up duration frame
 durData <- NULL
 for(ii in 1:nrow(sanctionSlice)){
 	slice <- sanctionSlice[ii,]
 	year <- seq(slice$startyear, slice$endyear, 1)
-	tcountry <- slice$targetstate; case <- slice$CaseID
+	tcountry <- slice$targetstate; case <- slice$caseid
 	temp <- cbind(slice$caseid, slice$targetstate, 
-		slice$compliance, slice$time,
-		year, duration=seq(1,length(year), 1))
+		slice$time, year, duration=seq(1,length(year), 1))
+	if(slice$compliance==1){
+		temp=cbind(temp, c(rep(0,nrow(temp)-1),1))} else {
+			temp=cbind(temp, rep(0,nrow(temp)))
+		}
 	durData <- rbind(durData, temp) }
 
 durData <- data.frame(durData)
-colnames(durData)[1:4] <- c('caseid', 'targetstate', 'compliance', 'slength')
+colnames(durData) <- c('caseid', 'targetstate', 'slength', 'year', 'duration', 'compliance')
 durData$tyear <- paste(durData$targetstate, durData$year, sep='')
 
 # Subsetting duration dataset
@@ -76,7 +78,7 @@ senders <- sanctionDataFinal[,c(1,75:80)]
 senders[senders==1000] <- NA # Turning cases where EU is sender to NA
 durData <- merge(x=durData, y=senders, by='caseid')
 
-# Dropping fucked up cases
+# Drops weird case of sanction against E. Germ from W. Germ during 1990-2012
 durData <- durData[which(
 	paste(durData$targetstate, durData$year, sep='') %in% 
 	panel$ccodeYear),]
@@ -89,7 +91,12 @@ durData$endyear2 <- durData$endyear + 1
 noS <- apply(durData[,9:13], 1, function(x) FUN=sum(!is.na(x)) )
 durData <- cbind(durData, noS)
 
-# Dropping cases where therea are zero senders
+# This drops cases where sanctions were
+# sent by institutions,instits sending sanction include:
+# European Economic Community (1653), European Union (1830)
+# OECD (3750), WTO (4580). Excluding these organizations
+# leads to the exclusion of 22 total sanction cases and 11
+# cases where target state complied 
 durData <- durData[durData$noS!=0,]
 ###############################################################
 
@@ -103,7 +110,10 @@ aData <- aData[aData$year<=2005,]
 
 ###############################################################
 # Building network data
-senders <- aData[,c(6, 3, 9:13)]
+sVars=paste('sender',1:5,'_ccode',sep='')
+vars=c('year',sVars)
+varsT=c('year','targetstate',sVars)
+senders <- aData[,varsT]
 
 # dyadic datasets: exportMats, tradeTotMats, allyMats, warMats, igoMats, religMats
 edata=netMelt(senders, 'targetstate', 'year', exportMats)
@@ -139,7 +149,6 @@ aData <- cbind(aData, edata, tdata, allydata, igodata,
 # Other Network Variables
 
 # Number of senders
-sVars=paste('sender',1:5,'_ccode',sep='')
 aData$noS <- apply(aData[,sVars], 1, function(x) {sum(!is.na(x))} )
 
 # Number of sanctions being received by targt state
@@ -150,7 +159,6 @@ aData$id=paste(aData$targetstate, aData$year, sep='')
 aData=merge(aData, sancRecCnt[,3:4], by='id')
 
 # Number of sanctions being sent by senders
-vars=c('year',sVars)
 senders=na.omit(melt(aData[,vars], id='year')[,c(1,3)])
 sancSenCnt=summaryBy(value ~ value + year, data=senders, FUN=length)
 names(sancSenCnt)=c('sender', 'year', 'sancSenCnt')

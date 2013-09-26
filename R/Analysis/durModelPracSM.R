@@ -11,17 +11,12 @@ mod.allison
 
 summary(mod.allison)
 
-plot(survfit(mod.allison), ylim=c(.7, 1), 
-	xlab='Weeks', ylab="Proportion Not Rearrested")
-
 attach(Rossi)
 Rossi.fin <- data.frame(fin=c(0,1), age=rep(mean(age),2), race=rep(mean(race),2),
 	wexp=rep(mean(wexp),2), mar=rep(mean(mar),2), paro=rep(mean(paro),2),
 	prio=rep(mean(prio),2))
 detach(Rossi)
 
-plot(survfit(mod.allison, newdata=Rossi.fin), conf.int=T,
-	lty=c(1,2), ylim=c(.6, 1))
 # legend(locator(1), legend=c('fin = 0', 'fin = 1'), lty=c(1,2))
 
 Rossi.2 <- matrix(0, 19809, 14) # to hold new data set
@@ -50,6 +45,24 @@ mod.allison.2 <- coxph(Surv(start, stop, arrest.time) ~
 	data=Rossi.2)
 summary(mod.allison.2)
 
+attach(Rossi.2)
+Rossi.fin.2 <- data.frame(fin=c(0,1), age=rep(mean(age),2), race=rep(mean(race),2),
+	wexp=rep(mean(wexp),2), mar=rep(mean(mar),2), paro=rep(mean(paro),2),
+	prio=rep(mean(prio),2), employed=rep(mean(prio),2))
+detach(Rossi.2)
+
+
+# Comparing fit of time-fixed and varying
+par(mfrow=c(1,2))
+plot(survfit(mod.allison), ylim=c(.7, 1), 
+	xlab='Weeks', ylab="Proportion Not Rearrested")
+plot(survfit(mod.allison.2), ylim=c(.7, 1), 
+	xlab='Weeks', ylab="Proportion Not Rearrested")
+
+plot(survfit(mod.allison, newdata=Rossi.fin), conf.int=T,
+	lty=c(1,2), ylim=c(.6, 1))
+plot(survfit(mod.allison.2, newdata=Rossi.fin.2), conf.int=T,
+	lty=c(1,2), ylim=c(.6, 1))
 ############################################################
 # SM replication of Krustev Table 1, Model 1
 ############################################################

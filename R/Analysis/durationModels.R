@@ -5,35 +5,82 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 
 setwd(pathData)
 load('durData.rda')
-setwd(paste(pathData, '/Replication Krustev', sep=''))
-krust <- read.dta('duration.dta')
-
 
 ############################################################
-# SM replication of Krustev Table 1, Model 1
+# Time varying models
+# Controlling for heterogeneity in duration data
+require(CRISP)
+aData$date=paste(aData$year,'1-1',sep='-')
+aData$ccode=aData$caseid
+duration=build.duration(data=aData, y='compliance',
+	trainingend='1990-01-01', teststart='1991-01-01',dataend='2005-01-01')
+
+dataend='2005-01-01'
+teststart='1991-01-01'
+trainingend='2000-01-01'
+y='compliance'
+data=aData
+lastdate = trainingend
+
+> build.duration
+function (data, y, trainingend = NULL, teststart = NULL, dataend = NULL) 
+{
+    if (is.null(data)) 
+        stop("No data supplied")
+    if (is.null(teststart)) 
+        stop("teststart not defined")
+    if (is.null(trainingend)) 
+        stop("testend not defined")
+    if (is.null(dataend)) 
+        stop("dataend (end of data available) is not defined")
+    if (!y %in% names(data)) 
+        stop("Var. name y not in provided data.")
+    duration.convert <- function(data, y, lastdate = NULL) {
+        lastdate <- as.Date(lastdate)
+        data <- subset(data, date <= lastdate)
+        data <- data[order(data$ccode, data$date), ]
+        failure <- function(x) return(c(0, pmax(0, diff(x))))
+        data$failure <- unlist(by(data[, y], data$ccode, failure))
+        data <- subset(data, !(get(y) == 1 & failure == 0))
+        data$end.spell <- ifelse(data$date == as.Date(lastdate), 
+            1, 0)
+        data$end.spell <- ifelse(data$failure == 1, 1, data$end.spell)
+        data$spellID <- rev(cumsum(rev(data$end.spell)))
+        failedspells <- data$spellID[data$failure == 1]
+        helper <- cbind(failedspells, 1)
+        colnames(helper) <- c("spellID", "c")
+        data <- merge(data, helper, by = ("spellID"), all.x = TRUE)
+        data$c[is.na(data$c)] <- 0
+        helper <- rep(1, dim(data)[1])
+        data <- data[order(data$spellID, data$date), ]
+        data$duration <- unlist(by(helper, data$spellID, cumsum))
+        data <- data[order(data$ccode, data$date), ]
+        return(data)
+    }
+    training <- duration.convert(data, y, lastdate = trainingend)
+    full <- duration.convert(data, y, lastdate = dataend)
+    test <- subset(full, date >= as.Date(teststart))
+    pred.data <- subset(test, date == as.Date(dataend))
+    missing <- setdiff(unique(data$ccode), unique(pred.data$ccode))
+    missing <- subset(data[data$date == dataend, ], ccode %in% 
+        missing)
+    missing$failure <- 0
+    missing$end.spell <- NA
+    missing$spellID <- NA
+    missing$c <- 1
+    missing$duration <- 1
+    pred.data <- rbind(pred.data, missing)
+    training$t.0 <- training$duration - 1
+    test$t.0 <- test$duration - 1
+    pred.data$t.0 <- pred.data$duration - 1
+    output <- list(training = training, test = test, pred.data = pred.data)
+    return(output)
+}
+
 ############################################################
 
-krust$begin <- as.Date(paste(krust[,'strtyr'], 
-	krust[,'strtmnth'], krust[,'strtday'],sep='-'))
-krust$end <- as.Date(paste(krust[,'endyear'], 
-	krust[,'endmnth'], krust[,'endday'],sep='-'))
-krust$temp <- krust$end - krust$begin
-krust[1:10, c(6:8, 10:12, 18:19, 23, 48:49)]
-
-
-krust2 <- krust[krust$marker==1,]
-krust2$cens2 <- krust2$censored
-krust2$cens2[krust2$cens2==1] <- 0
-krust2$cens2[is.na(krust2$cens2)] <- 1
-
-# Time fixed covariate model
-cpModKr <- coxph(Surv(krust2$calcdur, krust2$cens2, type="right") 
-	~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo,
-	 data=krust2)
-summary(cpModKr)
-
 ############################################################
-# Returning to our modeling
+# Time fixed models
 ############################################################
 # Modeling with net data (edata = exports)
 	# Finding thus far: in almost all models, ethnic tensions / internal conflict is significant
