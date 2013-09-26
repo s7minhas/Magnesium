@@ -22,6 +22,7 @@ require(doBy)
 require(foreign)
 require(cshapes)
 require(countrycode)
+require(CRISP)
 require(survival)
 require(OIsurv)
 require(eha)
@@ -152,8 +153,12 @@ cumulTS <- function(
 # Dyad data must identify countries by variables  
 # ccode_1 & ccode_2 and the time aspect by a variable called year
 # time is a simple vector of years
-# countryList is a list containing ccodes for each year
-DyadBuild <- function(variable, dyadData, time, countryList, directed=FALSE){
+# panel is a dataset with country codes
+DyadBuild <- function(variable, dyadData, time, panel=panel, directed=FALSE){
+
+	countryList <- lapply(time, function(x) FUN=panel[panel$year==x,'ccode'])
+	names(countryList) <- time
+
 	Mats <- list()
 	for(ii in 1:length(time)){
 	  countries <- countryList[[ii]]

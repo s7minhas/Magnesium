@@ -28,7 +28,7 @@ load('megaData.rda')
 # Clean Trade [extends from 1860 to 2009]
 trade2 <- trade[,c('importer1', 'importer2', 'year', 'flow1', 'flow2')]
 colnames(trade2) <- c('state_name1', 'state_name2', 'year', 'imports', 'exports')
-trade2 <- trade2[trade2$year>=1970,]
+trade2 <- trade2[trade2$year>=1960,]
 
 trade2$state_name1 <- as.character(trade2$state_name1)
 trade2$state_name2 <- as.character(trade2$state_name2)
@@ -78,7 +78,7 @@ trade2[trade2$state_name2=='Yemen Arab Republic' & trade2$year==1990, 'drop'] <-
 trade2 <- trade2[trade2$drop!=1,]; trade2 <- trade2[,c(1:(ncol(trade2)-1))]
 
 # Time [trimming to 1960 to 2005]
-trade2 <- trade2[trade2$year>=1960 & trade2$year<=2005,]
+# trade2 <- trade2[trade2$year>=1960 & trade2$year<=2005,]
 
 ### ASIDE
 # Create a separate export & import dataset
@@ -243,16 +243,16 @@ cntryList <- lapply(years, function(x) FUN=panel[panel$year==x,'ccode'])
 names(cntryList) <- years
 
 exportMats <- DyadBuild(variable='exports', dyadData=exports, 
-	time=years, countryList=cntryList, directed=TRUE)
+	time=1960:2009, panel=panel, directed=TRUE)
 
 tradeTotMats <- DyadBuild(variable='trade', dyadData=tradeTot, 
-	time=years, countryList=cntryList, directed=TRUE)
+	time=1960:2009, panel=panel, directed=TRUE)
 
 allyMats <- DyadBuild(variable='ally', dyadData=allianceFINAL, 
-	time=years, countryList=cntryList, directed=FALSE)
+	time=1960:2012, panel=panel, directed=FALSE)
 
 warMats <- DyadBuild(variable='war', dyadData=warFINAL, 
-	time=years, countryList=cntryList, directed=FALSE)
+	time=1960:2011, panel=panel, directed=FALSE)
 ###############################################################
 
 ###############################################################

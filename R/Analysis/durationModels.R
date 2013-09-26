@@ -7,16 +7,31 @@ setwd(pathData)
 load('durData.rda')
 
 ############################################################
-# Time varying models
-# Controlling for heterogeneity in duration data
-require(CRISP)
-
+# Creating duration dataset for spdur function
 aData$date=paste(aData$year,'1-1',sep='-')
 aData$ccode=aData$caseid
-spdurData=buildDuration(data=aData, y='compliance',
+spdurList=buildDuration(data=aData, y='compliance',
 	trainingend='1990-01-01', teststart='1991-01-01',dataend='2005-01-01')
 
 # Variable modifications
+spdurListF=list()
+for(ii in 1:length(spdurList)){
+	data=spdurList[[ii]]
+	data$lgdp=log(data$gdp)
+	data$lgdpCAP=log(data$gdpCAP)
+	data$lpopulation=log(data$population)
+	data$domSUM=sum(data$domestic1, data$domestic2, data$domestic3,
+		data$domestic4,data$domestic5,data$domestic6,data$domestic7,
+		data$domestic8)
+	data$autocBIN=ifelse(data$autoc>=6,1,0)
+	data$democBIN=ifelse(data$autoc>=6,1,0)
+	spdurListF[[ii]]=data
+}
+names(spdurListF)=names(spdurList)
+############################################################
+
+############################################################
+# Time varying models
 
 ############################################################
 
