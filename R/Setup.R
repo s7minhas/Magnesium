@@ -376,3 +376,185 @@ buildDuration <- function (data, y, trainingend = NULL, teststart = NULL, dataen
     output <- list(full=full, training=training, test=test, predData=predData)
     return(output)
 }
+
+# Modified from CRISP package
+predictSPD <- function (spdur.obj = NULL, pred.data = NULL) 
+{
+    if (is.null(spdur.obj)) 
+        stop("Must provide spdur object")
+    if (is.null(pred.data)) 
+        stop("Must provide pred.data")
+    formula <- spdur.obj$formula
+    cure <- spdur.obj$cure
+    data <- spdur.obj$data
+    last <- spdur.obj$last
+    test <- spdur.obj$test
+    distr <- spdur.obj$distr
+    coeff <- spdur.obj$model$coeff
+    a <- as.character(formula)
+    b <- as.character(cure)
+    lhb <- a[2]
+    rhb <- strsplit(a[3], split = " + ", fixed = T)[[1]]
+    lhg <- b[2]
+    rhg <- strsplit(b[3], split = " + ", fixed = T)[[1]]
+    X <- as.matrix(cbind(1, data[rhb]))
+    Z <- as.matrix(cbind(1, data[rhg]))
+    Y <- cbind(data[lhg], data[lhb], last)
+    X.test <- as.matrix(cbind(1, test[rhb]))
+    Z.test <- as.matrix(cbind(1, test[rhg]))
+    Y.test <- cbind(test[lhg], test[lhb])
+    X.pred <- as.matrix(cbind(1, pred.data[rhb]))
+    Z.pred <- as.matrix(cbind(1, pred.data[rhg]))
+    Y.pred <- cbind(0, pred.data[lhb], 0)
+    coeff.b <- coeff[1:ncol(X)]
+    coeff.g <- coeff[(ncol(X) + 1):(ncol(X) + ncol(Z))]
+    coeff.a <- coeff[(ncol(X) + ncol(Z) + 1)]
+    al.hat <- exp(-coeff.a)
+    la.hat.in <- exp(-X %*% coeff.b)
+    la.hat.out <- exp(-X.test %*% coeff.b)
+    la.hat.pred <- exp(-X.pred %*% coeff.b)
+    n.cure.in <- plogis(Z %*% coeff.g)
+    n.cure.out <- plogis(Z.test %*% coeff.g)
+    n.cure.pred <- plogis(Z.pred %*% coeff.g)
+    cure.in <- 1 - n.cure.in
+    cure.out <- 1 - n.cure.out
+    cure.pred <- 1 - n.cure.pred
+    if (distr == "weibull") {
+        st.in <- exp(-(la.hat.in * Y[, 2])^al.hat)
+        s0.in <- exp(-(la.hat.in * (Y[, 2] - 1))^al.hat)
+        st.out <- exp(-(la.hat.out * Y.test[, 2])^al.hat)
+        s0.out <- exp(-(la.hat.out * (Y.test[, 2] - 1))^al.hat)
+        st.pred <- exp(-(la.hat.pred * Y.pred[, 2])^al.hat)
+        s0.pred <- exp(-(la.hat.pred * (Y.pred[, 2] - 1))^al.hat)
+        st.pred.2 <- exp(-(la.hat.pred * (Y.pred[, 2] + 1))^al.hat)
+        st.pred.3 <- exp(-(la.hat.pred * (Y.pred[, 2] + 2))^al.hat)
+        st.pred.4 <- exp(-(la.hat.pred * (Y.pred[, 2] + 3))^al.hat)
+        st.pred.5 <- exp(-(la.hat.pred * (Y.pred[, 2] + 4))^al.hat)
+        st.pred.6 <- exp(-(la.hat.pred * (Y.pred[, 2] + 5))^al.hat)
+    }
+    if (distr == "loglog") {
+        st.in <- 1/(1 + (la.hat.in * Y[, 2])^al.hat)
+        s0.in <- 1/(1 + (la.hat.in * (Y[, 2] - 1))^al.hat)
+        st.out <- 1/(1 + (la.hat.out * Y.test[, 2])^al.hat)
+        s0.out <- 1/(1 + (la.hat.out * (Y.test[, 2] - 1))^al.hat)
+        st.pred <- 1/(1 + (la.hat.pred * Y.pred[, 2])^al.hat)
+        s0.pred <- 1/(1 + (la.hat.pred * (Y.pred[, 2] - 1))^al.hat)
+        st.pred.2 <- 1/(1 + (la.hat.pred * (Y.pred[, 2] + 1))^al.hat)
+        st.pred.3 <- 1/(1 + (la.hat.pred * (Y.pred[, 2] + 2))^al.hat)
+        st.pred.4 <- 1/(1 + (la.hat.pred * (Y.pred[, 2] + 3))^al.hat)
+        st.pred.5 <- 1/(1 + (la.hat.pred * (Y.pred[, 2] + 4))^al.hat)
+        st.pred.6 <- 1/(1 + (la.hat.pred * (Y.pred[, 2] + 5))^al.hat)
+    }
+    cure.t.in <- cure.in/pmax(1e-10, (st.in + cure.in * (1 - 
+        st.in)))
+    cure.t.out <- cure.out/pmax(1e-10, (st.out + cure.out * (1 - 
+        st.out)))
+    cure.t.pred.1 <- cure.pred/pmax(1e-10, (st.pred + cure.pred * 
+        (1 - st.pred)))
+    cure.t.pred.2 <- cure.pred/pmax(1e-10, (st.pred.2 + cure.pred * 
+        (1 - st.pred.2)))
+    cure.t.pred.3 <- cure.pred/pmax(1e-10, (st.pred.3 + cure.pred * 
+        (1 - st.pred.3)))
+    cure.t.pred.4 <- cure.pred/pmax(1e-10, (st.pred.4 + cure.pred * 
+        (1 - st.pred.4)))
+    cure.t.pred.5 <- cure.pred/pmax(1e-10, (st.pred.5 + cure.pred * 
+        (1 - st.pred.5)))
+    cure.t.pred.6 <- cure.pred/pmax(1e-10, (st.pred.6 + cure.pred * 
+        (1 - st.pred.6)))
+    n.cure.t.in <- 1 - cure.t.in
+    n.cure.t.out <- 1 - cure.t.out
+    n.cure.t.pred.1 <- 1 - cure.t.pred.1
+    n.cure.t.pred.2 <- 1 - cure.t.pred.2
+    n.cure.t.pred.3 <- 1 - cure.t.pred.3
+    n.cure.t.pred.4 <- 1 - cure.t.pred.4
+    n.cure.t.pred.5 <- 1 - cure.t.pred.5
+    n.cure.t.pred.6 <- 1 - cure.t.pred.6
+    if (distr == "weibull") {
+        ft.in <- la.hat.in * al.hat * (la.hat.in * Y[, 2])^(al.hat - 
+            1) * exp(-(la.hat.in * Y[, 2])^al.hat)
+        ft.out <- la.hat.out * al.hat * (la.hat.out * Y.test[, 
+            2])^(al.hat - 1) * exp(-(la.hat.out * Y.test[, 2])^al.hat)
+        ft.pred <- la.hat.pred * al.hat * (la.hat.pred * Y.pred[, 
+            2])^(al.hat - 1) * exp(-(la.hat.pred * Y.pred[, 2])^al.hat)
+        ft.pred.2 <- la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 1))^(al.hat - 1) * exp(-(la.hat.pred * (Y.pred[, 
+            2] + 1))^al.hat)
+        ft.pred.3 <- la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 2))^(al.hat - 1) * exp(-(la.hat.pred * (Y.pred[, 
+            2] + 2))^al.hat)
+        ft.pred.4 <- la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 3))^(al.hat - 1) * exp(-(la.hat.pred * (Y.pred[, 
+            2] + 3))^al.hat)
+        ft.pred.5 <- la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 4))^(al.hat - 1) * exp(-(la.hat.pred * (Y.pred[, 
+            2] + 4))^al.hat)
+        ft.pred.6 <- la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 5))^(al.hat - 1) * exp(-(la.hat.pred * (Y.pred[, 
+            2] + 5))^al.hat)
+    }
+    if (distr == "loglog") {
+        ft.in <- (la.hat.in * al.hat * (la.hat.in * Y[, 2])^(al.hat - 
+            1))/((1 + (la.hat.in * Y[, 2])^al.hat)^2)
+        ft.out <- (la.hat.out * al.hat * (la.hat.out * Y.test[, 
+            2])^(al.hat - 1))/((1 + (la.hat.out * Y.test[, 2])^al.hat)^2)
+        ft.pred <- (la.hat.pred * al.hat * (la.hat.pred * Y.pred[, 
+            2])^(al.hat - 1))/((1 + (la.hat.pred * Y.pred[, 2])^al.hat)^2)
+        ft.pred.2 <- (la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 1))^(al.hat - 1))/((1 + (la.hat.pred * (Y.pred[, 
+            2] + 1))^al.hat)^2)
+        ft.pred.3 <- (la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 2))^(al.hat - 1))/((1 + (la.hat.pred * (Y.pred[, 
+            2] + 2))^al.hat)^2)
+        ft.pred.4 <- (la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 3))^(al.hat - 1))/((1 + (la.hat.pred * (Y.pred[, 
+            2] + 3))^al.hat)^2)
+        ft.pred.5 <- (la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 4))^(al.hat - 1))/((1 + (la.hat.pred * (Y.pred[, 
+            2] + 4))^al.hat)^2)
+        ft.pred.6 <- (la.hat.pred * al.hat * (la.hat.pred * (Y.pred[, 
+            2] + 5))^(al.hat - 1))/((1 + (la.hat.pred * (Y.pred[, 
+            2] + 5))^al.hat)^2)
+    }
+    pr.c.f.in <- n.cure.t.in * ft.in/pmax(1e-10, (cure.t.in + 
+        n.cure.t.in * s0.in))
+    pr.c.h.in <- n.cure.t.in * ft.in/pmax(1e-10, (cure.t.in + 
+        n.cure.t.in * st.in))
+    pr.u.f.in <- n.cure.in * ft.in/pmax(1e-10, (cure.in + n.cure.in * 
+        s0.in))
+    pr.u.h.in <- n.cure.in * ft.in/pmax(1e-10, (cure.in + n.cure.in * 
+        st.in))
+    pr.c.f.out <- n.cure.t.out * ft.out/pmax(1e-10, (cure.t.out + 
+        n.cure.t.out * s0.out))
+    pr.c.h.out <- n.cure.t.out * ft.out/pmax(1e-10, (cure.t.out + 
+        n.cure.t.out * st.out))
+    pr.u.f.out <- n.cure.out * ft.out/pmax(1e-10, (cure.out + 
+        n.cure.out * s0.out))
+    pr.u.h.out <- n.cure.out * ft.out/pmax(1e-10, (cure.out + 
+        n.cure.out * st.out))
+    pr.u.f.pred.1 <- n.cure.t.pred.1 * ft.pred/pmax(1e-10, (cure.t.pred.1 + 
+        n.cure.t.pred.1 * s0.pred))
+    pr.u.f.pred.2 <- n.cure.t.pred.2 * ft.pred.2/pmax(1e-10, 
+        (cure.t.pred.2 + n.cure.t.pred.2 * st.pred))
+    pr.u.f.pred.3 <- n.cure.t.pred.3 * ft.pred.3/pmax(1e-10, 
+        (cure.t.pred.3 + n.cure.t.pred.3 * st.pred.2))
+    pr.u.f.pred.4 <- n.cure.t.pred.4 * ft.pred.4/pmax(1e-10, 
+        (cure.t.pred.4 + n.cure.t.pred.4 * st.pred.3))
+    pr.u.f.pred.5 <- n.cure.t.pred.5 * ft.pred.5/pmax(1e-10, 
+        (cure.t.pred.5 + n.cure.t.pred.5 * st.pred.4))
+    pr.u.f.pred.6 <- n.cure.t.pred.6 * ft.pred.6/pmax(1e-10, 
+        (cure.t.pred.6 + n.cure.t.pred.6 * st.pred.5))
+    pr.in <- list(n.cure.t.in = n.cure.t.in, n.cure.in = n.cure.in, 
+        pr.c.h.in = pr.c.h.in)
+    pr.out <- list(n.cure.t.out = n.cure.t.out, n.cure.out = n.cure.out, 
+        pr.c.h.out = pr.c.h.out)
+    pred.tbl.ncure <- data.frame(month.1 = n.cure.t.pred.1, month.2 = n.cure.t.pred.2, 
+        month.3 = n.cure.t.pred.3, month.4 = n.cure.t.pred.4, 
+        month.5 = n.cure.t.pred.5, month.6 = n.cure.t.pred.6)
+    pred.tbl.fail <- data.frame(month.1 = pr.u.f.pred.1, month.2 = pr.u.f.pred.2, 
+        month.3 = pr.u.f.pred.3, month.4 = pr.u.f.pred.4, month.5 = pr.u.f.pred.5, 
+        month.6 = pr.u.f.pred.6)
+    rownames(pred.tbl.ncure) <- rownames(pred.tbl.fail) <- as.character(pred.data$caseid)
+    output <- list(pr.in = pr.in, pr.out = pr.out, pred.tbl.ncure = pred.tbl.ncure, 
+        pred.tbl.fail = pred.tbl.fail)
+    return(output)
+}
