@@ -16,7 +16,14 @@ spdurList=buildDuration(data=aData, y='compliance',
 
 ############################################################
 # Time varying models
-model = spdur(duration ~ noS + polity + Internal.Conflict + )
+full=spdurList$'full'
+train=spdurList$'training'
+test=spdurList$'test'
+pred=spdurList$'predData'
+
+model = spdur(duration ~ noS,
+	c ~ noS,
+	last=full$end.spell, data=full, test=full, distr='weibull', iter=300)
 ############################################################
 
 ############################################################

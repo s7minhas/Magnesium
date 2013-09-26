@@ -372,6 +372,7 @@ buildDuration <- function (data, y, trainingend = NULL, teststart = NULL, dataen
     training$t.0 <- training$duration - 1
     test$t.0 <- test$duration - 1
     predData$t.0 <- predData$duration - 1
+    full$t.0 <- full$duration - 1
     output <- list(full=full, training=training, test=test, predData=predData)
     return(output)
 }
