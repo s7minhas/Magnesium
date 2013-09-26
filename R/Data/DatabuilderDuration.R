@@ -132,10 +132,13 @@ DdistMats <- lapply(distMats, function(x){
 	x <- ifelse(x<=200,1,0); diag(x) <- 0; x })
 Ddistdata=netMelt(senders, 'targetstate', 'year', DdistMats, rst=FALSE)
 
+aData <- cbind(aData, edata, tdata, allydata, igodata, 
+	religdata, Creligdata, distdata, Ddistdata)
 # Other Network Variables
 
 # Number of senders
-aData$noS <- apply(aData[,9:13], 1, function(x) {sum(!is.na(x))} )
+sVars=paste('sender',1:5,'_ccode',sep='')
+aData$noS <- apply(aData[,sVars], 1, function(x) {sum(!is.na(x))} )
 
 # Number of sanctions being received by targt state
 sancRecCnt=summaryBy(targetstate ~ targetstate + year, data=aData, FUN=length)
@@ -145,14 +148,15 @@ aData$id=paste(aData$targetstate, aData$year, sep='')
 aData=merge(aData, sancRecCnt[,3:4], by='id')
 
 # Number of sanctions being sent by senders
-senders=na.omit(melt(aData[,c(6, 9:13)], id='year')[,c(1,3)])
+vars=c('year',sVars)
+senders=na.omit(melt(aData[,vars], id='year')[,c(1,3)])
 sancSenCnt=summaryBy(value ~ value + year, data=senders, FUN=length)
 names(sancSenCnt)=c('sender', 'year', 'sancSenCnt')
 
 aData$sancSenCnt=NA
 for(ii in 1:nrow(aData)){
 	slice=aData[ii,]
-	senSlice=slice[,paste('sender',1:5,'_ccode',sep='')]; yrSlice=slice[,'year']
+	senSlice=slice[,sVars]; yrSlice=slice[,'year']
 	senSlice=senSlice[!is.na(senSlice)]
 
 	senCntSlice=sancSenCnt[
@@ -164,7 +168,5 @@ for(ii in 1:nrow(aData)){
 ###############################################################
 
 ###############################################################
-aData <- cbind(aData, edata, tdata, allydata, igodata, 
-	religdata, Creligdata, distdata, Ddistdata)
 save(aData, file='durData.rda')
 ###############################################################
