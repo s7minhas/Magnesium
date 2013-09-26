@@ -30,8 +30,12 @@ predProbs <- predictSPD(model, pred)
 pr.nc.in <- cbind(full$compliance,predProbs$pr.in$n.cure.t.in)
 pr.ht.in <- cbind(full$compliance,predProbs$pr.in$pr.c.h.in)
 
-separationplot(pr.nc.in[,2], pr.nc.in[,1], shuffle=T, heading="Pr(Non immunity)", show.expected=T, newplot=F)
-separationplot(pr.ht.in[,2], pr.ht.in[,1], shuffle=T, heading="Pr(Compliance at t | Non immunity)", show.expected=T, newplot=F)
+separationplot(pr.nc.in[,2], pr.nc.in[,1], 
+	shuffle=T, heading="Pr(Non immunity)", 
+	show.expected=T, newplot=F)
+separationplot(pr.ht.in[,2], pr.ht.in[,1], 
+	shuffle=T, heading="Pr(Compliance at t | Non immunity)", 
+	show.expected=T, newplot=F)
 ############################################################
 
 ############################################################
