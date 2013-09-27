@@ -45,7 +45,7 @@ separationplot(pr.ht.in[,2], pr.ht.in[,1],
 
 model1 = spdur(duration ~ lgdpCAP, 
 	c ~ lgdpCAP,
-	last=full$end.spell, data=full, test=full, distr='loglog', iter=300)
+	last=full$end.spell, data=full, test=full, distr='weibull', iter=300)
 
 model2 = spdur(duration ~ Internal.Conflict + gdpCAP + polity,
 	c ~ noS + distdata + sancRecCnt + edata + allydata + igodata +religdata,
