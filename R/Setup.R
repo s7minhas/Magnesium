@@ -558,3 +558,11 @@ predictSPD <- function (spdur.obj = NULL, pred.data = NULL)
         pred.tbl.fail = pred.tbl.fail)
     return(output)
 }
+
+#source files for initial value stuffs
+
+source(paste(pathMain,'/spdur.R', sep=''))
+source(paste(pathMain, '/spweib.lik.R', sep=''))
+source(paste(pathMain, '/spweibull.R', sep=''))
+source(paste(pathMain, '/weib.lik.R', sep=''))
+
