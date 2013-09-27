@@ -69,6 +69,10 @@ durData <- data.frame(durData)
 colnames(durData) <- c('caseid', 'targetstate', 'slength', 'year', 'durationSM', 'compliance')
 durData$tyear <- paste(durData$targetstate, durData$year, sep='')
 
+# Setting up start and stop times
+durData$start=durData$durationSM-1
+durData$stop=durData$durationSM
+
 # Subsetting durationSM dataset
 durData <- durData[durData$year>=1960 & durData$year<=2012,]
 durData <- durData[durData$targetstate!=1000,] # Eliminating cases where EU is sanction target
@@ -87,8 +91,9 @@ durData <- durData[which(
 durData <- merge(x=durData, y=sanctionSlice[,c(1:3)], by='caseid', all.x=T)
 durData$endyear2 <- durData$endyear + 1
 
-# Strange issue where some cases have no senders...wtf
-noS <- apply(durData[,9:13], 1, function(x) FUN=sum(!is.na(x)) )
+# Some cases have only IGOs as senders
+sVars=paste('sender',1:5,'_ccode',sep='')
+noS <- apply(durData[,sVars], 1, function(x) FUN=sum(!is.na(x)) )
 durData <- cbind(durData, noS)
 
 # This drops cases where sanctions were

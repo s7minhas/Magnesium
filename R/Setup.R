@@ -49,6 +49,11 @@ rescale <- function(x,new_max,new_min){
 # turn variables into numeric
 numSM <- function(x){ as.numeric(as.character(x)) }
 
+# Convert to cname
+cname <- function(x){
+	require(countrycode); x <- as.character(x)
+	y <- countrycode(x, 'country.name', 'country.name') }
+
 ### Fx for Melting/Cleaning WB Data for Merge
 cleanWbData <- function(data, variable){
 	var <- variable

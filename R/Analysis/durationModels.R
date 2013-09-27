@@ -1,7 +1,7 @@
 # Purpose: Some basic duration modeling attempts for magnesium 
 
-#source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
+source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+# source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
 
 setwd(pathData)
 load('durData.rda')
@@ -19,6 +19,7 @@ spdurList=buildDuration(data=aData, y='compliance',
 ############################################################
 # Time varying models, an example
 full=spdurList$'full'
+# full$duration=full$durationSM
 train=spdurList$'training'
 test=spdurList$'test'
 pred=spdurList$'predData'

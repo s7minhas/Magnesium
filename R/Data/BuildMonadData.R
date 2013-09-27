@@ -204,10 +204,17 @@ civwar <- civwar[civwar$SideA!='Hyderabad',]
 civwar$SideA[civwar$SideA=='United Arab Emirate'] <- 'United Arab Emirates'
 civwar$SideA[civwar$SideA=='Rumania'] <- 'Romania'
 civwar$SideA[civwar$SideA=='Serbia (Yugoslavia)'] <- 'SERBIA'
-civwar$cname <- countrycode(civwar$SideA, 'country.name', 'country.name')
+civwar$SideA[civwar$SideA=='DR Congo (Zaire) ']='Congo, Democratic Republic of'
+
+civwar$cname <- cname(civwar$SideA)
 civwar$cname[civwar$cname=='Czechoslovakia'] <- 'CZECH REPUBLIC'
+civwar$cnameYear=paste(civwar$cname,civwar$YEAR,sep='')
+names(table(civwar$cnameYear)[table(civwar$cnameYear)>1])
+
 civwar$ccode <- panel$ccode[match(civwar$cname,panel$cname)]
 civwar$cyear <- paste(civwar$ccode, civwar$YEAR, sep='')
+names(table(civwar$cyear)[table(civwar$cyear)>1])
+
 civwar$civwar <- 1
 ###############################################################
 
@@ -229,7 +236,7 @@ monadData <- merge(monadData, banks2[,c(5:13,ncol(banks2))],by='cyear',all.x=T,a
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData <- merge(monadData, constraints2[,c(1,8:10)],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
-monadData <- merge(monadData, civwar[,5:ncol(civwar)],by='cyear',all.x=T,all.y=F)
+monadData <- merge(monadData, civwar[,6:7],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 
 monadData <- monadData[monadData$year>=1960 & monadData$year<=2012,]
