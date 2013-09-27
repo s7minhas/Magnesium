@@ -19,7 +19,6 @@ spdurList=buildDuration(data=aData, y='compliance',
 ############################################################
 # Time varying models, an example
 full=spdurList$'full'
-# full$duration=full$durationSM
 train=spdurList$'training'
 test=spdurList$'test'
 pred=spdurList$'predData'
@@ -63,8 +62,14 @@ separationplot(pr.nc.in[,2], pr.nc.in[,1],
 separationplot(pr.ht.in[,2], pr.ht.in[,1], 
 	shuffle=T, heading="Pr(Compliance at t | Non immunity)", 
 	show.expected=T, newplot=F)
+############################################################
 
-
-
-
-
+############################################################
+# Frailty models
+model = coxph(Surv(start, stop, compliance) ~ 
+	noS + lgdpCAP + Internal.Conflict + polity
+	, data=aData)
+summary(model)
+cox.zph(model)
+plot(survfit(model))
+############################################################
