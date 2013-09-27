@@ -26,6 +26,8 @@ require(CRISP)
 require(survival)
 require(OIsurv)
 require(eha)
+require(frailtypack)
+require(boot)
 
 # Helper functions
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
