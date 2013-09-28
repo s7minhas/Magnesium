@@ -1,7 +1,7 @@
-# Purpose: Some basic duration modeling attempts for magnesium 
+# Purpose: Some duration modeling attempts for magnesium 
 
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
-# source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
+#source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
 
 setwd(pathData)
 load('durData.rda')
@@ -10,13 +10,33 @@ names(ids)=c('targetstate','fcode')
 aData=merge(aData,ids,by='targetstate',all.x=T)
 ############################################################
 # Frailty models
-model = coxph(Surv(start, stop, compliance) ~ 
+cmodel1 = coxph(Surv(start, stop, compliance) ~ 
 	lag1_noS + lag1_polity + lag1_noS:lag1_polity
 	+ lag1_lgdpCAP + lag1_Internal.Conflict
 	+ frailty.gaussian(caseid,sparse=FALSE)
 	, data=aData)
-summary(model)
-plot(survfit(model))
+summary(cmodel1)
+plot(survfit(cmodel1))
+
+cmodel2 = coxph(Surv(start, stop, compliance) ~ 
+	lag1_noS + lag1_polity + lag1_distdata 
+	+ lag1_lgdpCAP + lag1_Internal.Conflict
+	+ frailty.gaussian(caseid,sparse=FALSE)
+	, data=aData)
+summary(cmodel2)
+plot(survfit(cmodel2))
+
+cmodel3 = coxph(Surv(start, stop, compliance) ~ 
+	lag1_noS + lag1_polity + lag1_distdata 
+	+ lag1_lgdpCAP + lag1_Internal.Conflict + lag1_edata
+	+ lag1_allydata + lag1_igodata
+	+ frailty.gaussian(caseid,sparse=FALSE)
+	, data=aData)
+summary(cmodel3)
+plot(survfit(cmodel3))
+
+duration ~ Internal.Conflict + gdpCAP + polity,
+	c ~ noS + distdata + sancRecCnt + edata + allydata + igodata +religdata,
 ############################################################
 
 
@@ -29,7 +49,7 @@ spdurList=buildDuration(data=aData, y='compliance',
 ############################################################
 
 ############################################################
-# Time varying models, an example
+# Time varying models w/ spdur, an example
 full=spdurList$'full'
 train=spdurList$'training'
 test=spdurList$'test'
