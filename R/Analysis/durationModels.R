@@ -5,8 +5,20 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 
 setwd(pathData)
 load('durData.rda')
+ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
+names(ids)=c('targetstate','fcode')
+aData=merge(aData,ids,by='targetstate',all.x=T)
+############################################################
+# Frailty models
+model = coxph(Surv(start, stop, compliance) ~ 
+	lag1_noS + lag1_polity + lag1_noS:lag1_polity
+	+ lag1_lgdpCAP + lag1_Internal.Conflict
+	+ frailty.gaussian(caseid,sparse=FALSE)
+	, data=aData)
+summary(model)
+plot(survfit(model))
+############################################################
 
-library(pROC)
 
 ############################################################
 # Creating duration dataset for spdur function
@@ -62,14 +74,4 @@ separationplot(pr.nc.in[,2], pr.nc.in[,1],
 separationplot(pr.ht.in[,2], pr.ht.in[,1], 
 	shuffle=T, heading="Pr(Compliance at t | Non immunity)", 
 	show.expected=T, newplot=F)
-############################################################
-
-############################################################
-# Frailty models
-model = coxph(Surv(start, stop, compliance) ~ 
-	noS + lgdpCAP + Internal.Conflict + polity
-	, data=aData)
-summary(model)
-cox.zph(model)
-plot(survfit(model))
 ############################################################

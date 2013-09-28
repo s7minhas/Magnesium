@@ -3,6 +3,7 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 
 Rossi <- read.table("http://cran.r-project.org/doc/contrib/Fox-Companion/Rossi.txt",
 	header=T)
+Rossi$id = 1:nrow(Rossi)
 
 mod.allison <- coxph(Surv(week, arrest) ~ 
 	fin + age + race + wexp + mar + paro + prio, 
@@ -19,8 +20,8 @@ detach(Rossi)
 
 # legend(locator(1), legend=c('fin = 0', 'fin = 1'), lty=c(1,2))
 
-Rossi.2 <- matrix(0, 19809, 14) # to hold new data set
-colnames(Rossi.2) <- c('start', 'stop', 'arrest.time', names(Rossi)[1:10], 'employed')
+Rossi.2 <- matrix(0, 19809, 15) # to hold new data set
+colnames(Rossi.2) <- c('start', 'stop', 'arrest.time', names(Rossi)[c(1:10,ncol(Rossi))], 'employed')
 
 row <- 0 # set record counter to 0
 for (i in 1:nrow(Rossi)) { # loop over individuals
@@ -32,7 +33,7 @@ for (i in 1:nrow(Rossi)) { # loop over individuals
 		 stop <- start + 1 # stop time (current week)
 		 arrest.time <- if (stop == Rossi[i, 1] && Rossi[i, 2] ==1) 1 else 0
 		 # construct record:
-		 Rossi.2[row,] <- c(start, stop, arrest.time, unlist(Rossi[i, c(1:10, j)]))
+		 Rossi.2[row,] <- c(start, stop, arrest.time, unlist(Rossi[i, c(1:10,ncol(Rossi), j)]))
 	 }
 	}
 }
@@ -41,7 +42,8 @@ Rossi.2 <- as.data.frame(Rossi.2)
 remove(i, j, row, start, stop, arrest.time) # clean up
 
 mod.allison.2 <- coxph(Surv(start, stop, arrest.time) ~
-	fin + age + race + wexp + mar + paro + prio + employed,
+	fin + age + race + wexp + mar + paro + prio + employed
+	+ frailty(id),
 	data=Rossi.2)
 summary(mod.allison.2)
 
