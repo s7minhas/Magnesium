@@ -29,6 +29,7 @@ require(eha)
 require(frailtypack)
 require(boot)
 require(pROC)
+require(sbgcop)
 
 # Helper functions
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
