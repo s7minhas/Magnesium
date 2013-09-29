@@ -63,7 +63,7 @@ summary(cmodel5)
 cmodel6 = coxph(Surv(start, stop, compliance) ~ 
 	noS  + distdata + polconiii
 	+ lag1_lgdpCAP + Internal.Conflict + tdata
-	+ allydata + igodata + sancRecCnt + religdata
+	+ allydata + igodata + sancRecCnt + Creligdata
 	+ frailty.gaussian(caseid,sparse=FALSE)
 	, data=aData)
 summary(cmodel6)
@@ -73,7 +73,7 @@ summary(cmodel6)
 cmodel7 = coxph(Surv(start, stop, compliance) ~ 
 	noS  + distdata + polconiii
 	+ lag1_lgdpCAP + domestic9 + tdata
-	+ allydata + igodata + sancRecCnt + religdata
+	+ allydata + igodata + sancRecCnt + Creligdata
 	+ frailty.gaussian(caseid,sparse=FALSE)
 	, data=aData)
 summary(cmodel7)
@@ -85,7 +85,7 @@ plot(survfit(cmodel7))
 cmodel8 = coxph(Surv(start, stop, compliance) ~ 
 	noS + polconiii + distdata 
 	+ lag1_lgdpCAP + Internal.Conflict + tdata
-	+ allydata + igodata + sancRecCnt + religdata
+	+ allydata + igodata + sancRecCnt + Creligdata
 	+ polconiii:noS
 	+ frailty.gaussian(caseid,sparse=FALSE)
 	, data=aData)
