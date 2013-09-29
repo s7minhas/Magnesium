@@ -49,6 +49,7 @@
 \usepackage{coordsys} % for number lines
 \usepackage{graphicx}
 \usepackage{multirow}
+\usepackage{dcolumn}
 \usepackage{caption}
 \usepackage{subfig}
 \usepackage{tikz}
@@ -65,7 +66,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[When Do States Say Uncle? \hspace{14em} \insertframenumber/
-\inserttotalframenumber]{Sanction Compliance}
+\inserttotalframenumber]{When Do States Say Uncle? Sanction Compliance}
 \author{Shahryar Minhas \& Cassy Dorff}
 \institute[Duke University]
 {
@@ -144,14 +145,30 @@ Our own hypotheses: 2
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Models}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frametitle{Results}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Effect of Network Measures}
+\begin{table}
+\caption{Model 1: Network Effects}
+\begin{tabular}{lccc}
+\hline
+& $\beta$ & $\sigma_{\hat{\beta}}$ & P-value \\
+\hline
+Number of Senders &  0.600 & 0.177 & 0.001 \\ 
+Distance & -264.0 & 13.00 & 0.020 \\
+Polcon & -2.660 &  1.190 & 0.025 \\
+GDP per Capita (lagged) & -0.001 & 0.001 &  0.390 \\
+Internal Conflict & 0.039 &  0.100 & 0.690 \\
+Trade Network & 0.615 & 0.987 & 0.530 \\
+Ally Network & 1.370 & 0.568 & 0.016 \\
+IGO Network &  -0.023 & 0.014 & 0.110 \\
+Recieved Sanctions & -0.098 & 0.107 & 0.360 \\
+Religious Similarity &  -1.250 & 0.500  & 0.012 \\
+\hline
+\end{tabular}
+\end{table}
+
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
