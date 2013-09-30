@@ -238,6 +238,7 @@ monadData <- merge(monadData, constraints2[,c(1,8:10)],by='cyear',all.x=T,all.y=
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData <- merge(monadData, civwar[,6:7],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
+monadData$civwar[is.na(monadData$civwar)]=0
 
 monadData <- monadData[monadData$year>=1960 & monadData$year<=2012,]
 
