@@ -91,6 +91,8 @@ Duke University
 
 \begin{itemize}
 	\item When and why do states comply with economic sanctions? 
+	\item In this presentation we have demonstrate the necessity of incorporating network dynamics into predictive models of sanction compliance. 
+	\item We show that the connectivity between target and sender states--in terms of cultural similarities, geographical proximity, and alliance patterns--plays an important and previously overlooked role on sanction outcomes. 
 \end{itemize}
 
 \end{frame}
@@ -99,18 +101,35 @@ Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Sanctions and domestic factors}
-Previous literature has suggested sanctions ``work'' by destablizing leaders (Marinov 2005; Lektzian and Souva 2003) and focus on domestic factors that influence the effectiveness of sanctions. In addition, such work has often utilized a duration modeling approach to capture the time dependent nature of sanciton dynamics (Bolks Al-Sowayel 2000; McGillivray and Stam 2004).
+Previous literature has suggested sanctions ``work'' by destablizing leaders and other domestic factors
+\begin{itemize}
+\item Marinov 2005
+\item Lektzian and Souva 2003
+\end{itemize}
+
+In addition, such work has often utilized a duration modeling approach to capture the time dependent nature of sanciton dynamics: 
+\begin{itemize}
+\item Bolks Al-Sowayel 2000
+\item McGillivray and Stam 2004
+\end{itemize}
+
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Sanctions and Network Dynamics}
-While domestic conditions are important, another vein of literature suggests cross-cutting relationships and network dynamics should play a key role in understanding sanction outcomes (Martin, 1993; Drezner, 2000; Bapat and Morgan, 2009, Cranmer and Heinrich 2013). 
+While domestic conditions are important, another vein of literature suggests cross-cutting relationships and network dynamics should play a key role in understanding sanction outcomes 
+\begin{itemize}
+\item Martin, 1993; Drezner, 2000; Bapat and Morgan, 2009, Cranmer and Heinrich 2013. 
+\end{itemize}
 
-~\\
-
-The importance of multilateral oordination and network dynamics are intuitive given the broader work on networks in international relationships (Hoff and Ward 2004, Cranmer and Desmarais 2012). 
+The importance of multilateral coordination and network dynamics are intuitive given the broader work on networks in international relationships 
+\begin{itemize}
+\item Hoff and Ward 2004
+\item Cranmer and Desmarais 2012
+\end{itemize} 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -121,7 +140,6 @@ NETWORK GRAPH HERE. Say we are combining duration + network effects + considerat
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Bridging the Gaps}
@@ -129,7 +147,7 @@ We suggest that present duration approaches fail to incorporate the network pres
 
 \begin{itemize}
 \item Target states face a network of sanctioners, not just an individual sender state. We present a duration model that incorporates the interdependent nature of the international system. 
-\item In addition, we draw on previous literature to explore how network pressures matter inform sanction compliance, as well as interact with domestic conditions of the target state. 
+\item In addition, we explore how network pressures inform sanction compliance, as well as interact with the domestic institutions of the target state. 
 \end{itemize}
 \end{frame}
 
@@ -139,8 +157,11 @@ We suggest that present duration approaches fail to incorporate the network pres
 \begin{frame}
 \frametitle{Network Pressure Hypotheses}
 \begin{itemize}
-		\item \textbf{H1} Connectivity: The specific type of relationships between senders and receivers influence sanction compliance: the greater connectivity between senders and receivers in other network types (trade, alliance) the shorter the duration of the sanction. 
-		\item \textbf{H2} Network Members: The greater the number of sanctioning sender states, the shorter the duration of the sanction. 
+		\item \textbf{H1} Connectivity: The relationships between senders and receivers influences sanction compliance: 
+		\begin{itemize}
+			\item More proximate relationships translates to greater potential for pressure, which will lead to a shorter duration
+		\end{itemize}
+		\item \textbf{H2} Network Members: Higher number of sender states leads to greater potential for pressure, which will shorten the duration of the sanction 
 \end{itemize} 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -148,22 +169,81 @@ We suggest that present duration approaches fail to incorporate the network pres
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Institutions Hypothesis}
-	Sanctions impose costs on groups within the country.  Affected groups will try to lobby the government to reach an accommodation with sanctioning states. 
+	Sanctions impose costs on groups within the country. Affected groups will try to lobby the government to reach an accommodation with sanctioning states, and the power of these groups will be stronger in democracies.
 	\begin{itemize}
-	\item \textbf{H3} Target states with stronger democratic institutions will more quickly comply than those with weaker democratic processes. 
+	\item \textbf{H3} Target states with stronger democratic institutions that are under the pressure of sanctions will more quickly comply than those with less democratic institutions. 
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Data}
+\frametitle{Conceptualizing Networks}
+
+Two types of network effects that we want to capture:
+
+\begin{itemize}
+	\item Relationships between sender(s) of the sanction and a target state
+	\begin{itemize}
+		\item Alliances
+		\item Distance
+		\item Trade
+		\item Religion
+	\end{itemize}
+	\item Pressures from overall network structure
+	\begin{itemize}
+		\item Number of senders
+		\item How many sanctions targetstate has received
+	\end{itemize}
+\end{itemize}
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Constructing Network Measures}
+
+A network chart, with one target and four senders, network measures meant to capture the relationship between
+
+a little bit of math
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Data}
+
+Sanction data from Threat and Imposition of Sanctions developed by Morgan (2009), covers sanction cases from 1945 to 2005 \\
+\vspace{0.5cm}
+The focus of this study is compliance to economic sanctions \\
+\vspace{0.5cm}
+We define compliance as:
+
+\begin{itemize}
+	\item Complete/Partial Acquiescence by Target to threat
+	\item Negotiated Settlement
+	\item Total/Partial Acquiescence by the Target State following sanctions imposition
+	\item Negotiated Settlement following sanctions imposition
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Estimated Duration Model}
+
+\begin{align*}
+Compliance_{i,t} =\; & No. \; Senders_{j} + Constraints_{i,t} + Distance_{j,t} + \\
+ &GDP \; Capita_{i,t-1} +  Internal \; Conflict_{i,t} + Trade_{j,t} + \\
+ &Ally_{j,t} + IGOs_{j,t} + Sanc. \; Rec'd_{i,t} + Religion_{j,t} + \\
+ &Constraints_{i,t}*No. \; Senders_{j} + \epsilon_{i,t}
+\end{align*}
+
+where $i$ represents the target state, $j$ represents the relationship between the set of senders and $i$, and $t$ the time period
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -233,7 +313,11 @@ GRAPHICS HERE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Conclusions}
-In this presentation we have demonstrated the necessity of incorporating network dynamics into predictive models of sanction compliance. We have shown that the connectivity between target and sender states-- in terms of cultural similarities, geographical proximity, and alliance patterns-- plays an important and previously overlooked role on sanction outcomes. 
+
+Next Steps
+\begin{itemize}
+	\item This project shows the interaction between network and domestic factors in explaining sanction compliance.
+	\item Our findings suggest that future work on international relations must consider networks!!!!!!!!!!!!	
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

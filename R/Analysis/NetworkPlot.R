@@ -1,23 +1,8 @@
-# Need to pull out sanction variable for use in analysis
-# Clearing workspace
-rm(list=ls())
-
-# Setting working directory
-if(Sys.info()["user"]=="janus829")
-{pathMain="~/Desktop/Research/Magnesium/R";
-	pathGraphics="~/Dropbox/Research/Magnesium/Graphics";
-	pathFunctions="~/Desktop/Prog Notes/R Functions";
-	pathData="~/Dropbox/Research/Magnesium/Data"}
+source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 
 # Load sanction network Data
 setwd(pathData)
-load('sanction.rda')
-
-# Clean sanctions network data by dropping -99s
-remove <- '-99'
-sanctionDyadData <- lapply(sanctionDyadData, 
-	function(x) FUN=x[!rownames(x) %in% remove, !colnames(x) %in% remove])
-
+load('sanctionData.rda')
 ###################################################
 # Loading libraries and functions
 library(bipartite)
@@ -50,8 +35,8 @@ setwd(pathGraphics)
 years <- seq(1971, 2000, 1)
 # pdf(file='SanctionNetworkPlot.pdf', height=12, width=16)
 par(mfrow=c(6,5),mar=c(2, 2, 2, 2)*0.5, mgp=c(0,0,0), oma=c(0,0,0,0))
-for(ii in 1:length(sanctionDyadData)){
-	sanctions<- sanctionDyadData[[ii]]
+for(ii in 1:length(sanctionDataFinal)){
+	sanctions<- sanctionDataFinal[[ii]]
 	# Not accounting for sender prim
 	sanctions <- sanctions/sanctions
 	sanctions[is.na(sanctions)] <- 0
@@ -79,6 +64,6 @@ for(ii in 1:length(sanctionDyadData)){
 ###################################################
 
 setwd(pathData)
-rownames(sanctionDyadData[[30]])
+rownames(sanctionDataFinal[[30]])
 library(countrycode)
-countrycode(rownames(sanctionDyadData[[30]]), 'cown', 'country.name')
+countrycode(rownames(sanctionDataFinal[[30]]), 'cown', 'country.name')
