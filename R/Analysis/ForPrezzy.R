@@ -15,22 +15,8 @@ cmodel4 = coxph(Surv(start, stop, compliance) ~
 	noS + lag1_polity + distdata 
 	+ lag1_lgdpCAP + Internal.Conflict + tdata
 	+ allydata + igodata + sancRecCnt + religdata
-	+ frailty.gaussian(caseid,sparse=FALSE)
 	, data=aData)
-# summary(cmodel4)
-
-#same as model 6 but with interaction polconiii:noS
-	#also tried with polity interaction but wasn't super interesting
-	#and neither is this interaction but it does test our story
-# cmodel8 = coxph(Surv(start, stop, compliance) ~ 
-# 	noS + polconiii + distdata 
-# 	+ lag1_lgdpCAP + Internal.Conflict + tdata
-# 	+ allydata + igodata + sancRecCnt + Creligdata
-# 	+ interaction
-# 	+ frailty.gaussian(caseid,sparse=FALSE)
-# 	, data=aData)
-# summary(cmodel8)
-# plot(survfit(cmodel8))
+summary(cmodel4)
 
 aData$interaction=aData$polconiii*aData$noS
 cmodel8 = coxph(Surv(start, stop, compliance) ~ 
@@ -41,29 +27,27 @@ cmodel8 = coxph(Surv(start, stop, compliance) ~
 	, data=aData)
 summary(cmodel8)
 
-mTab=summary(cmodel8)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
-rownames(mtab)=c('Number of senders',
-	'Distance', 'Constraints',
+m1Tab<-summary(cmodel4)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
+rownames(m1Tab)=c('Number of senders',
+	'Constraints', 'Distance',
+	'GDP per Capita (lagged)',
+	'Internal Conflcit',
+	'Trade', 'Ally',
+	'IGO', "Rec'd Sanctions",
+	'Religion')
+m1Tab<-xtable(m1Tab)
+save(m1Tab, file='/Users/cassydorff/Dropbox/Research/Magnesium/Graphics/mod1.tex')
+
+m2Tab<-summary(cmodel8)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
+rownames(m2Tab)=c('Number of senders',
+	'Constraints', 'Distance', 
 	'GDP per Capita (lagged)',
 	'Internal Conflcit',
 	'Trade', 'Ally',
 	'IGO', "Rec'd Sanctions",
 	'Religion', 'Senders*Constraints')
-save(xtable(mTab), file='mod8.tex')
-
-fform <- formula(Surv(start, stop, compliance) ~ 
-		noS + polconiii + distdata 
-	+ lag1_lgdpCAP + Internal.Conflict + tdata
-	+ allydata + igodata + sancRecCnt + Creligdata
-	+ interaction
-	+ cluster(caseid))
-
-fmodel <- frailtyPenal(fform,
-	data=aData,
-	Frail=TRUE,
-	n.knots=20,
-	kappa1=100000,
-	recurrentAG=TRUE)
+m2Tab<-xtable(m2Tab)
+save(m2Tab, file='/Users/cassydorff/Dropbox/Research/Magnesium/Graphics/mod2.tex')
 
 attach(aData)
 aDataSim <- data.frame(
