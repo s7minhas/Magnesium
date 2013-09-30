@@ -13,12 +13,8 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 # Frailty models
 cmodel1 = coxph(Surv(start, stop, compliance) ~ 
 	lag1_noS + lag1_polity + lag1_noS:lag1_polity
-	+ sancRecCnt
-	+ lag1_Ddistdata
-	# + lag1_lgdpCAP + lag1_gdpGR 
-	+ lag1_civwar
-	+ lag1_gdpGR + lag1_gdpCAP
-	# + frailty.gaussian(targetstate,sparse=FALSE)
+	+ lag1_lgdpCAP + lag1_Internal.Conflict
+	+ frailty.gaussian(caseid,sparse=FALSE)
 	, data=aData)
 summary(cmodel1)
 plot(survfit(cmodel1))
