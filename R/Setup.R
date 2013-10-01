@@ -347,6 +347,19 @@ netMelt <- function(meltData, meltID, meltYr, netList, rst=TRUE, netStat=functio
 	print(' Completed '); ndata
 }
 
+# Set up scenario
+scenBuild=function(vi, vRange, vars, ostat, simData){
+	scenCol = length(vars); scenRow = length(vRange)
+	scenario = matrix(NA, nrow=scenRow, ncol=scenCol)
+	colnames(scenario) = c(vars)
+	scenario[,vi] = vRange
+
+	viPos = which(vi==vars)
+	ovals = apply(simData[,vars[-viPos]], 2, ostat, na.rm=T)
+	scenario[,vars[-viPos]] = matrix(rep(ovals,scenRow),nrow=scenRow,byrow=TRUE)
+	data.frame(scenario)
+}
+
 # Modified from CRISP pacakge to work in this case
 buildDuration <- function (data, y, trainingend = NULL, teststart = NULL, dataend = NULL) 
 {

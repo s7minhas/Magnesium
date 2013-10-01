@@ -1,6 +1,7 @@
-#source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
-
+if(Sys.info()["user"]=="janus829"){
+source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')}
+if(Sys.info()["user"]=="cassydorff"){
+source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 setwd(pathData)
 load('durData.rda')
@@ -27,7 +28,7 @@ cmodel8 = coxph(Surv(start, stop, compliance) ~
 	, data=aData)
 summary(cmodel8)
 
-m1Tab<-summary(cmodel4)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
+m1Tab=summary(cmodel4)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
 rownames(m1Tab)=c('Number of senders',
 	'Constraints', 'Distance',
 	'GDP per Capita (lagged)',
@@ -35,10 +36,11 @@ rownames(m1Tab)=c('Number of senders',
 	'Trade', 'Ally',
 	'IGO', "Rec'd Sanctions",
 	'Religion')
-m1Tab<-xtable(m1Tab)
-save(m1Tab, file='/Users/cassydorff/Dropbox/Research/Magnesium/Graphics/mod1.tex')
+m1Tab=xtable(m1Tab)
+setwd(pathGraphics)
+# save(m1Tab, file='mod1.tex')
 
-m2Tab<-summary(cmodel8)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
+m2Tab=summary(cmodel8)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
 rownames(m2Tab)=c('Number of senders',
 	'Constraints', 'Distance', 
 	'GDP per Capita (lagged)',
@@ -46,22 +48,14 @@ rownames(m2Tab)=c('Number of senders',
 	'Trade', 'Ally',
 	'IGO', "Rec'd Sanctions",
 	'Religion', 'Senders*Constraints')
-m2Tab<-xtable(m2Tab)
-save(m2Tab, file='/Users/cassydorff/Dropbox/Research/Magnesium/Graphics/mod2.tex')
+m2Tab=xtable(m2Tab)
+setwd(pathGraphics)
+# save(m2Tab, file='mod2.tex')
 
-attach(aData)
-aDataSim <- data.frame(
-	noS=c(1), polconiii=rep(mean(polconiii,na.rm=T),2), 
-	distdata=rep(mean(distdata,na.rm=T),2),
-	lag1_lgdpCAP=rep(mean(lag1_lgdpCAP,na.rm=T),2), 
-	Internal.Conflict=rep(mean(Internal.Conflict,na.rm=T),2),
-	tdata=rep(mean(tdata,na.rm=T),2), allydata=rep(mean(allydata,na.rm=T),2),
-	igodata=rep(mean(igodata,na.rm=T),2), 
-	sancRecCnt=rep(mean(sancRecCnt,na.rm=T),2),
-	Creligdata=rep(mean(Creligdata,na.rm=T),2), 
-	interaction=rep(mean(interaction,na.rm=T),2))
-detach(aData)
-
-# Comparing fit of time-fixed and varying
-plot(survfit(cmodel8))
-plot(survfit(cmodel8, newdata=aDataSim), conf.int=T, lty=c(1,2))
+###
+# Vars to generate survival plots for:
+	# noS, distance, ally, igo, religion
+plot(survfit(cmodel4, scenBuild(vi='noS', vRange=1:3,
+	vars=names(cmodel4$coefficients), 
+	ostat=mean, simData=aData)),
+	conf.int=T, col=c('red','blue','green') )
