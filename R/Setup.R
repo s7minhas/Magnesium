@@ -15,6 +15,19 @@ if(Sys.info()["user"]=="cassydorff")
 	pathPData="~/ProjectsGit/Magnesium/R/Data/BuildingPanelData"}
 
 # Loading libraries and functions
+require(igraph)
+# layout for igraph plot
+layout.svd3 = function (graph, d = shortest.paths(graph), ...)
+{
+  if (!is.igraph(graph)) {
+    stop("Not a graph object")
+  }
+  l = svd(d, 3)$u
+  l[, 1] = l[, 1]/dist(range(l[, 1]))
+  l[, 2] = l[, 2]/dist(range(l[, 2]))
+  l[, 3] = l[, 3]/dist(range(l[, 3]))
+  l
+}
 require(ggplot2)
 theme_set(theme_bw())
 require(reshape)
@@ -31,29 +44,6 @@ require(boot)
 require(pROC)
 require(sbgcop)
 require(xtable)
-
-require(bipartite)
-require(colorspace)
-require(ergm)
-require(ggplot2)
-require(igraph)
-require(NetIndices)
-require(network)
-require(sna)
-require(tnet)
-require(grid)
-# layout for igraph plot
-layout.svd3 = function (graph, d = shortest.paths(graph), ...)
-{
-  if (!is.igraph(graph)) {
-    stop("Not a graph object")
-  }
-  l = svd(d, 3)$u
-  l[, 1] = l[, 1]/dist(range(l[, 1]))
-  l[, 2] = l[, 2]/dist(range(l[, 2]))
-  l[, 3] = l[, 3]/dist(range(l[, 3]))
-  l
-}
 
 # Helper functions
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
