@@ -90,3 +90,21 @@ cpModKr <- coxph(Surv(krust2$calcdur, krust2$cens2, type="right")
 	~ ldistance + lev4cont + powdisparity + allies + jointdem + kdeplo,
 	 data=krust2)
 summary(cpModKr)
+
+
+### Frailty pack
+
+## Not run:
+data(readmission)
+# Shared frailty model
+modSha <- frailtyPenal(Surv(time,event)~as.factor(dukes)+cluster(id),
+n.knots=10,kappa1=10000,data=readmission,Frailty=TRUE,hazard="Splines")
+plot(modSha,type="surv",conf=FALSE)
+# Cox proportional hazard model using Penalized likelihood
+modCox <- frailtyPenal(Surv(time,event)~as.factor(dukes),n.knots=10,
+kappa1=10000,data=readmission,Frailty=FALSE,hazard="Splines")
+plot(modCox)
+# no confidence bands
+plot(modSha,conf.bands=FALSE,type.plot='survival')
+plot(modCox,conf.bands=FALSE)
+## End(Not run)
