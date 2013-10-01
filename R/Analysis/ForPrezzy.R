@@ -57,35 +57,35 @@ setwd(pathGraphics)
 # Vars to generate survival plots for:
 	# noS, distance, ally, igo, religion
 simModel=cmodel8
-pcolors=brewer.pal(9,'Blues')[c(7,9)]
+pcolors=append(brewer.pal(9,'Reds')[8],brewer.pal(9,'Blues')[8])
 vrfn=function(x){c(min(x,na.rm=T),max(x,na.rm=T))}
 
+setwd(pathGraphics)
+pdf(file='nosSurv.pdf')
 plot(survfit(simModel, 
-		scenBuild(vi='noS', vRange=c(1,2),
-		vars=names(simModel$coefficients), 
-		ostat=mean, simData=aData) ),
-	conf.int=T, col=pcolors, las=1)
+	scenBuild(vi='noS', vRange=c(1,2),
+	vars=names(simModel$coefficients), 
+	ostat=mean, simData=aData) ),
+	conf.int=F, col=pcolors, las=1,
+	main='Number of Senders', ylim=c(0.4,1), xlim=c(0,30), 
+	ylab='Survival Probability', xlab='Time (Years)')
+dev.off()
 
-plot(survfit(simModel, 
-		scenBuild(vi='distdata', vRange=vrfn(aData$distdata),
-		vars=names(simModel$coefficients), 
-		ostat=mean, simData=aData) ),
-	conf.int=T, col=pcolors, las=1)
 
-plot(survfit(simModel, 
-		scenBuild(vi='allydata', vRange=vrfn(aData$allydata),
+coefs=c('distdata','allydata','igodata','Creligdata')
+cnames=c('Distance','Ally', 'IGO', 'Religion')
+par(mfrow=c(2,2))
+pdf(file='oNet.pdf')
+for(ii in 1:length(coefs)){
+	coef=coefs[ii]
+	if (coef=='distdata') { crange=c(0.001,0.005)
+		} else { crange=vrfn(aData[,coef]) }	
+	plot(survfit(simModel, 
+		scenBuild(vi=coef, vRange=crange,
 		vars=names(simModel$coefficients), 
 		ostat=mean, simData=aData) ),
-	conf.int=T, col=pcolors, las=1)
-
-plot(survfit(simModel, 
-		scenBuild(vi='igodata', vRange=vrfn(aData$igodata),
-		vars=names(simModel$coefficients), 
-		ostat=mean, simData=aData) ),
-	conf.int=T, col=pcolors, las=1)
-
-plot(survfit(simModel, 
-		scenBuild(vi='Creligdata', vRange=vrfn(aData$Creligdata),
-		vars=names(simModel$coefficients), 
-		ostat=mean, simData=aData) ),
-	conf.int=T, col=pcolors, las=1)
+	conf.int=F, col=pcolors, las=1,
+	main=cnames[ii], ylim=c(0.4,1), xlim=c(0,30))
+	if(ii%%2){title(ylab='Survival Prob.')} 
+	if(ii==3|ii==4){title(xlab='Time (Years)') } }
+dev.off(); par(mfrow=c(1,1))

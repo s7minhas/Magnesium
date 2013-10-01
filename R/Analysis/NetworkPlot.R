@@ -63,16 +63,20 @@ par(mar=c(1,0,2,0)+.1, oma=c(0,0,0,0))
 years = names(smatList)
 ii=which(years==1984)
 smatAdj=creatAdj(smatList[[ii]])
+setwd(pathGraphics)
+pdf(file='84net.pdf')
 plot(smatAdj, layout=layout.fruchterman.reingold, main=years[ii],
           vertex.label=V(smatAdj)$name, vertex.size=4,
           vertex.label.dist=0.5, vertex.label.cex=.74,
           vertex.color="gray", vertex.label.color="black", 
           edge.arrow.size=0.3, edge.color='deepskyblue3',
-          edge.width=E(smatAdj)$weight/5,
+          edge.width=E(smatAdj)$weight/2,
           edge.curved=T)
+dev.off()
 
 # Plot of sanctions against south africa
-safSlice=sdata[which(sdata$targetstate_ccode==560 & sdata$startyear<=1984),]
+ii=which(years==1984)
+safSlice=sdata[which(sdata$targetstate_ccode==560 & sdata$startyear<=years[ii]),]
 verts=melt(safSlice[,c('targetstate_ccode',sendIDs)])[,2]
 verts=verts[!is.na(verts)]; verts=as.character(unique(verts))
 setdiff(verts, rownames(smatList)[[ii]])
@@ -96,6 +100,9 @@ for(ii in 1:nrow(edges)){
 	}
 }
 
+setwd(pathGraphics)
+pdf(file='sanet.pdf')
+ii=which(years==1984)
 par(mar=c(1,0.5,2.5,0.5)+.1, oma=c(0,0,0,0))
 plot(safMatAdj, layout=layout.fruchterman.reingold, 
 		  main=paste('South Africa Sanctions',years[ii]),
@@ -106,4 +113,5 @@ plot(safMatAdj, layout=layout.fruchterman.reingold,
           edge.color=E(safMatAdj)$color,
           edge.width=E(safMatAdj)$weight,
           edge.curved=T)
+dev.off()
 ###################################################
