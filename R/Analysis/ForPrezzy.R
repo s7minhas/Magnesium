@@ -57,32 +57,35 @@ setwd(pathGraphics)
 # Vars to generate survival plots for:
 	# noS, distance, ally, igo, religion
 simModel=cmodel8
-plot(survfit(simModel, 
-		scenBuild(vi='noS', vRange=1:3,
-		vars=names(simModel$coefficients), 
-		ostat=mean, simData=aData) ),
-	conf.int=T, col=c('red','blue','green') )
+pcolors=brewer.pal(9,'Blues')[c(7,9)]
+vrfn=function(x){c(min(x,na.rm=T),max(x,na.rm=T))}
 
 plot(survfit(simModel, 
-		scenBuild(vi='distdata', vRange=c(0,0.003,0.02),
+		scenBuild(vi='noS', vRange=c(1,2),
 		vars=names(simModel$coefficients), 
 		ostat=mean, simData=aData) ),
-	conf.int=T, col=c('red','blue','green') )
+	conf.int=T, col=pcolors, las=1)
 
 plot(survfit(simModel, 
-		scenBuild(vi='allydata', vRange=c(0,0.5,1),
+		scenBuild(vi='distdata', vRange=vrfn(aData$distdata),
 		vars=names(simModel$coefficients), 
 		ostat=mean, simData=aData) ),
-	conf.int=T, col=c('red','blue','green') )
+	conf.int=T, col=pcolors, las=1)
 
 plot(survfit(simModel, 
-		scenBuild(vi='igodata', vRange=c(4,52,93.6),
+		scenBuild(vi='allydata', vRange=vrfn(aData$allydata),
 		vars=names(simModel$coefficients), 
 		ostat=mean, simData=aData) ),
-	conf.int=T, col=c('red','blue','green') )
+	conf.int=T, col=pcolors, las=1)
 
 plot(survfit(simModel, 
-		scenBuild(vi='Creligdata', vRange=c(0,0.75,1.1),
+		scenBuild(vi='igodata', vRange=vrfn(aData$igodata),
 		vars=names(simModel$coefficients), 
 		ostat=mean, simData=aData) ),
-	conf.int=T, col=c('red','blue','green') )
+	conf.int=T, col=pcolors, las=1)
+
+plot(survfit(simModel, 
+		scenBuild(vi='Creligdata', vRange=vrfn(aData$Creligdata),
+		vars=names(simModel$coefficients), 
+		ostat=mean, simData=aData) ),
+	conf.int=T, col=pcolors, las=1)
