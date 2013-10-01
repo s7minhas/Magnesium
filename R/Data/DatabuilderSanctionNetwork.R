@@ -20,16 +20,17 @@ for(ii in 1:length(years)){
 	smat=matrix(0, nrow=length(ctrs), ncol=length(ctrs), dimnames=list(ctrs, ctrs))
 
 	for(jj in 1:nrow(slice)){
+		sndrs=NULL; trgt=NULL
 		sndrs=slice[jj,sendIDs]; sndrs=as.character(sndrs[!is.na(sndrs)])
-		sndrs=sndrs[which(sndrs!=setdiff(sndrs,rownames(smat)))]
+		sndrs=sndrs[ which( sndrs %in% intersect( sndrs,rownames(smat) ) ) ]
 		trgt=slice[jj,'targetstate']; trgt=as.character(trgt)
 		if(length(setdiff(trgt,rownames(smat)))==0){
 				smat2=matrix(0, nrow=length(ctrs), ncol=length(ctrs), dimnames=list(ctrs, ctrs))
 				smat2[sndrs, trgt]=1
-				smat=smat + smat2}
+				smat=smat + smat2 
+			}
 	}
 	smatList[[ii]]=smat
 }
-
 setwd(pathData)
 save(smatList, file='sanctionNet.rda')

@@ -2,52 +2,34 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 
 # Load sanction network Data
 setwd(pathData)
+load('sanctionData.rda')
+sendIDs=paste('sender',1:5,'_ccode',sep='')
+sdata=sanctionDataFinal[,c('targetstate',sendIDs,'startyear','endyear','caseid')]
 load('sanctionNet.rda')
-###################################################
-# Loading libraries and functions
-library(bipartite)
-library(colorspace)
-library(ergm)
-library(ggplot2)
-library(igraph)
-library(NetIndices)
-library(network)
-library(sna)
-library(tnet)
-library(grid)
-# layout for igraph plot
-layout.svd3 <- function (graph, d = shortest.paths(graph), ...)
-{
-  if (!is.igraph(graph)) {
-    stop("Not a graph object")
-  }
-  l <- svd(d, 3)$u
-  l[, 1] <- l[, 1]/dist(range(l[, 1]))
-  l[, 2] <- l[, 2]/dist(range(l[, 2]))
-  l[, 3] <- l[, 3]/dist(range(l[, 3]))
-  l
-}
+setwd(pathPData)
+load('panel.rda')
 ###################################################
 
 ###################################################
 # Plotting networks
 setwd(pathGraphics)
-years <- seq(1960, 2005, 1)
+years = seq(1960, 2005, 1)
 ii=1
 # pdf(file='SanctionNetworkPlot.pdf', height=12, width=16)
 # par(mfrow=c(6,5),mar=c(2, 2, 2, 2)*0.5, mgp=c(0,0,0), oma=c(0,0,0,0))
 for(ii in 1:length(smatList)){
-	sanctions<- smatList[[ii]]
-
+	smat=smatList[[ii]]
+	ctrs=panel$CNTRY_NAME[match(rownames(smat),panel$ccode)]
+	rownames(smat)=ctrs; colnames(smat)=ctrs
 	# Not accounting for sender prim
-	rows<-rowSums(sanctions)==0
-	cols<-colSums(sanctions)==0
-	both<-rows*cols
-	bothsub<-both[both==0]
-	sanctions <- sanctions[match(names(bothsub),rownames(sanctions)),
-		match(names(bothsub),colnames(sanctions))]
+	rows=rowSums(smat)==0
+	cols=colSums(smat)==0
+	both=rows*cols
+	bothsub=both[both==0]
+	smat = smat[match(names(bothsub),rownames(smat)),
+		match(names(bothsub),colnames(smat))]
 
-	sanction.grW <- graph.adjacency(sanctions, mode='directed', weighted=T, diag=F)
+	sanction.grW = graph.adjacency(smat, mode='directed', weighted=T, diag=F)
 
 	# layout.kamada.kawai
 	# layout.fruchterman.reingold
@@ -62,8 +44,3 @@ for(ii in 1:length(smatList)){
 }
 # dev.off()
 ###################################################
-
-setwd(pathData)
-rownames(smatList[[30]])
-library(countrycode)
-countrycode(rownames(smatList[[30]]), 'cown', 'country.name')
