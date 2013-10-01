@@ -14,6 +14,9 @@ if(Sys.info()["user"]=="cassydorff")
 	pathData="~/Dropbox/My Research/Magnesium/Data";
 	pathPData="~/ProjectsGit/Magnesium/R/Data/BuildingPanelData"}
 
+# R default base params
+par(mar=c(4, 4, 2, 0.5), oma=c(2,2,2,2), mfrow=c(1,1), mgp=c(2,.7,0))
+
 # Loading libraries and functions
 require(igraph)
 # layout for igraph plot
@@ -30,6 +33,7 @@ layout.svd3 = function (graph, d = shortest.paths(graph), ...)
 }
 require(ggplot2)
 theme_set(theme_bw())
+require(RColorBrewer)
 require(reshape)
 require(doBy)
 require(foreign)

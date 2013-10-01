@@ -4,7 +4,7 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 setwd(pathData)
 load('sanctionData.rda')
 sendIDs=paste('sender',1:5,'_ccode',sep='')
-sdata=sanctionDataFinal[,c('targetstate',sendIDs,'startyear','endyear','caseid')]
+sdata=sanctionDataFinal[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
 
 # Setting up list of country names in existence for time period of analysis
 setwd(pathPData)
@@ -23,7 +23,7 @@ for(ii in 1:length(years)){
 		sndrs=NULL; trgt=NULL
 		sndrs=slice[jj,sendIDs]; sndrs=as.character(sndrs[!is.na(sndrs)])
 		sndrs=sndrs[ which( sndrs %in% intersect( sndrs,rownames(smat) ) ) ]
-		trgt=slice[jj,'targetstate']; trgt=as.character(trgt)
+		trgt=slice[jj,'targetstate_ccode']; trgt=as.character(trgt)
 		if(length(setdiff(trgt,rownames(smat)))==0){
 				smat2=matrix(0, nrow=length(ctrs), ncol=length(ctrs), dimnames=list(ctrs, ctrs))
 				smat2[sndrs, trgt]=1
@@ -32,5 +32,6 @@ for(ii in 1:length(years)){
 	}
 	smatList[[ii]]=smat
 }
+names(smatList)=years
 setwd(pathData)
 save(smatList, file='sanctionNet.rda')
