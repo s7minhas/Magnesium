@@ -32,4 +32,4 @@ for(ii in 1:length(years)){
 }
 
 setwd(pathData)
-save(smatList, file='sanction.rda')
+save(smatList, file='sanctionNet.rda')

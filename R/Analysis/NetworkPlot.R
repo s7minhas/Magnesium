@@ -2,7 +2,7 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
 
 # Load sanction network Data
 setwd(pathData)
-load('sanctionData.rda')
+load('sanctionNet.rda')
 ###################################################
 # Loading libraries and functions
 library(bipartite)
@@ -32,14 +32,14 @@ layout.svd3 <- function (graph, d = shortest.paths(graph), ...)
 ###################################################
 # Plotting networks
 setwd(pathGraphics)
-years <- seq(1971, 2000, 1)
+years <- seq(1960, 2005, 1)
+ii=1
 # pdf(file='SanctionNetworkPlot.pdf', height=12, width=16)
-par(mfrow=c(6,5),mar=c(2, 2, 2, 2)*0.5, mgp=c(0,0,0), oma=c(0,0,0,0))
-for(ii in 1:length(sanctionDataFinal)){
-	sanctions<- sanctionDataFinal[[ii]]
+# par(mfrow=c(6,5),mar=c(2, 2, 2, 2)*0.5, mgp=c(0,0,0), oma=c(0,0,0,0))
+for(ii in 1:length(smatList)){
+	sanctions<- smatList[[ii]]
+
 	# Not accounting for sender prim
-	sanctions <- sanctions/sanctions
-	sanctions[is.na(sanctions)] <- 0
 	rows<-rowSums(sanctions)==0
 	cols<-colSums(sanctions)==0
 	both<-rows*cols
@@ -54,8 +54,8 @@ for(ii in 1:length(sanctionDataFinal)){
 	plot(sanction.grW, layout=layout.fruchterman.reingold, main=years[ii],vertex.size=4,
 	          vertex.label=V(sanction.grW)$name, vertex.label.dist=0.5,
 	          vertex.color="gray", vertex.label.color="black", 
-	          edge.arrow.size=0.1, edge.color='deepskyblue3',
-	          edge.width=E(sanction.grW)$weight/10,
+	          edge.arrow.size=0.3, edge.color='deepskyblue3',
+	          edge.width=E(sanction.grW)$weight/5,
 	          vertex.label.cex=.74,edge.curved=T, vertex.label.dist=0.5)
 
 
@@ -64,6 +64,6 @@ for(ii in 1:length(sanctionDataFinal)){
 ###################################################
 
 setwd(pathData)
-rownames(sanctionDataFinal[[30]])
+rownames(smatList[[30]])
 library(countrycode)
-countrycode(rownames(sanctionDataFinal[[30]]), 'cown', 'country.name')
+countrycode(rownames(smatList[[30]]), 'cown', 'country.name')
