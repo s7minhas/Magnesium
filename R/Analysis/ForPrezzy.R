@@ -12,10 +12,11 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 # not lagging everything
 # incudes: controls + senders & distance hypo + net hypo
 # ***pretty interesting results
+aData$Creligdata=aData$Creligdata+abs(min(aData$Creligdata,na.rm=T))
 cmodel4 = coxph(Surv(start, stop, compliance) ~ 
-	noS + lag1_polity + distdata 
+	noS + polconiii + distdata 
 	+ lag1_lgdpCAP + Internal.Conflict + tdata
-	+ allydata + igodata + sancRecCnt + religdata
+	+ allydata + igodata + sancRecCnt + Creligdata
 	, data=aData)
 summary(cmodel4)
 
@@ -55,7 +56,33 @@ setwd(pathGraphics)
 ###
 # Vars to generate survival plots for:
 	# noS, distance, ally, igo, religion
-plot(survfit(cmodel4, scenBuild(vi='noS', vRange=1:3,
-	vars=names(cmodel4$coefficients), 
-	ostat=mean, simData=aData)),
+simModel=cmodel8
+plot(survfit(simModel, 
+		scenBuild(vi='noS', vRange=1:3,
+		vars=names(simModel$coefficients), 
+		ostat=mean, simData=aData) ),
+	conf.int=T, col=c('red','blue','green') )
+
+plot(survfit(simModel, 
+		scenBuild(vi='distdata', vRange=c(0,0.003,0.02),
+		vars=names(simModel$coefficients), 
+		ostat=mean, simData=aData) ),
+	conf.int=T, col=c('red','blue','green') )
+
+plot(survfit(simModel, 
+		scenBuild(vi='allydata', vRange=c(0,0.5,1),
+		vars=names(simModel$coefficients), 
+		ostat=mean, simData=aData) ),
+	conf.int=T, col=c('red','blue','green') )
+
+plot(survfit(simModel, 
+		scenBuild(vi='igodata', vRange=c(4,52,93.6),
+		vars=names(simModel$coefficients), 
+		ostat=mean, simData=aData) ),
+	conf.int=T, col=c('red','blue','green') )
+
+plot(survfit(simModel, 
+		scenBuild(vi='Creligdata', vRange=c(0,0.75,1.1),
+		vars=names(simModel$coefficients), 
+		ostat=mean, simData=aData) ),
 	conf.int=T, col=c('red','blue','green') )
