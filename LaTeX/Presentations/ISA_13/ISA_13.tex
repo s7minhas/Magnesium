@@ -259,31 +259,35 @@ where $i$ represents the target state, $j$ represents the relationship between t
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Results}
+\framesubtitle{Duration Model Summary}
 
 %\input{mod1}
 
 \begin{table}[ht]
-\caption{Model 1: Network Effects}
+% \caption{Model 1: Network Effects}
 \begin{center}
-\begin{tabular}{rrrr}
+\begin{tabular}{lccc}
+  \hline\hline
+ &$\hat{\beta}$&$\hat{\sigma}$& Pr($>$$|$z$|$) \\ 
   \hline
- & coef & se(coef) & Pr($>$$|$z$|$) \\ 
-  \hline
-Number of senders & 0.59 & 0.15 & 0.00 \\ 
-  Constraints & 0.02 & 0.04 & 0.69 \\ 
-  Distance & -218.15 & 97.87 & 0.03 \\ 
-  GDP per Capita (lagged) & -0.00 & 0.00 & 0.43 \\ 
-  Internal Conflcit & -0.03 & 0.08 & 0.74 \\ 
-  Trade & 0.65 & 0.85 & 0.44 \\ 
-  Ally & 1.12 & 0.49 & 0.02 \\ 
-  IGO & -0.03 & 0.01 & 0.04 \\ 
-  Rec'd Sanctions & -0.06 & 0.09 & 0.49 \\ 
-  Religion & -0.90 & 0.40 & 0.02 \\ 
+  Case Network Measures \\
+  \;\;\;   Number of senders & 0.59 & 0.15 & 0.00 \\ 
+  \;\;\;   Constraints & 0.02 & 0.04 & 0.69 \\ 
+  \;\;\;   Distance & -218.15 & 97.87 & 0.03 \\
+  \;\;\;   Trade & 0.65 & 0.85 & 0.44 \\ 
+  \;\;\;   Ally & 1.12 & 0.49 & 0.02 \\ 
+  \;\;\;   IGO & -0.03 & 0.01 & 0.04 \\ 
+  \;\;\;   Religion & -0.90 & 0.40 & 0.02 \\ 
+  Full Network Measure \\
+  \;\;\;     Sanc. Recieved & -0.06 & 0.09 & 0.49 \\ 
+  Controls \\
+  \;\;\;     GDP per Capita (lagged) & -0.00 & 0.00 & 0.43 \\ 
+  \;\;\;     Internal Conflict & -0.03 & 0.08 & 0.74 \\ 
    \hline
-  N= 1001 &&& \\
-  Number of events= 42 &&& \\
-  \hline
-
+   Time at risk = 1027 &&&\\
+	 Number of cases = 154 &&&\\
+   Number of compliances = 44 &&&\\
+  \hline\hline
 \end{tabular}
 \end{center}
 \end{table}
@@ -295,15 +299,15 @@ Number of senders & 0.59 & 0.15 & 0.00 \\
 
 \begin{frame}
 \frametitle{Results:}
-\framesubtitle{Duration Model Summary}
+\framesubtitle{Duration Model with Interaction}
 
 %\input{mod2}
 \begin{table}[ht]
 \caption{Model 2: Network Effects \& Institutions}
 \begin{center}
-\begin{tabular}{rrrr}
-  \hline
- & coef & se(coef) & Pr($>$$|$z$|$) \\ 
+	\begin{tabular}{lccc}
+	  \hline\hline
+	 &$\hat{\beta}$&$\hat{\sigma}$& Pr($>$$|$z$|$) \\
   \hline
 Number of senders & 1.21 & 0.36 & 0.00 \\ 
   Constraints & -0.58 & 1.61 & 0.72 \\ 
@@ -317,9 +321,10 @@ Number of senders & 1.21 & 0.36 & 0.00 \\
   Religion & -1.33 & 0.45 & 0.00 \\ 
   Senders*Constraints & -1.66 & 0.92 & 0.07 \\ 
    \hline
-     N= 1027 &&&\\
-     Number of events= 44 &&&\\
-     \hline
+   Time at risk = 1027 &&&\\
+	 Number of cases = 154 &&&\\
+   Number of compliances = 44 &&&\\
+  \hline\hline
 \end{tabular}
 \end{center}
 \end{table}

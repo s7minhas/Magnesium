@@ -19,6 +19,8 @@ cmodel4 = coxph(Surv(start, stop, compliance) ~
 	+ allydata + igodata + sancRecCnt + Creligdata
 	, data=aData)
 summary(cmodel4)
+temp=na.omit(aData[,c('caseid',names(cmodel4$coefficients))])
+length(unique(temp$caseid))
 
 aData$interaction=aData$polconiii*aData$noS
 cmodel8 = coxph(Surv(start, stop, compliance) ~ 

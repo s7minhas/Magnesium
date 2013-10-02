@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (TeX Live 2011) (format=xelatex 2011.7.3)  1 OCT 2013 22:06
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (TeX Live 2011) (format=xelatex 2011.7.3)  1 OCT 2013 22:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1118,6 +1118,10 @@ Overfull \hbox (20.21208pt too wide) has occurred while \output is active
 [12
 
 ]
+Overfull \vbox (25.77908pt too high) detected at line 296
+ []
+
+
 Overfull \hbox (20.21208pt too wide) has occurred while \output is active
  [][][][]  
  []
@@ -1125,7 +1129,7 @@ Overfull \hbox (20.21208pt too wide) has occurred while \output is active
 [13
 
 ]
-Overfull \vbox (5.35742pt too high) detected at line 327
+Overfull \vbox (24.5791pt too high) detected at line 332
  []
 
 
@@ -1172,7 +1176,7 @@ Overfull \hbox (20.21208pt too wide) has occurred while \output is active
 Here is how much of TeX's memory you used:
  19847 strings out of 494150
  371861 string characters out of 3152950
- 444201 words of memory out of 3000000
+ 445201 words of memory out of 3000000
  22669 multiletter control sequences out of 15000+200000
  11163 words of font info for 41 fonts, out of 3000000 for 9000
  1018 hyphenation exceptions out of 8191
