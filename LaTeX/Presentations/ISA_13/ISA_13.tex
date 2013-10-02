@@ -105,7 +105,7 @@ Duke University
 
 \begin{itemize}
 	\item When and why do states comply with economic sanctions? 
-	\item In this presentation we have demonstrate the necessity of incorporating network dynamics into understanding the time until sanction compliance
+	\item In this presentation we demonstrate the necessity of incorporating network dynamics into understanding the time until sanction compliance
 	\item We show that the connectivity between target and sender states--in terms of cultural similarities, geographical proximity, and alliance patterns--plays an important and previously overlooked role on sanction outcomes
 \end{itemize}
 
@@ -115,16 +115,16 @@ Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Sanctions and domestic factors}
-Previous literature has suggested sanctions ``work'' by destablizing leaders and other domestic factors
+Previous literature has suggested sanctions ``work'' by destablizing leaders and other domestic factors:
 \begin{itemize}
-\item Marinov 2005
-\item Lektzian and Souva 2003
+	\item Marinov 2005
+	\item Lektzian and Souva 2003
 \end{itemize}
 
-In addition, such work has often utilized a duration modeling approach to capture the time dependent nature of sanciton dynamics: 
+Such work has often utilized a duration modeling approach to capture the time until sanction compliance: 
 \begin{itemize}
-\item Bolks Al-Sowayel 2000
-\item McGillivray and Stam 2004
+	\item Bolks Al-Sowayel 2000
+	\item McGillivray and Stam 2004
 \end{itemize}
 
 
@@ -134,15 +134,15 @@ In addition, such work has often utilized a duration modeling approach to captur
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Sanctions and Network Dynamics}
-While domestic conditions are important, another vein of literature suggests cross-cutting relationships and network dynamics should play a key role in understanding sanction outcomes 
+Domestic conditions are important but cross-cutting relationships and network dynamics should play a key role in understanding sanction outcomes as well:
 \begin{itemize}
-\item Martin, 1993; Drezner, 2000; Bapat and Morgan, 2009, Cranmer and Heinrich 2013. 
+	\item Martin, 1993; Drezner, 2000; Bapat and Morgan, 2009, Cranmer and Heinrich 2013. 
 \end{itemize}
 
-The importance of multilateral coordination and network dynamics are intuitive given the broader work on networks in international relationships 
+The importance of network dynamics have been found in other IR works:
 \begin{itemize}
-\item Hoff and Ward 2004
-\item Cranmer and Desmarais 2012
+	\item Ward, Siverson, and Xao 2007
+	\item Cranmer and Desmarais 2012
 \end{itemize} 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,7 +163,7 @@ The importance of multilateral coordination and network dynamics are intuitive g
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Bridging the Gaps}
-We suggest that present duration approaches fail to incorporate the network pressures instrinstic to international sanction processes. 
+We suggest that present duration approaches fail to incorporate the network pressures instrinstic to international sanction processes
 
 \begin{itemize}
 	\item Target states face sanctioners to whom they have a variety of relationships
@@ -187,7 +187,7 @@ We suggest that present duration approaches fail to incorporate the network pres
 
 \begin{itemize}
 	\item Sanction cases where relationships are more proximate will be more quickly resolved
-	\item Sanctions involving coalitions of sender(s) should be able to assert greater pressure than sanctions sent by just one state
+	\item Sanctions involving coalitions of sender(s) will be more quickly resolved than sanctions sent by just one state
 \end{itemize}
 
 \end{frame}
@@ -217,7 +217,11 @@ We suggest that present duration approaches fail to incorporate the network pres
 	Target states with stronger democratic institutions that are under the pressure of sanctions will more quickly comply than those with less democratic institutions. 
 \end{block}
 
-Sanctions impose costs on groups within the country. Affected groups will try to lobby the government to reach an accommodation with sanctioning states, and the ability to lobby is conditional on political institutions.
+\begin{itemize}
+	\item Sanctions are designed to impose costs on key groups within countries
+	\item Affected groups will lobby the government to reach an accommodation with sanctioning states
+	\item The ability to successfully lobby is conditional on political institutions
+\end{itemize}
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -232,10 +236,11 @@ Two types of network effects that we want to capture:
 	\item Sanction Case Network
 	\begin{itemize}
 		\item Number of senders associated with sanction case
-		\item Alliances: The proportion of sender(s) that are allied with the receiver
 		\item Distance: The average distance between sender(s) and the receiver
-		\item Trade: The share of total trade that the sender(s) make up for the receiver
-		\item Religion: Similarity between religious group makeups between sender(s) and the receiver
+		\item Trade: The share of total trade that the sender(s) make up for the receiver		
+		\item Alliances: The proportion of sender(s) that are allied with the receiver
+		\item IGOs: The average number of common IGOs that the sender(s) and receiver belong to
+		\item Religion: Similarity of religious group makeups between sender(s) and the receiver
 	\end{itemize}
 	\item Aggregate Network
 	\begin{itemize}
@@ -302,9 +307,11 @@ Our focus is economic sanctions and the period of 1984 to 2005, leaving us with 
 % \vspace{-0.5cm}
 \begin{block}{Time-Varying Duration Model}
 	\begin{align*}
-		Compliance_{i,t} =\; & No. \; Senders_{j} + Constraints_{i,t} + Distance_{j,t} + \\
-		 &GDP \; Capita_{i,t-1} +  Internal \; Conflict_{i,t} + Trade_{j,t} + \\
-		 &Ally_{j,t} + IGOs_{j,t} + Sanc. \; Rec'd_{i,t} + Religion_{j,t} + \\
+		Compliance_{i,t} =\; & No. \; Senders_{j} + Distance_{j,t} + Trade_{j,t}  + \\
+		 &Ally_{j,t} + IGOs_{j,t} + Religion_{j,t} +\\
+ 		 &Sanc. \; Rec'd_{i,t} + \\
+		 &Constraints_{i,t} + GDP \; Capita_{i,t-1} +\\
+		 & Internal \; Conflict_{i,t} +\\
 		 &Constraints_{i,t}*No. \; Senders_{j} + \epsilon_{i,t}
 	\end{align*}
 \end{block}
@@ -332,17 +339,17 @@ Our focus is economic sanctions and the period of 1984 to 2005, leaving us with 
 		  \hline
 		  Case Network Measures \\
 		  \;\;\;   Number of senders & 0.59 & 0.15 & 0.00 \\ 
-		  \;\;\;   Constraints & 0.02 & 0.04 & 0.69 \\ 
 		  \;\;\;   Distance & -218.15 & 97.87 & 0.03 \\
 		  \;\;\;   Trade & 0.65 & 0.85 & 0.44 \\ 
 		  \;\;\;   Ally & 1.12 & 0.49 & 0.02 \\ 
-		  \;\;\;   IGO & -0.03 & 0.01 & 0.04 \\ 
+		  \;\;\;   IGOs & -0.03 & 0.01 & 0.04 \\ 
 		  \;\;\;   Religion & -0.90 & 0.40 & 0.02 \\ 
-		  Full Network Measure \\
-		  \;\;\;     Sanc. Recieved & -0.06 & 0.09 & 0.49 \\ 
+		  Aggregate Network Measure \\
+		  \;\;\;   Sanc. Recieved & -0.06 & 0.09 & 0.49 \\ 
 		  Controls \\
-		  \;\;\;     GDP per Capita (lagged) & -0.00 & 0.00 & 0.43 \\ 
-		  \;\;\;     Internal Conflict & -0.03 & 0.08 & 0.74 \\ 
+		  \;\;\;   Constraints & 0.02 & 0.04 & 0.69 \\ 		  
+		  \;\;\;   GDP per Capita (lagged) & -0.00 & 0.00 & 0.43 \\ 
+		  \;\;\;   Internal Conflict & -0.03 & 0.08 & 0.74 \\ 
 		   \hline
 		   Time at risk = 1027 &&&\\
 			 Number of cases = 154 &&&\\
@@ -375,9 +382,9 @@ Our focus is economic sanctions and the period of 1984 to 2005, leaving us with 
 			\;\;\; Distance & -253.00 & 102.73 & 0.01 \\ 		
 			\;\;\; Trade & 0.50 & 0.84 & 0.55 \\ 
 			\;\;\; Ally & 1.44 & 0.54 & 0.01 \\ 
-			\;\;\; IGO & -0.02 & 0.01 & 0.12 \\		
+			\;\;\; IGOs & -0.02 & 0.01 & 0.12 \\		
 			\;\;\; Religion & -1.33 & 0.45 & 0.00 \\ 
-			Full Network Measures \\		
+			Aggregate Network Measures \\		
 			\;\;\; Rec'd Sanctions & -0.13 & 0.10 & 0.20 \\ 
 			Controls \\		
 			\;\;\; Constraints & -0.58 & 1.61 & 0.72 \\ 

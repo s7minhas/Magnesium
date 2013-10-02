@@ -1,7 +1,6 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (TeX Live 2011) (format=xelatex 2011.7.3)  2 OCT 2013 00:55
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (TeX Live 2011) (format=xelatex 2011.7.3)  2 OCT 2013 01:17
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
 **ISA_13.tex
 (./ISA_13.tex
@@ -1037,7 +1036,7 @@ File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf Graphic fi
 le (type QTm)
 
 <use  "/Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf" >
-Overfull \hbox (15.36542pt too wide) in paragraph at lines 260--260
+Overfull \hbox (15.36542pt too wide) in paragraph at lines 265--265
  [] 
  []
 
@@ -1047,7 +1046,7 @@ Overfull \hbox (15.36542pt too wide) in paragraph at lines 260--260
 File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf Graphic fil
 e (type QTm)
  <use  "/Users/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf" >
-Overfull \vbox (1.34254pt too high) detected at line 273
+Overfull \vbox (1.34254pt too high) detected at line 278
  []
 
 [12
@@ -1055,11 +1054,11 @@ Overfull \vbox (1.34254pt too high) detected at line 273
 ] [13
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 318.
+LaTeX Font Info:    Try loading font information for U+msa on input line 325.
  (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 318.
+LaTeX Font Info:    Try loading font information for U+msb on input line 325.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -1094,22 +1093,22 @@ File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/oNet.pdf Graphic file
 \tf@snm=\write8
 \openout8 = `ISA_13.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 444.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 444.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 451.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 451.
  (./ISA_13.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 444.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 444.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 451.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 451.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 444.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 451.
  ) 
 Here is how much of TeX's memory you used:
  19924 strings out of 494150
  372930 string characters out of 3152950
- 445256 words of memory out of 3000000
+ 446256 words of memory out of 3000000
  22733 multiletter control sequences out of 15000+200000
  13762 words of font info for 51 fonts, out of 3000000 for 9000
  1018 hyphenation exceptions out of 8191
