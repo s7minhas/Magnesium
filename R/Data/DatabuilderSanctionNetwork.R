@@ -11,6 +11,7 @@ setwd(pathPData)
 load('panel.rda')
 years=seq(1960, 2005, 1)
 ctryYr=lapply(years, function(x) FUN=panel[panel$year==x,'ccode'])
+sdata$endyear[is.na(sdata$endyear)]=2012
 
 smatList=list()
 for(ii in 1:length(years)){

@@ -65,9 +65,8 @@
 % \setmathsfont(Digits,Latin,Greek){Gill Sans}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title[When Do States Say Uncle? \hspace{14em} \insertframenumber/
-\inserttotalframenumber]{When Do States Say Uncle? Network Dependence and Sanction Compliance}
-\author{Shahryar Minhas \& Cassy Dorff}
+\title[When Do States Say Uncle?]{When Do States Say Uncle? Network Dependence and Sanction Compliance}
+\author[Minhas \& Dorff]{Shahryar Minhas \& Cassy Dorff}
 \institute[Duke University]
 {
 {\emph{shahryar.minhas@duke.edu \& cassy.dorff@duke.edu}} \\
@@ -76,6 +75,21 @@ Duke University
 }
 \date{\today}
 
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
 \graphicspath{{/Users/janus829/Dropbox/Research/Magnesium/Graphics/}}
 
 \begin{document}
@@ -91,8 +105,8 @@ Duke University
 
 \begin{itemize}
 	\item When and why do states comply with economic sanctions? 
-	\item In this presentation we have demonstrate the necessity of incorporating network dynamics into predictive models of sanction compliance. 
-	\item We show that the connectivity between target and sender states--in terms of cultural similarities, geographical proximity, and alliance patterns--plays an important and previously overlooked role on sanction outcomes. 
+	\item In this presentation we have demonstrate the necessity of incorporating network dynamics into understanding the time until sanction compliance
+	\item We show that the connectivity between target and sender states--in terms of cultural similarities, geographical proximity, and alliance patterns--plays an important and previously overlooked role on sanction outcomes
 \end{itemize}
 
 \end{frame}
@@ -135,9 +149,8 @@ The importance of multilateral coordination and network dynamics are intuitive g
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Bridging the Gaps:}
-\framesubtitle{1984 Sanction Network}
-% NETWORK GRAPH HERE. Say we are combining duration + network effects + consideration of domestic factors. 
+\frametitle{Understanding the Network:}
+\framesubtitle{1984 Sanction Spaghetti Bowl}
 \vspace{-0.25cm}
 \begin{figure}[ht]
   \centering
@@ -153,9 +166,12 @@ The importance of multilateral coordination and network dynamics are intuitive g
 We suggest that present duration approaches fail to incorporate the network pressures instrinstic to international sanction processes. 
 
 \begin{itemize}
-\item Target states face a network of sanctioners, not just an individual sender state. We present a duration model that incorporates the interdependent nature of the international system. 
-\item In addition, we explore how network pressures inform sanction compliance, as well as interact with the domestic institutions of the target state. 
+	\item Target states face sanctioners to whom they have a variety of relationships
+	\item At any given point in time, target states may be faced with a multitude of sanction cases
+	\item We present a duration model that incorporates these network dynamics
+	\item In addition, we explore whether these network pressures interact with domestic institutions of the target state
 \end{itemize}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,23 +179,46 @@ We suggest that present duration approaches fail to incorporate the network pres
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Network Pressure Hypotheses}
+\framesubtitle{Sanction Case Network}
+
+\begin{block}{Hypothesis 1}
+	Sanction Case Network: The relationship between sender(s) and the target matters for sanction compliance: 
+\end{block}
+
 \begin{itemize}
-		\item \textbf{H1} Connectivity: The relationships between senders and receivers influences sanction compliance: 
-		\begin{itemize}
-			\item More proximate relationships translates to greater potential for pressure, which will lead to a shorter duration
-		\end{itemize}
-		\item \textbf{H2} Network Members: Higher number of sender states leads to greater potential for pressure, which will shorten the duration of the sanction 
-\end{itemize} 
+	\item Sanction cases where relationships are more proximate will be more quickly resolved
+	\item Sanctions involving coalitions of sender(s) should be able to assert greater pressure than sanctions sent by just one state
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Network Pressure Hypotheses}
+\framesubtitle{Aggregate Network}
+
+\begin{block}{Hypothesis 2}
+	Aggregate Network: Targets of sanctions often face a multitude of sanction cases at any given point in time
+\end{block}
+
+\begin{itemize}
+	\item States under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few
+\end{itemize}
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Institutions Hypothesis}
-	Sanctions impose costs on groups within the country. Affected groups will try to lobby the government to reach an accommodation with sanctioning states, and the power of these groups will be stronger in democracies.
-	\begin{itemize}
-	\item \textbf{H3} Target states with stronger democratic institutions that are under the pressure of sanctions will more quickly comply than those with less democratic institutions. 
-\end{itemize}
+
+\begin{block}{\textbf{Hypothesis 3}}
+	Target states with stronger democratic institutions that are under the pressure of sanctions will more quickly comply than those with less democratic institutions. 
+\end{block}
+
+Sanctions impose costs on groups within the country. Affected groups will try to lobby the government to reach an accommodation with sanctioning states, and the ability to lobby is conditional on political institutions.
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -190,17 +229,17 @@ We suggest that present duration approaches fail to incorporate the network pres
 Two types of network effects that we want to capture:
 
 \begin{itemize}
-	\item Relationships between sender(s) of the sanction and a target state
+	\item Sanction Case Network
 	\begin{itemize}
-		\item Alliances
-		\item Distance
-		\item Trade
-		\item Religion
+		\item Number of senders associated with sanction case
+		\item Alliances: The proportion of sender(s) that are allied with the receiver
+		\item Distance: The average distance between sender(s) and the receiver
+		\item Trade: The share of total trade that the sender(s) make up for the receiver
+		\item Religion: Similarity between religious group makeups between sender(s) and the receiver
 	\end{itemize}
-	\item Pressures from overall network structure
+	\item Aggregate Network
 	\begin{itemize}
-		\item Number of senders
-		\item How many sanctions targetstate has received
+		\item Sanctions Received: Total number of sanctions to which the target state is currently exposed
 	\end{itemize}
 \end{itemize}
 
@@ -209,8 +248,22 @@ Two types of network effects that we want to capture:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Constructing Network Measures:}
-\framesubtitle{South Africa 1984 Network}
+\frametitle{Untangling the Spaghetti Bowl:}
+\framesubtitle{South Africa 1984 Sanction Case Network}
+
+\vspace{-.4cm}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.05\textwidth]{saneti}
+\end{figure}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Untangling the Spaghetti Bowl:}
+\framesubtitle{South Africa 1984 Aggregate Network}
 
 \begin{figure}[ht]
 	\centering
@@ -224,18 +277,20 @@ Two types of network effects that we want to capture:
 \begin{frame}
 \frametitle{Data}
 
-Sanction data from Threat and Imposition of Sanctions developed by Morgan (2009), covers sanction cases from 1945 to 2005 \\
+Sanction data from Threat and Imposition of Sanctions developed by Morgan (2009), covers 1,412 sanction cases from 1945 to 2005 \\
 \vspace{0.5cm}
-The focus of this study is compliance to economic sanctions \\
+Our focus is economic sanctions and the period of 1984 to 2005, leaving us with 184 sanction cases
 \vspace{0.5cm}
-We define compliance as:
+\begin{block}{Conceptualization of Dependent Variable}
+	We define compliance as:
 
-\begin{itemize}
-	\item Complete/Partial Acquiescence by Target to threat
-	\item Negotiated Settlement
-	\item Total/Partial Acquiescence by the Target State following sanctions imposition
-	\item Negotiated Settlement following sanctions imposition
-\end{itemize}
+	\begin{itemize}
+		\item Complete/Partial Acquiescence by Target to threat
+		\item Negotiated Settlement
+		\item Total/Partial Acquiescence by the Target State following sanctions imposition
+		\item Negotiated Settlement following sanctions imposition
+	\end{itemize}
+\end{block}
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -244,14 +299,21 @@ We define compliance as:
 \begin{frame}
 \frametitle{Estimated Duration Model}
 
-\begin{align*}
-Compliance_{i,t} =\; & No. \; Senders_{j} + Constraints_{i,t} + Distance_{j,t} + \\
- &GDP \; Capita_{i,t-1} +  Internal \; Conflict_{i,t} + Trade_{j,t} + \\
- &Ally_{j,t} + IGOs_{j,t} + Sanc. \; Rec'd_{i,t} + Religion_{j,t} + \\
- &Constraints_{i,t}*No. \; Senders_{j} + \epsilon_{i,t}
-\end{align*}
+% \vspace{-0.5cm}
+\begin{block}{Time-Varying Duration Model}
+	\begin{align*}
+		Compliance_{i,t} =\; & No. \; Senders_{j} + Constraints_{i,t} + Distance_{j,t} + \\
+		 &GDP \; Capita_{i,t-1} +  Internal \; Conflict_{i,t} + Trade_{j,t} + \\
+		 &Ally_{j,t} + IGOs_{j,t} + Sanc. \; Rec'd_{i,t} + Religion_{j,t} + \\
+		 &Constraints_{i,t}*No. \; Senders_{j} + \epsilon_{i,t}
+	\end{align*}
+\end{block}
 
-where $i$ represents the target state, $j$ represents the relationship between the set of senders and $i$, and $t$ the time period.
+\begin{itemize}
+	\item $i$ represents the target state
+	\item $j$ represents the relationship between the set of sender(s) for a particular sanction case and $i$
+	\item $t$ the time period
+\end{itemize}
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -261,36 +323,35 @@ where $i$ represents the target state, $j$ represents the relationship between t
 \frametitle{Results}
 \framesubtitle{Duration Model Summary}
 
-%\input{mod1}
-
-\begin{table}[ht]
-% \caption{Model 1: Network Effects}
-\begin{center}
-\begin{tabular}{lccc}
-  \hline\hline
- &$\hat{\beta}$&$\hat{\sigma}$& Pr($>$$|$z$|$) \\ 
-  \hline
-  Case Network Measures \\
-  \;\;\;   Number of senders & 0.59 & 0.15 & 0.00 \\ 
-  \;\;\;   Constraints & 0.02 & 0.04 & 0.69 \\ 
-  \;\;\;   Distance & -218.15 & 97.87 & 0.03 \\
-  \;\;\;   Trade & 0.65 & 0.85 & 0.44 \\ 
-  \;\;\;   Ally & 1.12 & 0.49 & 0.02 \\ 
-  \;\;\;   IGO & -0.03 & 0.01 & 0.04 \\ 
-  \;\;\;   Religion & -0.90 & 0.40 & 0.02 \\ 
-  Full Network Measure \\
-  \;\;\;     Sanc. Recieved & -0.06 & 0.09 & 0.49 \\ 
-  Controls \\
-  \;\;\;     GDP per Capita (lagged) & -0.00 & 0.00 & 0.43 \\ 
-  \;\;\;     Internal Conflict & -0.03 & 0.08 & 0.74 \\ 
-   \hline
-   Time at risk = 1027 &&&\\
-	 Number of cases = 154 &&&\\
-   Number of compliances = 44 &&&\\
-  \hline\hline
-\end{tabular}
-\end{center}
-\end{table}
+\footnotesize{
+	\begin{table}[ht]
+		\begin{center}
+		\begin{tabular}{lccc}
+		  \hline\hline
+		 &$\hat{\beta}$&$\hat{\sigma}$& Pr($>$$|$z$|$) \\ 
+		  \hline
+		  Case Network Measures \\
+		  \;\;\;   Number of senders & 0.59 & 0.15 & 0.00 \\ 
+		  \;\;\;   Constraints & 0.02 & 0.04 & 0.69 \\ 
+		  \;\;\;   Distance & -218.15 & 97.87 & 0.03 \\
+		  \;\;\;   Trade & 0.65 & 0.85 & 0.44 \\ 
+		  \;\;\;   Ally & 1.12 & 0.49 & 0.02 \\ 
+		  \;\;\;   IGO & -0.03 & 0.01 & 0.04 \\ 
+		  \;\;\;   Religion & -0.90 & 0.40 & 0.02 \\ 
+		  Full Network Measure \\
+		  \;\;\;     Sanc. Recieved & -0.06 & 0.09 & 0.49 \\ 
+		  Controls \\
+		  \;\;\;     GDP per Capita (lagged) & -0.00 & 0.00 & 0.43 \\ 
+		  \;\;\;     Internal Conflict & -0.03 & 0.08 & 0.74 \\ 
+		   \hline
+		   Time at risk = 1027 &&&\\
+			 Number of cases = 154 &&&\\
+		   Number of compliances = 44 &&&\\
+		  \hline\hline
+		\end{tabular}
+		\end{center}
+	\end{table}
+}
 
 
 \end{frame}
@@ -301,40 +362,42 @@ where $i$ represents the target state, $j$ represents the relationship between t
 \frametitle{Results:}
 \framesubtitle{Duration Model with Interaction}
 
-%\input{mod2}
-\begin{table}[ht]
-\caption{Model 2: Network Effects \& Institutions}
-\begin{center}
-	\begin{tabular}{lccc}
-	  \hline\hline
-	 &$\hat{\beta}$&$\hat{\sigma}$& Pr($>$$|$z$|$) \\
-  \hline
-Number of senders & 1.21 & 0.36 & 0.00 \\ 
-  Constraints & -0.58 & 1.61 & 0.72 \\ 
-  Distance & -253.00 & 102.73 & 0.01 \\ 
-  GDP per Capita (lagged) & -0.00 & 0.00 & 0.38 \\ 
-  Internal Conflcit & 0.03 & 0.09 & 0.71 \\ 
-  Trade & 0.50 & 0.84 & 0.55 \\ 
-  Ally & 1.44 & 0.54 & 0.01 \\ 
-  IGO & -0.02 & 0.01 & 0.12 \\ 
-  Rec'd Sanctions & -0.13 & 0.10 & 0.20 \\ 
-  Religion & -1.33 & 0.45 & 0.00 \\ 
-  Senders*Constraints & -1.66 & 0.92 & 0.07 \\ 
-   \hline
-   Time at risk = 1027 &&&\\
-	 Number of cases = 154 &&&\\
-   Number of compliances = 44 &&&\\
-  \hline\hline
-\end{tabular}
-\end{center}
-\end{table}
-
+\footnotesize{
+	\begin{table}[ht]
+		\begin{center}
+			\begin{tabular}{lccc}
+			\hline\hline
+			&$\hat{\beta}$&$\hat{\sigma}$& Pr($>$$|$z$|$) \\
+			\hline
+			Case Network Measures \\		
+			\;\;\; Number of senders & 1.21 & 0.36 & 0.00 \\ 
+			\;\;\; Senders*Constraints & -1.66 & 0.92 & 0.07 \\ 		
+			\;\;\; Distance & -253.00 & 102.73 & 0.01 \\ 		
+			\;\;\; Trade & 0.50 & 0.84 & 0.55 \\ 
+			\;\;\; Ally & 1.44 & 0.54 & 0.01 \\ 
+			\;\;\; IGO & -0.02 & 0.01 & 0.12 \\		
+			\;\;\; Religion & -1.33 & 0.45 & 0.00 \\ 
+			Full Network Measures \\		
+			\;\;\; Rec'd Sanctions & -0.13 & 0.10 & 0.20 \\ 
+			Controls \\		
+			\;\;\; Constraints & -0.58 & 1.61 & 0.72 \\ 
+			\;\;\; GDP per Capita (lagged) & -0.00 & 0.00 & 0.38 \\ 
+			\;\;\; Internal Conflcit & 0.03 & 0.09 & 0.71 \\ 
+			\hline
+			Time at risk = 1027 &&&\\
+			Number of cases = 154 &&&\\
+			Number of compliances = 44 &&&\\
+			\hline\hline
+		\end{tabular}
+		\end{center}
+	\end{table}
+}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Results:}
-\framesubtitle{Survival Probability by Number of Senders}
+\framesubtitle{Survival Probability by Number of Senders in a Sanction Case}
 
 \vspace{0.7cm}
 \begin{figure}[ht]
@@ -348,7 +411,7 @@ Number of senders & 1.21 & 0.36 & 0.00 \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Results:}	
-\framesubtitle{Survival Probability by Other Network Variables}
+\framesubtitle{Survival Probability by Other Network Variables Relating to Sanction Case}
 
 \begin{figure}[ht]
 	\centering
@@ -360,78 +423,22 @@ Number of senders & 1.21 & 0.36 & 0.00 \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Conclusions}
+\frametitle{Next Steps}
 
 Next Steps
 \begin{itemize}
-	\item This project shows the interaction between network and domestic factors in explaining sanction compliance.
+	\item The relationships between sender(s) of a sanction and the target matter, and the specific facets of the relationship that matter extend beyond trade
+	\item So far we have not found that the aggregate network structure faced by a state matters for compliance
+	\begin{itemize}
+		\item There are other conceptualizations of aggregate network pressures that we can pursue
+	\end{itemize}
+	\item We also did not find support for the institutions hypothesis
+	\begin{itemize}
+		\item Greater specification of this hypothesis is likely necessary
+	\end{itemize}
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-
-
-
-% \begin{frame}
-% \frametitle{Summary}
-% \scriptsize{
-% 	\begin{itemize}
-% 		\item In this presentation deck, we show replications of papers by Sorens \& Ruger (2012) and Lee (2013) Both these papers originally employed Amelia to impute missing values in their dataset. In the following slides, we show replications of their Amelia results and compare them to similar models run through a Bayesian framework using Sbgcop to impute missing values. 
-% 		\item To implement Sbgcop we created 5,000 imputed datasets and then within the MCMCs for the models we randomly chose one of those datasets to use in estimating the parameters. 
-% 	\end{itemize}
-% 	}
-% \end{frame}
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}
-% \frametitle{Replication of Sorens \& Ruger Model 3}
-% \scriptsize{On the left hand side, we show the results of a Bayesian (black) and Frequenstist (grey) approach with listwise deletion. On the right hand side, we show the same but with having imputed values through Sbgcop and Amelia.}
-% \begin{figure}
-% 	\centering
-% 	\begin{tabular}{ll}
-% 		\subfloat{
-% 		\includegraphics[width=0.48\textwidth]{/SorensRugerReplication/Graphics/coefpM3_noIMP.pdf}
-% 		\label{fig:Smod1Latent}} &
-% 		\subfloat{
-% 		\includegraphics[width=0.48\textwidth]{/SorensRugerReplication/Graphics/coefpM3.pdf}
-% 		\label{fig:Smod1Legend}}				
-% 	\end{tabular}
-% \end{figure}
-% \end{frame}
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}
-% \frametitle{Replication of Sorens \& Ruger Model 4}
-% \scriptsize{On the left hand side, we show the results of a Bayesian (black) and Frequenstist (grey) approach with listwise deletion. On the right hand side, we show the same but with having imputed values through Sbgcop and Amelia.}
-% \begin{figure}
-% 	\centering
-% 	\begin{tabular}{ll}
-% 		\subfloat{
-% 		\includegraphics[width=0.48\textwidth]{/SorensRugerReplication/Graphics/coefpM4_noIMP.pdf}
-% 		\label{fig:Smod1Latent}} &
-% 		\subfloat{
-% 		\includegraphics[width=0.48\textwidth]{/SorensRugerReplication/Graphics/coefpM4.pdf}
-% 		\label{fig:Smod1Legend}}				
-% 	\end{tabular}
-% \end{figure}
-% \end{frame}
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}
-% \frametitle{Replication of Lee}
-% \scriptsize{On the left hand side, we show the results of a Bayesian (black) and Frequenstist (grey) approach with listwise deletion. On the right hand side, we show the same but with having imputed values through Sbgcop and Amelia.}
-% \begin{figure}
-% 	\centering
-% 	\begin{tabular}{ll}
-% 		\subfloat{
-% 		\includegraphics[width=0.48\textwidth]{/LeeReplication/Graphics/LEE_bVm_coefpV2_noImputation.pdf}
-% 		\label{fig:Smod1Latent}} &
-% 		\subfloat{
-% 		\includegraphics[width=0.48\textwidth]{/LeeReplication/Graphics/LEE_bVm_coefpV2.pdf}
-% 		\label{fig:Smod1Legend}}				
-% 	\end{tabular}
-% \end{figure}
-% \end{frame}
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % End of slides
-% \end{document} 
+\end{document} 

@@ -77,7 +77,7 @@ legend('topright', c("Few Senders", "Many Senders"),
 	lty = 1, col=pcolors, bty='n')
 dev.off()
 
-pdf(file='oNet.pdf', height=6, width=10)
+pdf(file='oNet.pdf', height=7, width=10)
 coefs=c('distdata','allydata','igodata','Creligdata')
 cnames=c('Distance','Ally', 'IGO', 'Religion')
 par(mfrow=c(2,2))
