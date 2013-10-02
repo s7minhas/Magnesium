@@ -12,7 +12,7 @@ load('panel.rda')
 
 ###################################################
 # Helper function to create adjacency matrix for plot.igraph
-creatAdj = function(mat, top=TRUE){
+creatAdj = function(mat, top=TRUE, mult=1.5){
 	require(igraph)
 	setwd(pathPData)
 	load('panel.rda')
@@ -25,36 +25,35 @@ creatAdj = function(mat, top=TRUE){
 	bothsub=both[both==0]
 	mat=mat[match(names(bothsub),rownames(mat)),
 		match(names(bothsub),colnames(mat))]
-	# Choosing labels
-	topS=names(rowSums(mat)[rowSums(mat)>mean(rowSums(mat))])
-	topC=names(colSums(mat)[colSums(mat)>mean(colSums(mat))])
 
 	matAdj=graph.adjacency(mat, mode='directed', weighted=T, diag=F)
-	if(top==TRUE){V(matAdj)[degree(matAdj)<=median(degree(matAdj))]$name=''}
+	if(top==TRUE){V(matAdj)[degree(matAdj)<=mult*median(degree(matAdj))]$name=''}
 	V(matAdj)$name[V(matAdj)$name=='Germany Federal Republic']='W. Germany'
 	V(matAdj)$name[V(matAdj)$name=='Germany Democratic Republic']='E. Germany'
+	V(matAdj)$name[V(matAdj)$name=='United Kingdom']='UK'
+	V(matAdj)$name[V(matAdj)$name=='United States']='USA'
 	matAdj
 }
 ###################################################
 
-###################################################
-# Plotting networks
-setwd(pathGraphics)
-years = names(smatList)
-pdf(file='SanctionNetworkPlot.pdf', height=12, width=16)
-par(mfrow=c(3,3),mar=c(2, 2, 2, 2)*0.5, mgp=c(0,0,0), oma=c(0,0,0,0))
-for(ii in 1:length(smatList)){
-	smatAdj=creatAdj(smatList[[ii]])
-	plot(smatAdj, layout=layout.fruchterman.reingold, main=years[ii],
-	          vertex.label=V(smatAdj)$name, vertex.size=4,
-	          vertex.label.dist=0.5, vertex.label.cex=.74,
-	          vertex.color="gray", vertex.label.color="black", 
-	          edge.arrow.size=0.3, edge.color='deepskyblue3',
-	          edge.width=E(smatAdj)$weight/5,
-	          edge.curved=T)
-	}
-dev.off()
-###################################################
+# ###################################################
+# # Plotting networks
+# setwd(pathGraphics)
+# years = names(smatList)
+# pdf(file='SanctionNetworkPlot.pdf', height=12, width=16)
+# par(mfrow=c(3,3),mar=c(2, 2, 2, 2)*0.5, mgp=c(0,0,0), oma=c(0,0,0,0))
+# for(ii in 1:length(smatList)){
+# 	smatAdj=creatAdj(smatList[[ii]])
+# 	plot(smatAdj, layout=layout.fruchterman.reingold, main=years[ii],
+# 	          vertex.label=V(smatAdj)$name, vertex.size=4,
+# 	          vertex.label.dist=0.5, vertex.label.cex=.74,
+# 	          vertex.color="gray", vertex.label.color="black", 
+# 	          edge.arrow.size=0.3, edge.color='deepskyblue3',
+# 	          edge.width=E(smatAdj)$weight/5,
+# 	          edge.curved=T)
+# 	}
+# dev.off()
+# ###################################################
 
 #### Plots for preeze
 ###################################################
@@ -62,17 +61,19 @@ dev.off()
 par(mar=c(1,0,2,0)+.1, oma=c(0,0,0,0))
 years = names(smatList)
 ii=which(years==1984)
-smatAdj=creatAdj(smatList[[ii]])
+smatAdj=creatAdj(smatList[[ii]], mult=5)
 setwd(pathGraphics)
-pdf(file='84net.pdf')
-plot(smatAdj, layout=layout.fruchterman.reingold, main=years[ii],
+# pdf(file='84net.pdf',height=10,width=15)
+plot(smatAdj, layout=layout.fruchterman.reingold, 
+		  # main=paste(years[ii], 'Sanction Network'),
+		  main='',
           vertex.label=V(smatAdj)$name, vertex.size=4,
-          vertex.label.dist=0.5, vertex.label.cex=.74,
-          vertex.color="gray", vertex.label.color="black", 
-          edge.arrow.size=0.3, edge.color='deepskyblue3',
-          edge.width=E(smatAdj)$weight/2,
+          vertex.label.dist=0.5, vertex.label.cex=1.5,
+          vertex.color="white", vertex.label.color="black", 
+          edge.arrow.size=0.7, edge.color='deepskyblue3',
+          edge.width=E(smatAdj)$weight,
           edge.curved=T)
-dev.off()
+# dev.off()
 
 # Plot of sanctions against south africa
 ii=which(years==1984)
@@ -87,6 +88,7 @@ safMat[,which(!colnames(safMat) == '560')]=0 # 560 is the code for S. Africa
 safMatAdj=creatAdj(safMat, top=FALSE)
 safSlice$color=brewer.pal(nrow(safSlice), 'Dark2')
 edges=get.edgelist(safMatAdj)
+edges[3,1]='United States'
 edges[,1]=panel$ccode[match(edges[,1], panel$CNTRY_NAME)]
 edges[,2]=panel$ccode[match(edges[,2], panel$CNTRY_NAME)]
 E(safMatAdj)$color=rep(NA,nrow(edges))
@@ -105,13 +107,14 @@ pdf(file='sanet.pdf')
 ii=which(years==1984)
 par(mar=c(1,0.5,2.5,0.5)+.1, oma=c(0,0,0,0))
 plot(safMatAdj, layout=layout.fruchterman.reingold, 
-		  main=paste('South Africa Sanctions',years[ii]),
-          vertex.label=V(safMatAdj)$name, vertex.size=2,
-          vertex.label.dist=0.5, vertex.label.cex=.74,
-          vertex.color="gray", vertex.label.color="black", 
-          edge.arrow.size=0.5, 
+		  main='',
+		  # main=paste('South Africa Sanctions',years[ii]),
+          vertex.label=V(safMatAdj)$name, vertex.size=4,
+          vertex.label.dist=0.5, vertex.label.cex=1.5,
+          vertex.color="white", vertex.label.color="black", 
+          edge.arrow.size=0.7, 
           edge.color=E(safMatAdj)$color,
           edge.width=E(safMatAdj)$weight,
           edge.curved=T)
 dev.off()
-###################################################
+###################################################8

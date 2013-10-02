@@ -48,6 +48,7 @@ require(boot)
 require(pROC)
 require(sbgcop)
 require(xtable)
+require(tikzDevice)
 
 # Helper functions
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
@@ -347,7 +348,7 @@ netMelt <- function(meltData, meltID, meltYr, netList, rst=TRUE, netStat=functio
 	print(' Completed '); ndata
 }
 
-# Set up scenario
+# Function to set up scenarios for prediction
 scenBuild=function(vi, vRange, vars, ostat, simData){
 	scenCol = length(vars); scenRow = length(vRange)
 	scenario = matrix(NA, nrow=scenRow, ncol=scenCol)
