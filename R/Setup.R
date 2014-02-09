@@ -11,7 +11,7 @@ if(Sys.info()["user"]=="janus829")
 if(Sys.info()["user"]=="cassydorff")
 {pathMain="~/ProjectsGit/Magnesium/R";
 	pathGraphics="~/Dropbox/My Research/Magnesium";
-	pathData="~/Dropbox/My Research/Magnesium/Data";
+	pathData="~/Dropbox/Research/Magnesium/Data";
 	pathPData="~/ProjectsGit/Magnesium/R/Data/BuildingPanelData"}
 
 # R default base params
