@@ -14,9 +14,13 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 # ***pretty interesting results
 aData$Creligdata=aData$Creligdata+abs(min(aData$Creligdata,na.rm=T))
 cmodel4 = coxph(Surv(start, stop, compliance) ~ 
-	noS + polconiii + distdata 
-	+ lag1_lgdpCAP + Internal.Conflict + tdata
-	+ allydata + igodata + sancRecCnt + Creligdata
+	polconiii
+	+ lag1_lgdpCAP + Internal.Conflict
+	+ noS
+ 	+ sancRecCnt 
+	+ distdata 
+	+ tdata + allydata
+	# + igodata + Creligdata
 	, data=aData)
 summary(cmodel4)
 temp=na.omit(aData[,c('caseid',names(cmodel4$coefficients))])
