@@ -23,24 +23,25 @@ ctryYr=lapply(years, function(x) FUN=panel[panel$year==x,'ccode'])
 sdata$endyear[is.na(sdata$endyear)]=2012
 
 cmatList=list()
-for(ii in 1:length(years)){
+for(ii in 12:length(years)){
 	slice=sdata[which(years[ii]>=sdata$startyear & years[ii]<=sdata$endyear),] 
 	ctrs=ctryYr[[ii]] 
-	cmat=matrix(0,nrow=length(ctrs),ncol=length(ctrs),dimnames=list(ctrs,ctrs))
+	cmatList[[ii]]=matrix(0,nrow=length(ctrs),ncol=length(ctrs),dimnames=list(ctrs,ctrs))
 
 	for(jj in 1:nrow(slice)){
 		sndrs=NULL; trgt=NULL
 		sndrs=slice[jj,sendIDs]; sndrs=as.character(sndrs[!is.na(sndrs)])
-		sndrs=sndrs[ which( sndrs %in% intersect( sndrs,rownames(cmat) ) ) ]
+		sndrs=sndrs[ which( sndrs %in% intersect( sndrs,rownames(cmatList[[ii]]) ) ) ]
 		trgt=slice[jj,'targetstate_ccode']; trgt=as.character(trgt)
-		if(length(setdiff(trgt,rownames(cmat)))==0){
+		if(length(setdiff(trgt,rownames(cmatList[[ii]])))==0){
 				cmat2=matrix(0, nrow=length(ctrs), ncol=length(ctrs), dimnames=list(ctrs, ctrs))
-				cmat2[trgt, sndrs]=slice[jj,'compliance']
-				cmat=cmat + cmat2 			
+				if(years[ii]==slice[jj,'endyear']){cmat2[trgt, sndrs]=slice[jj,'compliance']}
+				cmatList[[ii]]=cmatList[[ii]] + cmat2 			
 			}		
 	}
-	cmatList[[ii]]=cmat	; print(years[ii])
+	print(years[ii])
 }
+
 names(cmatList)=years
 setwd(pathData)
 save(cmatList, file='complianceNet.rda')
