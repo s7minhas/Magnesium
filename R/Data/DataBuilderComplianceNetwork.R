@@ -24,23 +24,22 @@ sdata$endyear[is.na(sdata$endyear)]=2012
 
 cmatList=list()
 for(ii in 1:length(years)){
-	slice=sdata[which(years[ii]>=sdata$startyear & years[ii]<=sdata$endyear),]  
-	
-	ctrs=ctryYr[[ii]]
-	smat=matrix(0, nrow=length(ctrs), ncol=length(ctrs), dimnames=list(ctrs, ctrs))
+	slice=sdata[which(years[ii]>=sdata$startyear & years[ii]<=sdata$endyear),] 
+	ctrs=ctryYr[[ii]] 
+	cmat=matrix(0,nrow=length(ctrs),ncol=length(ctrs),dimnames=list(ctrs,ctrs))
 
 	for(jj in 1:nrow(slice)){
 		sndrs=NULL; trgt=NULL
 		sndrs=slice[jj,sendIDs]; sndrs=as.character(sndrs[!is.na(sndrs)])
-		sndrs=sndrs[ which( sndrs %in% intersect( sndrs,rownames(smat) ) ) ]
+		sndrs=sndrs[ which( sndrs %in% intersect( sndrs,rownames(cmat) ) ) ]
 		trgt=slice[jj,'targetstate_ccode']; trgt=as.character(trgt)
-		if(length(setdiff(trgt,rownames(smat)))==0){
-				smat2=matrix(0, nrow=length(ctrs), ncol=length(ctrs), dimnames=list(ctrs, ctrs))
-				smat2[sndrs, trgt]=1
-				smat=smat + smat2 
-			}
+		if(length(setdiff(trgt,rownames(cmat)))==0){
+				cmat2=matrix(0, nrow=length(ctrs), ncol=length(ctrs), dimnames=list(ctrs, ctrs))
+				cmat2[trgt, sndrs]=slice[jj,'compliance']
+				cmat=cmat + cmat2 			
+			}		
 	}
-	cmatList[[ii]]=smat
+	cmatList[[ii]]=cmat	; print(years[ii])
 }
 names(cmatList)=years
 setwd(pathData)
