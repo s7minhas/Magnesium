@@ -23,7 +23,7 @@ ctryYr=lapply(years, function(x) FUN=panel[panel$year==x,'ccode'])
 sdata$endyear[is.na(sdata$endyear)]=2012
 
 cmatList=list()
-for(ii in 12:length(years)){
+for(ii in 1:length(years)){
 	slice=sdata[which(years[ii]>=sdata$startyear & years[ii]<=sdata$endyear),] 
 	ctrs=ctryYr[[ii]] 
 	cmatList[[ii]]=matrix(0,nrow=length(ctrs),ncol=length(ctrs),dimnames=list(ctrs,ctrs))
