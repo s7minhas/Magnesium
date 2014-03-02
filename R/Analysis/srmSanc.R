@@ -6,42 +6,17 @@
 
 
 
-# Load sanction network Data
+# Load sanction & compliance network Data
 setwd(pathData)
 load('sanctionData.rda')
+load('sanctionNet.rda') #smatList
+load('complianceNet.rda') #cmatList
 sendIDs=paste('sender',1:5,'_ccode',sep='')
 sdata=sanctionDataFinal[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
-load('sanctionNet.rda')
+
 setwd(pathPData)
 load('panel.rda')
-###################################################
 
-###################################################
-# Helper function to create adjacency matrices
-creatAdj = function(mat, top=TRUE, mult=1.5){
-	require(igraph)
-	setwd(pathPData)
-	load('panel.rda')
-	ctrs=panel$CNTRY_NAME[match(rownames(mat),panel$ccode)]
-	rownames(mat)=ctrs; colnames(mat)=ctrs
-	# Dropping cases with no send/rec
-	rows=rowSums(mat)==0
-	cols=colSums(mat)==0
-	both=rows*cols
-	bothsub=both[both==0]
-	mat=mat[match(names(bothsub),rownames(mat)),
-		match(names(bothsub),colnames(mat))]
-
-	matAdj=graph.adjacency(mat, mode='directed', weighted=T, diag=F)
-	if(top==TRUE){V(matAdj)[degree(matAdj)<=mult*median(degree(matAdj))]$name=''}
-	V(matAdj)$name[V(matAdj)$name=='Germany Federal Republic']='W. Germany'
-	V(matAdj)$name[V(matAdj)$name=='Germany Democratic Republic']='E. Germany'
-	V(matAdj)$name[V(matAdj)$name=='United Kingdom']='UK'
-	V(matAdj)$name[V(matAdj)$name=='United States']='USA'
-	V(matAdj)$name[V(matAdj)$name=='Saudi Arabia']='S. Arab.'
-	matAdj
-}
-###################################################
 
 ###################################################
 #srm
@@ -82,3 +57,13 @@ par(fig=c(.8,1,.8,1),new=T)
 qgraph(smatList$"1990", weighted=TRUE, labels=rownames(smatList))
 par(fig=c(0,1,0,1))
 
+#run on compliance matrix
+outComp<-list()
+year <- 1960
+		for (i in cmatList){
+			print(year)
+			outComp <- c(outComp,list(dyads(i)))
+			names(outComp)[length(outComp)] <- paste("year",year, sep="_")
+			year <- year+1
+		}
+outComp <-outComp
