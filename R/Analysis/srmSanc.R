@@ -5,7 +5,6 @@
 ###################################################
 
 
-
 # Load sanction & compliance network Data
 setwd(pathData)
 load('sanctionData.rda')
@@ -14,12 +13,8 @@ load('complianceNet.rda') #cmatList
 sendIDs=paste('sender',1:5,'_ccode',sep='')
 sdata=sanctionDataFinal[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
 
-setwd(pathPData)
-load('panel.rda')
 
-
-###################################################
-#srm
+# srm
 source("SRM.R")
 #out<-lapply(smatList, function(x), FUN=dyads(x))
 
@@ -33,8 +28,7 @@ year <- 1960
 		}
 out2 <-out2
 
-
-#pull out all of the individual SRM stats for all the years
+# pull out all of the individual SRM stats for all the years
 actor.effect.i <- lapply(out2, function(year) year$actor.effect.i)
 partner.effect.i <- lapply(out2, funcouttion(year) year$partner.effect.i)
 unique.effect.ij <- lapply(out2, function(year) year$unique.effect.ij) #mat
@@ -45,19 +39,7 @@ partner.variance<-lapply(out2, function(year) year$partner.variance) #1/yr
 actor.partner.covariance<-lapply(out2, function(year) year$actor.partner.covariance)
 colmeans <- lapply(out2, function(year) year$colmeans)
 
-# reciprocity figure
-uniq.net<-as.matrix(out2$year_1990$unique.effect.ij)
-diag(uniq.net)<-0
-plot.network(network(uniq.net, directed=T, usearrows=T,edge.col=8, vertex.col="darkblue",label.col="black", label.pos=1, label.cex=.75, edge.lwd=.1) 
-
-# reciprocity figure 2
-library(qgraph)
-qgraph(uniq.net, minimum=-min(out2$year_1990$unique.effect.ij), maximum=  max(out2$year_1990$unique.effect.ij), labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE, diag=FALSE)
-par(fig=c(.8,1,.8,1),new=T)
-qgraph(smatList$"1990", weighted=TRUE, labels=rownames(smatList))
-par(fig=c(0,1,0,1))
-
-#run on compliance matrix
+# run on compliance matrix
 outComp<-list()
 year <- 1960
 		for (i in cmatList){
@@ -67,3 +49,28 @@ year <- 1960
 			year <- year+1
 		}
 outComp <-outComp
+
+# pull out all of the individual SRM stats for all the years
+actor.effect.i <- lapply(outComp, function(year) year$actor.effect.i)
+partner.effect.i <- lapply(outComp, funcouttion(year) year$partner.effect.i)
+unique.effect.ij <- lapply(outComp, function(year) year$unique.effect.ij) #mat
+unique.variance<- lapply(outComp, function(year) year$unique.variance) #1/yr
+relationship.covariance<-lapply(outComp, function(year) year$relationship.covariance) 
+actor.variance<- lapply(outComp, function(year) year$actor.variance) #1/yr
+partner.variance<-lapply(outComp, function(year) year$partner.variance) #1/yr
+actor.partner.covariance<-lapply(outComp, function(year) year$actor.partner.covariance)
+colmeans <- lapply(outComp, function(year) year$colmeans)
+
+
+# grahpics
+# reciprocity figure sanc
+uniq.net<-as.matrix(out2$year_1990$unique.effect.ij)
+diag(uniq.net)<-0
+plot.network(network(uniq.net, directed=T, usearrows=T,edge.col=8, vertex.col="darkblue",label.col="black", label.pos=1, label.cex=.75, edge.lwd=.1) 
+
+# reciprocity figure sanc 2
+library(qgraph)
+qgraph(uniq.net, minimum=-min(out2$year_1990$unique.effect.ij), maximum=  max(out2$year_1990$unique.effect.ij), labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE, diag=FALSE)
+par(fig=c(.8,1,.8,1),new=T)
+qgraph(smatList$"1990", weighted=TRUE, labels=rownames(smatList))
+par(fig=c(0,1,0,1))
