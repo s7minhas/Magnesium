@@ -3,7 +3,11 @@
 # CD & SM
 # Load data, create matrices, run SRM, pull out useful measures, plot.
 ###################################################
+if(Sys.info()["user"]=="janus829"){
+source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')}
 
+if(Sys.info()["user"]=="cassydorff"){
+source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Load sanction & compliance network Data
 setwd(pathData)
@@ -11,7 +15,14 @@ load('sanctionNet.rda') #smatList
 load('complianceNet.rda') #cmatList
 
 # srm
-source("SRM.R")
+if(Sys.info()["user"]=="janus829"){
+source('/Users/janus829/Desktop/Research/Magnesium/R/Analysis/SRM.R')}
+
+if(Sys.info()["user"]=="cassydorff"){
+source('/Users/cassydorff/ProjectsGit/Magnesium/R/Analysis/SRM.R')}
+
+# source("SRM.R")
+
 #out<-lapply(smatList, function(x), FUN=dyads(x))
 
 outSanc<-list()
