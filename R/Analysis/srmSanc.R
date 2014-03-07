@@ -25,15 +25,15 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Analysis/SRM.R')}
 
 #out<-lapply(smatList, function(x), FUN=dyads(x))
 
-outSanc<-list()
+outSanc2<-list()
 year <- 1960
-		for (i in smatList){
+		for (i in smatList[1:10]){
 			print(year)
-			outSanc <- c(outSanc,list(dyads(i)))
-			names(outSanc)[length(outSanc)] <- paste("year",year, sep="_")
+			outSanc2 <- c(outSanc2,list(dyads(i)))
+			names(outSanc2)[length(outSanc2)] <- paste("year",year, sep="_")
 			year <- year+1
 		}
-outSanc <-outSanc
+outSanc2 <-outSanc2 
 
 # pull out all of the individual SRM stats for all the years
 actor.effect.i <- lapply(outSanc, function(year) year$actor.effect.i)
