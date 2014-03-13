@@ -1,3 +1,29 @@
 \section{Empirics}
 \label{empirics}
 
+Threat and Imposition of Sanctions Database (Morgan 2009) provides information on 1,412 sanction case initiations and outcomes from 1945 to 2005.  Our focus is economic sanctions and the period of 1984 to 2005, providing us with 184 sanction cases.Our unit of analysis is the sanction case-year, providing us with a total of 1,920 observations
+	
+	
+We define compliance as:
+	\begin{itemize}
+		\item Complete/Partial Acquiescence by Target to threat
+		\item Negotiated Settlement
+		\item Total/Partial Acquiescence by the Target State following sanctions imposition
+		\item Negotiated Settlement following sanctions imposition
+	\end{itemize}
+	
+\subsection{Modeling Approach} 
+\begin{align*}
+		Compliance_{i,t} =\; & No. \; Senders_{j} + Distance_{j,t} + Trade_{j,t}  + \\
+		 &Ally_{j,t} + IGOs_{j,t} + Religion_{j,t} +\\
+ 		 &Sanc. \; Rec'd_{i,t} + \\
+		 &Constraints_{i,t} + GDP \; Capita_{i,t-1} +\\
+		 & Internal \; Conflict_{i,t} +\\
+		 &Constraints_{i,t}*No. \; Senders_{j} + \epsilon_{i,t}
+	\end{align*}
+	
+\begin{itemize}
+	\item $i$ represents the target of the sanction
+	\item $j$ represents the relationship between the set of sender(s) for a particular sanction case and $i$
+	\item $t$ the time period
+\end{itemize}

@@ -1,9 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  13 MAR 2014 12:50
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  5 MAR 2014 13:06
 entering extended mode
- \write18 enabled.
- file:line:error style messages enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
-**Magnesium.tex
+**Magnesium.tex -recorder
 (./Magnesium.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
@@ -1287,12 +1286,15 @@ File: lstlang3.sty 2004/09/05 1.3 listings language file
 )
 Runaway argument?
 { Cassy Dorff \\ \texttt {cassy.dorff@duke.edu} \and Shahryar Minhas \ETC.
-./Magnesium.tex:128: Paragraph ended before \author was complete.
+! Paragraph ended before \author was complete.
 <to be read again> 
                    \par 
 l.128 
       
-? 
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
 (./Magnesium.aux)
 \openout1 = `Magnesium.aux'.
 
@@ -2648,59 +2650,50 @@ LaTeX Warning: No \author given.
 [1
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./MagnesiumIntro.tex) (./MagnesiumLit.tex
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 5.
+(./MagnesiumIntro.tex)
+Overfull \hbox (2.73586pt too wide) in paragraph at lines 14--184
+[]\OT1/cmr/m/n/12 We haven't at all talked about the all im-por-tant monadic le
+vel here yet ei-ther...countries
+ []
+
+[2] (./MagnesiumLit.tex
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 6.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 5.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 6.
 )
-(./MagnesiumTheory.tex [2]) (./MagnesiumEmp.tex [3]) (./MagnesiumConcl.tex)
-[4]
+(./MagnesiumTheory.tex) (./MagnesiumEmp.tex) (./MagnesiumConcl.tex) [3]
 No file Magnesium.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 207.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 207.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 205.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 205.
 (./Magnesium.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 207.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 207.
-
-
-Package rerunfilecheck Warning: File `Magnesium.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Magnesium.out':
-(rerunfilecheck)             Before: 65450B6EE540AE420F0A0DDDCBBCA9D6;242
-(rerunfilecheck)             After:  90949F92CAD98B001C43F282217DBBC2;367.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 207.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 205.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 205.
+Package rerunfilecheck Info: File `Magnesium.out' has not changed.
+(rerunfilecheck)             Checksum: 65450B6EE540AE420F0A0DDDCBBCA9D6;242.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 205.
  ) 
 Here is how much of TeX's memory you used:
- 27730 strings out of 493488
- 545008 string characters out of 3141326
- 592184 words of memory out of 3000000
- 30536 multiletter control sequences out of 15000+200000
- 15840 words of font info for 62 fonts, out of 3000000 for 9000
+ 27726 strings out of 493488
+ 544964 string characters out of 3141326
+ 591184 words of memory out of 3000000
+ 30535 multiletter control sequences out of 15000+200000
+ 15533 words of font info for 61 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,8n,55p,635b,920s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,6n,55p,892b,856s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
-sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
-/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
-ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
-al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
-texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
-exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Magnesium.pdf (4 pages, 117757 bytes).
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
+local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on Magnesium.pdf (3 pages, 76266 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 76 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
+ 71 PDF objects out of 1000 (max. 8388607)
+ 59 compressed objects within 1 object stream
+ 9 named destinations out of 1000 (max. 500000)
  53 words of extra memory for PDF output out of 10000 (max. 10000000)
 
