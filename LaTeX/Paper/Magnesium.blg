@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Magnesium.aux
+The style file: /Users/janus829/Documents/APSR.bst
+Database file #1: magRefs.bib.bib
+You've used 1 entry,
+            2874 wiz_defined-function locations,
+            647 strings with 4949 characters,
+and the built_in function-call counts, 5982 in all, are:
+= -- 977
+> -- 89
+< -- 0
++ -- 479
+- -- 30
+* -- 525
+:= -- 1189
+add.period$ -- 4
+call.type$ -- 1
+change.case$ -- 13
+chr.to.int$ -- 1
+cite$ -- 1
+duplicate$ -- 15
+empty$ -- 36
+format.name$ -- 30
+if$ -- 1070
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 1
+newline$ -- 7
+num.names$ -- 14
+pop$ -- 2
+preamble$ -- 1
+purify$ -- 15
+quote$ -- 0
+skip$ -- 15
+stack$ -- 0
+substring$ -- 1399
+swap$ -- 2
+text.length$ -- 14
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 4
+warning$ -- 0
+while$ -- 26
+width$ -- 0
+write$ -- 17
