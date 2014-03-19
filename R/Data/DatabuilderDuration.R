@@ -14,14 +14,18 @@ load('mindistMatrices.rda')
 ###############################################################
 
 ###############################################################
-# Subsetting to economic sanctions (issue = 4, 12, 13, 14)
-econ <- c(4, 12, 13, 14)
+# Subsetting to economic sanctions
+econ <- c(4, 13, 14) # saved as durDataEcon
+# econ <- c(4, 8, 12, 13, 14) # saved as durDataEcon2
 sanctionDataFinal$issue1[is.na(sanctionDataFinal$issue1)] <- 0
 sanctionDataFinal$issue2[is.na(sanctionDataFinal$issue2)] <- 0
 sanctionDataFinal$issue3[is.na(sanctionDataFinal$issue3)] <- 0
 sanctionData <- sanctionDataFinal[sanctionDataFinal$issue1==econ |
 	sanctionDataFinal$issue2==econ |
 	sanctionDataFinal$issue3==econ, ]
+
+# Sanctions covering all issues
+# sanctionData=sanctionDataFinal # saved as durDataAll
 ###############################################################
 
 
@@ -127,6 +131,9 @@ varsT=c('year','targetstate',sVars)
 senders <- aData[,varsT]
 
 # dyadic datasets: exportMats, tradeTotMats, allyMats, warMats, igoMats, religMats
+logSM=function(x){ y=x; y[y!=0]=log(x[x!=0]); y }
+exportMats=lapply(exportMats, function(x) FUN=logSM(x))
+tradeTotMats=lapply(tradeTotMats, function(x) FUN=logSM(x))
 edata=netMelt(senders, 'targetstate', 'year', exportMats)
 tdata=netMelt(senders, 'targetstate', 'year', tradeTotMats)
 allydata=netMelt(senders, 'targetstate', 'year', allyMats, rst=FALSE)
@@ -146,6 +153,7 @@ religMats2 <- rep(CreligMats, 5)
 religMats2 <- religMats2[sort(names(religMats2))]
 names(religMats2) <- 1960:2014
 religMats2 <- religMats2[as.character(1960:2010)]
+religMats2=lapply(religMats2, function(x) FUN=x+1)
 Creligdata=netMelt(senders, 'targetstate', 'year', religMats2, rst=FALSE)
 
 distMats <- distMats[as.character(1960:2011)]
@@ -196,5 +204,7 @@ aData <- lagDataSM(aData, 'tyear', 'targetstate',
 ###############################################################
 
 ###############################################################
-save(aData, file='durData.rda')
+save(aData, file='durDataEcon.rda')
+# save(aData, file='durDataEcon2.rda')
+# save(aData, file='durDataAll.rda')
 ###############################################################

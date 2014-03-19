@@ -4,57 +4,53 @@ if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 setwd(pathData)
-load('durData.rda')
+load('durDataEcon.rda')
+
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
 aData=merge(aData,ids,by='targetstate',all.x=T)
 
+# Var mods
+aData$interaction=aData$polconiii*aData$noS
+
+# Variable key
+varDef=cbind(
+	c('polconiii', 'lag1_lgdpCAP', 'Internal.Conflict','noS','sancRecCnt',
+		'distdata','tdata','allydata','igodata','Creligdata','interaction'),
+	c('Constraints','GDP per capita (lagged)','Internal Stability',
+		'Number of Senders',"Sanction(s) Rec'd",'Distance','Trade',
+		'Ally','IGOs','Religion','Senders*Constraints'))
+
 # not lagging everything
 # incudes: controls + senders & distance hypo + net hypo
 # ***pretty interesting results
-aData$Creligdata=aData$Creligdata+abs(min(aData$Creligdata,na.rm=T))
 cmodel4 = coxph(Surv(start, stop, compliance) ~ 
 	polconiii
 	+ lag1_lgdpCAP + Internal.Conflict
 	+ noS
- 	+ sancRecCnt 
+ 	+ sancRecCnt
 	+ distdata 
 	+ tdata + allydata
-	# + igodata + Creligdata
+	+ igodata + Creligdata
 	, data=aData)
-summary(cmodel4)
 temp=na.omit(aData[,c('caseid',names(cmodel4$coefficients))])
 length(unique(temp$caseid))
 
-aData$interaction=aData$polconiii*aData$noS
 cmodel8 = coxph(Surv(start, stop, compliance) ~ 
 	noS + polconiii + distdata 
 	+ lag1_lgdpCAP + Internal.Conflict + tdata
 	+ allydata + igodata + sancRecCnt + Creligdata
 	+ interaction
 	, data=aData)
-summary(cmodel8)
 
 m1Tab=summary(cmodel4)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
-rownames(m1Tab)=c('Number of senders',
-	'Constraints', 'Distance',
-	'GDP per Capita (lagged)',
-	'Internal Conflcit',
-	'Trade', 'Ally',
-	'IGO', "Rec'd Sanctions",
-	'Religion')
+rownames(m1Tab)=varDef[ match(rownames(m1Tab),varDef[,1]) , 2 ]
 m1Tab=xtable(m1Tab)
 setwd(pathGraphics)
 # save(m1Tab, file='mod1.tex')
 
 m2Tab=summary(cmodel8)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
-rownames(m2Tab)=c('Number of senders',
-	'Constraints', 'Distance', 
-	'GDP per Capita (lagged)',
-	'Internal Conflcit',
-	'Trade', 'Ally',
-	'IGO', "Rec'd Sanctions",
-	'Religion', 'Senders*Constraints')
+rownames(m2Tab)=varDef[ match(rownames(m2Tab),varDef[,1]) , 2 ]
 m2Tab=xtable(m2Tab)
 setwd(pathGraphics)
 # save(m2Tab, file='mod2.tex')
