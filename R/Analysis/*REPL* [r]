@@ -1,0 +1,42 @@
+> summary(cmodel4)
+Call:
+coxph(formula = Surv(start, stop, compliance) ~ lag1_polconiii + 
+    lag1_lgdpCAP + lag1_Internal.Conflict + noS + lag1_sancRecCnt + 
+    distdata + tdata + allydata + igodata + Creligdata, data = aData)
+
+  n= 1441, number of events= 54 
+   (1118 observations deleted due to missingness)
+
+                             coef  exp(coef)   se(coef)      z Pr(>|z|)    
+lag1_polconiii         -3.881e-03  9.961e-01  2.102e-03 -1.846 0.064864 .  
+lag1_lgdpCAP           -3.875e-04  9.996e-01  5.817e-04 -0.666 0.505272    
+lag1_Internal.Conflict  1.454e-03  1.001e+00  5.481e-03  0.265 0.790856    
+noS                     3.371e-01  1.401e+00  1.139e-01  2.961 0.003066 ** 
+lag1_sancRecCnt         1.096e-01  1.116e+00  5.735e-02  1.912 0.055921 .  
+distdata               -1.351e+02  2.195e-59  5.871e+01 -2.300 0.021423 *  
+tdata                   1.998e+01  4.739e+08  1.297e+01  1.540 0.123623    
+allydata                6.654e-01  1.945e+00  3.988e-01  1.668 0.095230 .  
+igodata                -3.563e-02  9.650e-01  1.050e-02 -3.394 0.000688 ***
+Creligdata             -3.094e-01  7.339e-01  3.838e-01 -0.806 0.420189    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                       exp(coef) exp(-coef)  lower .95 upper .95
+lag1_polconiii         9.961e-01  1.004e+00  9.920e-01 1.000e+00
+lag1_lgdpCAP           9.996e-01  1.000e+00  9.985e-01 1.001e+00
+lag1_Internal.Conflict 1.001e+00  9.985e-01  9.908e-01 1.012e+00
+noS                    1.401e+00  7.138e-01  1.121e+00 1.751e+00
+lag1_sancRecCnt        1.116e+00  8.962e-01  9.972e-01 1.249e+00
+distdata               2.195e-59  4.555e+58 2.317e-109 2.080e-09
+tdata                  4.739e+08  2.110e-09  4.288e-03 5.239e+19
+allydata               1.945e+00  5.141e-01  8.902e-01 4.251e+00
+igodata                9.650e-01  1.036e+00  9.454e-01 9.851e-01
+Creligdata             7.339e-01  1.363e+00  3.459e-01 1.557e+00
+
+Concordance= 0.745  (se = 0.046 )
+Rsquare= 0.029   (max possible= 0.302 )
+Likelihood ratio test= 42.7  on 10 df,   p=5.622e-06
+Wald test            = 42.87  on 10 df,   p=5.24e-06
+Score (logrank) test = 48.2  on 10 df,   p=5.717e-07
+
+> 

@@ -21,12 +21,18 @@ varDef=cbind(
 		'Number of Senders',"Sanction(s) Rec'd",'Distance','Trade',
 		'Ally','IGOs','Religion','Senders*Constraints'))
 
+# varDef = cbind (  
+# 	c( 'noS', 'interaction', 'distance', 'trade', 'ally', 'igodata', 'Creligdata',
+# 	 'sancRecCnt', 'polconiii', 'lag1_lgdpCAP', 'Internal.Conflict'),
+# 	c(  )
+# 	)
+
 # not lagging everything
 # incudes: controls + senders & distance hypo + net hypo
 # ***pretty interesting results
 cmodel4 = coxph(Surv(start, stop, compliance) ~ 
-	polconiii
-	+ lag1_lgdpCAP + Internal.Conflict
+	lag1_polconiii
+	+ lag1_lgdpCAP + lag1_Internal.Conflict
 	+ noS
  	+ sancRecCnt
 	+ distdata 
@@ -38,7 +44,7 @@ length(unique(temp$caseid))
 
 cmodel8 = coxph(Surv(start, stop, compliance) ~ 
 	noS + polconiii + distdata 
-	+ lag1_lgdpCAP + Internal.Conflict + tdata
+	+ lgdpCAP + Internal.Conflict + tdata
 	+ allydata + igodata + sancRecCnt + Creligdata
 	+ interaction
 	, data=aData)
