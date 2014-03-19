@@ -11,42 +11,31 @@ names(ids)=c('targetstate','fcode')
 aData=merge(aData,ids,by='targetstate',all.x=T)
 
 # Var mods
-aData$interaction=aData$polconiii*aData$noS
+aData$interaction=aData$lag1_polconiii*aData$noS
 
 # Variable key
-varDef=cbind(
-	c('polconiii', 'lag1_lgdpCAP', 'Internal.Conflict','noS','sancRecCnt',
-		'distdata','tdata','allydata','igodata','Creligdata','interaction'),
-	c('Constraints','GDP per capita (lagged)','Internal Stability',
-		'Number of Senders',"Sanction(s) Rec'd",'Distance','Trade',
-		'Ally','IGOs','Religion','Senders*Constraints'))
-
-# varDef = cbind (  
-# 	c( 'noS', 'interaction', 'distance', 'trade', 'ally', 'igodata', 'Creligdata',
-# 	 'sancRecCnt', 'polconiii', 'lag1_lgdpCAP', 'Internal.Conflict'),
-# 	c(  )
-# 	)
+varDef = cbind (  
+	c( 'noS', 'interaction', 'distdata', 'tdata', 'allydata', 'igodata', 'Creligdata',
+	 'lag1_sancRecCnt', 'lag1_polconiii', 'lag1_lgdpCAP', 'lag1_Internal.Conflict'),
+	c( 'Number of Senders$_{j,t}$', 'Senders$_{j,t}$*Constraints$_{i,t-1}$',
+	'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$', 'IGOs$_{j,t}$', 
+	'Religion$_{j,t}$', "Sanc. Rec'd$_{i,t}$", 'Constraints$_{i,t}$',
+	'Ln(GDP per capita)$_{i,t}$', 'Internal Stability$_{i,t}$' )
+	)
 
 # not lagging everything
 # incudes: controls + senders & distance hypo + net hypo
 # ***pretty interesting results
 cmodel4 = coxph(Surv(start, stop, compliance) ~ 
-	lag1_polconiii
-	+ lag1_lgdpCAP + lag1_Internal.Conflict
-	+ noS
- 	+ sancRecCnt
-	+ distdata 
-	+ tdata + allydata
-	+ igodata + Creligdata
+	noS + distdata + tdata + allydata + igodata + Creligdata 
+	+ lag1_sancRecCnt + lag1_polconiii + lag1_lgdpCAP + lag1_Internal.Conflict
 	, data=aData)
 temp=na.omit(aData[,c('caseid',names(cmodel4$coefficients))])
 length(unique(temp$caseid))
 
 cmodel8 = coxph(Surv(start, stop, compliance) ~ 
-	noS + polconiii + distdata 
-	+ lgdpCAP + Internal.Conflict + tdata
-	+ allydata + igodata + sancRecCnt + Creligdata
-	+ interaction
+	noS + interaction + distdata + tdata + allydata + igodata + Creligdata 
+	+ lag1_sancRecCnt + lag1_polconiii + lag1_lgdpCAP + lag1_Internal.Conflict
 	, data=aData)
 
 m1Tab=summary(cmodel4)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
