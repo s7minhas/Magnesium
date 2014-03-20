@@ -22,8 +22,11 @@ We define compliance as:
 	\end{itemize}
 	
 \subsection{Modeling Approach} 
+
+Describe duration model using cox proportional hazards with time varying covariates
+
 \begin{align*}
-		Compliance_{i,t} =\; & No. \; Senders_{j} + Distance_{j,t} + Trade_{j,t}  + \\
+		Compliance_{i,t} =\; & No. \; Senders_{j,t} + Distance_{j,t} + Trade_{j,t}  + \\
 		 &Ally_{j,t} + IGOs_{j,t} + Religion_{j,t} +\\
  		 &Sanc. \; Rec'd_{i,t} + \\
 		 &Constraints_{i,t} + GDP \; Capita_{i,t-1} +\\

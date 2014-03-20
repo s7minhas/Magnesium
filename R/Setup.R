@@ -3,6 +3,7 @@ rm(list=ls())
 # Setting working directory
 if(Sys.info()["user"]=="janus829")
 {pathMain="~/Desktop/Research/Magnesium/R";
+	pathTex="~/Desktop/Research/Magnesium/LaTeX/TeXoutput"
 	pathGraphics="~/Dropbox/Research/Magnesium/Graphics";
 	pathFunctions="~/Desktop/Prog Notes/R Functions";
 	pathData="~/Dropbox/Research/Magnesium/Data";
@@ -402,16 +403,24 @@ durTable = function(modResults, varDef, digs=3){
 	tableFinal = rbind(tableFinal, tableResults[ii,], temp) }
 
 	# Adding other info
-	nStats=2
 	sSize = cbind('n', t(as.vector(mapply(x=modResults, 
 		function(x) FUN=x$n))))
-	events = cbind('N', t(as.vector(mapply(x=modResults, 
+	events = cbind('Events', t(as.vector(mapply(x=modResults, 
 		function(x) FUN=x$nevent))))
-	tableFinal = rbind(tableFinal, sSize, events)
+	logtest = cbind('Likelihood ratio test', 
+		t(as.vector( 
+			mapply(x=modResults, function(x) 
+				FUN=paste(
+					round(summary(x)$logtest[1], digs-1),
+					paste0('(',round(summary(x)$logtest[3], digs-1),')')
+				 ) 
+				)
+			) ) )
+
+	tableFinal = rbind(tableFinal, sSize, events, logtest)
 
 	temp=varDef[match(tableFinal[,'Variable'], varDef[,1]),2]
 	temp[which(is.na(temp))]=tableFinal[,'Variable'][which(is.na(temp))]
 	tableFinal[,'Variable']=temp
-
-	print(tableFinal)
+	tableFinal
 }

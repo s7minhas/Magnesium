@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  20 MAR 2014 16:31
+=======
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  20 MAR 2014 06:26
+>>>>>>> FETCH_HEAD
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2670,6 +2674,7 @@ Overfull \hbox (22.76358pt too wide) in paragraph at lines 20--21
  []
 
 
+<<<<<<< HEAD
 </Users/cassydorff/Dropbox/Research/Magnesium/Graphics/sanet.pdf, id=128, 522.9
 5375pt x 487.8225pt>
 File: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/sanet.pdf Graphic f
@@ -2706,12 +2711,54 @@ oNet.pdf used on input line 72.
 (./MagnesiumConcl.tex [10] [11] [12 </Users/cassydorff/Dropbox/Research/Magnesi
 um/Graphics/nosSurv.pdf> </Users/cassydorff/Dropbox/Research/Magnesium/Graphics
 /oNet.pdf>]) [13
+=======
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf, id=57, 522.9537
+5pt x 487.8225pt>
+File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf Graphic fil
+e (type pdf)
+
+<use /Users/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf>
+Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/sa
+net.pdf used on input line 26.
+(pdftex.def)             Requested size: 341.43307pt x 318.50258pt.
+ [3 </Users/janus829/Dropbox/Research/Magnesium/Graphics/84net.pdf>] [4 </Users
+/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf> </Users/janus829/Drop
+box/Research/Magnesium/Graphics/sanet.pdf>]) (./MagnesiumEmp.tex [5
+
+] [6])
+(./MagnesiumFindings.tex (../TeXoutput/durModelResults.tex)
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/nosSurv.pdf, id=126, 433.6
+2pt x 289.08pt>
+File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/nosSurv.pdf Graphic f
+ile (type pdf)
+
+<use /Users/janus829/Dropbox/Research/Magnesium/Graphics/nosSurv.pdf>
+Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/no
+sSurv.pdf used on input line 9.
+(pdftex.def)             Requested size: 455.24411pt x 303.51207pt.
+
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/oNet.pdf, id=127, 722.7pt 
+x 505.89pt>
+File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/oNet.pdf Graphic file
+ (type pdf)
+ <use /Users/janus829/Dropbox/Research/Magnesium/Graphics/oNet.pdf>
+Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/oN
+et.pdf used on input line 14.
+(pdftex.def)             Requested size: 455.24411pt x 318.67378pt.
+) (./MagnesiumConcl.tex [7] [8 </Users/janus829/Dropbox/Research/Magnesium/Grap
+hics/nosSurv.pdf> </Users/janus829/Dropbox/Research/Magnesium/Graphics/oNet.pdf
+>]) [9
+>>>>>>> FETCH_HEAD
 
 ] (./Magnesium.bbl [14]
 Missing character: There is no Ñ in font cmr12!
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 212.
+<<<<<<< HEAD
  [15]
+=======
+ [10]
+>>>>>>> FETCH_HEAD
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 212.
  (./Magnesium.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 212.
@@ -2725,6 +2772,7 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 212.
  ) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  27873 strings out of 493488
  548389 string characters out of 3141326
  597184 words of memory out of 3000000
@@ -2751,4 +2799,32 @@ PDF statistics:
  229 compressed objects within 3 object streams
  49 named destinations out of 1000 (max. 500000)
  70 words of extra memory for PDF output out of 10000 (max. 10000000)
+=======
+ 27183 strings out of 493633
+ 534732 string characters out of 3143378
+ 581036 words of memory out of 3000000
+ 29950 multiletter control sequences out of 15000+200000
+ 17908 words of font info for 70 fonts, out of 3000000 for 9000
+ 831 hyphenation exceptions out of 8191
+ 56i,10n,55p,1299b,905s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
+usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
+cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
+l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
+exlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
+xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texl
+ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texli
+ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Magnesium.pdf (10 pages, 256442 bytes).
+PDF statistics:
+ 213 PDF objects out of 1000 (max. 8388607)
+ 164 compressed objects within 2 object streams
+ 27 named destinations out of 1000 (max. 500000)
+ 102 words of extra memory for PDF output out of 10000 (max. 10000000)
+>>>>>>> FETCH_HEAD
 
