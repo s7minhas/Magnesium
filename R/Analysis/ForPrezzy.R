@@ -28,15 +28,12 @@ varDef = cbind (
 # ***pretty interesting results
 cmodel4 = coxph(Surv(start, stop, compliance) ~ 
 	noS + distdata + tdata + allydata + igodata + Creligdata 
-	+ lag1_sancRecCnt + lag1_polconiii + lag1_lgdpCAP + lag1_Internal.Conflict
+	+ lag1_sancSenCnt
+	+ lag1_sancRecCnt + lag1_polconiii + lag1_Internal.Conflict
+	+ lag1_lgdpCAP + lag1_gdpGR
 	, data=aData)
 temp=na.omit(aData[,c('caseid',names(cmodel4$coefficients))])
 length(unique(temp$caseid))
-
-cmodel8 = coxph(Surv(start, stop, compliance) ~ 
-	noS + interaction + distdata + tdata + allydata + igodata + Creligdata 
-	+ lag1_sancRecCnt + lag1_polconiii + lag1_lgdpCAP + lag1_Internal.Conflict
-	, data=aData)
 
 m1Tab=summary(cmodel4)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
 rownames(m1Tab)=varDef[ match(rownames(m1Tab),varDef[,1]) , 2 ]
