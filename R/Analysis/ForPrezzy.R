@@ -23,17 +23,26 @@ varDef = cbind (
 	'Ln(GDP per capita)$_{i,t-1}$', 'Internal Stability$_{i,t-1}$' )
 	)
 
+# No imputation
+modData=aData
+
+# Impute missing values
+# sbgcopTimeSR <- system.time(
+#   sbgcopFitSR <- sbgcop.mcmc(aData, 
+#   	nsamp=2000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
+
+
 # Only state-specific non-network/rel. measures
 model1 = coxph(Surv(start, stop, compliance) ~ 
 	lag1_polconiii + lag1_Internal.Conflict
-	+ lag1_lgdpCAP + lag1_gdpGR
-	, data=aData)
+	+ lag1_lgdpCAP + lag1_gdpGR 
+	, data=modData)
 
 # Only network/rel. measures
 model2 = coxph(Surv(start, stop, compliance) ~ 
 	noS + distdata + tdata + allydata + igodata + Creligdata 
 	+ lag1_sancSenCnt + lag1_sancRecCnt
-	, data=aData)
+	, data=modData)
 
 # "network/relational" variables unlagged
 model3 = coxph(Surv(start, stop, compliance) ~ 
@@ -41,8 +50,41 @@ model3 = coxph(Surv(start, stop, compliance) ~
 	+ lag1_sancSenCnt + lag1_sancRecCnt
 	+ lag1_polconiii + lag1_Internal.Conflict
 	+ lag1_lgdpCAP + lag1_gdpGR
-	, data=aData)
+	, data=modData)
 
+# To add frailty term
+# frailty.gamma(as.factor(caseid), sparse=FALSE)
+
+# Nonlinearity in continuous covariates
+# pspline
+
+# Testing proportionality assumption
+cox.zph(model3)
+par(mfrow=c(3,4))
+plot(cox.zph(model3, transform='identity'))
+par(mfrow=c(1,1))
+
+# Evid of nonprop then interact with log.time
+modData$distStop=I(modData$distdata*log(modData$stop))
+modData$igoStop=I(modData$igodata*log(modData$stop))
+modData$CreligStop=I(modData$Creligdata*log(modData$stop))
+modData$gdpGRStop=I(modData$lag1_gdpGR*log(modData$stop))
+
+model3v2 = coxph(Surv(start, stop, compliance) ~ 
+	noS + distdata + tdata + allydata + igodata + Creligdata 
+	+ lag1_sancSenCnt + lag1_sancRecCnt
+	+ lag1_polconiii + lag1_Internal.Conflict
+	+ lag1_lgdpCAP + lag1_gdpGR
+	+ distStop + igoStop + CreligStop
+	+ gdpGRStop
+	, data=modData)
+cox.zph(model3v2)
+
+# Compare
+summary(model3)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
+summary(model3v2)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
+
+# Table for TeX
 setwd(pathTex)
 durTables=durTable(list(model1, model2, model3), varDef)
 print.xtable( xtable(durTables, align='llccc', 
@@ -57,26 +99,26 @@ print.xtable( xtable(durTables, align='llccc',
 ###
 # Vars to generate survival plots for:
 	# noS, distance, ally, igo, religion
-simModel=model3
+simModel=model3v2
 pcolors=append(brewer.pal(9,'Reds')[8],brewer.pal(9,'Blues')[8])
 vrfn=function(x){c(min(x,na.rm=T),max(x,na.rm=T))}
 
 setwd(pathGraphics)
-pdf(file='nosSurv.pdf', height=4, width=6)
+# pdf(file='nosSurv.pdf', height=4, width=6)
 plot(survfit(simModel, 
-	scenBuild(vi='noS', vRange=c(1,2),
+	scenBuild(vi='noS', vRange=c(1,5),
 	vars=names(simModel$coefficients), 
-	ostat=mean, simData=aData) ),
+	ostat=mean, simData=modData) ),
 	conf.int=F, col=pcolors, las=1,
 	# main='Number of Senders', 
 	main='', 
-	ylim=c(0.4,1), xlim=c(0,30), 
+	ylim=c(0.3,1), xlim=c(0,30), 
 	ylab='Survival Probability', xlab='Time (Years)', bty='n')
 legend('topright', c("Few Senders", "Many Senders"), 
 	lty = 1, col=pcolors, bty='n')
-dev.off()
+# dev.off()
 
-pdf(file='oNet.pdf', height=7, width=10)
+# pdf(file='oNet.pdf', height=7, width=10)
 coefs=c('distdata','allydata','igodata','Creligdata')
 cnames=c('Distance','Ally', 'IGO', 'Religion')
 par(mfrow=c(2,2))
@@ -87,9 +129,10 @@ for(ii in 1:length(coefs)){
 	plot(survfit(simModel, 
 		scenBuild(vi=coef, vRange=crange,
 		vars=names(simModel$coefficients), 
-		ostat=mean, simData=aData) ),
+		ostat=mean, simData=modData) ),
 	conf.int=F, col=pcolors, las=1,
 	main=cnames[ii], ylim=c(0.4,1), xlim=c(0,30))
 	if(ii%%2){title(ylab='Survival Prob.')} 
 	if(ii==3|ii==4){title(xlab='Time (Years)') } }
-dev.off(); par(mfrow=c(1,1))
+# dev.off()
+par(mfrow=c(1,1))

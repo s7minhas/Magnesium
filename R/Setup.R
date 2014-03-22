@@ -16,7 +16,7 @@ if(Sys.info()["user"]=="cassydorff")
 	pathPData="~/ProjectsGit/Magnesium/R/Data/BuildingPanelData"}
 
 # R default base params
-par(mar=c(4, 4, 2, 0.5), oma=c(2,2,2,2), mfrow=c(1,1), mgp=c(2,.7,0))
+# par(mar=c(4, 4, 2, 0.5), oma=c(2,2,2,2), mfrow=c(1,1), mgp=c(2,.7,0))
 
 # Loading libraries and functions
 # require(igraph)

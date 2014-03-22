@@ -20,9 +20,9 @@ econ <- c(4, 13, 14) # saved as durDataEcon
 sanctionDataFinal$issue1[is.na(sanctionDataFinal$issue1)] <- 0
 sanctionDataFinal$issue2[is.na(sanctionDataFinal$issue2)] <- 0
 sanctionDataFinal$issue3[is.na(sanctionDataFinal$issue3)] <- 0
-sanctionData <- sanctionDataFinal[sanctionDataFinal$issue1==econ |
-	sanctionDataFinal$issue2==econ |
-	sanctionDataFinal$issue3==econ, ]
+sanctionData <- sanctionDataFinal[which(sanctionDataFinal$issue1%in%econ |
+	sanctionDataFinal$issue2%in%econ |
+	sanctionDataFinal$issue3%in%econ), ]
 
 # Sanctions covering all issues
 # sanctionData=sanctionDataFinal # saved as durDataAll
@@ -51,6 +51,17 @@ table(sanctionSlice$compliance)/nrow(sanctionSlice) # ~58% compliance
 
 sanctionSlice$time <- NA
 sanctionSlice$time <- sanctionSlice$endyear - sanctionSlice$startyear + 1
+###############################################################
+
+###############################################################
+# Analyzing outcomes of sanction cases
+outcomeData=sanctionSlice[,c('caseid','endyear','finaloutcome','compliance')]
+
+table(outcomeData$finaloutcome[which(outcomeData$compliance==1)])
+
+outcomeData$noComp = 1
+outcomeData$noComp[ which(outcomeData$endyear==2013 & outcomeData$compliance==0 | outcomeData$compliance==1) ] = 0
+table(outcomeData$finaloutcome[which(outcomeData$noComp==1)])
 ###############################################################
 
 ###############################################################
