@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  21 MAR 2014 05:36
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  22 MAR 2014 18:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2053,104 +2053,107 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (./MagnesiumIntro.tex [2]) (./MagnesiumLit.tex [3] [4]) (./MagnesiumTheory.tex
-</Users/janus829/Dropbox/Research/Magnesium/Graphics/84net.pdf, id=95, 547.0437
-5pt x 548.0475pt>
-File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/84net.pdf Graphic fil
-e (type pdf)
+[5]
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf, id=110, 54
+7.04375pt x 548.0475pt>
+File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf Graphi
+c file (type pdf)
 
-<use /Users/janus829/Dropbox/Research/Magnesium/Graphics/84net.pdf>
+<use /Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf>
 Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/84
-net.pdf used on input line 6.
-(pdftex.def)             Requested size: 336.88313pt x 337.50296pt.
- [5]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 13.
+net-crop.pdf used on input line 10.
+(pdftex.def)             Requested size: 455.24411pt x 456.08351pt.
+
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf, id=111, 361
+.35pt x 216.81pt>
+File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf Graphic
+ file (type pdf)
+
+<use /Users/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf>
+Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/Ma
+pLegend.pdf used on input line 11.
+(pdftex.def)             Requested size: 204.85846pt x 122.9147pt.
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 8--13
+ [][] 
+ []
+
+[6] [7 </Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf> </U
+sers/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 21.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 13.
- [6 </Users/janus829/Dropbox/Research/Magnesium/Graphics/84net.pdf>]
-</Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf, id=125, 692.58
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 21.
+
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf, id=132, 692.58
 75pt x 448.67625pt>
 File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf Graphic fi
 le (type pdf)
 
 <use /Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf>
 Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/sa
-neti.pdf used on input line 20.
-(pdftex.def)             Requested size: 478.00769pt x 309.67595pt.
+neti.pdf used on input line 30.
+(pdftex.def)             Requested size: 455.24411pt x 294.9223pt.
+ [8
 
-Overfull \hbox (22.76358pt too wide) in paragraph at lines 20--21
- [][] 
- []
-
-
-</Users/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf, id=126, 522.953
+]
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf, id=138, 522.953
 75pt x 487.8225pt>
 File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf Graphic fil
 e (type pdf)
 
 <use /Users/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf>
 Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/sa
-net.pdf used on input line 26.
+net.pdf used on input line 39.
 (pdftex.def)             Requested size: 341.43307pt x 318.50258pt.
- [7 </Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf>] [8 </User
-s/janus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf>]) (./MagnesiumEmp.tex
- [9])
-(./MagnesiumFindings.tex (../TeXoutput/durModelResults.tex)
-</Users/janus829/Dropbox/Research/Magnesium/Graphics/nosSurv.pdf, id=179, 433.6
-2pt x 289.08pt>
-File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/nosSurv.pdf Graphic f
-ile (type pdf)
+ [9 </Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf> </Users/ja
+nus829/Dropbox/Research/Magnesium/Graphics/sanet.pdf>]) (./MagnesiumEmp.tex
+./MagnesiumEmp.tex:4: Undefined control sequence.
+l.4 ... and initiations from 1945 to 2013.\foonote
+                                                  {Only sanction cases threa...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-<use /Users/janus829/Dropbox/Research/Magnesium/Graphics/nosSurv.pdf>
-Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/no
-sSurv.pdf used on input line 9.
-(pdftex.def)             Requested size: 455.24411pt x 303.51207pt.
+[10
 
-</Users/janus829/Dropbox/Research/Magnesium/Graphics/oNet.pdf, id=180, 722.7pt 
-x 505.89pt>
-File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/oNet.pdf Graphic file
- (type pdf)
- <use /Users/janus829/Dropbox/Research/Magnesium/Graphics/oNet.pdf>
-Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/oN
-et.pdf used on input line 14.
-(pdftex.def)             Requested size: 455.24411pt x 318.67378pt.
-) (./MagnesiumConcl.tex [10] [11] [12 </Users/janus829/Dropbox/Research/Magnesi
-um/Graphics/nosSurv.pdf> </Users/janus829/Dropbox/Research/Magnesium/Graphics/o
-Net.pdf>]) [13
+] [11] [12]) (./MagnesiumFindings.tex (../TeXoutput/durModelResults.tex)
+(../TeXoutput/nosSurv.tex) (../TeXoutput/oNet.tex) (../TeXoutput/oNet2.tex))
+(./MagnesiumConcl.tex [13] [14] [15]) [16
 
-] (./Magnesium.bbl [14]
+] (./Magnesium.bbl [17]
 Missing character: There is no Ñ in font cmr12!
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 212.
- [15]
+ [18]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 212.
- (./Magnesium.aux)
+
+(./Magnesium.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 212.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 212.
 Package rerunfilecheck Info: File `Magnesium.out' has not changed.
-(rerunfilecheck)             Checksum: E60092EEEB7F83DD9C2986E04E8A9D2E;212.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+(rerunfilecheck)             Checksum: E77CA2EF4E36EE477AE1C59EC2E94102;144.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 212.
  ) 
 Here is how much of TeX's memory you used:
- 27266 strings out of 493633
- 536178 string characters out of 3143378
- 581036 words of memory out of 3000000
- 30011 multiletter control sequences out of 15000+200000
- 19021 words of font info for 75 fonts, out of 3000000 for 9000
+ 28597 strings out of 493633
+ 562508 string characters out of 3143378
+ 777907 words of memory out of 3000000
+ 31317 multiletter control sequences out of 15000+200000
+ 21483 words of font info for 83 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 56i,10n,55p,1484b,964s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,12n,57p,1484b,962s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
 /usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
 usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></us
 r/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
 local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
 cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
@@ -2160,10 +2163,10 @@ ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
 ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/
 2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (15 pages, 281500 bytes).
+Output written on Magnesium.pdf (18 pages, 974416 bytes).
 PDF statistics:
- 284 PDF objects out of 1000 (max. 8388607)
- 228 compressed objects within 3 object streams
- 47 named destinations out of 1000 (max. 500000)
- 70 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 304 PDF objects out of 1000 (max. 8388607)
+ 247 compressed objects within 3 object streams
+ 55 named destinations out of 1000 (max. 500000)
+ 57 words of extra memory for PDF output out of 10000 (max. 10000000)
 

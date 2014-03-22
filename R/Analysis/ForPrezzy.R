@@ -58,7 +58,7 @@ model3 = coxph(Surv(start, stop, compliance) ~
 # Nonlinearity in continuous covariates
 # pspline
 
-# Testing proportionality assumption
+# Testing proportionality assumption, 99% CI
 cox.zph(model3)
 par(mfrow=c(3,4))
 plot(cox.zph(model3, transform='identity'))
@@ -75,10 +75,12 @@ model3v2 = coxph(Surv(start, stop, compliance) ~
 	+ lag1_sancSenCnt + lag1_sancRecCnt
 	+ lag1_polconiii + lag1_Internal.Conflict
 	+ lag1_lgdpCAP + lag1_gdpGR
-	+ distStop + igoStop + CreligStop
+	+ distStop 
+	+ igoStop 
+	+ CreligStop
 	+ gdpGRStop
 	, data=modData)
-cox.zph(model3v2)
+cox.zph(model3v2) 
 
 # Compare
 summary(model3)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
@@ -86,9 +88,11 @@ summary(model3v2)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
 
 # Table for TeX
 setwd(pathTex)
-durTables=durTable(list(model1, model2, model3), varDef)
-print.xtable( xtable(durTables, align='llccc', 
-	caption='Results of duration models with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+# durTables=durTable(list(model1, model2, model3v2), varDef)
+# print.xtable( xtable(durTables, align='llccc', 
+durTables=durTable(list(model3v2), varDef)	
+print.xtable( xtable(durTables, align='llc', 	
+	caption='Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
 	),
 	include.rownames=FALSE, sanitize.text.function=identity,
 	hline.after=c(0,0,12,16,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
@@ -103,8 +107,9 @@ simModel=model3v2
 pcolors=append(brewer.pal(9,'Reds')[8],brewer.pal(9,'Blues')[8])
 vrfn=function(x){c(min(x,na.rm=T),max(x,na.rm=T))}
 
-setwd(pathGraphics)
+setwd(pathTex)
 # pdf(file='nosSurv.pdf', height=4, width=6)
+tikz(file='nosSurv.tex', height=4, width=6, standAlone=F)
 plot(survfit(simModel, 
 	scenBuild(vi='noS', vRange=c(1,5),
 	vars=names(simModel$coefficients), 
@@ -112,16 +117,18 @@ plot(survfit(simModel,
 	conf.int=F, col=pcolors, las=1,
 	# main='Number of Senders', 
 	main='', 
-	ylim=c(0.3,1), xlim=c(0,30), 
+	ylim=c(0,1), xlim=c(0,30), 
 	ylab='Survival Probability', xlab='Time (Years)', bty='n')
 legend('topright', c("Few Senders", "Many Senders"), 
 	lty = 1, col=pcolors, bty='n')
-# dev.off()
+dev.off()
 
 # pdf(file='oNet.pdf', height=7, width=10)
-coefs=c('distdata','allydata','igodata','Creligdata')
-cnames=c('Distance','Ally', 'IGO', 'Religion')
-par(mfrow=c(2,2))
+tikz(file='oNet.tex', height=3, width=8, standAlone=F)
+coefs=c('distdata','allydata','Creligdata')
+cnames=varDef[match(coefs, varDef[,1]), 2]
+cnames=c('Distance','Ally', 'Religion')
+par(mfrow=c(1,3))
 for(ii in 1:length(coefs)){
 	coef=coefs[ii]
 	if (coef=='distdata') { crange=c(0.001,0.005)
@@ -132,7 +139,27 @@ for(ii in 1:length(coefs)){
 		ostat=mean, simData=modData) ),
 	conf.int=F, col=pcolors, las=1,
 	main=cnames[ii], ylim=c(0.4,1), xlim=c(0,30))
-	if(ii%%2){title(ylab='Survival Prob.')} 
-	if(ii==3|ii==4){title(xlab='Time (Years)') } }
-# dev.off()
+	if(ii==1){title(ylab='Survival Prob.')} 
+	title(xlab='Time (Years)')  }
+dev.off()
+par(mfrow=c(1,1))
+
+###
+tikz(file='oNet2.tex', height=3, width=8, standAlone=F)
+coefs=c('lag1_sancSenCnt','lag1_sancRecCnt')
+cnames=varDef[match(coefs, varDef[,1]), 2]
+par(mfrow=c(1,2))
+for(ii in 1:length(coefs)){
+	coef=coefs[ii]
+	if (coef=='distdata') { crange=c(0.001,0.005)
+		} else { crange=vrfn(aData[,coef]) }	
+	plot(survfit(simModel, 
+		scenBuild(vi=coef, vRange=crange,
+		vars=names(simModel$coefficients), 
+		ostat=mean, simData=modData) ),
+	conf.int=F, col=pcolors, las=1,
+	main=cnames[ii], ylim=c(0.4,1), xlim=c(0,30))
+	if(ii==1){title(ylab='Survival Prob.')} 
+	title(xlab='Time (Years)') } 
+dev.off()
 par(mfrow=c(1,1))

@@ -33,6 +33,7 @@ if(Sys.info()["user"]=="cassydorff")
 #   l
 # }
 require(network)
+require(igraph)
 require(ggplot2)
 theme_set(theme_bw())
 require(RColorBrewer)

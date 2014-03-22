@@ -10,6 +10,7 @@ To test the effects of network pressures on sanction compliance we use the Threa
 \end{itemize}
 
 % Need to provide reason for why we are restricting to economic sanctions
+% Economic sanctions are a complex and interdependent phenomenon in which a state or numerous states cut or threaten tocutregulareconomicrelationswithanotherstateinordertoobtainapolicychange.
 
 Restricting our analysis to threats or sanctions stemming from these issues during the period of 1984 to 2005 leaves us with 272 cases. Our unit of analysis is the case-year, providing us with a total of 1,920 observations. For each case in the TIES database a final outcome is recorded to describe how and if the case has been resolved. The purpose of our analysis is to assess the time until a state complies to a threat or sanction and we consider a case to have been resolved in compliance if any of the follwing conditions are met:
 
@@ -24,8 +25,6 @@ In using this definition of compliance, approximately 37\% of cases in our datas
 
 \begin{table}[ht]
 	\centering
-	\caption{Outcomes of sanction cases no longer ongoing where compliance was not achieved.}
-	\label{tab:termCases}
 	\begin{tabular}{lc}
 		\hline\hline
 		Outcome & Frequency \\
@@ -36,12 +35,14 @@ In using this definition of compliance, approximately 37\% of cases in our datas
 		Stalemate in the Threat Stage & 1 \\
 		\hline\hline
 	\end{tabular}
+	\caption{Outcomes of threat and sanction cases no longer ongoing where compliance was not achieved.}
+	\label{tab:termCases}	
 \end{table}
 \FloatBarrier
 
 \subsection{Modeling Approach} 
 
-Next we discuss our model specification. To estimate the effect of network pressures on the ability of a threatened or sanctioned states to resist compliance, what we will refer to as sanction spell, we use Cox proportional hazard (PH) models of the length of threat or sanction periods. Specifically, the dependent variable is the number of years that a state has not complied to a threat or sanction at time $t$. We model the expected length of sanction spells as a function of a baseline hazard rate and a set of covariates that shift the baseline hazard. The Cox PH specification that we employ is
+Next we discuss our modeling approach. To estimate the effect of network pressures on the ability of a threatened or sanctioned states to resist compliance, what we will refer to as sanction spell, we use Cox proportional hazard (PH) models of the length of threat or sanction periods. Specifically, the dependent variable is the number of years that a state has not complied to a threat or sanction at time $t$. We model the expected length of sanction spells as a function of a baseline hazard rate and a set of covariates that shift the baseline hazard. The Cox PH specification that we employ is
 
 \begin{center}
 $\log h_{i}(t | \boldsymbol{X}_{i}) \; = \; h_{0}(t) \times \exp(\boldsymbol{X}_{i}) \beta)$,
@@ -49,7 +50,7 @@ $\log h_{i}(t | \boldsymbol{X}_{i}) \; = \; h_{0}(t) \times \exp(\boldsymbol{X}_
 
 where the log-hazard rate of compliance in a sanction case, $i$, conditional on having not complied for $t$ years is a function of a common baseline hazard $h_{0}(t)$ and covariates $\boldsymbol{X}$. In employing this approach, we assume no specific functional form for the baseline hazard and instead estimate it non-parametrically from the data. The covariates $\boldsymbol{X}$ operate multiplicatevely on the hazard rate, shifting the expected risk of compliance up or down depending on the value of $\beta$ \citep{crespo2013political}.\footnote{To ensure against bias in our parameter estimates we also included a vector of case-level shared frailties. \citet{crespo2013political} note that these account for variations in unit-specific factors. However, we found similar results with and without the shared frailities, so we report results without the inclusion of this additional term.} 
 
-Providing no specific functional form for the baseline hazard necessitates testing the proportional hazard assumption. \citet{keele2010proportionally} notes that not inspecting this assumption in the covariates can lead to severely biased parameter estimates. To address this issue, we first fit smoothing splines for all continuous covariates. After ascertaining that none of the continuous covariates in our model required modeling with splines, we carried out tests of non-proportionality. For those covariates where the non-proportional effects assumption does not hold, at a 95\% confidence level, we include interactions between the covariate and spell duration (log scale). The covariates showing evidence of non-proportionality are the average distance between a receiver and senders, average number of common IGOs, average similarity of religious profiles, and lagged GDP growth of the receiving country.
+Providing no specific functional form for the baseline hazard necessitates testing the proportional hazard assumption. \citet{keele2010proportionally} notes that not inspecting this assumption in the covariates can lead to severely biased parameter estimates. To address this issue, we first fit smoothing splines for all continuous covariates. After ascertaining that none of the continuous covariates in our model required modeling with splines, we carried out tests of non-proportionality. For those covariates where the non-proportional effects assumption does not hold, we include interactions between the covariate and spell duration (log scale). The only covariate showing evidence of non-proportionality is the average similarity of religious profiles.
 
 \begin{align*}
 		Compliance_{i,t} =\; & No. \; Senders_{j,t} + Distance_{j,t} + Trade_{j,t}  + \\

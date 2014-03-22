@@ -928,6 +928,17 @@
   publisher = {Taylor \& Francis}
 }
 
+@ARTICLE{cranmer2014reciprocity,
+  author = {Cranmer, Skyler J and Heinrich, Tobias and Desmarais, Bruce A},
+  title = {Reciprocity and the structural determinants of the international
+	sanctions network},
+  journal = {Social Networks},
+  year = {2014},
+  volume = {36},
+  pages = {5--22},
+  publisher = {Elsevier}
+}
+
 @ARTICLE{crespo2013political,
   author = {Crespo-Tenorio, Adriana and Jensen, Nathan M and Rosas, Guillermo},
   title = {Political Liabilities Surviving Banking Crises},
@@ -1924,6 +1935,18 @@
   pages = {127--154},
   number = {1-2},
   publisher = {Springer}
+}
+
+@ARTICLE{keele2010proportionally,
+  author = {Keele, Luke},
+  title = {Proportionally difficult: testing for nonproportional hazards in
+	Cox models},
+  journal = {Political Analysis},
+  year = {2010},
+  volume = {18},
+  pages = {189--205},
+  number = {2},
+  publisher = {SPM-PMSAPSA}
 }
 
 @ARTICLE{kemeny2010does,
