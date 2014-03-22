@@ -552,6 +552,18 @@
   publisher = {SAGE Publications}
 }
 
+@ARTICLE{bolks2000,
+  author = {Bolks, Sean M and Al-Sowayel, Dina},
+  title = {How long do economic sanctions last? Examining the sanctioning process
+	through duration},
+  journal = {Political Research Quarterly},
+  year = {2000},
+  volume = {53},
+  pages = {241--265},
+  number = {2},
+  publisher = {Sage Publications}
+}
+
 @ARTICLE{bollen1989democracy,
   author = {Bollen, Kenneth A and Jackman, Robert W},
   title = {Democracy, stability, and dichotomies},
@@ -816,6 +828,18 @@
   publisher = {Wiley Online Library}
 }
 
+@ARTICLE{cao2009networks,
+  author = {Cao, Xun},
+  title = {Networks of intergovernmental organizations and convergence in domestic
+	economic policies},
+  journal = {International Studies Quarterly},
+  year = {2009},
+  volume = {53},
+  pages = {1095--1130},
+  number = {4},
+  publisher = {Wiley Online Library}
+}
+
 @ARTICLE{carr2003estimating,
   author = {Carr, D.L. and Markusen, J.R. and Maskus, K.E.},
   title = {Estimating the knowledge-capital model of the multinational enterprise:
@@ -902,6 +926,25 @@
   pages = {309--322},
   number = {3},
   publisher = {Taylor \& Francis}
+}
+
+@ARTICLE{crespo2013political,
+  author = {Crespo-Tenorio, Adriana and Jensen, Nathan M and Rosas, Guillermo},
+  title = {Political Liabilities Surviving Banking Crises},
+  journal = {Comparative Political Studies},
+  year = {2013},
+  pages = {0010414013488559},
+  publisher = {SAGE Publications}
+}
+
+@ARTICLE{dashti1997,
+  author = {Dashti-Gibson, Jaleh and Davis, Patricia and Radcliff, Benjamin},
+  title = {On the determinants of the success of economic sanctions: An empirical
+	analysis},
+  journal = {American Journal of Political Science},
+  year = {1997},
+  pages = {608--618},
+  publisher = {JSTOR}
 }
 
 @ARTICLE{daude2007,
@@ -1023,6 +1066,27 @@
   publisher = {Oxford University Press}
 }
 
+@ARTICLE{dorff2013,
+  author = {Dorff, Cassy and Ward, Michael D},
+  title = {Networks, Dyads, and the Social Relations Model},
+  journal = {Political Science Research Methods},
+  year = {2013},
+  volume = {1.2},
+  pages = {159-178}
+}
+
+@ARTICLE{dorussen2001,
+  author = {Dorussen, Han and Mo, Jongryn},
+  title = {Ending Economic Sanctions Audience Costs and Rent-Seeking as Commitment
+	Strategies},
+  journal = {Journal of Conflict Resolution},
+  year = {2001},
+  volume = {45},
+  pages = {395--426},
+  number = {4},
+  publisher = {Sage Publications}
+}
+
 @ARTICLE{downs1996good,
   author = {Downs, George W and Rocke, David M and Barsoom, Peter N},
   title = {Is the good news about compliance good news about cooperation?},
@@ -1041,6 +1105,17 @@
   volume = {13},
   pages = {129--157},
   number = {2},
+  publisher = {Wiley Online Library}
+}
+
+@ARTICLE{drezner1998,
+  author = {Drezner, Daniel W},
+  title = {Conflict expectations and the paradox of economic coercion},
+  journal = {International Studies Quarterly},
+  year = {1998},
+  volume = {42},
+  pages = {709--731},
+  number = {4},
   publisher = {Wiley Online Library}
 }
 
@@ -2117,6 +2192,15 @@
   pages = {1--78}
 }
 
+@ARTICLE{lam1990,
+  author = {Lam, Sam Ling},
+  title = {Economic sanctions and the success of foreign policy goals.},
+  journal = {Japan and the World Economy},
+  year = {1990},
+  volume = {2},
+  pages = {239--248}
+}
+
 @ARTICLE{laver1990coalitions,
   author = {Laver, M. and Shepsle, K.A.},
   title = {Coalitions and cabinet government},
@@ -2162,6 +2246,17 @@
 	same region. Ultimately, the geographical location of a country may
 	determine its economic and financial integration into the world economy.},
   publisher = {Wiley Online Library}
+}
+
+@ARTICLE{lektzian2007,
+  author = {Lektzian, David and Souva, Mark},
+  title = {An institutional theory of sanctions onset and success},
+  journal = {Journal of Conflict Resolution},
+  year = {2007},
+  volume = {51},
+  pages = {848--871},
+  number = {6},
+  publisher = {Sage Publications}
 }
 
 @ARTICLE{li2003reversal,
@@ -2296,6 +2391,17 @@
   publisher = {JSTOR}
 }
 
+@ARTICLE{marinov2005,
+  author = {Marinov, Nikolay},
+  title = {Do economic sanctions destabilize country leaders?},
+  journal = {American Journal of Political Science},
+  year = {2005},
+  volume = {49},
+  pages = {564--576},
+  number = {3},
+  publisher = {Wiley Online Library}
+}
+
 @ARTICLE{mattli2001,
   author = {Mattli, Walter},
   title = {Private Justice in a Global Economy: From Litigation to Arbitration},
@@ -2365,6 +2471,18 @@
   publisher = {JSTOR}
 }
 
+@ARTICLE{mcgillivray2004,
+  author = {McGillivray, Fiona and Stam, Allan C},
+  title = {Political institutions, coercive diplomacy, and the duration of economic
+	sanctions},
+  journal = {Journal of Conflict Resolution},
+  year = {2004},
+  volume = {48},
+  pages = {154--172},
+  number = {2},
+  publisher = {Sage Publications}
+}
+
 @BOOK{medvedev2006beyond,
   title = {Beyond trade: the impact of preferential trade agreements on foreign
 	direct investment inflows},
@@ -2383,6 +2501,18 @@
   pages = {901--924},
   number = {4},
   publisher = {Elsevier}
+}
+
+@ARTICLE{miers2002,
+  author = {Miers, Anne and Morgan, T},
+  title = {Multilateral sanctions and foreign policy success: Can too many cooks
+	spoil the broth?},
+  journal = {International Interactions},
+  year = {2002},
+  volume = {28},
+  pages = {117--136},
+  number = {2},
+  publisher = {Taylor \& Francis}
 }
 
 @ARTICLE{milner2005move,
@@ -2530,6 +2660,18 @@
   pages = {92--110},
   number = {1},
   publisher = {Sage Publications}
+}
+
+@ARTICLE{morgan1997,
+  author = {Morgan, T Clifton and Schwebach, Valerie L},
+  title = {Fools suffer gladly: The use of economic sanctions in international
+	crises},
+  journal = {International Studies Quarterly},
+  year = {1997},
+  volume = {41},
+  pages = {27--50},
+  number = {1},
+  publisher = {Wiley Online Library}
 }
 
 @ARTICLE{morrow2001,
