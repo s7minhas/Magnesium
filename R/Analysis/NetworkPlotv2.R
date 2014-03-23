@@ -80,12 +80,12 @@ netColors$X1=as.character(netColors$X1);netColors$X2=as.character(netColors$X2)
 netColors$X1[netColors$X1=='Congo, DRC'] = "Congo, Democratic Republic of"
 netColors$ccode=panel$ccode[match(netColors$X1, panel$CNTRY_NAME)]
 
-## Plot map with colors
-setwd(pathGraphics)
-pdf('MapLegend.pdf', width = 5, height = 3)
-par(mar=c(0,0,0,0), oma=c(0,0,0,0))
-plot(map84, col=farben, lwd=1e-200)
-dev.off()
+# ## Plot map with colors
+# setwd(pathGraphics)
+# pdf('MapLegend.pdf', width = 5, height = 3)
+# par(mar=c(0,0,0,0), oma=c(0,0,0,0))
+# plot(map84, col=farben, lwd=1e-200)
+# dev.off()
 
 # Plot network
 par(mar=c(0,0,0,0), oma=c(0,0,0,0), mfrow=c(1,1))
@@ -106,7 +106,7 @@ keep=names(degree(smatAdj)[degree(smatAdj)>quantile(degree(smatAdj),0.8)])
 V(smatAdj)$name[ which( ! V(smatAdj)$name %in% keep) ]=""
 
 setwd(pathGraphics)
-pdf(file='84net.pdf',height=10,width=15)
+# pdf(file='84net.pdf',height=10,width=15)
 set.seed(12345)
 plot(smatAdj, 
 	# layout=layout.kamada.kawai, 
@@ -120,7 +120,7 @@ plot(smatAdj,
           edge.arrow.size=0.5, edge.color=brewer.pal(8,'Greys')[3],
           edge.width=E(smatAdj)$weight,
           edge.curved=F)
-dev.off()
+# dev.off()
 
 ## Write for gephi
 # setwd(pathGraphics)
@@ -144,8 +144,8 @@ safSlice$color=append(
 	brewer.pal(9, 'Blues')[c(5,7,9)],
 	brewer.pal(9, 'Reds')[c(5,7,9)])
 edges=get.edgelist(safMatAdj)
-edges[3,1]='United States'
-edges[4,1]='Saudi Arabia'
+edges[5:8,1]='United States'
+edges[9,1]='Saudi Arabia'
 edges[,1]=panel$ccode[match(edges[,1], panel$CNTRY_NAME)]
 edges[,2]=panel$ccode[match(edges[,2], panel$CNTRY_NAME)]
 E(safMatAdj)$color=rep(NA,nrow(edges))
@@ -160,7 +160,7 @@ for(ii in 1:nrow(edges)){
 }
 
 setwd(pathGraphics)
-pdf(file='sanet.pdf', height=7, width=10)
+# pdf(file='sanet.pdf', height=7, width=10)
 ii=which(years==1984)
 par(mar=c(0,0.5,0,0.5), oma=c(0,0,0,0))
 set.seed(6886)
@@ -175,13 +175,13 @@ plot(safMatAdj,
           edge.color=E(safMatAdj)$color,
           edge.width=E(safMatAdj)$weight,
           edge.curved=T)
-dev.off()
+# dev.off()
 ###################################################
 
 ###################################################
 # Plot of S. Africa sanctions case by case
 setwd(pathGraphics)
-pdf(file='saneti.pdf',height=7,width=10)
+# pdf(file='saneti.pdf',height=7,width=10)
 par(mar=c(0,1.9,0,2.5), oma=c(0,0,0,0), mfrow=c(2,3))
 for(ii in 1:nrow(safSlice)){
 	scol=safSlice[ii,'color']
@@ -190,8 +190,8 @@ for(ii in 1:nrow(safSlice)){
 	scnts=panel$CNTRY_NAME[match(scnts, panel$ccode)]
 
 	edges=get.edgelist(safMatAdj)
-	edges[3,1]='United States'
-	edges[4,1]='Saudi Arabia'
+	edges[ which(edges[,1] %in% 'USA') ,1]='United States'
+	edges[which(edges[,1] %in% 'S. Arabia'),1]='Saudi Arabia'
 	E(safMatAdj)$label=as.numeric(
 		apply(edges, 1, 
 			function(x){!is.na(match(x[1],scnts))}))
@@ -208,5 +208,6 @@ for(ii in 1:nrow(safSlice)){
           edge.arrow.size=0.7, edge.label='',
           edge.color=scol, edge.curved=T)
 }
-dev.off(); par(mfrow=c(1,1))
+# dev.off()
+par(mfrow=c(1,1))
 ###################################################8

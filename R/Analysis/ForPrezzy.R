@@ -10,17 +10,21 @@ ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate
 names(ids)=c('targetstate','fcode')
 aData=merge(aData,ids,by='targetstate',all.x=T)
 
+# Var mods
+aData$lag1_polity2=aData$lag1_polity^2	
+
 # Variable key
 varDef = cbind (  
 	c( 'noS', 'distdata', 'tdata', 'allydata', 'igodata', 'Creligdata',
 	 'lag1_sancSenCnt', 'lag1_sancRecCnt', 
-	 'lag1_polconiii', 'lag1_lgdpCAP', 'lag1_Internal.Conflict'),
+	 'lag1_polity', 'lag1_polity2',
+	 'lag1_lgdpCAP', 'lag1_gdpGR','lag1_Internal.Conflict'),
 	c( 'Number of Senders$_{j,t}$', 
 	'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$', 'IGOs$_{j,t}$', 
 	'Religion$_{j,t}$', 
 	"Sanc. Sent$_{j,t-1}$", "Sanc. Rec'd$_{i,t-1}$",
-	'Constraints$_{i,t-1}$',
-	'Ln(GDP per capita)$_{i,t-1}$', 'Internal Stability$_{i,t-1}$' )
+	'Polity$_{i,t-1}$', 'Polity$^{2}_{i,t-1}$',
+	'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$','Internal Stability$_{i,t-1}$' )
 	)
 
 # No imputation
@@ -34,8 +38,10 @@ modData=aData
 
 # Only state-specific non-network/rel. measures
 model1 = coxph(Surv(start, stop, compliance) ~ 
-	lag1_polconiii + lag1_Internal.Conflict
-	+ lag1_lgdpCAP + lag1_gdpGR 
+	# + lag1_polity + lag1_polity2
+	+ lag1_polconiii
+	+ lag1_lgdpCAP + lag1_gdpGR
+	+ lag1_Internal.Conflict
 	, data=modData)
 
 # Only network/rel. measures
@@ -48,8 +54,10 @@ model2 = coxph(Surv(start, stop, compliance) ~
 model3 = coxph(Surv(start, stop, compliance) ~ 
 	noS + distdata + tdata + allydata + igodata + Creligdata 
 	+ lag1_sancSenCnt + lag1_sancRecCnt
-	+ lag1_polconiii + lag1_Internal.Conflict
+	# + lag1_polity + lag1_polity2
+	+ lag1_polconiii
 	+ lag1_lgdpCAP + lag1_gdpGR
+	+ lag1_Internal.Conflict
 	, data=modData)
 
 # To add frailty term
@@ -65,7 +73,7 @@ plot(cox.zph(model3, transform='identity'))
 par(mfrow=c(1,1))
 
 # Evid of nonprop then interact with log.time
-modData$distStop=I(modData$distdata*log(modData$stop))
+# modData$distStop=I(modData$distdata*log(modData$stop))
 modData$igoStop=I(modData$igodata*log(modData$stop))
 modData$CreligStop=I(modData$Creligdata*log(modData$stop))
 modData$gdpGRStop=I(modData$lag1_gdpGR*log(modData$stop))
@@ -73,9 +81,11 @@ modData$gdpGRStop=I(modData$lag1_gdpGR*log(modData$stop))
 model3v2 = coxph(Surv(start, stop, compliance) ~ 
 	noS + distdata + tdata + allydata + igodata + Creligdata 
 	+ lag1_sancSenCnt + lag1_sancRecCnt
-	+ lag1_polconiii + lag1_Internal.Conflict
+	# + lag1_polity + lag1_polity2
+	+ lag1_polconiii
 	+ lag1_lgdpCAP + lag1_gdpGR
-	+ distStop 
+	+ lag1_Internal.Conflict
+	# + distStop 
 	+ igoStop 
 	+ CreligStop
 	+ gdpGRStop
