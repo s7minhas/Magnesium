@@ -1,3 +1,5 @@
+% NOTE FROM SM: Lacking a theory here is really hurting us. We should consider adding a case on S. Africa or some other country so that we can actually sketch out a theory of network pressure and sanction compliance. 
+
 \section*{Accounting for Network Effects}
 \label{neteffects}
 
@@ -17,6 +19,8 @@ The focus of the extant literature on domestic explanations of sanction complian
 
 Many of the duration approaches in the extant literature focus solely on domestic factors. In doing so, they fail to take into account the types of network pressures that are brought to bear through sanctions. One such network pressure involves the interrelationships and interactions between senders and receiver in any particular sanction case. In figure \ref{fig:saneti}, we show the six sanction cases faced by South Africa in 1984.\footnote{Data for sanction cases is from \citet{morgan2009threat}.} For the most part each sanction case involves a variety of actors with whom South Africa has differing cultural, geographic, diplomatic, and economic relationships. Within any individual sanction case we hypothesize that the proximity of relationships between sender(s) of a sanction and a receiver matter for determining the time and if the sanctioned state complies. 
 
+% Sanction Case Network: The relationship between sender(s) and the target matters for sanction compliance. Sanctions involving coalitions of sender(s) will be more quickly resolved than sanctions sent by just one state. Sanction cases where relationships are more proximate will be more quickly resolved.
+
 \begin{quote}
 	\textbf{H1}: Sanction cases where relationships between sender(s) and receiver(s) are more proximate will be more quickly resolved.
 \end{quote}
@@ -29,7 +33,21 @@ Many of the duration approaches in the extant literature focus solely on domesti
 \end{figure}
 \FloatBarrier
 
+To test the effect of relationships between sender(s) and receiver(s) in predicting sanction compliance we construct a number of covariates. First for each sanction case we determine the number of senders. We also calculate the average number of other sanctions being sent by the senders of each particular sanction case.  
+
+	\begin{itemize}
+		\item Number of senders associated with a sanction case
+		\item Mean Number of other sanctions being sent by senders
+		\item Distance: The average distance between sender(s) and the receiver
+		\item Trade: The share of total trade that the sender(s) make up for the receiver		
+		\item Alliances: The proportion of sender(s) that are allied with the receiver
+		\item IGOs: The average number of common IGOs that the sender(s) and receiver belong to
+		\item Religion: Similarity of religious group makeups between sender(s) and the receiver
+	\end{itemize}
+
 Additionally, the six separate sanctions that South Africa faced in 1984 can also be thought of as a yearly sanction case network. In figure \ref{fig:sanet}, we aggregate the six sanction networks into one where each separate sanction is denoted by a differing color. Here we hypothesize that states under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
+
+% Aggregate Network: Targets of sanctions often face a multitude of sanction cases at any given point in time. States under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
 
 \begin{quote}
 	\textbf{H2}: States facing the pressure of a multitude of sanctions will more quickly resolve any one of those sanction cases.
@@ -43,38 +61,15 @@ Additionally, the six separate sanctions that South Africa faced in 1984 can als
 \end{figure}
 \FloatBarrier
 
-% We conceptualize network dynamics in terms of ``pressures.'' First how the interrelationships, e.g., cultural or geographic proximity, and interactions between states, e.g., trade, affect the time until compliance. Second, that target states, receivers, often face multiple sanctions from multiple senders at any given time. Last, we incorporate a few of the prominent target-focused explanations for sanction compliance. 
-% Third, we consider that reciprocal compliance occurs over time between states within the network. We incorporate all three of these relational effects into our duration model.  NOTE FROM SM: should probably leave this out until we actually do it
-
-% NOTE FROM SM: Lacking a theory here is really hurting us. Maybe we should consider adding a case on S. Africa or some other country so that we can actually sketch out a theory of network pressure and sanction compliance. 
-
-Though we hypothesize that network effects matter greatly for determining sanction compliance there are characteristics of sanctioned states that may better enable them to manage these pressures. 
-
-\begin{itemize}
-	\item Sanction Case Network: The relationship between sender(s) and the target matters for sanction compliance. Sanctions involving coalitions of sender(s) will be more quickly resolved than sanctions sent by just one state. Sanction cases where relationships are more proximate will be more quickly resolved.
-	\item Aggregate Network: Targets of sanctions often face a multitude of sanction cases at any given point in time. States under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
-	\item Target states with stronger democratic institutions that are under the pressure of sanctions will more quickly comply than those with less democratic institutions. Sanctions are designed to impose costs on key groups within countries. Affected groups will lobby the government to reach an accommodation with sanctioning states. The ability to successfully lobby is dependent upon political institutions (Manin, Przeworski and Stokes 1999; Barro 1973; Ferejohn 1986)
-\end{itemize}
-
-\section*{Conceptualizing Networks}
-
-Network pressures here can come from a variety of perspectives. 
-
-\begin{itemize}
-	\item Sanction Case Network
-	\begin{itemize}
-		\item Number of senders associated with a sanction case
-		\item Mean Number of other sanctions being sent by senders
-		\item Distance: The average distance between sender(s) and the receiver
-		\item Trade: The share of total trade that the sender(s) make up for the receiver		
-		\item Alliances: The proportion of sender(s) that are allied with the receiver
-		\item IGOs: The average number of common IGOs that the sender(s) and receiver belong to
-		\item Religion: Similarity of religious group makeups between sender(s) and the receiver
-	\end{itemize}
-	\item Aggregate Network
 	\begin{itemize}
 		\item Sanctions Received: Total number of sanctions to which the target state is currently exposed
 	\end{itemize}
-\end{itemize}
 
-Add in reciprocity talk here. 
+% We conceptualize network dynamics in terms of ``pressures.'' First how the interrelationships, e.g., cultural or geographic proximity, and interactions between states, e.g., trade, affect the time until compliance. Second, that target states, receivers, often face multiple sanctions from multiple senders at any given time. Last, we incorporate a few of the prominent target-focused explanations for sanction compliance. 
+% Third, we consider that reciprocal compliance occurs over time between states within the network. We incorporate all three of these relational effects into our duration model.  NOTE FROM SM: should probably leave this out until we actually do it
+
+
+
+% Though we hypothesize that network effects matter greatly for determining sanction compliance there are characteristics of sanctioned states that may better enable them to manage these pressures. 
+
+% Target states with stronger democratic institutions that are under the pressure of sanctions will more quickly comply than those with less democratic institutions. Sanctions are designed to impose costs on key groups within countries. Affected groups will lobby the government to reach an accommodation with sanctioning states. The ability to successfully lobby is dependent upon political institutions (Manin, Przeworski and Stokes 1999; Barro 1973; Ferejohn 1986)

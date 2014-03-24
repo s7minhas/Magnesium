@@ -48,6 +48,7 @@ comp <- c(1,2,5,6,7,10)
 sanctionSlice$compliance <- 0
 sanctionSlice$compliance[which(sanctionSlice$finaloutcome %in% comp)] <- 1
 table(sanctionSlice$compliance)/nrow(sanctionSlice) # ~58% compliance
+table(sanctionSlice$finaloutcome[which(sanctionSlice$compliance==1)])
 
 sanctionSlice$time <- NA
 sanctionSlice$time <- sanctionSlice$endyear - sanctionSlice$startyear + 1
@@ -56,8 +57,6 @@ sanctionSlice$time <- sanctionSlice$endyear - sanctionSlice$startyear + 1
 ###############################################################
 # Analyzing outcomes of sanction cases
 outcomeData=sanctionSlice[,c('caseid','endyear','finaloutcome','compliance')]
-
-table(outcomeData$finaloutcome[which(outcomeData$compliance==1)])
 
 outcomeData$noComp = 1
 outcomeData$noComp[ which(outcomeData$endyear==2013 & outcomeData$compliance==0 | outcomeData$compliance==1) ] = 0

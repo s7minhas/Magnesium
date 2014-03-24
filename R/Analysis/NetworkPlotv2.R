@@ -174,7 +174,7 @@ plot(safMatAdj,
           edge.arrow.size=0.7, edge.label='',
           edge.color=E(safMatAdj)$color,
           edge.width=E(safMatAdj)$weight,
-          edge.curved=T)
+          edge.curved=F)
 # dev.off()
 ###################################################
 
