@@ -45,7 +45,7 @@ In using this definition of compliance, approximately 37\% of cases in our datas
 \end{table}
 \FloatBarrier
 
-\subsection{Modeling Approach} 
+\subsection*{Modeling Approach} 
 
 Next we discuss our modeling approach. To estimate the effect of network pressures on the ability of a threatened or sanctioned states to resist compliance, what we will refer to as sanction spell, we use Cox proportional hazard (PH) models of the length of threat or sanction periods. Specifically, the dependent variable is the number of years that a state has not complied to a threat or sanction at time $t$. We model the expected length of sanction spells as a function of a baseline hazard rate and a set of covariates that shift the baseline hazard. The Cox PH specification that we employ is
 
@@ -53,7 +53,7 @@ Next we discuss our modeling approach. To estimate the effect of network pressur
 $\log h_{i}(t | \boldsymbol{X}_{i}) \; = \; h_{0}(t) \times \exp(\boldsymbol{X}_{i}) \beta)$,
 \end{center}
 
-where the log-hazard rate of compliance in a sanction case, $i$, conditional on having not complied for $t$ years is a function of a common baseline hazard $h_{0}(t)$ and covariates $\boldsymbol{X}$. In employing this approach, we assume no specific functional form for the baseline hazard and instead estimate it non-parametrically from the data. The covariates $\boldsymbol{X}$ operate multiplicatevely on the hazard rate, shifting the expected risk of compliance up or down depending on the value of $\beta$ \citep{crespo2013political}.\footnote{To ensure against bias in our parameter estimates we also included a vector of case-level shared frailties. \citet{crespo2013political} note that these account for variations in unit-specific factors. However, we found similar results with and without the shared frailities, so we report results without the inclusion of this additional term.} 
+where the log-hazard rate of compliance in a sanction case, $i$, conditional on having not complied for $t$ years is a function of a common baseline hazard $h_{0}(t)$ and covariates $\boldsymbol{X}$. In employing this approach, we assume no specific functional form for the baseline hazard and instead estimate it non-parametrically from the data. The covariates $\boldsymbol{X}$ operate multiplicatevely on the hazard rate, shifting the expected risk of compliance up or down depending on the value of $\beta$ \citep{crespo2013political}.\footnote{To ensure against bias in our parameter estimates we also included a vector of case-level shared frailties to account for variations in unit-specific factors. However, we found similar results with and without the shared frailities, so we report results without the inclusion of this additional term.} 
 
 Providing no specific functional form for the baseline hazard necessitates testing the proportional hazard assumption. \citet{keele2010proportionally} notes that not inspecting this assumption in the covariates can lead to severely biased parameter estimates. To address this issue, we first fit smoothing splines for all continuous covariates. After ascertaining that none of the continuous covariates in our model required modeling with splines, we carried out tests of non-proportionality. For those covariates where the non-proportional effects assumption does not hold, we include interactions between the covariate and spell duration (log scale). The only covariate showing evidence of non-proportionality is the average similarity of religious profiles.
 \vspace{.01in}
