@@ -3,23 +3,28 @@
 
 To test the effects of network pressures on sanction compliance we use the Threat and Imposition of Sanctions (TIES) Database developed by \citet{morgan2009threat}. This database includes over 1,400 sanction case threats and initiations from 1945 to 2013.\footnote{Only sanction cases threatened and initiated up until 2005 are included but outcomes for cases are recorded up until 2013.} Our focus here is restricted to threats and sanctions that are prompted as the result of an economic issue. The TIES database categorizes the issue(s) involved in the threat or impositions of sanctions, we focus on three:
 
+\begin{singlespacing}
 \begin{itemize}
 	\item Expropriation/seizure of citizens, property, or material
 	\item Trade practices
 	\item Implement economic reform
 \end{itemize}
+\end{singlespacing}
+
 
 % Need to provide reason for why we are restricting to economic sanctions
 % Economic sanctions are a complex and interdependent phenomenon in which a state or numerous states cut or threaten tocutregulareconomicrelationswithanotherstateinordertoobtainapolicychange.
 
 Restricting our analysis to threats or sanctions stemming from these issues during the period of 1984 to 2005 leaves us with 272 cases. Our unit of analysis is the case-year, providing us with a total of 1,920 observations. For each case in the TIES database a final outcome is recorded to describe how and if the case has been resolved. The purpose of our analysis is to assess the time until a state complies to a threat or sanction and we consider a case to have been resolved in compliance if any of the follwing conditions are met:
 
+\begin{singlespacing}
 \begin{itemize}
 	\item Complete/Partial Acquiescence by Target to threat
 	\item Negotiated Settlement
 	\item Total/Partial Acquiescence by the Target State following sanctions imposition
 	\item Negotiated Settlement following sanctions imposition
 \end{itemize}
+\end{singlespacing}
 	
 In using this definition of compliance, approximately 37\% of cases in our dataset end with a state complying by 2013 while 42\% remain ongoing. The remaining 21\% of cases were terminated for other reasons show below in table \ref{tab:termCases}.
 
@@ -51,7 +56,7 @@ $\log h_{i}(t | \boldsymbol{X}_{i}) \; = \; h_{0}(t) \times \exp(\boldsymbol{X}_
 where the log-hazard rate of compliance in a sanction case, $i$, conditional on having not complied for $t$ years is a function of a common baseline hazard $h_{0}(t)$ and covariates $\boldsymbol{X}$. In employing this approach, we assume no specific functional form for the baseline hazard and instead estimate it non-parametrically from the data. The covariates $\boldsymbol{X}$ operate multiplicatevely on the hazard rate, shifting the expected risk of compliance up or down depending on the value of $\beta$ \citep{crespo2013political}.\footnote{To ensure against bias in our parameter estimates we also included a vector of case-level shared frailties. \citet{crespo2013political} note that these account for variations in unit-specific factors. However, we found similar results with and without the shared frailities, so we report results without the inclusion of this additional term.} 
 
 Providing no specific functional form for the baseline hazard necessitates testing the proportional hazard assumption. \citet{keele2010proportionally} notes that not inspecting this assumption in the covariates can lead to severely biased parameter estimates. To address this issue, we first fit smoothing splines for all continuous covariates. After ascertaining that none of the continuous covariates in our model required modeling with splines, we carried out tests of non-proportionality. For those covariates where the non-proportional effects assumption does not hold, we include interactions between the covariate and spell duration (log scale). The only covariate showing evidence of non-proportionality is the average similarity of religious profiles.
-
+\vspace{.01in}
 \begin{align*}
 		Compliance_{i,t} =\; & No. \; Senders_{j,t} + Distance_{j,t} + Trade_{j,t}  + \\
 		 &Ally_{j,t} + IGOs_{j,t} + Religion_{j,t} +\\
@@ -61,8 +66,11 @@ Providing no specific functional form for the baseline hazard necessitates testi
 		 &Constraints_{i,t}*No. \; Senders_{j} + \epsilon_{i,t}
 	\end{align*}
 	
+\begin{singlespacing}	
 \begin{itemize}
 	\item $i$ represents the target of the sanction
 	\item $j$ represents the relationship between the set of sender(s) for a particular sanction case and $i$
 	\item $t$ the time period
 \end{itemize}
+\end{singlespacing}
+
