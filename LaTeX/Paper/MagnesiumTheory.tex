@@ -1,9 +1,14 @@
 % NOTE FROM SM: Lacking a theory here is really hurting us. We should consider adding a case on S. Africa or some other country so that we can actually sketch out a theory of network pressure and sanction compliance. 
 
+goal here is to go over how we are constructing our network measures and what network measures we use and data sources for those measures
+cassy in her lit review has already gone into explaining why networks matter and that hte lit hasnt incorp'd them so i dont need to rehash that point
+
 \section*{Accounting for Network Effects}
 \label{neteffects}
 
-In this section, we will review our approach for incorporating features of the sanction network as covariates in our models for predicting the time until sanction compliance. Figure \ref{fig:spaghetti} depicts the network of sanction cases and threats thereof ongoing and initiated by 1984. Nodes represent countries and the directed edges denote the sender and receiver of sanctions. Clear from figure \ref{fig:spaghetti} is that the process through which sanctions have proliferated in the international system forms a complex network, where states often face sanctions from not simply a single sender but multiple. 
+In this section, we will explain our approach for incorporating features of the sanction network into models for predicting the time until sanction compliance. 
+
+Figure \ref{fig:spaghetti} depicts the network of sanction cases and threats thereof ongoing and initiated by 1984. Nodes represent countries and the directed edges denote the sender and receiver of sanctions. 
 
 \begin{figure}[ht]
   \centering
@@ -40,11 +45,11 @@ To test the effect of relationships between sender(s) and receiver(s) in predict
 	\begin{itemize}
 		\item Number of senders associated with a sanction case
 		\item Mean Number of other sanctions being sent by senders
-		\item Distance: The average distance between sender(s) and the receiver
-		\item Trade: The share of total trade that the sender(s) make up for the receiver		
-		\item Alliances: The proportion of sender(s) that are allied with the receiver
-		\item IGOs: The average number of common IGOs that the sender(s) and receiver belong to
-		\item Religion: Similarity of religious group makeups between sender(s) and the receiver
+		\item Distance: The average distance between sender(s) and the receiver (cshapes)
+		\item Trade: The share of total trade that the sender(s) make up for the receiver (cow trade)
+		\item Alliances: The proportion of sender(s) that are allied with the receiver (cow ally)
+		\item IGOs: The average number of common IGOs that the sender(s) and receiver belong to (cow igos)
+		\item Religion: Similarity of religious group makeups between sender(s) and the receiver (cow religion)
 	\end{itemize}
 
 Additionally, the six separate sanctions that South Africa faced in 1984 can also be thought of as a yearly sanction case network. In figure \ref{fig:sanet}, we aggregate the six sanction networks into one where each separate sanction is denoted by a differing color. Here we hypothesize that states under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
