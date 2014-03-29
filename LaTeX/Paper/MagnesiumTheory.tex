@@ -6,7 +6,6 @@ In this section, we will explain our approach for incorporating features of the 
 \begin{figure}[ht]
   \centering
   \begin{tabular}{c}
-	  % \includegraphics[width=1\textwidth]{84net}
 	  \includegraphics[width=1\textwidth]{84net-crop} \\
 	  \includegraphics[width=0.45\textwidth]{MapLegend}
   \end{tabular}
@@ -25,15 +24,7 @@ We conceptualize network dynamics in terms of ``pressures.'' First how the inter
 	\item Similarity in the makeup of religious groups\footnote{To determine similarity we calculate the pearson correlation coefficient between the proportion of the population in various religious groups defined in the COW dataset for each country. For a single year this provides us with an $N \times N$ matrix where each $i-j$ cross-section represents how similar the populations of $i$ and $j$ are in terms of their religious denominations. We then add 1 to each of these scores so that the minimum value within a cross-section is 0 and the maximum is 2. We do this for every year providing us with $N \times N \times T$ matrices.} between sender(s) and receiver from the COW Dataset \citep{maoz2013world}
 \end{itemize}
 
-Our hypothesis is that senders which have more ``proximate'' (i.e., shorter geographic distances, higher levels of trade, more similar religious makeups, etc.) will be able to pressure the receiver of a sanction into compliance in a shorter timeframe. The logic for this flows from the 
-
-\begin{quote}
-	\textbf{H1}: Sanction cases where relationships between sender(s) and receiver(s) are more proximate will be more quickly resolved.
-\end{quote}
-
-Additional information we took from the sanction cse network includes other statistics such s the number of senders associated with each case
-
-% Sanction Case Network: The relationship between sender(s) and the target matters for sanction compliance. Sanctions involving coalitions of sender(s) will be more quickly resolved than sanctions sent by just one state. Sanction cases where relationships are more proximate will be more quickly resolved.
+Our hypothesis is that senders which have more ``proximate'' (i.e., shorter geographic distances, higher levels of trade, more similar religious makeups, etc.) will be able to pressure the receiver of a sanction into compliance in a shorter timeframe. In testing the effect of each of these relationships we are not laying out a specific theory for why one dimension of a relationship between sender(s) and a receiver should matter more or less for determining compliance, but just ascertaining that the interrelationships between states are a necessary datapoint to capture in determining how states respond to sanctions. Additional information that we take from the sanction case network includes the number of senders in each sanction case. Sanctions that involve a coalition of sender(s) are more likely to be effective than unilateral sanctions \citep{morgan2009threat}. Last, we include a measure of the average number of other sanctions sent by the sender(s) of a particular sanction case. 
 
 \begin{figure}[ht]
 	\centering
@@ -43,43 +34,16 @@ Additional information we took from the sanction cse network includes other stat
 \end{figure}
 \FloatBarrier
 
-To test the effect of relationships between sender(s) and receiver(s) in predicting sanction compliance we construct a number of covariates. First for each sanction case we determine the number of senders. We also calculate the average number of other sanctions being sent by the senders of each particular sanction case.  
-
-	\begin{itemize}
-		\item Number of senders associated with a sanction case
-		\item Mean Number of other sanctions being sent by senders
-		\item Distance: The average distance between sender(s) and the receiver (cshapes)
-		\item Trade: The share of total trade that the sender(s) make up for the receiver (cow trade)
-		\item Alliances: The proportion of sender(s) that are allied with the receiver (cow ally)
-		\item IGOs: The average number of common IGOs that the sender(s) and receiver belong to (cow igos)
-		\item Religion: Similarity of religious group makeups between sender(s) and the receiver (cow religion)
-	\end{itemize}
-
-Additionally, the six separate sanctions that South Africa faced in 1984 can also be thought of as a yearly sanction case network. In figure \ref{fig:sanet}, we aggregate the six sanction networks into one where each separate sanction is denoted by a differing color. Here we hypothesize that states under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
-
-% Aggregate Network: Targets of sanctions often face a multitude of sanction cases at any given point in time. States under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
-
-\begin{quote}
-	\textbf{H2}: States facing the pressure of a multitude of sanctions will more quickly resolve any one of those sanction cases.
-\end{quote}
+Additionally, the six separate sanctions that South Africa faced in 1984 can also be thought of as a yearly sanction case network. In figure \ref{fig:sanet}, we aggregate the six sanction networks into one where each separate sanction is denoted by a differing color. We hypothesize that states under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.75\textwidth]{sanet}
-	\caption{South Africa 1984 Sanction Case Network}
+	\caption{All sanctions faced by South Africa in 1984 collapsed to one network}
 	\label{fig:sanet}
 \end{figure}
 \FloatBarrier
 
-	\begin{itemize}
-		\item Sanctions Received: Total number of sanctions to which the target state is currently exposed
-	\end{itemize}
+Though we hypothesize that network effects matter greatly for determining sanction compliance there are characteristics of sanctioned states that may better enable them to manage these pressures, thus we incorporate a few of the prominent receiver-focused explanations for sanction compliance. \citet{bolks2000} argue that a country's institutional structure and political vulnerability are an important determinant of sanction compliance. To measure institutional structure we turn to the political constraints developed by \citet{henisz2000a} and to estimate the effect of political vulnerability we use a measure of internal stability from the ICRG dataset. Last, we include a measure of a state's GDP per capita, with the hypothesis that states with higher levels of economic development will be able to better resist pressures to comply to the sanctions they face.
 
-%  Second, that target states, receivers, often face multiple sanctions from multiple senders at any given time.Last, we incorporate a few of the prominent target-focused explanations for sanction compliance. 
-% Third, we consider that reciprocal compliance occurs over time between states within the network. We incorporate all three of these relational effects into our duration model.  NOTE FROM SM: should probably leave this out until we actually do it
-
-
-
-% Though we hypothesize that network effects matter greatly for determining sanction compliance there are characteristics of sanctioned states that may better enable them to manage these pressures. 
-
-% Target states with stronger democratic institutions that are under the pressure of sanctions will more quickly comply than those with less democratic institutions. Sanctions are designed to impose costs on key groups within countries. Affected groups will lobby the government to reach an accommodation with sanctioning states. The ability to successfully lobby is dependent upon political institutions (Manin, Przeworski and Stokes 1999; Barro 1973; Ferejohn 1986)
+% Third, we consider that reciprocal compliance occurs over time between states within the network. We incorporate all three of these relational effects into our duration model.
