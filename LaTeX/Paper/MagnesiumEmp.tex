@@ -60,10 +60,10 @@ Providing no specific functional form for the baseline hazard necessitates testi
 \begin{align*}
 		Compliance_{i,t} =\; & No. \; Senders_{j,t} + Distance_{j,t} + Trade_{j,t}  + \\
 		 &Ally_{j,t} + IGOs_{j,t} + Religion_{j,t} +\\
- 		 &Sanc. \; Rec'd_{i,t} + \\
-		 &Constraints_{i,t} + GDP \; Capita_{i,t-1} +\\
-		 & Internal \; Conflict_{i,t} +\\
-		 &Constraints_{i,t}*No. \; Senders_{j} + \epsilon_{i,t}
+ 		 &Sanc. \; Sent_{j,t-1} Sanc. \; Rec'd_{i,t} + \\
+		 &Constraints_{i,t} + Ln(GDP \; Capita)_{i,t-1} +\\
+		 & Internal \; Stability_{i,t} +\\
+		 &\epsilon_{i,t}
 	\end{align*}
 	
 \begin{singlespacing}	

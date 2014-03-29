@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 % NOTE FROM SM: Lacking a theory here is really hurting us. We should consider adding a case on S. Africa or some other country so that we can actually sketch out a theory of network pressure and sanction compliance. 
 
 %goal here is to go over how we are constructing our network measures and what network measures we use and data sources for those measures
@@ -11,20 +12,39 @@ In this section, we present our argument for incorporating features of the sanct
 To illustrate the network characteristics essential to our argument, we begin with an illustration of the year 1984. Figure \ref{fig:spaghetti} depicts the network of sanction cases, and threats thereof, ongoing and initiated by 1984. Nodes represent states and the directed edges denote the sender and receiver of sanctions. This figure is complex, demonstrating that numerous states are involved in mulitple sanction cases during this one year.
 %threats? we need to explain this a bit more, I don't really get what that means here.
 
+=======
+\section*{Accounting for Network Effects}
+\label{neteffects}
+
+In this section, we will explain our approach for incorporating features of the sanction network into models for predicting the time until sanction compliance. Figure \ref{fig:spaghetti} depicts the network of sanction cases ongoing and initiated by 1984 -- nodes represent countries and the directed edges denote the sender and receiver of sanctions. As indicated in the previous section, much of the literature on sanction compliance has analyzed what is actually a very complex network by focusing on only the monadic characteristics of sanctioned states. Clear from \ref{fig:spaghetti}, however, is that the sanctions country face come from a variety of different senders and can involve single and multiple actors. Models that rely on just domestic explanations for sanction compliance discard this information that we will argue is extremely important in understanding when and why states comply.
+>>>>>>> FETCH_HEAD
 
 \begin{figure}[ht]
   \centering
   \begin{tabular}{c}
-	  % \includegraphics[width=1\textwidth]{84net}
 	  \includegraphics[width=1\textwidth]{84net-crop} \\
 	  \includegraphics[width=0.45\textwidth]{MapLegend}
   \end{tabular}
-  \caption{Here we show the sanction network in 1984, nodes are colored by geographic coordinates of countries.}
+  \caption{Here we show the sanction network in 1984, nodes are colored by geographic coordinates of countries. Data for sanction cases comes from \citet{morgan2009threat}.}
   \label{fig:spaghetti}
 \end{figure}
 \FloatBarrier
 
+<<<<<<< HEAD
 Next, we deconstruct this network and narrow our focus to observe the indivdual country case of South Africa in 1984. In this case, South Africa is the target of multiple sanctions, as shown in Figure \ref{fig:saneti}. Because of this, we construct a sanction network that represents each sanction South Africa faces during this year. As one can easily see, in most cases during 1984, South Africa faces more than one sanctioner, and these sanctioners vary across each sanction case. For example, in the first network graph, in the top left of Figure \ref{fig:saneti}, we see that South Africa faces a sanction from India, Pakistan, and Jamaica. Yet in the top right network graph, we see that South Africa also faces a sanction from Canada, Sweden, the USA, Finland, and Austrialia. 
+=======
+We conceptualize network dynamics in terms of ``pressures.'' First how the interrelationships, e.g., cultural or geographic proximity, and interactions between states, e.g., trade, affect the time until compliance. To provide an example we turn to figure \ref{fig:saneti}, which shows the six sanction cases faced by South Africa in 1984. For the most part, each of these sanction cases involves a variety of actors with whom South Africa has differing cultural, geographic, diplomatic, and economic relationships. For each sanction case, we construct a central tendency measure to capture the relationships between South Africa and the senders of a sacntion case. The relationships that we explicitly measured are:
+
+\begin{itemize}
+	\item Average minimum distance between sender(s) and receiver from the Cshapes Dataset \citep{weidmann2010geography}
+	\item Average level of trade between sender(s) and receiver and from the COW Dataset \citep{barbieri2009trading}
+	\item Proportion of sender(s) that are allied with the receiver from the COW Dataset \citep{gibler2009international}
+	\item Average Number of IGOs common between sender(s) and receiver from the COW Dataset \citep{pevehouse2004correlates}
+	\item Similarity in the makeup of religious groups\footnote{To determine similarity we calculate the pearson correlation coefficient between the proportion of the population in various religious groups defined in the COW dataset for each country. For a single year this provides us with an $N \times N$ matrix where each $i-j$ cross-section represents how similar the populations of $i$ and $j$ are in terms of their religious denominations. We then add 1 to each of these scores so that the minimum value within a cross-section is 0 and the maximum is 2. We do this for every year providing us with $N \times N \times T$ matrices.} between sender(s) and receiver from the COW Dataset \citep{maoz2013world}
+\end{itemize}
+
+Our hypothesis is that senders which have more ``proximate'' (i.e., shorter geographic distances, higher levels of trade, more similar religious makeups, etc.) will be able to pressure the receiver of a sanction into compliance in a shorter timeframe. In testing the effect of each of these relationships we are not laying out a specific theory for why one dimension of a relationship between sender(s) and a receiver should matter more or less for determining compliance, but just ascertaining that the interrelationships between states are a necessary datapoint to capture in determining how states respond to sanctions. Additional information that we take from the sanction case network includes the number of senders in each sanction case. Sanctions that involve a coalition of sender(s) are more likely to be effective than unilateral sanctions \citep{morgan2009threat}. Last, we include a measure of the average number of other sanctions sent by the sender(s) of a particular sanction case. 
+>>>>>>> FETCH_HEAD
 
 \begin{figure}[ht]
 	\centering
@@ -34,6 +54,7 @@ Next, we deconstruct this network and narrow our focus to observe the indivdual 
 \end{figure}
 \FloatBarrier
 
+<<<<<<< HEAD
 Clearly these two networks are composed of a diverse set of unique actors, all of which have a specific relationship with the target state. We conceptualize these relationships as composed of ``pressures'' which likely influences the behavior of the target state. We present two hypotheses which focus on the sanction case network. First, it is intutitive that the number of senders likely influences the willingness of the target state to comply because as the number of senders increases, the more constraints through multple relationships the target faces. The essential idea is that handling the demands of ten relationships is more influential than one. However, we also expect that these relationships must be meaningful not juste plentiful. Just as one would imagine that a person is less swayed by the demands of 10 strangers than the demands of a few close friends, we conceptualize senders as most influential when they interact with the target state on a number of dimensions.  Thus, for each sanction case we determine the number of senders. We also calculate and control for the average number of other sanctions being sent by the senders of each particular sanction case.
 
 \begin{quote}
@@ -68,20 +89,27 @@ Thus far we have explained how the relationships between sanctioners and target 
 \begin{quote}
 	\textbf{H3}: States facing the pressure of a multitude of sanctions will more quickly resolve any one of those sanction cases.
 \end{quote}
+=======
+Additionally, the six separate sanctions that South Africa faced in 1984 can also be thought of as a yearly sanction case network. In figure \ref{fig:sanet}, we aggregate the six sanction networks into one where each separate sanction is denoted by a differing color. We hypothesize that states under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
+>>>>>>> FETCH_HEAD
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.75\textwidth]{sanet}
-	\caption{South Africa 1984 Sanction Case Network}
+	\caption{All sanctions faced by South Africa in 1984 collapsed to one network}
 	\label{fig:sanet}
 \end{figure}
 \FloatBarrier
 
+<<<<<<< HEAD
 
 
 % We conceptualize network dynamics in terms of ``pressures.'' First how the interrelationships, e.g., cultural or geographic proximity, and interactions between states, e.g., trade, affect the time until compliance. Second, that target states, receivers, often face multiple sanctions from multiple senders at any given time. Last, we incorporate a few of the prominent target-focused explanations for sanction compliance. 
 % Third, we consider that reciprocal compliance occurs over time between states within the network. We incorporate all three of these relational effects into our duration model.  NOTE FROM SM: should probably leave this out until we actually do it
 
 % Though we hypothesize that network effects matter greatly for determining sanction compliance there are characteristics of sanctioned states that may better enable them to manage these pressures. 
+=======
+Though we hypothesize that network effects matter greatly for determining sanction compliance there are characteristics of sanctioned states that may better enable them to manage these pressures, thus we incorporate a few of the prominent receiver-focused explanations for sanction compliance. \citet{bolks2000} argue that a country's institutional structure and political vulnerability are an important determinant of sanction compliance. To measure institutional structure we turn to the political constraints developed by \citet{henisz2000a} and to estimate the effect of political vulnerability we use a measure of internal stability from the ICRG dataset. Last, we include a measure of a state's GDP per capita, with the hypothesis that states with higher levels of economic development will be able to better resist pressures to comply to the sanctions they face.
+>>>>>>> FETCH_HEAD
 
-% Target states with stronger democratic institutions that are under the pressure of sanctions will more quickly comply than those with less democratic institutions. Sanctions are designed to impose costs on key groups within countries. Affected groups will lobby the government to reach an accommodation with sanctioning states. The ability to successfully lobby is dependent upon political institutions (Manin, Przeworski and Stokes 1999; Barro 1973; Ferejohn 1986)
+% Third, we consider that reciprocal compliance occurs over time between states within the network. We incorporate all three of these relational effects into our duration model.

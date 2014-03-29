@@ -1,5 +1,11 @@
 \begin{thebibliography}{xx}
 
+\harvarditem[Barbieri, Keshk \harvardand\ Pollins]{Barbieri, Keshk \harvardand\
+  Pollins}{2009}{barbieri2009trading}
+Barbieri, Katherine, Omar~MG Keshk \harvardand\ Brian~M Pollins. 2009.
+\newblock ``Trading data evaluating our assumptions and coding rules.'' {\em
+  Conflict Management and Peace Science} 26(5):471--491.
+
 \harvarditem{Bolks \harvardand\ Al-Sowayel}{2000}{bolks2000}
 Bolks, Sean~M \harvardand\ Dina Al-Sowayel. 2000.
 \newblock ``How long do economic sanctions last? Examining the sanctioning
@@ -46,10 +52,20 @@ Drezner, Daniel~W. 1998.
 \newblock ``Conflict expectations and the paradox of economic coercion.'' {\em
   International Studies Quarterly} 42(4):709--731.
 
+\harvarditem{Gibler}{2009}{gibler2009international}
+Gibler, Douglas~M. 2009.
+\newblock {\em International military alliances, 1648-2008}.
+\newblock CQ Press.
+
 \harvarditem{Greenhill}{2010}{greenhill2010norm}
 Greenhill, B. 2010.
 \newblock Norm Transmission in Networks of Intergovermental Organizations PhD
   thesis University of Washington.
+
+\harvarditem{Henisz}{2000}{henisz2000a}
+Henisz, Witold~J. 2000.
+\newblock ``The institutional environment for economic growth.'' {\em Economics
+  \& Politics} 12(1):1--31.
 
 \harvarditem{Hoff \harvardand\ Ward}{2004}{hoff2004modeling}
 Hoff, P.D. \harvardand\ M.D. Ward. 2004.
@@ -70,6 +86,11 @@ Lam, Sam~Ling. 1990.
 Lektzian, David \harvardand\ Mark Souva. 2007.
 \newblock ``An institutional theory of sanctions onset and success.'' {\em
   Journal of Conflict Resolution} 51(6):848--871.
+
+\harvarditem{Maoz \harvardand\ Henderson}{2013}{maoz2013world}
+Maoz, Zeev \harvardand\ Errol~A Henderson. 2013.
+\newblock ``The world religion dataset, 1945--2010: Logic, estimates, and
+  trends.'' {\em International Interactions} 39(3):265--291.
 
 \harvarditem{Marinov}{2005}{marinov2005}
 Marinov, Nikolay. 2005.
@@ -97,9 +118,22 @@ Morgan, T~Clifton \harvardand\ Valerie~L Schwebach. 1997.
 \newblock ``Fools suffer gladly: The use of economic sanctions in international
   crises.'' {\em International Studies Quarterly} 41(1):27--50.
 
+\harvarditem[Pevehouse, Nordstrom \harvardand\ Warnke]{Pevehouse, Nordstrom
+  \harvardand\ Warnke}{2004}{pevehouse2004correlates}
+Pevehouse, Jon, Timothy Nordstrom \harvardand\ Kevin Warnke. 2004.
+\newblock ``The Correlates of War 2 international governmental organizations
+  data version 2.0.'' {\em Conflict Management and Peace Science}
+  21(2):101--119.
+
 \harvarditem{Warren}{2010}{warren2010geometry}
 Warren, T.C. 2010.
 \newblock ``The geometry of security: Modeling interstate alliances as evolving
   networks.'' {\em Journal of Peace Research} 47(6):697--709.
+
+\harvarditem[Weidmann, Kuse \harvardand\ Gleditsch]{Weidmann, Kuse \harvardand\
+  Gleditsch}{2010}{weidmann2010geography}
+Weidmann, N.B., D. Kuse \harvardand\ K.S. Gleditsch. 2010.
+\newblock ``The geography of the international system: The cshapes dataset.''
+  {\em International Interactions} 36(1):86--106.
 
 \end{thebibliography}

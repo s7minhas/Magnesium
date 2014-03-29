@@ -323,6 +323,17 @@
   year = {2008}
 }
 
+@ARTICLE{barbieri2009trading,
+  author = {Barbieri, Katherine and Keshk, Omar MG and Pollins, Brian M},
+  title = {Trading data evaluating our assumptions and coding rules},
+  journal = {Conflict Management and Peace Science},
+  year = {2009},
+  volume = {26},
+  pages = {471--491},
+  number = {5},
+  publisher = {Sage Publications}
+}
+
 @ARTICLE{baron1989bargaining,
   author = {Baron, D.P. and Ferejohn, J.A.},
   title = {Bargaining in legislatures},
@@ -1328,6 +1339,13 @@
   issn = {0305-750X},
   keywords = {foreign direct investment},
   url = {http://www.sciencedirect.com/science/article/pii/S0305750X98000497}
+}
+
+@BOOK{gibler2009international,
+  title = {International military alliances, 1648-2008},
+  publisher = {CQ Press},
+  year = {2009},
+  author = {Gibler, Douglas M}
 }
 
 @ARTICLE{ginsburg2005international,
@@ -2414,6 +2432,17 @@
   publisher = {JSTOR}
 }
 
+@ARTICLE{maoz2013world,
+  author = {Maoz, Zeev and Henderson, Errol A},
+  title = {The world religion dataset, 1945--2010: Logic, estimates, and trends},
+  journal = {International Interactions},
+  year = {2013},
+  volume = {39},
+  pages = {265--291},
+  number = {3},
+  publisher = {Taylor \& Francis}
+}
+
 @ARTICLE{marinov2005,
   author = {Marinov, Nikolay},
   title = {Do economic sanctions destabilize country leaders?},
@@ -3000,6 +3029,18 @@
   doi = {10.1093/pan/mpq020},
   eprint = {http://pan.oxfordjournals.org/content/early/2010/08/26/pan.mpq020.full.pdf+html},
   url = {http://pan.oxfordjournals.org/content/early/2010/08/26/pan.mpq020.abstract}
+}
+
+@ARTICLE{pevehouse2004correlates,
+  author = {Pevehouse, Jon and Nordstrom, Timothy and Warnke, Kevin},
+  title = {The Correlates of War 2 international governmental organizations
+	data version 2.0},
+  journal = {Conflict Management and Peace Science},
+  year = {2004},
+  volume = {21},
+  pages = {101--119},
+  number = {2},
+  publisher = {Taylor \& Francis}
 }
 
 @TECHREPORT{pierce2012surprisingly,
