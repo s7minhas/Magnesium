@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  29 MAR 2014 12:13
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  29 MAR 2014 17:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2694,9 +2694,9 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 8.
 
-[11] [12]) (./MagnesiumFindings.tex (../TeXoutput/durModelResults.tex)
+[11] [12]) (./MagnesiumFindings.tex [13] (../TeXoutput/durModelResults.tex)
 (../TeXoutput/nosSurv.tex) (../TeXoutput/oNet.tex) (../TeXoutput/oNet2.tex))
-(./MagnesiumConcl.tex [13] [14] [15]) [16
+(./MagnesiumConcl.tex [14] [15]) [16
 
 ] (./Magnesium.bbl [17]
 Missing character: There is no Ñ in font cmr12!
@@ -2715,7 +2715,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 212.
 Here is how much of TeX's memory you used:
  29213 strings out of 493488
  574908 string characters out of 3141326
- 801307 words of memory out of 3000000
+ 800805 words of memory out of 3000000
  31941 multiletter control sequences out of 15000+200000
  21483 words of font info for 83 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -2735,7 +2735,7 @@ ive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
 ve/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/
 2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (18 pages, 979285 bytes).
+Output written on Magnesium.pdf (18 pages, 980777 bytes).
 PDF statistics:
  305 PDF objects out of 1000 (max. 8388607)
  248 compressed objects within 3 object streams
