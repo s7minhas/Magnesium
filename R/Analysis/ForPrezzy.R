@@ -110,6 +110,21 @@ print.xtable( xtable(durTables, align='llc',
 	file='durModelResults.tex'
 	)
 
+# Risk ratios
+coefDist=mvrnorm (1000, coef (model3v2), vcov (model3v2))
+
+vRange=quantile(modData$noS, probs=c(0.05,0.95))
+scen=scenBuild(vi='noS', vRange=vRange, vars=names(model3v2$coefficients),
+	ostat=mean, simData=modData)
+preds=coefDist%*%t(scen)
+
+# Hazard ratio
+hr=median(exp(preds[,1])/exp(preds[,2]))
+# Bootstrapped se
+bse=sd (preds[,1] - preds[,2])
+# Conf int
+c( mean( exp( log( hr ) - 1.96*bse ) ), mean( exp( log( hr ) + 1.96*bse ) ))
+
 ###
 # Vars to generate survival plots for:
 	# noS, distance, ally, igo, religion
