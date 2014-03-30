@@ -1,15 +1,9 @@
-% NOTE FROM SM: Lacking a theory here is really hurting us. We should consider adding a case on S. Africa or some other country so that we can actually sketch out a theory of network pressure and sanction compliance. 
-
-%goal here is to go over how we are constructing our network measures and what network measures we use and data sources for those measures
-%cassy in her lit review has already gone into explaining why networks matter and that hte lit hasnt incorp'd them so i dont need to rehash that point
-
 \section*{Accounting for Network Effects}
 \label{neteffects}
 
 In this section, we present our argument for incorporating features of the sanction network into models for predicting the time until sanction compliance and describe our approach for capturing these features. In focusing primarily on domestic factors, as much of the extant literature has done, alternative explanations that incorporate external factors relating to the sanctioning network have been ignored. The two explanations that we focus on are, first, the types of influential relationships senders have to receiver states and, second, the network pressures created at the aggregate network level, across all sanctions in any given year. %CD: this "second" part could use something snappier, I am not sure I am summarizing it very well (?)
 
-To illustrate the network characteristics essential to our argument, we begin with an illustration of the year 1984. Figure \ref{fig:spaghetti} depicts the network of sanction cases, and threats thereof, ongoing and initiated by 1984. Nodes represent states and the directed edges denote the sender and receiver of sanctions. This figure is complex, demonstrating that numerous states are involved in mulitple sanction cases during this one year.
-%threats? we need to explain this a bit more, I don't really get what that means here.
+To illustrate the network characteristics essential to our argument, we begin with an illustration of the year 1984. Figure \ref{fig:spaghetti} depicts the network of sanction cases ongoing and initiated by 1984. Nodes represent states and the directed edges denote the sender and receiver of sanctions. This figure is complex, demonstrating that numerous states are involved in mulitple sanction cases during this one year.
 
 \begin{figure}[ht]
   \centering
@@ -27,7 +21,7 @@ Next, we deconstruct this network and narrow our focus to observe the indivdual 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=1\textwidth]{saneti}
-	\caption{Here we show a separate network for each sanction case that South Africa faced in 1984.}
+	\caption{Here we show a network for each sanction case that South Africa faced in 1984.}
 	\label{fig:saneti}
 \end{figure}
 \FloatBarrier
@@ -44,7 +38,7 @@ Clearly these two networks are composed of a diverse set of unique actors, all o
 
  Next, we describe what exactly is meant behind our concept of ``proximity.'' In figure \ref{fig:saneti}, we show the six sanction cases faced by South Africa in 1984.\footnote{Data for sanction cases is from \citet{morgan2009threat}.} For the most part, each sanction case involves a variety of actors with whom South Africa has differing cultural, geographic, diplomatic, and economic relationships. Within any individual sanction case we hypothesize (H2) that the proximity, (i.e. the ways in which the sender and target interact on a number of dimensions) of relationships between sender(s) of a sanction and a receiver influence whether a target state complies. To test this idea that the normative closeness, or general ``proximity''of relationships between sender(s) and receiver(s) in predicting sanction compliance we construct a number of covariates. 
 
-We focus on five key measures of the ``proximate'' nature of relationships First, we measure the average distance between sender(s) and reciever. Next we utilize the Correlates of War (COW) data to construct variour measures. Our second covariate relating to proximity is trade, which we measure as the total share of trade that sender states accounts for. Third, we measure alliances as the proportion of sender(s) that are allied with the receiver. Forth, we measure the average number of common IGOs that the sender(s) and target state belong to. And Last, also using COW, we create a measure of similarity in relgiion across sender relationships. We construct this measure using the COW data. 
+We focus on five key measures of the ``proximate'' nature of relationships First, we measure the average minimum distance between sender(s) and reciever. Next we utilize the Correlates of War (COW) data to construct variour measures. Our second covariate relating to proximity is trade, which we measure as the total share of trade that sender states accounts for. Third, we measure alliances as the proportion of sender(s) that are allied with the receiver. Forth, we measure the average number of common IGOs that the sender(s) and target state belong to. Last, also using COW, we create a measure of similarity in religion across sender relationships.
   
 Thus far we have explained how the relationships between sanctioners and target states matter for predicting compliance. This view has focused on the individual sanction case. However, the six separate sanctions that South Africa faced in 1984 can also be thought of as a yearly sanction case network. In figure \ref{fig:sanet}, we aggregate the six sanction networks into one where each separate sanction is denoted by a differing color. Here we hypothesize that states under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.\footnote{Our next step in this project is to include measures of reciprocity over time. This will allow us to test the argument presented in the earlier half of the paper where we suggest accumulated dependencies over time will influence the likeilhood of compliance (e.g. reciprocity: if country $i$ often complies with country $j$, will country $j$ be more likely to comply with country $i$?}
 
