@@ -1,44 +1,42 @@
 \section*{Results}
 \label{Results} 
 
-Table~\ref{table1} displays the results from our model. As expected, we find support for hypothesis one, which states that as the number of sender states increases for any given sanction case, the time to compliance will decrease. We also find support for our second hypothesis, that more proximate relationships between sender and recievers result in quicker compliance by the target state. However, support for this hypothesis is limited to the type of relationship or proximity that is measured. Our findings reveal that distance and religion are influential for predicting compliance. This suggests that target states are most sensitive to sanctions by those states whose are both neighbors and share cultural similarities. We also find support for hypothesis three, that states are more likely to comply to one sanction when they are simultaneously facing a number of others. 
-
-We control for the prominent idea from the literature that domestic factors influence sanction compliance. We find that while our measure of internal stabiity does not play a role, %we need to define this variable somewhere. 
-domestic institutions do matter. Interestingly, we find little support for trade and alliances having an influence on compliance. 
-Because it is difficult to interpret the effect of point estimates on the hazard function in tabular form, we present graphical interpretations below. 
+Table~\ref{tab:regResults} displays the results from our model. As expected, we find support for hypothesis one, which states that as the number of sender states increases for any given sanction case, the time to compliance will decrease. Generally, we also find support for our second hypothesis, that more proximate relationships between sender and recievers result in quicker compliance by the target state. However, support for this hypothesis is limited to the type of relationship or proximity that is measured. Our findings reveal that distance, alliance, and religion are influential for predicting compliance -- though the latter measure has an effect opposite to what we expected. This suggests that target states are most sensitive to sanctions by those states who are both neighbors and allies. We also find support for hypothesis three, that states are more likely to comply to one sanction when they are simultaneously facing a number of others. 
 
 \input{../TeXoutput/durModelResults}
+\FloatBarrier
 
+We control for the prominent idea from the literature that domestic factors influence sanction compliance. We find that while our measure of internal stability does not play a role, domestic institutions do matter. Interestingly, we find little support for trade and similar IGO memberships having an influence on compliance. Because it is difficult to interpret the effect of point estimates on the hazard function in tabular form, we present graphical interpretations figures \ref{fig:surv1}, \ref{fig:surv2}, and \ref{fig:surv3}. 
 
-In each figure the y-axis represents the probability of survival, or in this case the probability that a country will not comply; with the x-axis representing time. We also see a red and a blue line which represent different values of our covariate of interest. In each graph, the red line represents the covariate of interest set to a low value (its lower quartile), and the blue line represents the covariate at a higher value (upper quartile). This allows us to more easily interpret the effects of each covariate. The first graph captures the ``number of senders'' covariate. In this case, the red line indicates a low number of senders and the blue line, a higher number. It is evident that as the number of senders increase, the liklihood of survival, or time to compliance, decreases. This supports our first hypothesis that for any given sanction episode, states faced with a large number of sanctioners are more likely to comply sooner than states facing a small number of sanctioners.
+In each figure, the y-axis represents the probability of survival, or in this case the probability that a country will not comply and the x-axis represents time (measured in years). We use a red and a blue line to represent high and low values in our covariates of interest. In each graph, the red line represents the covariate of interest set to a low value (its lower quartile), and the blue line represents the covariate at a higher value (upper quartile). This allows us to more easily interpret the effects of each covariate. Figure \ref{fig:surv1} captures the ``number of senders'' covariate. In this case, the red line indicates a low number of senders and the blue line, a higher number. It is evident that as the number of senders increase, the liklihood of survival, or time to compliance, substantially decreases and almost halves in a few years. This supports our first hypothesis that for any given sanction episode, states faced with a large number of sanctioners are more likely to comply sooner than states facing a small number of sanctioners.
 
 \begin{figure}[ht]
 	\centering
-	\caption{Survival Probability by Number of Senders in a Sanction Case}
+	\caption{Survival probabilities by varying number of senders in a sanction case. Red designates scenario where the number of senders is set to its low value and blue the scenario where it is set to its high value.}
 	% \includegraphics[width=1\textwidth]{nosSurv}
-	\resizebox{1\textwidth}{!}{\input{../TeXoutput/nosSurv.tex}}
+	\resizebox{0.7\textwidth}{!}{\input{../TeXoutput/nosSurv.tex}}
 	\label{fig:surv1}
 \end{figure}
+\FloatBarrier
 
-Three other graphs demonstrate the effects of ``proximate'' relationships. For the covariate of interest, distance, we see that when the distance between states is large (the blue line) compliance is predicted to take longer than when states are geographically closer together (the red line). Not surprisingly, we also see that when target states are allies with sanction senders, (the blue line) they are more likely to comply. Interestingly, our argument that religious similarity should also pressure states into quicker compliance is not supported. We see in the graph for religion that as religious similarity increases (the blue line) the probability of survival, or denying compliance, also increases. This suggest that when target states share the same religious culture to sanctioning states, the target is less likely to comply to the sanction.
-%IS THIS RIGHT
-
-In addition to these measures we control for previous sender and target behavior via the number of sanctions each state has recieved and sent in the previous time period. The graphic shows that as the number of previous sanctions sent and recieved increases, the more likely a state is to comply to the sanction case at hand. 
-%WHY?
-
-
-
-
+The graphs in figure \ref{fig:surv2} demonstrate the effects of ``proximate'' relationships. In the panel on the far left we show the effects for distance, and we can see that when the distance between states is large (the blue line) compliance is predicted to take longer than when states are geographically closer together (the red line). Not surprisingly, we also see that when target states are allies with sanction senders, (the blue line) they are more likely to comply -- though the effect of this variable is much more marginal than the other covariates that we are highlighting. Interestingly, our argument that religious similarity should also pressure states into quicker compliance is not supported. We see in the graph for religion that as religious similarity increases (the blue line) the probability of survival, or denying compliance, also increases. This suggest that when target states share the same religious culture to sanctioning states, the target is less likely to comply to the sanction by a very large degree.
 
 \begin{figure}[ht]
 	\centering
+	\caption{Survival probabilities by ``proximity'' covariates. Red designates scenarios in which covariate is set to its low value and blue where it is set to its high value.}
 	% \includegraphics[width=1\textwidth]{oNet}
 	\resizebox{1\textwidth}{!}{\input{../TeXoutput/oNet.tex}}	
+	\label{fig:surv2}
 \end{figure}
+\FloatBarrier
+
+In figure \ref{fig:surv3}, we show the results for our covariate measured at the yearly sanction network. Specifically, we accounted for the total number of sanctions that a country faced in any given year, with the idea that states facing a multitude of sanctions in any given year will be more likely to resolve any one of those cases. Here we can see that this has a noticeable effect on the probability of compliance, indicating that countries facing multiple sanctions have a higher probability of complying to any one of them than others. 
 
 \begin{figure}[ht]
 	\centering
+	\caption{Survival probabilities by varying number of sanctions received by a country at a yearly level. Red designates scenario where the number of senders is set to its low value and blue the scenario where it is set to its high value.}
 	% \includegraphics[width=1\textwidth]{oNet}
-	\resizebox{1\textwidth}{!}{\input{../TeXoutput/oNet2.tex}}	
+	\resizebox{0.7\textwidth}{!}{\input{../TeXoutput/oNet2.tex}}	
+	\label{fig:surv3}	
 \end{figure}
-
+\FloatBarrier

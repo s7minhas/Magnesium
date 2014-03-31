@@ -51,6 +51,11 @@ Greenhill, B. 2010.
 \newblock Norm Transmission in Networks of Intergovermental Organizations PhD
   thesis University of Washington.
 
+\harvarditem{Henisz}{2000}{henisz2000a}
+Henisz, Witold~J. 2000.
+\newblock ``The institutional environment for economic growth.'' {\em Economics
+  \& Politics} 12(1):1--31.
+
 \harvarditem{Hoff \harvardand\ Ward}{2004}{hoff2004modeling}
 Hoff, P.D. \harvardand\ M.D. Ward. 2004.
 \newblock ``Modeling dependencies in international relations networks.'' {\em
@@ -101,5 +106,11 @@ Morgan, T~Clifton \harvardand\ Valerie~L Schwebach. 1997.
 Warren, T.C. 2010.
 \newblock ``The geometry of security: Modeling interstate alliances as evolving
   networks.'' {\em Journal of Peace Research} 47(6):697--709.
+
+\harvarditem[Weidmann, Kuse \harvardand\ Gleditsch]{Weidmann, Kuse \harvardand\
+  Gleditsch}{2010}{weidmann2010geography}
+Weidmann, N.B., D. Kuse \harvardand\ K.S. Gleditsch. 2010.
+\newblock ``The geography of the international system: The cshapes dataset.''
+  {\em International Interactions} 36(1):86--106.
 
 \end{thebibliography}

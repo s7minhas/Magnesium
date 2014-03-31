@@ -17,13 +17,13 @@ aData$lag1_polity2=aData$lag1_polity^2
 varDef = cbind (  
 	c( 'noS', 'distdata', 'tdata', 'allydata', 'igodata', 'Creligdata',
 	 'lag1_sancSenCnt', 'lag1_sancRecCnt', 
-	 'lag1_polity', 'lag1_polity2',
+	 'lag1_polconiii',
 	 'lag1_lgdpCAP', 'lag1_gdpGR','lag1_Internal.Conflict'),
 	c( 'Number of Senders$_{j,t}$', 
 	'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$', 'IGOs$_{j,t}$', 
 	'Religion$_{j,t}$', 
 	"Sanc. Sent$_{j,t-1}$", "Sanc. Rec'd$_{i,t-1}$",
-	'Polity$_{i,t-1}$', 'Polity$^{2}_{i,t-1}$',
+	'Constraints$_{i,t-1}$',
 	'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$','Internal Stability$_{i,t-1}$' )
 	)
 
@@ -161,10 +161,10 @@ dev.off()
 par(mfrow=c(1,1))
 
 ###
-tikz(file='oNet2.tex', height=3, width=8, standAlone=F)
-coefs=c('lag1_sancSenCnt','lag1_sancRecCnt')
+tikz(file='oNet2.tex', height=4, width=6, standAlone=F)
+coefs=c('lag1_sancRecCnt')
 cnames=varDef[match(coefs, varDef[,1]), 2]
-par(mfrow=c(1,2))
+par(mfrow=c(1,1))
 for(ii in 1:length(coefs)){
 	coef=coefs[ii]
 	if (coef=='distdata') { crange=c(0.001,0.005)
@@ -179,3 +179,17 @@ for(ii in 1:length(coefs)){
 	title(xlab='Time (Years)') } 
 dev.off()
 par(mfrow=c(1,1))
+
+tikz(file='oNet2.tex', height=4, width=6, standAlone=F)
+plot(survfit(simModel, 
+	scenBuild(vi='lag1_sancRecCnt', vRange=vrfn(aData[,'lag1_sancRecCnt']),
+	vars=names(simModel$coefficients), 
+	ostat=mean, simData=modData) ),
+	conf.int=F, col=pcolors, las=1,
+	# main='Number of Senders', 
+	main='', 
+	ylim=c(0.5,1), xlim=c(0,30), 
+	ylab='Survival Probability', xlab='Time (Years)', bty='n')
+legend('topright', c("Few Sanctions", "Many Sanctions"), 
+	lty = 1, col=pcolors, bty='n')
+dev.off()
