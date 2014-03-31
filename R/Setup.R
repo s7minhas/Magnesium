@@ -353,6 +353,7 @@ netMelt <- function(meltData, meltID, meltYr, netList, rst=TRUE, netStat=functio
 
 # Function to set up scenarios for prediction
 scenBuild=function(vi, vRange, vars, ostat, simData){
+	if(is.null(vRange)){ vRange=quantile(simData[,vi], probs=c(0.05,0.95), na.rm=T) }	
 	scenCol = length(vars); scenRow = length(vRange)
 	scenario = matrix(NA, nrow=scenRow, ncol=scenCol)
 	colnames(scenario) = c(vars)
@@ -424,4 +425,18 @@ durTable = function(modResults, varDef, digs=3){
 	temp[which(is.na(temp))]=tableFinal[,'Variable'][which(is.na(temp))]
 	tableFinal[,'Variable']=temp
 	tableFinal
+}
+
+# Function for risk ratios
+riskRatio=function(sims, model, data, var, seed=6886){
+	set.seed(seed)
+	coefDist=mvrnorm (sims, coef (model), vcov (model))
+	scen=scenBuild(vi=var, vRange=NULL,
+		vars=names(model$coefficients), ostat=mean, simData=data)
+	preds=coefDist%*%t(scen)
+
+	hr=median(exp(preds[,2])/exp(preds[,1])) # Hazard ratio
+	bse=sd (preds[,2] - preds[,1]) 	# Bootstrapped se
+	ci=c( mean( exp( log( hr ) - 1.96*bse ) ), mean( exp( log( hr ) + 1.96*bse ) )) # Conf int
+	matrix( c(hr, ci), ncol=3, dimnames=list(var,c('mean','lci','uci')) ) # Output
 }
