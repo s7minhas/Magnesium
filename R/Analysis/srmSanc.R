@@ -3,6 +3,7 @@
 # CD & SM
 # Load data, create matrices, run SRM, pull out useful measures, plot.
 ###################################################
+
 if(Sys.info()["user"]=="janus829"){
 source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')}
 
@@ -69,7 +70,7 @@ actor.partner.covariance<-lapply(outComp, function(year) year$actor.partner.cova
 colmeans <- lapply(outComp, function(year) year$colmeans)
 
 
-# grahpics
+# graphics
 # reciprocity figure sanc
 uniq.net<-as.matrix(outSanc$year_1990$unique.effect.ij)
 diag(uniq.net)<-0
@@ -83,13 +84,28 @@ qgraph(smatList$"1990", weighted=TRUE, labels=rownames(smatList))
 par(fig=c(0,1,0,1))
 
 #covariance over time
-plot(seq(1960,2005,1), lapply(relationship.covariance,(log))
-plot(seq(1960,2005,1), lapply(actor.partner.covariance,log))
+plot(seq(1960,2005,1), lapply(relationship.covariance, log), pch = 19)
+points(seq(1960,2005,1), lapply(actor.partner.covariance,log), pch = 19, col="red")
+title("orange= actor partner covariance, black= relationship covariance") 
+
+#actor & partner effects over time
+aeSum<-lapply(actor.effect.i, mean)
+peSum<-lapply(partner.effect.i, mean)
+plot(seq(1960,2005,1), aeSum, pch=19)
+points(seq(1960, 2005, 1), peSum, col="orange", pch=19)
+title("orange= partner effects, black=actor effects")
+
+#variance over time
+plot(seq(1960,2005,1), lapply(unique.variance,log), pch = 19, col="purple", ylim=c(-16,-2))
+points(seq(1960,2005,1), lapply(actor.variance,log), pch = 19, col="black")
+points(seq(1960,2005,1), lapply(partner.variance,log), pch = 19, col="turquoise")
+title("unique variance (purple), actor variance (blk) & partner variance (turq)")
+
+
+
 
 
 ## NOTES
 # relationship/unique variance- measuring the degree to which compliance is unique to particular parings/partners; reflects variance due to the interaction between actor and partner 
-
-# actor-partner covariance is the extent to which i's compliance, in general, is correlated with partners (js') compliance with i. 
-
+# actor-partner covariance is the extent to which i's compliance, in general, is correlated with partners (js') compliance with i.
 # The relationship covariance can be thought of as the association between how country i complies specifically with country j and how partner j complies specifically with country i.
