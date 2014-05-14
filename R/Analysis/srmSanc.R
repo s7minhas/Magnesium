@@ -10,102 +10,121 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')}
 if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
+############################################################
 # Load sanction & compliance network Data
 setwd(pathData)
 load('sanctionNet.rda') #smatList
 load('complianceNet.rda') #cmatList
+############################################################
 
+############################################################
 # srm
 if(Sys.info()["user"]=="janus829"){
 source('/Users/janus829/Desktop/Research/Magnesium/R/Analysis/SRM.R')}
 
 if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Analysis/SRM.R')}
+############################################################
 
-# source("SRM.R")
+############################################################
+# Creating network measures for use in duration model
+compNet=lapply(ccmatList, function(x) FUN=dyads(x))
 
-#out<-lapply(smatList, function(x), FUN=dyads(x))
+# Pulling out individual effects
+actorEffect=lapply(compNet, function(x) FUN=x$actor.effect.i)
+rcvrEffect=lapply(compNet, function(x) FUN=x$partner.effect.i)
+ueffect=lapply(compNet, function(x) FUN=x$unique.effect.ij)
+colmeans=lapply(compNet, function(x) FUN=x$colmeans)
 
-outSanc<-list()
-year <- 1960
-		for (i in smatList){
-			print(year)
-			outSanc <- c(outSanc,list(dyads(i)))
-			names(outSanc)[length(outSanc)] <- paste("year",year, sep="_")
-			year <- year+1
-		}
-outSanc <-outSanc 
+# Save data
+setwd(pathData)
+save(actorEffect, rcvrEffect, ueffect, colmeans, file='compSRM.rda')
+############################################################
 
-# pull out all of the individual SRM stats for all the years
-actor.effect.i <- lapply(outSanc, function(year) year$actor.effect.i)
-partner.effect.i <- lapply(outSanc, function(year) year$partner.effect.i)
-unique.effect.ij <- lapply(outSanc, function(year) year$unique.effect.ij) #mat
-unique.variance<- lapply(outSanc, function(year) year$unique.variance) #1/yr
-relationship.covariance<-lapply(outSanc, function(year) year$relationship.covariance) 
-actor.variance<- lapply(outSanc, function(year) year$actor.variance) #1/yr
-partner.variance<-lapply(outSanc, function(year) year$partner.variance) #1/yr
-actor.partner.covariance<-lapply(outSanc, function(year) year$actor.partner.covariance)
-colmeans <- lapply(outSanc, function(year) year$colmeans)
+############################################################
+# # source("SRM.R")
 
-# run on compliance matrix
-outComp<-list()
-year <- 1960
-		for (i in cmatList){
-			print(year)
-			outComp <- c(outComp,list(dyads(i)))
-			names(outComp)[length(outComp)] <- paste("year",year, sep="_")
-			year <- year+1
-		}
-outComp <-outComp
+# #out<-lapply(smatList, function(x), FUN=dyads(x))
 
-# pull out all of the individual SRM stats for all the years
-actor.effect.i <- lapply(outComp, function(year) year$actor.effect.i)
-partner.effect.i <- lapply(outComp, function(year) year$partner.effect.i)
-unique.effect.ij <- lapply(outComp, function(year) year$unique.effect.ij) #mat
-unique.variance<- lapply(outComp, function(year) year$unique.variance) #1/yr
-relationship.covariance<-lapply(outComp, function(year) year$relationship.covariance) 
-actor.variance<- lapply(outComp, function(year) year$actor.variance) #1/yr
-partner.variance<-lapply(outComp, function(year) year$partner.variance) #1/yr
-actor.partner.covariance<-lapply(outComp, function(year) year$actor.partner.covariance)
-colmeans <- lapply(outComp, function(year) year$colmeans)
+# outSanc<-list()
+# year <- 1960
+# 		for (i in smatList){
+# 			print(year)
+# 			outSanc <- c(outSanc,list(dyads(i)))
+# 			names(outSanc)[length(outSanc)] <- paste("year",year, sep="_")
+# 			year <- year+1
+# 		}
 
+# # pull out all of the individual SRM stats for all the years
+# actor.effect.i <- lapply(outSanc, function(year) year$actor.effect.i)
+# partner.effect.i <- lapply(outSanc, function(year) year$partner.effect.i)
+# unique.effect.ij <- lapply(outSanc, function(year) year$unique.effect.ij) #mat
+# unique.variance<- lapply(outSanc, function(year) year$unique.variance) #1/yr
+# relationship.covariance<-lapply(outSanc, function(year) year$relationship.covariance) 
+# actor.variance<- lapply(outSanc, function(year) year$actor.variance) #1/yr
+# partner.variance<-lapply(outSanc, function(year) year$partner.variance) #1/yr
+# actor.partner.covariance<-lapply(outSanc, function(year) year$actor.partner.covariance)
+# colmeans <- lapply(outSanc, function(year) year$colmeans)
 
-# graphics
-# reciprocity figure sanc
-uniq.net<-as.matrix(outSanc$year_1990$unique.effect.ij)
-diag(uniq.net)<-0
-plot.network(network(uniq.net, directed=T, usearrows=T,edge.col=8, vertex.col="darkblue",label.col="black", label.pos=1, label.cex=.75, edge.lwd=.1) 
+# # run on compliance matrix
+# outComp<-list()
+# year <- 1960
+# 		for (i in cmatList){
+# 			print(year)
+# 			outComp <- c(outComp,list(dyads(i)))
+# 			names(outComp)[length(outComp)] <- paste("year",year, sep="_")
+# 			year <- year+1
+# 		}
 
-# reciprocity figure sanc 2
-library(qgraph)
-qgraph(uniq.net, minimum=-min(outSanc$year_1990$unique.effect.ij), maximum=  max(outSanc$year_1990$unique.effect.ij), labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE, diag=FALSE)
-par(fig=c(.8,1,.8,1),new=T)
-qgraph(smatList$"1990", weighted=TRUE, labels=rownames(smatList))
-par(fig=c(0,1,0,1))
-
-#covariance over time
-plot(seq(1960,2005,1), lapply(relationship.covariance, log), pch = 19)
-points(seq(1960,2005,1), lapply(actor.partner.covariance,log), pch = 19, col="red")
-title("orange= actor partner covariance, black= relationship covariance") 
-
-#actor & partner effects over time
-aeSum<-lapply(actor.effect.i, mean)
-peSum<-lapply(partner.effect.i, mean)
-plot(seq(1960,2005,1), aeSum, pch=19)
-points(seq(1960, 2005, 1), peSum, col="orange", pch=19)
-title("orange= partner effects, black=actor effects")
-
-#variance over time
-plot(seq(1960,2005,1), lapply(unique.variance,log), pch = 19, col="purple", ylim=c(-16,-2))
-points(seq(1960,2005,1), lapply(actor.variance,log), pch = 19, col="black")
-points(seq(1960,2005,1), lapply(partner.variance,log), pch = 19, col="turquoise")
-title("unique variance (purple), actor variance (blk) & partner variance (turq)")
+# # pull out all of the individual SRM stats for all the years
+# actor.effect.i <- lapply(outComp, function(year) year$actor.effect.i)
+# partner.effect.i <- lapply(outComp, function(year) year$partner.effect.i)
+# unique.effect.ij <- lapply(outComp, function(year) year$unique.effect.ij) #mat
+# unique.variance<- lapply(outComp, function(year) year$unique.variance) #1/yr
+# relationship.covariance<-lapply(outComp, function(year) year$relationship.covariance) 
+# actor.variance<- lapply(outComp, function(year) year$actor.variance) #1/yr
+# partner.variance<-lapply(outComp, function(year) year$partner.variance) #1/yr
+# actor.partner.covariance<-lapply(outComp, function(year) year$actor.partner.covariance)
+# colmeans <- lapply(outComp, function(year) year$colmeans)
 
 
+# # graphics
+# # reciprocity figure sanc
+# uniq.net<-as.matrix(outSanc$year_1990$unique.effect.ij)
+# diag(uniq.net)<-0
+# plot.network(network(uniq.net, directed=T, usearrows=T,edge.col=8, vertex.col="darkblue",label.col="black", label.pos=1, label.cex=.75, edge.lwd=.1) 
+
+# # reciprocity figure sanc 2
+# library(qgraph)
+# qgraph(uniq.net, minimum=-min(outSanc$year_1990$unique.effect.ij), maximum=  max(outSanc$year_1990$unique.effect.ij), labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE, diag=FALSE)
+# par(fig=c(.8,1,.8,1),new=T)
+# qgraph(smatList$"1990", weighted=TRUE, labels=rownames(smatList))
+# par(fig=c(0,1,0,1))
+
+# #covariance over time
+# plot(seq(1960,2005,1), lapply(relationship.covariance, log), pch = 19)
+# points(seq(1960,2005,1), lapply(actor.partner.covariance,log), pch = 19, col="red")
+# title("orange= actor partner covariance, black= relationship covariance") 
+
+# #actor & partner effects over time
+# aeSum<-lapply(actor.effect.i, mean)
+# peSum<-lapply(partner.effect.i, mean)
+# plot(seq(1960,2005,1), aeSum, pch=19)
+# points(seq(1960, 2005, 1), peSum, col="orange", pch=19)
+# title("orange= partner effects, black=actor effects")
+
+# #variance over time
+# plot(seq(1960,2005,1), lapply(unique.variance,log), pch = 19, col="purple", ylim=c(-16,-2))
+# points(seq(1960,2005,1), lapply(actor.variance,log), pch = 19, col="black")
+# points(seq(1960,2005,1), lapply(partner.variance,log), pch = 19, col="turquoise")
+# title("unique variance (purple), actor variance (blk) & partner variance (turq)")
 
 
 
-## NOTES
-# relationship/unique variance- measuring the degree to which compliance is unique to particular parings/partners; reflects variance due to the interaction between actor and partner 
-# actor-partner covariance is the extent to which i's compliance, in general, is correlated with partners (js') compliance with i.
-# The relationship covariance can be thought of as the association between how country i complies specifically with country j and how partner j complies specifically with country i.
+
+
+# ## NOTES
+# # relationship/unique variance- measuring the degree to which compliance is unique to particular parings/partners; reflects variance due to the interaction between actor and partner 
+# # actor-partner covariance is the extent to which i's compliance, in general, is correlated with partners (js') compliance with i.
+# # The relationship covariance can be thought of as the association between how country i complies specifically with country j and how partner j complies specifically with country i.
+############################################################
