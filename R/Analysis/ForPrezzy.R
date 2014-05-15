@@ -78,7 +78,7 @@ model3 = coxph(Surv(start, stop, compliance) ~
 	+ lag1_lgdpCAP + lag1_gdpGR
 	+ lag1_Internal.Conflict
 	, data=modData)
-summary(model3)
+# summary(model3)
 
 # Incorp reciprocity measure
 model4=coxph(Surv(start,stop,compliance) ~
@@ -91,15 +91,17 @@ model4=coxph(Surv(start,stop,compliance) ~
 	+ lag1_lgdpCAP + lag1_gdpGR
 	+ lag1_Internal.Conflict
 	, data=modData)
-summary(model4) 
+# summary(model4) 
 
 # Incorp reciprocity measure
 modelFinal=coxph(Surv(start,stop,compliance) ~
 	uData 
+	+ SuData
+	# + SmeanPtnrSndr
 	# + meanActorSndr	
 	+ noS 
 	+ distdata + tdata + allydata + igodata + Creligdata 
-	# + sancRecCnt
+	+ sancRecCnt
 	+ lag1_polconiii
 	+ lag1_lgdpCAP + lag1_gdpGR
 	+ lag1_Internal.Conflict
