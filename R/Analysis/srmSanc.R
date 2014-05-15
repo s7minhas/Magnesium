@@ -42,6 +42,21 @@ save(actorEffect, rcvrEffect, ueffect, colmeans, file='compSRM.rda')
 ############################################################
 
 ############################################################
+# Creating network measures for use in duration model
+sancNet=lapply(csmatList, function(x) FUN=dyads(x))
+
+# Pulling out individual effects
+SactorEffect=lapply(sancNet, function(x) FUN=x$actor.effect.i)
+SrcvrEffect=lapply(sancNet, function(x) FUN=x$partner.effect.i)
+Sueffect=lapply(sancNet, function(x) FUN=x$unique.effect.ij)
+Scolmeans=lapply(sancNet, function(x) FUN=x$colmeans)
+
+# Save data
+setwd(pathData)
+save(SactorEffect, SrcvrEffect, Sueffect, Scolmeans, file='sancSRM.rda')
+############################################################
+
+############################################################
 # # source("SRM.R")
 
 # #out<-lapply(smatList, function(x), FUN=dyads(x))

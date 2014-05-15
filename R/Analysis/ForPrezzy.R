@@ -83,7 +83,7 @@ summary(model3)
 # Incorp reciprocity measure
 model4=coxph(Surv(start,stop,compliance) ~
 	uData 
-	+ meanActorSndr	
+	# + meanActorSndr	
 	+ noS + distdata + tdata + allydata + igodata + Creligdata 
 	+ lag1_sancSenCnt 
 	+ lag1_sancRecCnt
@@ -94,17 +94,17 @@ model4=coxph(Surv(start,stop,compliance) ~
 summary(model4) 
 
 # Incorp reciprocity measure
-model5=coxph(Surv(start,stop,compliance) ~
+modelFinal=coxph(Surv(start,stop,compliance) ~
 	uData 
-	+ meanActorSndr	
+	# + meanActorSndr	
 	+ noS 
 	+ distdata + tdata + allydata + igodata + Creligdata 
-	+ sancRecCnt
+	# + sancRecCnt
 	+ lag1_polconiii
 	+ lag1_lgdpCAP + lag1_gdpGR
 	+ lag1_Internal.Conflict
 	, data=modData)
-summary(model5) 
+summary(modelFinal) 
 
 
 # To add frailty term

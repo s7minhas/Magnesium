@@ -134,7 +134,7 @@ aData <- merge(x=durData, y=monadData[,c(1,3,5:ncol(monadData))],
 ###############################################################
 
 ###############################################################
-# Node level network measures from SRM
+# Compliance Node level network measures from SRM
 setwd(pathData)
 load('compSRM.rda') # contains actorEffect, rcvrEffect, ueffect, colmeans
 
@@ -209,6 +209,62 @@ senders <- aData[,varsT]
 uDataRST=netMelt(senders, 'targetstate', 'year', ueffect)
 uData=netMelt(senders, 'targetstate', 'year', ueffect, rst=FALSE)
 aData=cbind(aData, uDataRST, uData)
+###############################################################
+
+###############################################################
+# Sanction  Node level network measures from SRM
+setwd(pathData)
+load('sancSRM.rda') # contains SactorEffect, SrcvrEffect, Sueffect, Scolmeans
+
+SactorData=unpackSRM(SactorEffect)
+SrcvrData=unpackSRM(SrcvrEffect)
+ScolmData=unpackSRM(Scolmeans, dim=F)
+SsrmData=data.frame(cbind(SactorData[,c(3,1)],SactorData[,2], SrcvrData[,2], ScolmData[,2]))
+colnames(SsrmData)=c('ccode','year','Sactor','Spartner','Scolmean')
+SsrmData$cyear=paste0(SsrmData$ccode, SsrmData$year)
+
+# Merge in for targetstate
+aData=merge(aData, SsrmData[,3:ncol(SsrmData)], by.x='tyear', by.y='cyear', all.x=T)
+
+# Merge in for sender states (avg, max)
+# To do so we create a dataframe of just senders and year
+# Then merge in srm data for each sender
+# After this we can just take mean, max and merge back into adata
+
+# Creating sender-year frame
+sVars=paste('sender',1:5,'_ccode',sep='')
+vars=c('year',sVars)
+senders=aData[,vars]; colnames(senders)=c('year','s1','s2','s3','s4','s5')
+syears=matrix(apply(senders[,2:ncol(senders)],2,function(x) FUN=numSM(paste(x,senders[,1], sep=''))),ncol=5)
+colnames(syears)=paste0('syr',1:5)
+
+# Adding SRM data, by column (five senders)
+sData=senders
+for(ii in 1:5){
+	slice=cbind(syears[,paste0('syr',ii)],
+		SsrmData[match(syears[,paste0('syr',ii)], SsrmData[,ncol(SsrmData)]),3:(ncol(SsrmData)-1)])
+	colnames(slice)=c(paste0('syr',ii),paste0(colnames(slice)[2:ncol(slice)],ii))
+	sData=cbind(sData, slice)
+}
+
+# Aggregating
+sActor=t(apply(sData[,paste0('Sactor',1:5)], 1, function(x) FUN=cbind(meanSRM(x),maxSRM(x))))
+colnames(sActor)=c('SmeanActorSndr', 'SmaxActorSndr')
+sPtnr=t(apply(sData[,paste0('Spartner',1:5)], 1, function(x) FUN=cbind(meanSRM(x),maxSRM(x))))
+colnames(sPtnr)=c('SmeanPtnrSndr', 'SmaxPtnrSndr')
+sColm=t(apply(sData[,paste0('Scolmean',1:5)], 1, function(x) FUN=cbind(meanSRM(x),maxSRM(x))))
+colnames(sColm)=c('SmeanColmSndr', 'SmaxColmSndr')
+aData=cbind(aData, sActor, sPtnr, sColm)
+
+# Incorporating dyadic effect
+sVars=paste('sender',1:5,'_ccode',sep='')
+vars=c('year',sVars)
+varsT=c('year','targetstate',sVars)
+senders <- aData[,varsT]
+
+SuDataRST=netMelt(senders, 'targetstate', 'year', Sueffect)
+SuData=netMelt(senders, 'targetstate', 'year', Sueffect, rst=FALSE)
+aData=cbind(aData, SuDataRST, SuData)
 ###############################################################
 
 ###############################################################
