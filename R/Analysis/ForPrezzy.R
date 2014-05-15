@@ -12,6 +12,25 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 
 # Var mods
 aData$lag1_polity2=aData$lag1_polity^2	
+# SRM measures
+minNA=function(x){min(x,na.rm=T)}
+srmVars=c('actor','partner','colmean',
+	'meanActorSndr','meanPtnrSndr','meanColmSndr',
+	'maxActorSndr','maxPtnrSndr','maxColmSndr',
+	'uDataRST','uData')
+
+attach(aData)
+actor = actor + minNA(actor)
+partner = partner + minNA(partner)
+meanActorSndr = meanActorSndr + minNA(meanActorSndr)
+meanPtnrSndr = meanPtnrSndr + minNA(meanPtnrSndr)
+maxActorSndr = maxActorSndr + minNA(maxActorSndr)
+maxPtnrSndr = maxPtnrSndr + minNA(maxPtnrSndr)
+uData = uData + minNA(uData)
+detach(aData)
+
+summary(aData[,srmVars])
+cor(aData[,srmVars], use='pairwise.complete.obs')
 
 # Variable key
 varDef = cbind (  
@@ -59,6 +78,34 @@ model3 = coxph(Surv(start, stop, compliance) ~
 	+ lag1_lgdpCAP + lag1_gdpGR
 	+ lag1_Internal.Conflict
 	, data=modData)
+summary(model3)
+
+# Incorp reciprocity measure
+model4=coxph(Surv(start,stop,compliance) ~
+	uData 
+	+ meanActorSndr	
+	+ noS + distdata + tdata + allydata + igodata + Creligdata 
+	+ lag1_sancSenCnt 
+	+ lag1_sancRecCnt
+	+ lag1_polconiii
+	+ lag1_lgdpCAP + lag1_gdpGR
+	+ lag1_Internal.Conflict
+	, data=modData)
+summary(model4) 
+
+# Incorp reciprocity measure
+model5=coxph(Surv(start,stop,compliance) ~
+	uData 
+	+ meanActorSndr	
+	+ noS 
+	+ distdata + tdata + allydata + igodata + Creligdata 
+	+ sancRecCnt
+	+ lag1_polconiii
+	+ lag1_lgdpCAP + lag1_gdpGR
+	+ lag1_Internal.Conflict
+	, data=modData)
+summary(model5) 
+
 
 # To add frailty term
 # frailty.gamma(as.factor(caseid), sparse=FALSE)
