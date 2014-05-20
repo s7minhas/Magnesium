@@ -208,7 +208,9 @@ senders <- aData[,varsT]
 
 uDataRST=netMelt(senders, 'targetstate', 'year', ueffect)
 uData=netMelt(senders, 'targetstate', 'year', ueffect, rst=FALSE)
-aData=cbind(aData, uDataRST, uData)
+ueffect2=lapply(ueffect, function(x) FUN=t(x)) # flipping pos of sen and rec
+uData2=netMelt(senders, 'targetstate', 'year', ueffect2, rst=FALSE)
+aData=cbind(aData, uDataRST, uData, uData2)
 ###############################################################
 
 ###############################################################
@@ -264,7 +266,9 @@ senders <- aData[,varsT]
 
 SuDataRST=netMelt(senders, 'targetstate', 'year', Sueffect)
 SuData=netMelt(senders, 'targetstate', 'year', Sueffect, rst=FALSE)
-aData=cbind(aData, SuDataRST, SuData)
+Sueffect2=lapply(Sueffect, function(x) FUN=t(x)) # flipping pos of sen and rec
+SuData2=netMelt(senders, 'targetstate', 'year', Sueffect2, rst=FALSE)
+aData=cbind(aData, SuDataRST, SuData, SuData2)
 ###############################################################
 
 ###############################################################

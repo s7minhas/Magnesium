@@ -95,16 +95,15 @@ model4=coxph(Surv(start,stop,compliance) ~
 
 # Incorp reciprocity measure
 modelFinal=coxph(Surv(start,stop,compliance) ~
-	uData 
-	+ SuData
-	# + SmeanPtnrSndr
-	# + meanActorSndr	
+	uData
+	+ SuData2
 	+ noS 
 	+ distdata + tdata + allydata + igodata + Creligdata 
 	+ sancRecCnt
 	+ lag1_polconiii
 	+ lag1_lgdpCAP + lag1_gdpGR
 	+ lag1_Internal.Conflict
+	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal) 
 
