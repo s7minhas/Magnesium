@@ -19,15 +19,15 @@ srmVars=c('actor','partner','colmean',
 	'maxActorSndr','maxPtnrSndr','maxColmSndr',
 	'uDataRST','uData')
 
-attach(aData)
-actor = actor + minNA(actor)
-partner = partner + minNA(partner)
-meanActorSndr = meanActorSndr + minNA(meanActorSndr)
-meanPtnrSndr = meanPtnrSndr + minNA(meanPtnrSndr)
-maxActorSndr = maxActorSndr + minNA(maxActorSndr)
-maxPtnrSndr = maxPtnrSndr + minNA(maxPtnrSndr)
-uData = uData + minNA(uData)
-detach(aData)
+# scaling above zero
+aData$actor = aData$actor + abs(minNA(aData$actor))
+aData$partner = aData$partner + abs(minNA(aData$partner))
+aData$meanActorSndr = aData$meanActorSndr + abs(minNA(aData$meanActorSndr))
+aData$meanPtnrSndr = aData$meanPtnrSndr + abs(minNA(aData$meanPtnrSndr))
+aData$maxActorSndr = aData$maxActorSndr + abs(minNA(aData$maxActorSndr))
+aData$maxPtnrSndr = aData$maxPtnrSndr + abs(minNA(aData$maxPtnrSndr))
+aData$uData = aData$uData + abs(minNA(aData$uData))
+aData$SuData2 = aData$SuData2 + abs(minNA(aData$SuData2))
 
 summary(aData[,srmVars])
 cor(aData[,srmVars], use='pairwise.complete.obs')
@@ -55,7 +55,7 @@ modData=aData
 #   	nsamp=2000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
 
 
-# Only state-specific non-network/rel. measures
+# Only state-specific measures
 model1 = coxph(Surv(start, stop, compliance) ~ 
 	# + lag1_polity + lag1_polity2
 	+ lag1_polconiii
@@ -63,43 +63,21 @@ model1 = coxph(Surv(start, stop, compliance) ~
 	+ lag1_Internal.Conflict
 	, data=modData)
 
-# Only network/rel. measures
+# State-specific and rel. measures
 model2 = coxph(Surv(start, stop, compliance) ~ 
-	noS + distdata + tdata + allydata + igodata + Creligdata 
-	+ lag1_sancSenCnt + lag1_sancRecCnt
-	, data=modData)
-
-# "network/relational" variables unlagged
-model3 = coxph(Surv(start, stop, compliance) ~ 
-	noS + distdata + tdata + allydata + igodata + Creligdata 
-	+ lag1_sancSenCnt + lag1_sancRecCnt
-	# + lag1_polity + lag1_polity2
+	+ noS + Ddistdata + tdata + allydata
+	 # + igodata + Creligdata 
 	+ lag1_polconiii
 	+ lag1_lgdpCAP + lag1_gdpGR
 	+ lag1_Internal.Conflict
 	, data=modData)
-# summary(model3)
-
-# Incorp reciprocity measure
-model4=coxph(Surv(start,stop,compliance) ~
-	uData 
-	# + meanActorSndr	
-	+ noS + distdata + tdata + allydata + igodata + Creligdata 
-	+ lag1_sancSenCnt 
-	+ lag1_sancRecCnt
-	+ lag1_polconiii
-	+ lag1_lgdpCAP + lag1_gdpGR
-	+ lag1_Internal.Conflict
-	, data=modData)
-# summary(model4) 
 
 # Incorp reciprocity measure
 modelFinal=coxph(Surv(start,stop,compliance) ~
-	uData
-	+ SuData2
+	uData + SuData2 
 	+ noS 
-	+ distdata + tdata + allydata + igodata + Creligdata 
-	+ sancRecCnt
+	+ Ddistdata + tdata + allydata
+	 # + igodata + Creligdata 
 	+ lag1_polconiii
 	+ lag1_lgdpCAP + lag1_gdpGR
 	+ lag1_Internal.Conflict
