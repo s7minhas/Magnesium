@@ -3,21 +3,27 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')}
 if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
+
+###############################################################
 setwd(pathData)
 load('durDataEcon.rda')
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
 aData=merge(aData,ids,by='targetstate',all.x=T)
+###############################################################
 
+###############################################################
 # Var mods
 aData$lag1_polity2=aData$lag1_polity^2	
+
 # SRM measures
 minNA=function(x){min(x,na.rm=T)}
 srmVars=c('actor','partner','colmean',
 	'meanActorSndr','meanPtnrSndr','meanColmSndr',
 	'maxActorSndr','maxPtnrSndr','maxColmSndr',
-	'uDataRST','uData')
+	'uDataRST','uData',
+	'SuData2', 'Sactor', 'Spartner')
 
 # scaling above zero
 aData$actor = aData$actor + abs(minNA(aData$actor))
@@ -27,11 +33,16 @@ aData$meanPtnrSndr = aData$meanPtnrSndr + abs(minNA(aData$meanPtnrSndr))
 aData$maxActorSndr = aData$maxActorSndr + abs(minNA(aData$maxActorSndr))
 aData$maxPtnrSndr = aData$maxPtnrSndr + abs(minNA(aData$maxPtnrSndr))
 aData$uData = aData$uData + abs(minNA(aData$uData))
+
 aData$SuData2 = aData$SuData2 + abs(minNA(aData$SuData2))
+aData$Sactor = aData$Sactor + abs(minNA(aData$Sactor))
+aData$Spartner = aData$Spartner + abs(minNA(aData$Spartner))
 
 summary(aData[,srmVars])
 cor(aData[,srmVars], use='pairwise.complete.obs')
+###############################################################
 
+###############################################################
 # Variable key
 varDef = cbind (  
 	c( 'noS', 'distdata', 'tdata', 'allydata', 'igodata', 'Creligdata',
@@ -49,12 +60,13 @@ varDef = cbind (
 # No imputation
 modData=aData
 
-# Impute missing values
+# # Impute missing values
 # sbgcopTimeSR <- system.time(
-#   sbgcopFitSR <- sbgcop.mcmc(aData, 
+#   sbgData <- sbgcop.mcmc(aData[,varDef[,1]], 
 #   	nsamp=2000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
+###############################################################
 
-
+###############################################################
 # Only state-specific measures
 model1 = coxph(Surv(start, stop, compliance) ~ 
 	# + lag1_polity + lag1_polity2
@@ -62,66 +74,46 @@ model1 = coxph(Surv(start, stop, compliance) ~
 	+ lag1_lgdpCAP + lag1_gdpGR
 	+ lag1_Internal.Conflict
 	, data=modData)
+summary(model1)
 
 # State-specific and rel. measures
 model2 = coxph(Surv(start, stop, compliance) ~ 
 	+ noS + Ddistdata + tdata + allydata
 	 # + igodata + Creligdata 
-	+ lag1_polconiii
-	+ lag1_lgdpCAP + lag1_gdpGR
-	+ lag1_Internal.Conflict
+	+ lag1_polconiii + lag1_lgdpCAP + lag1_gdpGR + lag1_Internal.Conflict
 	, data=modData)
+summary(model2)
 
 # Incorp reciprocity measure
 modelFinal=coxph(Surv(start,stop,compliance) ~
 	uData + SuData2 
-	+ noS 
-	+ Ddistdata + tdata + allydata
-	 # + igodata + Creligdata 
-	+ lag1_polconiii
-	+ lag1_lgdpCAP + lag1_gdpGR
-	+ lag1_Internal.Conflict
+	+ noS + Ddistdata + tdata + allydata
+	+ lag1_polconiii + lag1_lgdpCAP + lag1_gdpGR + lag1_Internal.Conflict
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
-summary(modelFinal) 
-
+summary(modelFinal)
 
 # To add frailty term
 # frailty.gamma(as.factor(caseid), sparse=FALSE)
+############################################################### 
+
+############################################################### 
+# Diagnostics
 
 # Nonlinearity in continuous covariates
 # pspline
 
 # Testing proportionality assumption, 99% CI
-cox.zph(model3)
+cox.zph(modelFinal)
 par(mfrow=c(3,4))
-plot(cox.zph(model3, transform='identity'))
+plot(cox.zph(modelFinal, transform='identity'))
 par(mfrow=c(1,1))
 
-# Evid of nonprop then interact with log.time
-# modData$distStop=I(modData$distdata*log(modData$stop))
-modData$igoStop=I(modData$igodata*log(modData$stop))
-modData$CreligStop=I(modData$Creligdata*log(modData$stop))
-modData$gdpGRStop=I(modData$lag1_gdpGR*log(modData$stop))
+# No Evid of nonprop then interact with log.time
+# modData$gdpGRStop=I(modData$lag1_gdpGR*log(modData$stop))
+############################################################### 
 
-model3v2 = coxph(Surv(start, stop, compliance) ~ 
-	noS + distdata + tdata + allydata + igodata + Creligdata 
-	+ lag1_sancSenCnt + lag1_sancRecCnt
-	# + lag1_polity + lag1_polity2
-	+ lag1_polconiii
-	+ lag1_lgdpCAP + lag1_gdpGR
-	+ lag1_Internal.Conflict
-	# + distStop 
-	+ igoStop 
-	+ CreligStop
-	+ gdpGRStop
-	, data=modData)
-cox.zph(model3v2) 
-
-# Compare
-summary(model3)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
-summary(model3v2)$coefficients[,c('coef','se(coef)','Pr(>|z|)')]
-
+############################################################### 
 # Table for TeX
 setwd(pathTex)
 # durTables=durTable(list(model1, model2, model3v2), varDef)
@@ -135,13 +127,17 @@ print.xtable( xtable(durTables, align='llc',
 	size='normalsize',
 	file='durModelResults.tex'
 	)
+############################################################### 
 
+############################################################### 
 # Risk ratios
 riskVars=c('noS', 'distdata', 'allydata', 'Creligdata', 
 	'lag1_sancSenCnt', 'lag1_sancRecCnt', 
 	'lag1_polconiii')
 riskRatios=t(mapply(x=riskVars, function(x) FUN=riskRatio(1000, model3v2, modData, x)))
+############################################################### 
 
+############################################################### 
 ###
 # Vars to generate survival plots for:
 	# noS, distance, ally, igo, religion
@@ -219,3 +215,4 @@ plot(survfit(simModel,
 legend('topright', c("Few Sanctions", "Many Sanctions"), 
 	lty = 1, col=pcolors, bty='n')
 dev.off()
+############################################################### 
