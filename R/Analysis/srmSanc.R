@@ -30,7 +30,7 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Analysis/SRM.R')}
 # Creating network measures for use in duration model
 compNet=lapply(ccmatList, function(x) FUN=dyads(x))
 
-# Pulling out individual effects
+# Pulling out effects
 actorEffect=lapply(compNet, function(x) FUN=x$actor.effect.i)
 rcvrEffect=lapply(compNet, function(x) FUN=x$partner.effect.i)
 ueffect=lapply(compNet, function(x) FUN=x$unique.effect.ij)
@@ -45,7 +45,7 @@ save(actorEffect, rcvrEffect, ueffect, colmeans, file='compSRM.rda')
 # Creating network measures for use in duration model
 sancNet=lapply(csmatList, function(x) FUN=dyads(x))
 
-# Pulling out individual effects
+# Pulling out effects
 SactorEffect=lapply(sancNet, function(x) FUN=x$actor.effect.i)
 SrcvrEffect=lapply(sancNet, function(x) FUN=x$partner.effect.i)
 Sueffect=lapply(sancNet, function(x) FUN=x$unique.effect.ij)

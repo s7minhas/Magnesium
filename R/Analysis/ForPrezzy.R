@@ -45,14 +45,11 @@ cor(aData[,srmVars], use='pairwise.complete.obs')
 ###############################################################
 # Variable key
 varDef = cbind (  
-	c( 'noS', 'distdata', 'tdata', 'allydata', 'igodata', 'Creligdata',
-	 'lag1_sancSenCnt', 'lag1_sancRecCnt', 
-	 'lag1_polconiii',
-	 'lag1_lgdpCAP', 'lag1_gdpGR','lag1_Internal.Conflict'),
-	c( 'Number of Senders$_{j,t}$', 
-	'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$', 'IGOs$_{j,t}$', 
-	'Religion$_{j,t}$', 
-	"Sanc. Sent$_{j,t-1}$", "Sanc. Rec'd$_{i,t-1}$",
+	c( 'uData', 'SuData2',
+		'noS', 'Ddistdata', 'tdata', 'allydata', 
+	 'lag1_polconiii', 'lag1_lgdpCAP', 'lag1_gdpGR','lag1_Internal.Conflict'),
+	c( 'Compliance Reciprocity$_{j,t}$', 'Sanction Reciprocity$_{j,t}$',
+	'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$', 
 	'Constraints$_{i,t-1}$',
 	'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$','Internal Stability$_{i,t-1}$' )
 	)
@@ -118,12 +115,12 @@ par(mfrow=c(1,1))
 setwd(pathTex)
 # durTables=durTable(list(model1, model2, model3v2), varDef)
 # print.xtable( xtable(durTables, align='llccc', 
-durTables=durTable(list(model3v2), varDef)	
+durTables=durTable(list(modelFinal), varDef)	
 print.xtable( xtable(durTables, align='llc', 	
 	caption='Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
 	),
 	include.rownames=FALSE, sanitize.text.function=identity,
-	hline.after=c(0,0,12,16,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
+	hline.after=c(0,0,4,12,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
 	size='normalsize',
 	file='durModelResults.tex'
 	)
@@ -131,17 +128,16 @@ print.xtable( xtable(durTables, align='llc',
 
 ############################################################### 
 # Risk ratios
-riskVars=c('noS', 'distdata', 'allydata', 'Creligdata', 
-	'lag1_sancSenCnt', 'lag1_sancRecCnt', 
-	'lag1_polconiii')
-riskRatios=t(mapply(x=riskVars, function(x) FUN=riskRatio(1000, model3v2, modData, x)))
+riskVars=c('uData', 'SuData2',
+	'noS', 'Ddistdata', 'tdata', 'allydata')
+riskRatios=t(mapply(x=riskVars, function(x) FUN=riskRatio(1000, modelFinal, modData, x)))
 ############################################################### 
 
 ############################################################### 
 ###
 # Vars to generate survival plots for:
 	# noS, distance, ally, igo, religion
-simModel=model3v2
+simModel=modelFinal
 pcolors=append(brewer.pal(9,'Reds')[8],brewer.pal(9,'Blues')[8])
 vrfn=function(x){c(min(x,na.rm=T),max(x,na.rm=T))}
 
@@ -163,9 +159,9 @@ dev.off()
 
 # pdf(file='oNet.pdf', height=7, width=10)
 tikz(file='oNet.tex', height=3, width=8, standAlone=F)
-coefs=c('distdata','allydata','Creligdata')
+coefs=c('distdata','tdata','allydata')
 cnames=varDef[match(coefs, varDef[,1]), 2]
-cnames=c('Distance','Ally', 'Religion')
+cnames=c('Distance','Trade', 'Ally')
 par(mfrow=c(1,3))
 for(ii in 1:length(coefs)){
 	coef=coefs[ii]
@@ -182,37 +178,37 @@ for(ii in 1:length(coefs)){
 dev.off()
 par(mfrow=c(1,1))
 
-###
-tikz(file='oNet2.tex', height=4, width=6, standAlone=F)
-coefs=c('lag1_sancRecCnt')
-cnames=varDef[match(coefs, varDef[,1]), 2]
-par(mfrow=c(1,1))
-for(ii in 1:length(coefs)){
-	coef=coefs[ii]
-	if (coef=='distdata') { crange=c(0.001,0.005)
-		} else { crange=vrfn(aData[,coef]) }	
-	plot(survfit(simModel, 
-		scenBuild(vi=coef, vRange=crange,
-		vars=names(simModel$coefficients), 
-		ostat=mean, simData=modData) ),
-	conf.int=F, col=pcolors, las=1,
-	main=cnames[ii], ylim=c(0.4,1), xlim=c(0,30))
-	if(ii==1){title(ylab='Survival Prob.')} 
-	title(xlab='Time (Years)') } 
-dev.off()
-par(mfrow=c(1,1))
+# ###
+# tikz(file='oNet2.tex', height=4, width=6, standAlone=F)
+# coefs=c('lag1_sancRecCnt')
+# cnames=varDef[match(coefs, varDef[,1]), 2]
+# par(mfrow=c(1,1))
+# for(ii in 1:length(coefs)){
+# 	coef=coefs[ii]
+# 	if (coef=='distdata') { crange=c(0.001,0.005)
+# 		} else { crange=vrfn(aData[,coef]) }	
+# 	plot(survfit(simModel, 
+# 		scenBuild(vi=coef, vRange=crange,
+# 		vars=names(simModel$coefficients), 
+# 		ostat=mean, simData=modData) ),
+# 	conf.int=F, col=pcolors, las=1,
+# 	main=cnames[ii], ylim=c(0.4,1), xlim=c(0,30))
+# 	if(ii==1){title(ylab='Survival Prob.')} 
+# 	title(xlab='Time (Years)') } 
+# dev.off()
+# par(mfrow=c(1,1))
 
-tikz(file='oNet2.tex', height=4, width=6, standAlone=F)
-plot(survfit(simModel, 
-	scenBuild(vi='lag1_sancRecCnt', vRange=vrfn(aData[,'lag1_sancRecCnt']),
-	vars=names(simModel$coefficients), 
-	ostat=mean, simData=modData) ),
-	conf.int=F, col=pcolors, las=1,
-	# main='Number of Senders', 
-	main='', 
-	ylim=c(0.5,1), xlim=c(0,30), 
-	ylab='Survival Probability', xlab='Time (Years)', bty='n')
-legend('topright', c("Few Sanctions", "Many Sanctions"), 
-	lty = 1, col=pcolors, bty='n')
-dev.off()
+# tikz(file='oNet2.tex', height=4, width=6, standAlone=F)
+# plot(survfit(simModel, 
+# 	scenBuild(vi='lag1_sancRecCnt', vRange=vrfn(aData[,'lag1_sancRecCnt']),
+# 	vars=names(simModel$coefficients), 
+# 	ostat=mean, simData=modData) ),
+# 	conf.int=F, col=pcolors, las=1,
+# 	# main='Number of Senders', 
+# 	main='', 
+# 	ylim=c(0.5,1), xlim=c(0,30), 
+# 	ylab='Survival Probability', xlab='Time (Years)', bty='n')
+# legend('topright', c("Few Sanctions", "Many Sanctions"), 
+# 	lty = 1, col=pcolors, bty='n')
+# dev.off()
 ############################################################### 
