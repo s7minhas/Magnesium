@@ -138,7 +138,7 @@ riskRatios
 	# noS, distance, ally, igo, religion
 simModel=modelFinal
 pcolors=append(brewer.pal(9,'Reds')[8],brewer.pal(9,'Blues')[8])
-vrfn=function(x){c(min(x,na.rm=T),max(x,na.rm=T))}
+vrfn=function(x,lo=0,hi=1){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
 
 setwd(pathTex)
 # pdf(file='nosSurv.pdf', height=4, width=6)
@@ -147,7 +147,7 @@ plot(survfit(simModel,
 	scenBuild(vi='noS', vRange=vrfn(aData[,'noS']),
 	vars=names(simModel$coefficients), 
 	ostat=mean, simData=modData) ),
-	conf.int=F, col=pcolors, las=1,
+	conf.int=F, col=pcolors, las=1, 
 	# main='Number of Senders', 
 	main='', 
 	ylim=c(0,1), xlim=c(0,30), 
@@ -171,20 +171,21 @@ for(ii in 1:length(coefs)){
 		vars=names(simModel$coefficients), 
 		ostat=mean, simData=modData) ),
 	conf.int=F, col=pcolors, las=1,
-	main=cnames[ii], ylim=c(0.4,1), xlim=c(0,30))
+	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
 	if(ii==1){title(ylab='Survival Prob.')} 
 	title(xlab='Time (Years)')  }
 # dev.off()
 par(mfrow=c(1,1))
 
+# pdf(file='oNet2.pdf', height=7, width=10)
+# tikz(file='oNet2.tex', height=3, width=8, standAlone=F)
 coefs=c('uData','SuData2')
 cnames=varDef[match(coefs, varDef[,1]), 2]
 cnames=c('Compliance Reciprocity','Sanction Reciprocity')
 par(mfrow=c(1,2))
 for(ii in 1:length(coefs)){
 	coef=coefs[ii]
-	# crange=vrfn(aData[,coef])
-	crange=numSM(quantile(aData[,coef],probs=c(0,.8),na.rm=T))
+	crange=vrfn(aData[,coef],lo=0,hi=0.75)
 	plot(survfit(simModel, 
 		scenBuild(vi=coef, vRange=crange,
 		vars=names(simModel$coefficients), 
