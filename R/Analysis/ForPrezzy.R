@@ -106,17 +106,15 @@ par(mfrow=c(3,4))
 plot(cox.zph(modelFinal, transform='identity'))
 par(mfrow=c(1,1))
 
-# No Evid of nonprop then interact with log.time
+# No Evid of nonprop, if there was then would interact with log.time
 # modData$gdpGRStop=I(modData$lag1_gdpGR*log(modData$stop))
 ############################################################### 
 
 ############################################################### 
 # Table for TeX
 setwd(pathTex)
-# durTables=durTable(list(model1, model2, model3v2), varDef)
-# print.xtable( xtable(durTables, align='llccc', 
-durTables=durTable(list(modelFinal), varDef)	
-print.xtable( xtable(durTables, align='llc', 	
+durTables=durTable(list(model1, model2, modelFinal), varDef)	
+print.xtable( xtable(durTables, align='llccc', 	
 	caption='Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
 	),
 	include.rownames=FALSE, sanitize.text.function=identity,
@@ -131,6 +129,7 @@ print.xtable( xtable(durTables, align='llc',
 riskVars=c('uData', 'SuData2',
 	'noS', 'Ddistdata', 'tdata', 'allydata')
 riskRatios=t(mapply(x=riskVars, function(x) FUN=riskRatio(1000, modelFinal, modData, x)))
+riskRatios
 ############################################################### 
 
 ############################################################### 
@@ -143,9 +142,9 @@ vrfn=function(x){c(min(x,na.rm=T),max(x,na.rm=T))}
 
 setwd(pathTex)
 # pdf(file='nosSurv.pdf', height=4, width=6)
-tikz(file='nosSurv.tex', height=4, width=6, standAlone=F)
+# tikz(file='nosSurv.tex', height=4, width=6, standAlone=F)
 plot(survfit(simModel, 
-	scenBuild(vi='noS', vRange=c(1,5),
+	scenBuild(vi='noS', vRange=vrfn(aData[,'noS']),
 	vars=names(simModel$coefficients), 
 	ostat=mean, simData=modData) ),
 	conf.int=F, col=pcolors, las=1,
@@ -155,11 +154,11 @@ plot(survfit(simModel,
 	ylab='Survival Probability', xlab='Time (Years)', bty='n')
 legend('topright', c("Few Senders", "Many Senders"), 
 	lty = 1, col=pcolors, bty='n')
-dev.off()
+# dev.off()
 
 # pdf(file='oNet.pdf', height=7, width=10)
-tikz(file='oNet.tex', height=3, width=8, standAlone=F)
-coefs=c('distdata','tdata','allydata')
+# tikz(file='oNet.tex', height=3, width=8, standAlone=F)
+coefs=c('Ddistdata','tdata','allydata')
 cnames=varDef[match(coefs, varDef[,1]), 2]
 cnames=c('Distance','Trade', 'Ally')
 par(mfrow=c(1,3))
@@ -175,7 +174,26 @@ for(ii in 1:length(coefs)){
 	main=cnames[ii], ylim=c(0.4,1), xlim=c(0,30))
 	if(ii==1){title(ylab='Survival Prob.')} 
 	title(xlab='Time (Years)')  }
-dev.off()
+# dev.off()
+par(mfrow=c(1,1))
+
+coefs=c('uData','SuData2')
+cnames=varDef[match(coefs, varDef[,1]), 2]
+cnames=c('Compliance Reciprocity','Sanction Reciprocity')
+par(mfrow=c(1,2))
+for(ii in 1:length(coefs)){
+	coef=coefs[ii]
+	# crange=vrfn(aData[,coef])
+	crange=numSM(quantile(aData[,coef],probs=c(0,.8),na.rm=T))
+	plot(survfit(simModel, 
+		scenBuild(vi=coef, vRange=crange,
+		vars=names(simModel$coefficients), 
+		ostat=mean, simData=modData) ),
+	conf.int=F, col=pcolors, las=1,
+	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
+	if(ii==1){title(ylab='Survival Prob.')} 
+	title(xlab='Time (Years)')  }
+# dev.off()
 par(mfrow=c(1,1))
 
 # ###
