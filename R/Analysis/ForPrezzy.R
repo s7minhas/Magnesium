@@ -142,7 +142,7 @@ vrfn=function(x,lo=0,hi=1){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
 
 setwd(pathTex)
 # pdf(file='nosSurv.pdf', height=4, width=6)
-# tikz(file='nosSurv.tex', height=4, width=6, standAlone=F)
+tikz(file='nosSurv.tex', height=4, width=6, standAlone=F)
 plot(survfit(simModel, 
 	scenBuild(vi='noS', vRange=vrfn(aData[,'noS']),
 	vars=names(simModel$coefficients), 
@@ -154,10 +154,10 @@ plot(survfit(simModel,
 	ylab='Survival Probability', xlab='Time (Years)', bty='n')
 legend('topright', c("Few Senders", "Many Senders"), 
 	lty = 1, col=pcolors, bty='n')
-# dev.off()
+dev.off()
 
 # pdf(file='oNet.pdf', height=7, width=10)
-# tikz(file='oNet.tex', height=3, width=8, standAlone=F)
+tikz(file='oNet.tex', height=3, width=8, standAlone=F)
 coefs=c('Ddistdata','tdata','allydata')
 cnames=varDef[match(coefs, varDef[,1]), 2]
 cnames=c('Distance','Trade', 'Ally')
@@ -174,11 +174,11 @@ for(ii in 1:length(coefs)){
 	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
 	if(ii==1){title(ylab='Survival Prob.')} 
 	title(xlab='Time (Years)')  }
-# dev.off()
+dev.off()
 par(mfrow=c(1,1))
 
 # pdf(file='oNet2.pdf', height=7, width=10)
-# tikz(file='oNet2.tex', height=3, width=8, standAlone=F)
+tikz(file='oNet2.tex', height=3, width=8, standAlone=F)
 coefs=c('uData','SuData2')
 cnames=varDef[match(coefs, varDef[,1]), 2]
 cnames=c('Compliance Reciprocity','Sanction Reciprocity')
@@ -190,11 +190,11 @@ for(ii in 1:length(coefs)){
 		scenBuild(vi=coef, vRange=crange,
 		vars=names(simModel$coefficients), 
 		ostat=mean, simData=modData) ),
-	conf.int=F, col=pcolors, las=1,
+	conf.int=T, col=pcolors, las=1,
 	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
 	if(ii==1){title(ylab='Survival Prob.')} 
 	title(xlab='Time (Years)')  }
-# dev.off()
+dev.off()
 par(mfrow=c(1,1))
 
 # ###
