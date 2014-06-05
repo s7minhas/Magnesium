@@ -11,7 +11,8 @@ if(Sys.info()["user"]=="janus829")
 
 if(Sys.info()["user"]=="cassydorff")
 {pathMain="~/ProjectsGit/Magnesium/R";
-	pathGraphics="~/Dropbox/My Research/Magnesium";
+	pathTex="/ProjectsGit/Magnesium/LaTeX/TeXoutput"
+	pathGraphics="~/Dropbox/Research/Magnesium";
 	pathData="~/Dropbox/Research/Magnesium/Data";
 	pathPData="~/ProjectsGit/Magnesium/R/Data/BuildingPanelData"}
 
