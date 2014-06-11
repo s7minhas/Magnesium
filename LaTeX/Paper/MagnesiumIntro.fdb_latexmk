@@ -1,0 +1,13 @@
+# Fdb version 3
+["bibtex MagnesiumIntro"] 1402508622 "MagnesiumIntro.aux" "MagnesiumIntro.bbl" "MagnesiumIntro" 1402508623
+  "MagnesiumIntro.aux" 1402508621 8 a94a2480d3289e625eea47cd1b285758 ""
+  "MagnesiumIntro.bcf" 0 -1 0 ""
+  (generated)
+  "MagnesiumIntro.bbl"
+["pdflatex"] 1402508622 "MagnesiumIntro.tex" "MagnesiumIntro.pdf" "MagnesiumIntro" 1402508623
+  "MagnesiumIntro.aux" 1402508621 8 a94a2480d3289e625eea47cd1b285758 ""
+  "MagnesiumIntro.bbl" 1402508622 0 d41d8cd98f00b204e9800998ecf8427e "bibtex MagnesiumIntro"
+  "MagnesiumIntro.tex" 1402508621 3795 26aece94e569eee44bd4d0b1b46e7b40 ""
+  (generated)
+  "MagnesiumIntro.log"
+  "MagnesiumIntro.pdf"
