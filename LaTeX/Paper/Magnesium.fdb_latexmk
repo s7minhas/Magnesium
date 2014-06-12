@@ -1,5 +1,5 @@
 # Fdb version 3
-["bibtex Magnesium"] 1402508975 "Magnesium.aux" "Magnesium.bbl" "Magnesium" 1402509211
+["bibtex Magnesium"] 1402508975 "Magnesium.aux" "Magnesium.bbl" "Magnesium" 1402511328
   "./apsr.bst" 1395234779 25357 c990a86d1a60aa9370f76a9507b609ec ""
   "Magnesium.aux" 1402509210 6778 6f62316ad746554a41a3bc6172efc01b ""
   "Magnesium.bcf" 0 -1 0 ""
@@ -7,7 +7,7 @@
   (generated)
   "Magnesium.bbl"
   "Magnesium.blg"
-["pdflatex"] 1402509205 "Magnesium.tex" "Magnesium.pdf" "Magnesium" 1402509211
+["pdflatex"] 1402509205 "Magnesium.tex" "Magnesium.pdf" "Magnesium" 1402511328
   "../TeXoutput/durModelResults.tex" 1401922155 1494 e7a748998970cad3d5f3832475d39034 ""
   "../TeXoutput/nosSurv.tex" 1401922155 19910 b1e3ee0ec4caa6461026597b178c6028 ""
   "../TeXoutput/oNet.tex" 1401922155 81287 22374d2d37ae3e092260763e4287ca48 ""
@@ -192,6 +192,6 @@
   "MagnesiumTheory.tex" 1400002214 10784 c42d3d3fbf3f3022ccb94c5a80214120 ""
   (generated)
   "Magnesium.log"
-  "Magnesium.aux"
   "Magnesium.out"
+  "Magnesium.aux"
   "Magnesium.pdf"
