@@ -158,10 +158,10 @@ dev.off()
 
 # pdf(file='oNet.pdf', height=7, width=10)
 tikz(file='oNet.tex', height=3, width=8, standAlone=F)
-coefs=c('Ddistdata','tdata','allydata')
+coefs=c('Ddistdata','tdata')
 cnames=varDef[match(coefs, varDef[,1]), 2]
-cnames=c('Distance','Trade', 'Ally')
-par(mfrow=c(1,3))
+cnames=c('Distance','Trade')
+par(mfrow=c(1,2))
 for(ii in 1:length(coefs)){
 	coef=coefs[ii]
 	if (coef=='distdata') { crange=c(0.001,0.005)
