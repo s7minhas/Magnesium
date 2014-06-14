@@ -181,7 +181,7 @@ cumulTS <- function(
 	print(' Completed '); fullData[,c(key, variable, cum_var)]
 }
 
-# Build undirected dyad dataset from dyadic data
+# Build adjacency matrices from dyadic data
 # Dyad data must identify countries by variables  
 # ccode_1 & ccode_2 and the time aspect by a variable called year
 # time is a simple vector of years

@@ -11,6 +11,8 @@ load('durDataEcon.rda')
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
 aData=merge(aData,ids,by='targetstate',all.x=T)
+
+aData=aData[aData$year<2006,] # Compliance data ends at 2005
 ###############################################################
 
 ###############################################################
@@ -57,10 +59,16 @@ varDef = cbind (
 # No imputation
 modData=aData
 
-# # Impute missing values
-# sbgcopTimeSR <- system.time(
-#   sbgData <- sbgcop.mcmc(aData[,varDef[,1]], 
-#   	nsamp=2000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
+# Impute missing values
+sbgcopTimeSR <- system.time(
+  sbgData <- sbgcop.mcmc(aData[,
+  	c(
+  	'year','targetstate',
+  	varDef[,1]
+  	)
+  ], nsamp=6000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
+
+modData=cbind(aData[,c('start','stop','compliance')], sbgData$Y.pmean)
 ###############################################################
 
 ###############################################################
@@ -89,9 +97,6 @@ modelFinal=coxph(Surv(start,stop,compliance) ~
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)
-
-# To add frailty term
-# frailty.gamma(as.factor(caseid), sparse=FALSE)
 ############################################################### 
 
 ############################################################### 
@@ -190,7 +195,7 @@ for(ii in 1:length(coefs)){
 		scenBuild(vi=coef, vRange=crange,
 		vars=names(simModel$coefficients), 
 		ostat=mean, simData=modData) ),
-	conf.int=T, col=pcolors, las=1,
+	conf.int=F, col=pcolors, las=1,
 	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
 	if(ii==1){title(ylab='Survival Prob.')} 
 	title(xlab='Time (Years)')  }

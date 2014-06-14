@@ -106,7 +106,7 @@ trade3$cname_2 <- panel$cname[match(trade3$ccode_2, panel$ccode)]
 tradeTot <- trade3[,c(
 	'ccode_1','ccode_2','cname_1','cname_2', 'cyear_1', 'cyear_2', 'year',
 	'trade')]
-###############################################################
+###############################################################a
 
 ###############################################################
 # Clean alliance data [extends from 1816 to 2012]
