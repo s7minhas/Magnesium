@@ -9,6 +9,14 @@ We develop two reciprocity concepts that account for any allow us to analyze the
 
 We extend this intuition to our second key measure, \textit{sanction reciprocity}. Following the same idea as compliance reciprocity, this is a measure of how often a target state has received sanctions from the senders of any given sanction case--relative to all other sanction interactions of states. The intuition behind this measures is to capture the concept of resolve: states who have been sanctioned against multiple times by a sender state are likely to build up a willingness of resistance and not cooperation.  This suggests that states receiving sanctions from those with whom they have been sanctioned before are likely to more slowly comply to those states. The basic insight here is that states that continually reciprocate sanctioning behavior are signaling more conflictual interactions rather than cooperative ones. 
 
+\begin{quote}
+	\textbf{H1}: states who recieve sanctions from those with whom they have a history of reciprocal compliance are likely to comply sooner to those states than they would with lower compliance reciprocity. 
+\end{quote}
+
+
+\begin{quote}
+	\textbf{H2}: states receiving sanctions from those with whom they have been sanctioned before are likely to more slowly comply to those states.
+\end{quote}
 
 \begin{figure}[ht]
   \centering
@@ -29,7 +37,7 @@ By the 1980s, the South African apartheid regime had been in power since 1948. T
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=1\textwidth]{saneti}
-	\caption{Here we show a network for each sanction case that South Africa faced in 1984.}
+	\caption{Network for each sanction case that South Africa faced in 1984.}
 	\label{fig:saneti}
 \end{figure}
 \FloatBarrier
@@ -38,16 +46,17 @@ By the 1980s, the South African apartheid regime had been in power since 1948. T
 We also expect that these relationships must be meaningful not just plentiful. Just as one would imagine that a person is less swayed by the demands of 10 strangers than the demands of a few close friends, we conceptualize senders as most influential when they interact with the target state on a number of dimensions.  Thus, for each sanction case we determine the number of senders but we also measure other dimensions of each sender's relationship to the target. In addition, we calculate and control for the average number of other sanctions being sent by the senders of each particular sanction case.
 
 \begin{quote}
-	\textbf{H1}: As the number of sender states increases for any given sanction case, the time to compliance will decrease. 
+	\textbf{H3}: As the number of sender states increases for any given sanction case, the time to compliance will decrease. 
 \end{quote}
 
-\begin{quote}
-	\textbf{H2}: Sanction cases where relationships between sender(s) and receiver(s) are more proximate will be more quickly resolved.
-\end{quote}
 
  We now describe exactly what is meant behind our concept of ``proximity.'' In figure \ref{fig:saneti}, we show the six sanction cases faced by South Africa in 1984.\footnote{Data for sanction cases is from \citet{morgan2009threat} and is explained further in the following section.} For the most part, each sanction case involves a variety of actors with whom South Africa has differing cultural, geographic, diplomatic, and economic relationships. Within any individual sanction case we hypothesize (\textbf{H2}) that the proximity, (i.e. the ways in which the sender and target interact on a number of dimensions) of relationships between sender(s) of a sanction and a receiver influence whether a target state complies. We construct a number of covariates to test this idea that the normative closeness, or general ``proximity'' between sender(s) and receiver(s) increases sanction compliance. 
 
 We focus on five key measures of the ``proximate'' nature of relationships First, we measure the average distance between sender(s) and reciever.\footnote{To construct this measure we use the minimum distance between countries from the Cshapes Dataset \citep{weidmann2010geography}.} We utilize the Correlates of War (COW) data to construct the remaining four variables. Our second covariate relating to proximity is trade, which we measure as the total share of the receiver's trade in that year accounted for by sender states. Third, we measure alliances as the proportion of sender(s) that are allied with the receiver. Forth, we measure the average number of common IGOs that the sender(s) and target state belong to. Last, we create a measure capturing similarity in the religous/cultural makeups across receiver and senders.\footnote{To determine religous/cultural similarity, we first calculate the correlation in religious makeups between countries for each year, data on religious makeups is taken from the COW World Religion dataset. For a single year this provides us with an $N \times N$ matrix where each $i-j$ cross-section represents how similar the populations of $i$ and $j$ are in terms of their religious denominations. We then add 1 to each of these scores so that the minimum value within a cross-section is 0 and the maximum is 2. We do this for every year providing us with $N \times N \times T$ matrices.}
+
+\begin{quote}
+	\textbf{H4}: Sanction cases where relationships between sender(s) and receiver(s) are more proximate will be more quickly resolved.
+\end{quote}
 
 Thus far we have explained how the relationships between sanctioners and target states matter for predicting compliance. This view has focused on the individual sanction case. However, the six separate sanctions that South Africa faced in 1984 can also be thought of within the context of a yearly sanction network. In figure \ref{fig:sanet}, we aggregate the six sanction networks into one where each separate sanction is denoted by a differing color. Here we hypothesize that states under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
 
