@@ -48,17 +48,19 @@ cor(aData[,srmVars], use='pairwise.complete.obs')
 ###############################################################
 # Variable key
 varDef = cbind (  
-	c( 'uData', 'SuData2',
-		'noS', 'Ddistdata', 'tdata', 'allydata', 
-	 'lag1_polconiii', 
-	 'lag1_lgdpCAP', 'lag1_gdpGR',
-	 'lag1_civwar'
+	c( 'lag1_uData', 'lag1_SuData2'
+		,'noS', 'Ddistdata', 'tdata', 'allydata'
+	 ,'lag1_polconiii'
+	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
+	 ,'lag1_lpopulation'	 
+	 ,'lag1_ldomsum'
 	 ),
-	c( 'Compliance Reciprocity$_{j,t}$', 'Sanction Reciprocity$_{j,t}$',
-	'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$', 
-	'Constraints$_{i,t-1}$',
-	'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$',
-	'Civil War$_{i,t-1}$' 
+	c( 'Compliance Reciprocity$_{j,t}$', 'Sanction Reciprocity$_{j,t}$'
+	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
+	,'Constraints$_{i,t-1}$'
+	,'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$'
+	,'Population$_{i,t-1}$'	
+	,'Internal Conflict$_{i,t-1}$' 
 	)
 	)
 
@@ -70,9 +72,9 @@ modData=aData[, c( names(aData)[1:19], varDef[,1] )]
 # Only state-specific measures
 model1 = coxph(Surv(start, stop, compliance) ~ 
 	# + lag1_polity + lag1_polity2
-	+ lag1_polconiii
-	+ lag1_lgdpCAP + lag1_gdpGR
-	+ lag1_civwar
+	+ lag1_polconiii 
+	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
+	+ lag1_ldomsum
 	, data=modData)
 summary(model1)
 
@@ -80,15 +82,19 @@ summary(model1)
 model2 = coxph(Surv(start, stop, compliance) ~ 
 	+ noS + Ddistdata + tdata + allydata
 	 # + igodata + Creligdata 
-	+ lag1_polconiii + lag1_lgdpCAP + lag1_gdpGR + lag1_civwar
+	+ lag1_polconiii 
+	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
+	+ lag1_ldomsum
 	, data=modData)
 summary(model2)
 
 # Incorp reciprocity measure
 modelFinal=coxph(Surv(start,stop,compliance) ~
-	uData + SuData2 
+	lag1_uData + lag1_SuData2 
 	+ noS + Ddistdata + tdata + allydata
-	+ lag1_polconiii + lag1_lgdpCAP + lag1_gdpGR + lag1_civwar
+	+ lag1_polconiii 
+	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
+	+ lag1_ldomsum
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)

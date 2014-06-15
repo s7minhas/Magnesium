@@ -160,37 +160,37 @@ polity2$cyear <- paste(polity2$ccode, polity2$year, sep='')
 table(polity2$cyear)[table(polity2$cyear)>1] # Dupe check
 ###############################################################
 
-###############################################################
-# ICRG data from PRS group
-setwd(paste(pathData, '/Components',sep=''))
-icrg <- read.csv('PRS_Melted_Format.csv')
+# ###############################################################
+# # ICRG data from PRS group
+# setwd(paste(pathData, '/Components',sep=''))
+# icrg <- read.csv('PRS_Melted_Format.csv')
 
-icrg2 <- icrg
+# icrg2 <- icrg
 
-icrg2$Country <- as.character(icrg$Country)
-icrg2$Country[icrg2$Country=='Congo-Brazzaville'] <- 'Congo, Republic of'
-icrg2$Country[icrg2$Country=='Congo-Kinshasa'] <- 'Congo, Democratic Republic of'
-drop <- c("Hong Kong", "New Caledonia")
-icrg2 <- icrg2[which(!icrg2$Country %in% drop),]
-icrg2$cname <- countrycode(icrg2$Country, 'country.name', 'country.name')
-icrg2[icrg2$cname=='Czechoslovakia', 'cname'] <- 'CZECH REPUBLIC'
+# icrg2$Country <- as.character(icrg$Country)
+# icrg2$Country[icrg2$Country=='Congo-Brazzaville'] <- 'Congo, Republic of'
+# icrg2$Country[icrg2$Country=='Congo-Kinshasa'] <- 'Congo, Democratic Republic of'
+# drop <- c("Hong Kong", "New Caledonia")
+# icrg2 <- icrg2[which(!icrg2$Country %in% drop),]
+# icrg2$cname <- countrycode(icrg2$Country, 'country.name', 'country.name')
+# icrg2[icrg2$cname=='Czechoslovakia', 'cname'] <- 'CZECH REPUBLIC'
 
-icrg2$cnameYear <- paste(icrg2$cname, icrg2$Year, sep='')
+# icrg2$cnameYear <- paste(icrg2$cname, icrg2$Year, sep='')
 
-icrg2$drop <- 0
-icrg2[icrg2$Country=='Serbia and Montenegro' & icrg2$Year>=2006, 'drop'] <- 1
-icrg2[icrg2$Country=='Serbia' & icrg2$Year<2006, 'drop'] <- 1
-icrg2[icrg2$Country=='Czechoslovakia' & icrg2$Year>=1993, 'drop'] <- 1
-icrg2[icrg2$Country=='Czech Republic' & icrg2$Year<1993, 'drop'] <- 1
-icrg2 <- icrg2[icrg2$drop==0,]; icrg2 <- icrg2[,1:(ncol(icrg2)-1)]
+# icrg2$drop <- 0
+# icrg2[icrg2$Country=='Serbia and Montenegro' & icrg2$Year>=2006, 'drop'] <- 1
+# icrg2[icrg2$Country=='Serbia' & icrg2$Year<2006, 'drop'] <- 1
+# icrg2[icrg2$Country=='Czechoslovakia' & icrg2$Year>=1993, 'drop'] <- 1
+# icrg2[icrg2$Country=='Czech Republic' & icrg2$Year<1993, 'drop'] <- 1
+# icrg2 <- icrg2[icrg2$drop==0,]; icrg2 <- icrg2[,1:(ncol(icrg2)-1)]
 
-table(icrg2$cnameYear)[table(icrg2$cnameYear)>1]
+# table(icrg2$cnameYear)[table(icrg2$cnameYear)>1]
 
-# Adding in codes from panel
-icrg2$ccode <- panel$ccode[match(icrg2$cname,panel$cname)]
-icrg2$cyear <- paste(icrg2$ccode, icrg2$Year, sep='')
-table(icrg2$cyear)[table(icrg2$cyear)>1] # Dupe check
-###############################################################
+# # Adding in codes from panel
+# icrg2$ccode <- panel$ccode[match(icrg2$cname,panel$cname)]
+# icrg2$cyear <- paste(icrg2$ccode, icrg2$Year, sep='')
+# table(icrg2$cyear)[table(icrg2$cyear)>1] # Dupe check
+# ###############################################################
 
 ###############################################################
 # PRIO Civil War
@@ -230,8 +230,8 @@ monadData <- merge(dframe, wbData[,c(4,8:ncol(wbData))],by='cyear',all.x=T,all.y
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData <- merge(monadData, polity2[,c(7:35,ncol(polity2))],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
-monadData <- merge(monadData, icrg2[,c(5:16,ncol(icrg2))],by='cyear',all.x=T,all.y=F)
-unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
+# monadData <- merge(monadData, icrg2[,c(5:16,ncol(icrg2))],by='cyear',all.x=T,all.y=F)
+# unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData <- merge(monadData, banks2[,c(5:13,ncol(banks2))],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData <- merge(monadData, constraints2[,c(1,8:10)],by='cyear',all.x=T,all.y=F)
@@ -250,28 +250,33 @@ monadData <- monadData[monadData$year>=1960 & monadData$year<=2005,] # Complianc
 drop=c('democ','autoc','polity2','durable','xrreg','xrcomp','xropen',
 	'xconst','parreg','parcomp','exrec','prior','emonth','eday','eyear',
 	'eprec','interim','bmonth','bday','byear','bprec','post','change',
-	'd4','sf','regtrans',paste0('domestic',1:8),'polconv','polconvj')
+	'd4','sf','regtrans','exconst','polcomp',
+	paste0('domestic',1:8),'polconv','polconvj')
 monadData = monadData[,which(!names(monadData) %in% drop ) ]
 
-# Set up lags for sbgcop
+# Checks for lagdata function
 mdl=monadData
 mdl$cyear=numSM(mdl$cyear)
-mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',
-	varsTOlag=names(mdl)[5:ncol(monadData)], lag=1)
+lagVars=names(mdl)[5:ncol(monadData)]
+lagVars=lagVars[which(!lagVars %in% c('civwar','polity'))] # not enough variance in polity and civwar
+sum(apply(mdl[,lagVars],2,class)=='numeric')/ncol(mdl[,lagVars])
+
+# Set up lags for sbgcop
+mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',varsTOlag=lagVars,lag=1)
+mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',varsTOlag=lagVars,lag=2)
+mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',varsTOlag=lagVars,lag=3)
+mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',varsTOlag=lagVars,lag=4)
+mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',varsTOlag=lagVars,lag=5)
+lagVarsAll=as.vector(apply(t(lagVars), 2, 
+	function(x) FUN=paste(paste('lag',1:4,'_',sep=''), x, sep='')))
 
 # Impute missing values
 sbgcopTimeSR <- system.time(
-  sbgData <- sbgcop.mcmc(aData[,
-  	c(
-  	'year','targetstate',
-  	varDef[,1]
-  	)
-  ], nsamp=6000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
-
-modData=cbind(aData[,c('start','stop','compliance')], sbgData$Y.pmean)
+  sbgData <- sbgcop.mcmc(mdl[,c('ccode','year',lagVars,lagVarsAll,'civwar','polity')]
+  , nsamp=6000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
 ###############################################################
 
 ###############################################################
 setwd(pathData)
-save(monadData, file='monadData.rda')
+save(monadData, mdl, file='monadData.rda')
 ###############################################################

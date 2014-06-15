@@ -348,8 +348,18 @@ for(ii in 1:nrow(aData)){
 ###############################################################
 # Lagging variables
 aData$tyear = numSM(aData$tyear)
+
+doNotLag=c('id','tyear','caseid','targetstate','slength','year',
+	'compliance', 'start', 'stop', 'primarysender_ccode',
+	paste0('sender',1:5,'_ccode'), 'startyear', 'endyear', 
+	'endyear2', 'cname')
+lagVars=which(!names(aData) %in% doNotLag & !substr(names(aData),0,5) %in% 'lag1_')
+
+# Make sure all are numeric
+sum(apply(aData[,lagVars],2,class)=='numeric')/length(lagVars)
+
 aData <- lagDataSM(aData, 'tyear', 'targetstate', 
-	names(aData)[c(18,20:length( names(aData) ) )],1)
+	names(aData)[lagVars],1)
 ###############################################################
 
 ###############################################################
