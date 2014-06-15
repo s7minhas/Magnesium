@@ -144,8 +144,9 @@ lagTS <- function(x,l){
   c(rep(NA,l), x[ -cuts ] )
 }
 
-lagDataSM <- function(data, country_year, country, varsTOlag, lag)
+lagDataSM <- function(data, country_year, country, varsTOlag, lag=1)
 {
+  data[,country_year] = numSM(data[,country_year])
   data <- data[order(data[,country_year]),]
   lagData <- apply(data[,varsTOlag], 2, 
     function(x){

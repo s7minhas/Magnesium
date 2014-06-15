@@ -17,7 +17,8 @@ aData=aData[aData$year<2006,] # Compliance data ends at 2005
 
 ###############################################################
 # Var mods
-aData$lag1_polity2=aData$lag1_polity^2	
+aData$lag1_polity2=aData$lag1_polity^2
+aData$lag1_ldomsum=log(aData$lag1_domestic9+1)
 
 # SRM measures
 minNA=function(x){min(x,na.rm=T)}
@@ -49,26 +50,20 @@ cor(aData[,srmVars], use='pairwise.complete.obs')
 varDef = cbind (  
 	c( 'uData', 'SuData2',
 		'noS', 'Ddistdata', 'tdata', 'allydata', 
-	 'lag1_polconiii', 'lag1_lgdpCAP', 'lag1_gdpGR','lag1_Internal.Conflict'),
+	 'lag1_polconiii', 
+	 'lag1_lgdpCAP', 'lag1_gdpGR',
+	 'lag1_civwar'
+	 ),
 	c( 'Compliance Reciprocity$_{j,t}$', 'Sanction Reciprocity$_{j,t}$',
 	'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$', 
 	'Constraints$_{i,t-1}$',
-	'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$','Internal Stability$_{i,t-1}$' )
+	'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$',
+	'Civil War$_{i,t-1}$' 
+	)
 	)
 
-# No imputation
-modData=aData
-
-# Impute missing values
-sbgcopTimeSR <- system.time(
-  sbgData <- sbgcop.mcmc(aData[,
-  	c(
-  	'year','targetstate',
-  	varDef[,1]
-  	)
-  ], nsamp=6000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
-
-modData=cbind(aData[,c('start','stop','compliance')], sbgData$Y.pmean)
+# Subsetting to model data
+modData=aData[, c( names(aData)[1:19], varDef[,1] )]
 ###############################################################
 
 ###############################################################
@@ -77,7 +72,7 @@ model1 = coxph(Surv(start, stop, compliance) ~
 	# + lag1_polity + lag1_polity2
 	+ lag1_polconiii
 	+ lag1_lgdpCAP + lag1_gdpGR
-	+ lag1_Internal.Conflict
+	+ lag1_civwar
 	, data=modData)
 summary(model1)
 
@@ -85,7 +80,7 @@ summary(model1)
 model2 = coxph(Surv(start, stop, compliance) ~ 
 	+ noS + Ddistdata + tdata + allydata
 	 # + igodata + Creligdata 
-	+ lag1_polconiii + lag1_lgdpCAP + lag1_gdpGR + lag1_Internal.Conflict
+	+ lag1_polconiii + lag1_lgdpCAP + lag1_gdpGR + lag1_civwar
 	, data=modData)
 summary(model2)
 
@@ -93,7 +88,7 @@ summary(model2)
 modelFinal=coxph(Surv(start,stop,compliance) ~
 	uData + SuData2 
 	+ noS + Ddistdata + tdata + allydata
-	+ lag1_polconiii + lag1_lgdpCAP + lag1_gdpGR + lag1_Internal.Conflict
+	+ lag1_polconiii + lag1_lgdpCAP + lag1_gdpGR + lag1_civwar
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)

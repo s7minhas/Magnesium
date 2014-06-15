@@ -347,11 +347,13 @@ for(ii in 1:nrow(aData)){
 
 ###############################################################
 # Lagging variables
+aData$tyear = numSM(aData$tyear)
 aData <- lagDataSM(aData, 'tyear', 'targetstate', 
 	names(aData)[c(18,20:length( names(aData) ) )],1)
 ###############################################################
 
 ###############################################################
+setwd(pathData)
 save(aData, file='durDataEcon.rda')
 # save(aData, file='durDataEcon2.rda')
 # save(aData, file='durDataAll.rda')

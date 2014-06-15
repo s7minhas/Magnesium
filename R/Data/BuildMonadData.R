@@ -245,7 +245,30 @@ monadData <- monadData[monadData$year>=1960 & monadData$year<=2005,] # Complianc
 
 ###############################################################
 # Set up imputation
-drop=c('')
+
+# Drop unnecessary vars
+drop=c('democ','autoc','polity2','durable','xrreg','xrcomp','xropen',
+	'xconst','parreg','parcomp','exrec','prior','emonth','eday','eyear',
+	'eprec','interim','bmonth','bday','byear','bprec','post','change',
+	'd4','sf','regtrans',paste0('domestic',1:8),'polconv','polconvj')
+monadData = monadData[,which(!names(monadData) %in% drop ) ]
+
+# Set up lags for sbgcop
+mdl=monadData
+mdl$cyear=numSM(mdl$cyear)
+mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',
+	varsTOlag=names(mdl)[5:ncol(monadData)], lag=1)
+
+# Impute missing values
+sbgcopTimeSR <- system.time(
+  sbgData <- sbgcop.mcmc(aData[,
+  	c(
+  	'year','targetstate',
+  	varDef[,1]
+  	)
+  ], nsamp=6000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
+
+modData=cbind(aData[,c('start','stop','compliance')], sbgData$Y.pmean)
 ###############################################################
 
 ###############################################################
