@@ -244,6 +244,17 @@ monadData <- monadData[monadData$year>=1960 & monadData$year<=2005,] # Complianc
 ###############################################################
 
 ###############################################################
+# Var mods
+monadData$lgdp=log(monadData$gdp)
+monadData$lgdpCAP=log(monadData$gdpCAP)
+monadData$lpopulation=log(monadData$population)
+monadData$lfdi=log(monadData$fdi + abs(min(monadData$fdi,na.rm=T))+1)
+monadData$domSUM=sum(monadData$domestic1, monadData$domestic2, monadData$domestic3,
+	monadData$domestic4,monadData$domestic5,monadData$domestic6,monadData$domestic7,
+	monadData$domestic8)
+###############################################################
+
+###############################################################
 # Set up imputation
 
 # Drop unnecessary vars
@@ -251,7 +262,8 @@ drop=c('democ','autoc','polity2','durable','xrreg','xrcomp','xropen',
 	'xconst','parreg','parcomp','exrec','prior','emonth','eday','eyear',
 	'eprec','interim','bmonth','bday','byear','bprec','post','change',
 	'd4','sf','regtrans','exconst','polcomp',
-	paste0('domestic',1:8),'polconv','polconvj')
+	paste0('domestic',1:9),'polconv','polconvj'
+	,'gdp','gdpCAP','population', 'fdi')
 monadData = monadData[,which(!names(monadData) %in% drop ) ]
 
 # Checks for lagdata function
@@ -268,7 +280,7 @@ mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',varsTOlag=lagVars,la
 mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',varsTOlag=lagVars,lag=4)
 mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',varsTOlag=lagVars,lag=5)
 lagVarsAll=as.vector(apply(t(lagVars), 2, 
-	function(x) FUN=paste(paste('lag',1:4,'_',sep=''), x, sep='')))
+	function(x) FUN=paste(paste('lag',1:5,'_',sep=''), x, sep='')))
 
 # Impute missing values
 sbgcopTimeSR <- system.time(

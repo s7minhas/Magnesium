@@ -120,16 +120,21 @@ durData <- durData[durData$noS!=0,]
 
 ###############################################################
 # Add in monadic variables for target state
-monadData$lgdp=log(monadData$gdp)
-monadData$lgdpCAP=log(monadData$gdpCAP)
-monadData$lpopulation=log(monadData$population)
-monadData$domSUM=sum(monadData$domestic1, monadData$domestic2, monadData$domestic3,
-	monadData$domestic4,monadData$domestic5,monadData$domestic6,monadData$domestic7,
-	monadData$domestic8)
-monadData$autocBIN=ifelse(monadData$autoc>=6,1,0)
-monadData$democBIN=ifelse(monadData$autoc>=6,1,0)
 
-aData <- merge(x=durData, y=monadData[,c(1,3,5:ncol(monadData))], 
+tData=monadData # raw version
+# tData=mdl # imputed version
+
+# Var mods
+tData$lgdp=log(tData$gdp)
+tData$lgdpCAP=log(tData$gdpCAP)
+tData$lpopulation=log(tData$population)
+tData$domSUM=sum(tData$domestic1, tData$domestic2, tData$domestic3,
+	tData$domestic4,tData$domestic5,tData$domestic6,tData$domestic7,
+	tData$domestic8)
+tData$autocBIN=ifelse(tData$autoc>=6,1,0)
+tData$democBIN=ifelse(tData$autoc>=6,1,0)
+
+aData <- merge(x=durData, y=tData[,c(1,3,5:ncol(tData))], 
 	by.x='tyear', by.y='cyear', all.x=T)
 ###############################################################
 
