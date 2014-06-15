@@ -13,6 +13,19 @@ sanctionData <- read.csv('TIESv4.csv')
 ###############################################################
 
 ###############################################################
+# Fix errors for five cases, see http://www.unc.edu/~bapat/TIESCorrections.do
+sanctionData[which(sanctionData$caseid ==1990999901), 'threat']=1
+sanctionData[which(sanctionData$caseid ==1983011301), 'imposition']=1
+sanctionData[which(sanctionData$caseid ==1973070501), 'startmonth']=1
+sanctionData[which(sanctionData$caseid ==1973070501), 'startday']=9
+sanctionData[which(sanctionData$caseid ==1973070501), 'sancimpositionstartmonth']=1
+sanctionData[which(sanctionData$caseid ==1973070501), 'sancimpositionstartday']=9
+sanctionData[which(sanctionData$caseid ==1973070501), 'finaloutcome']=8
+sanctionData[which(sanctionData$caseid ==2002041106), 'endyear']=2004
+sanctionData[which(sanctionData$caseid ==2002041103), 'targetstate']=490
+###############################################################
+
+###############################################################
 #add country names
 to.change<-t(t(sanctionData$targetstate))
 to.changeps<-t(t(sanctionData$primarysender))

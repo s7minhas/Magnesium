@@ -120,22 +120,15 @@ durData <- durData[durData$noS!=0,]
 
 ###############################################################
 # Add in monadic variables for target state
+# Choose between imputed and non-imputed versions
 
-tData=monadData # raw version
-# tData=mdl # imputed version
+# tData=monadData # raw version
+tData=impData # imputed version
+drop=c('ccode','year','cname')
+tData=tData[,which(!names(tData) %in% drop)]
 
-# Var mods
-tData$lgdp=log(tData$gdp)
-tData$lgdpCAP=log(tData$gdpCAP)
-tData$lpopulation=log(tData$population)
-tData$domSUM=sum(tData$domestic1, tData$domestic2, tData$domestic3,
-	tData$domestic4,tData$domestic5,tData$domestic6,tData$domestic7,
-	tData$domestic8)
-tData$autocBIN=ifelse(tData$autoc>=6,1,0)
-tData$democBIN=ifelse(tData$autoc>=6,1,0)
-
-aData <- merge(x=durData, y=tData[,c(1,3,5:ncol(tData))], 
-	by.x='tyear', by.y='cyear', all.x=T)
+durData$tyear=numSM(durData$tyear)
+aData <- merge(x=durData, y=tData, by.x='tyear', by.y='cyear', all.x=T)
 ###############################################################
 
 ###############################################################
@@ -369,7 +362,10 @@ aData <- lagDataSM(aData, 'tyear', 'targetstate',
 
 ###############################################################
 setwd(pathData)
-save(aData, file='durDataEcon.rda')
+
+# save(aData, file='durDataEcon.rda')
+save(aData, file='durDataEconImp.rda')
+
 # save(aData, file='durDataEcon2.rda')
 # save(aData, file='durDataAll.rda')
 ###############################################################

@@ -249,9 +249,9 @@ monadData$lgdp=log(monadData$gdp)
 monadData$lgdpCAP=log(monadData$gdpCAP)
 monadData$lpopulation=log(monadData$population)
 monadData$lfdi=log(monadData$fdi + abs(min(monadData$fdi,na.rm=T))+1)
-monadData$domSUM=sum(monadData$domestic1, monadData$domestic2, monadData$domestic3,
-	monadData$domestic4,monadData$domestic5,monadData$domestic6,monadData$domestic7,
-	monadData$domestic8)
+monadData$domSUM=monadData$domestic1+ monadData$domestic2+ monadData$domestic3+
+	monadData$domestic4+monadData$domestic5+monadData$domestic6+monadData$domestic7+
+	monadData$domestic8
 ###############################################################
 
 ###############################################################
@@ -286,9 +286,18 @@ lagVarsAll=as.vector(apply(t(lagVars), 2,
 sbgcopTimeSR <- system.time(
   sbgData <- sbgcop.mcmc(mdl[,c('ccode','year',lagVars,lagVarsAll,'civwar','polity')]
   , nsamp=6000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
+
+# Clean
+impData=data.frame(
+	cbind(
+		mdl[,c('cyear','cname')],
+		sbgData$Y.pmean[,c(lagVars,'civwar','polity')]
+	)
+)
 ###############################################################
 
 ###############################################################
 setwd(pathData)
-save(monadData, mdl, file='monadData.rda')
+save(monadData, impData, file='monadData.rda')
+save(sbgcopTimeSR, sbgData, file='SBGCOPmonadData.rda')
 ###############################################################
