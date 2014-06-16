@@ -240,7 +240,7 @@ monadData <- merge(monadData, civwar[,6:7],by='cyear',all.x=T,all.y=F)
 unique(monadData[is.na(monadData$ccode), 1:5]); dim(monadData)
 monadData$civwar[is.na(monadData$civwar)]=0
 
-monadData <- monadData[monadData$year>=1960 & monadData$year<=2005,] # Compliance data ends at 2005
+# monadData <- monadData[monadData$year>=1960 & monadData$year<=2005,] # Compliance data ends at 2005
 ###############################################################
 
 ###############################################################
@@ -290,7 +290,7 @@ sbgcopTimeSR <- system.time(
 # Clean
 impData=data.frame(
 	cbind(
-		mdl[,c('cyear','cname')],
+		mdl[,c('cyear')],
 		sbgData$Y.pmean[,c(lagVars,'civwar','polity')]
 	)
 )
