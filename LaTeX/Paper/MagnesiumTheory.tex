@@ -7,6 +7,29 @@ First, we visually present the sanction-year network. Figure \ref{fig:spaghetti}
 
 We develop two reciprocity concepts that account for any allow us to analyze the interdepenencies inherent to the evolution of sanction dynamics. First, we outline a \textit{compliance reciprocity} measure. By creating a yearly network, for each year available in our data, we are able to calculate compliance reciprocity over time. Essentially, this represents a target states' cumulative history of compliance between partners, or sender states. This allows us to capture whether those who have a history of cooperative behavior with eachother, tend to have more cooperative behavior in the future with their partner states. Or, in a duration context, states who recieve sanctions from those with whom they have a history of reciprocal compliance are likely to comply sooner to those states than they would with lower compliance reciprocity. Notably, this measure is different from a simple conceptualization of past interactions which might simply control for the number of times a state has complied. Such a simple measure completely ignores the fact that each state's actions are conditional on all other interactions between states. For example, if state $i$ complies often to state $j$, does state $i$ also comply a lot to all other partner states? Or, relative to all other interactions, does state $i$ comply more frequently and uniquely with state $j$? The latter idea is the one explicated within our  concept of compliance reciprocity. 
 
+\textcolor{red}{this needs work}
+To illustrate, consider the matrix $X_{ij}$ below, in which we have six actors in a round robin (dyadic) format.  These data are represented by the  which has the measured value of each of the thirty interactions in each entry, with the main diagonal being empty:
+
+\singlespacing
+\[
+\left[
+\begin{array}{cccccc}
+ & X_{12}  & X_{13}  & X_{14} & X_{15} & X_{16} \\
+X_{21}  &  & X_{23}  & X_{24} & X_{25} & X_{26} \\
+X_{31}  & X_{32}  &    & X_{34} & X_{35} & X_{36} \\
+X_{41}  & X_{42}  & X_{43}  &  & X_{45} & X_{46} \\
+X_{51}  & X_{52}  & X_{53}  & X_{54} &   & X_{56} \\
+X_{61}  & X_{62}  & X_{63}  & X_{64} & X_{65} &   \\
+\end{array}
+\right]
+\]
+
+\doublespacing
+From this set up we can calculate the reciprocity effect for each specific dyad $ij$ simply subtracts the row and column effects along with the overall mean out of the value for dyad $ij$. \\
+$\hat{g}_{ij} = X_{ij} - \hat{a}_i - \hat{b}_j - X_{\cdot \cdot}$
+
+\textcolor{red}{$---------$}
+
 We extend this intuition to our second key measure, \textit{sanction reciprocity}. Following the same idea as compliance reciprocity, this is a measure of how often a target state has received sanctions from the senders of any given sanction case--relative to all other sanction interactions of states. The intuition behind this measures is to capture the concept of resolve: states who have been sanctioned against multiple times by a sender state are likely to build up a willingness of resistance and not cooperation.  This suggests that states receiving sanctions from those with whom they have been sanctioned before are likely to more slowly comply to those states. The basic insight here is that states that continually reciprocate sanctioning behavior are signaling more conflictual interactions rather than cooperative ones. 
 
 \begin{quote}
