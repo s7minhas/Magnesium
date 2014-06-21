@@ -6,19 +6,18 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 ###############################################################
 setwd(pathData)
-load('durDataEcon.rda')
+# load('durDataEcon.rda')
+load('durDataEconImp.rda')
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
 aData=merge(aData,ids,by='targetstate',all.x=T)
-
-aData=aData[aData$year<2006,] # Compliance data ends at 2005
 ###############################################################
 
 ###############################################################
 # Var mods
 aData$lag1_polity2=aData$lag1_polity^2
-aData$lag1_ldomsum=log(aData$lag1_domestic9+1)
+aData$lag1_ldomsum=log(aData$lag1_domSUM+1)
 
 # SRM measures
 minNA=function(x){min(x,na.rm=T)}
@@ -53,7 +52,7 @@ varDef = cbind (
 	 ,'lag1_polconiii'
 	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
 	 ,'lag1_lpopulation'	 
-	 ,'lag1_ldomsum'
+	 ,'lag1_civwar'
 	 ),
 	c( 'Compliance Reciprocity$_{j,t}$', 'Sanction Reciprocity$_{j,t}$'
 	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
@@ -74,7 +73,7 @@ model1 = coxph(Surv(start, stop, compliance) ~
 	# + lag1_polity + lag1_polity2
 	+ lag1_polconiii 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
-	+ lag1_ldomsum
+	+ lag1_civwar
 	, data=modData)
 summary(model1)
 
@@ -84,7 +83,7 @@ model2 = coxph(Surv(start, stop, compliance) ~
 	 # + igodata + Creligdata 
 	+ lag1_polconiii 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
-	+ lag1_ldomsum
+	+ lag1_civwar
 	, data=modData)
 summary(model2)
 
@@ -94,7 +93,7 @@ modelFinal=coxph(Surv(start,stop,compliance) ~
 	+ noS + Ddistdata + tdata + allydata
 	+ lag1_polconiii 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
-	+ lag1_ldomsum
+	+ lag1_civwar
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)

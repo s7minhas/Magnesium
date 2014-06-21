@@ -124,8 +124,7 @@ durData <- durData[durData$noS!=0,]
 
 # tData=monadData # raw version
 tData=impData # imputed version
-drop=c('ccode','year','cname')
-tData=tData[,which(!names(tData) %in% drop)]
+colnames(tData)[1]='cyear'
 
 durData$tyear=numSM(durData$tyear)
 aData <- merge(x=durData, y=tData, by.x='tyear', by.y='cyear', all.x=T)
@@ -350,14 +349,13 @@ aData$tyear = numSM(aData$tyear)
 doNotLag=c('id','tyear','caseid','targetstate','slength','year',
 	'compliance', 'start', 'stop', 'primarysender_ccode',
 	paste0('sender',1:5,'_ccode'), 'startyear', 'endyear', 
-	'endyear2', 'cname')
+	'endyear2')
 lagVars=which(!names(aData) %in% doNotLag & !substr(names(aData),0,5) %in% 'lag1_')
 
 # Make sure all are numeric
 sum(apply(aData[,lagVars],2,class)=='numeric')/length(lagVars)
 
-aData <- lagDataSM(aData, 'tyear', 'targetstate', 
-	names(aData)[lagVars],1)
+aData = lagDataSM(aData,'tyear','targetstate',names(aData)[lagVars],1)
 ###############################################################
 
 ###############################################################
