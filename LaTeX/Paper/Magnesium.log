@@ -1,9 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 JUN 2014 12:38
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  16 JUN 2014 15:49
 entering extended mode
- \write18 enabled.
- file:line:error style messages enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
-**Magnesium.tex
+**Magnesium.tex -recorder
 (./Magnesium.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
@@ -2651,53 +2650,53 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
  [6] [7]
-</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf, id=126, 
+</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf, id=125, 
 547.04375pt x 548.0475pt>
 File: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf Grap
 hic file (type pdf)
 
 <use /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf>
 Package pdftex.def Info: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/
-84net-crop.pdf used on input line 24.
+84net-crop.pdf used on input line 47.
 (pdftex.def)             Requested size: 455.24411pt x 456.08351pt.
 
-</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf, id=127, 3
+</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf, id=126, 3
 61.35pt x 216.81pt>
 File: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf Graph
 ic file (type pdf)
 
 <use /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf>
 Package pdftex.def Info: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/
-MapLegend.pdf used on input line 25.
+MapLegend.pdf used on input line 48.
 (pdftex.def)             Requested size: 204.85846pt x 122.9147pt.
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 23--27
+Overfull \hbox (12.0pt too wide) in paragraph at lines 46--50
  [][] 
  []
 
 [8] [9 </Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf> <
 /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf>]
-</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf, id=159, 692.
+</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf, id=161, 692.
 5875pt x 448.67625pt>
 File: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf Graphic 
 file (type pdf)
 
 <use /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf>
 Package pdftex.def Info: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/
-saneti.pdf used on input line 39.
+saneti.pdf used on input line 62.
 (pdftex.def)             Requested size: 455.24411pt x 294.9223pt.
  [10
 
 ]
 [11 </Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf>]
-</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/sanet.pdf, id=198, 522.9
+</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/sanet.pdf, id=200, 522.9
 5375pt x 487.8225pt>
 File: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/sanet.pdf Graphic f
 ile (type pdf)
 
 <use /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/sanet.pdf>
 Package pdftex.def Info: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/
-sanet.pdf used on input line 69.
+sanet.pdf used on input line 92.
 (pdftex.def)             Requested size: 341.43307pt x 318.50258pt.
  [12])
 (./MagnesiumEmp.tex [13 </Users/cassydorff/Dropbox/Research/Magnesium/Graphics/
@@ -2734,32 +2733,33 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 212.
  ) 
 Here is how much of TeX's memory you used:
- 28890 strings out of 493488
- 568681 string characters out of 3141326
- 697410 words of memory out of 3000000
+ 28889 strings out of 493488
+ 568670 string characters out of 3141326
+ 697415 words of memory out of 3000000
  31602 multiletter control sequences out of 15000+200000
  21483 words of font info for 83 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,12n,57p,1719b,997s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,12n,57p,1729b,997s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
-r/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></us
-r/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
-cal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
-l/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/t
-exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
-ive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
-ve/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
-/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/
-2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (23 pages, 995647 bytes).
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
+/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr
+/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
+/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/te
+xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
+ve/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
+e/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/
+2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2
+012/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Magnesium.pdf (23 pages, 1004218 bytes).
 PDF statistics:
- 374 PDF objects out of 1000 (max. 8388607)
- 309 compressed objects within 4 object streams
- 74 named destinations out of 1000 (max. 500000)
+ 376 PDF objects out of 1000 (max. 8388607)
+ 310 compressed objects within 4 object streams
+ 73 named destinations out of 1000 (max. 500000)
  33 words of extra memory for PDF output out of 10000 (max. 10000000)
 
