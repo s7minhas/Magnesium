@@ -36,7 +36,7 @@ for(ii in 1:length(years)){
 names(smatList)=years
 
 ####################################################################
-# Cumulative compliance matrices
+# Cumulative sanction matrices
 csmatList=list()
 for(ii in 1:length(years)){
 	slice=sdata[which(years[ii]>=sdata$startyear),]  
