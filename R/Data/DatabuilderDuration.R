@@ -165,15 +165,6 @@ srmData$cyear=numSM(paste0(srmData$ccode, srmData$year))
 # Merge in for targetstate
 aData=merge(aData, srmData[,3:ncol(srmData)], by.x='tyear', by.y='cyear', all.x=T)
 
-# # # # # # # # # # # # # # # # # # 
-# Problems
-diffs=setdiff(aData$tyear, srmData$cyear)
-diffYrs=sort(numSM(unique( substrRight(diffs, 4)  )))
-temp=NULL
-for i in diffs{ temp=append(temp, substr(i, 1, nchar(i)-4)  )}
-diffCnts=unique(temp)
-# # # # # # # # # # # # # # # # # # 
-
 # Merge in for sender states (avg, max)
 # To do so we create a dataframe of just senders and year
 # Then merge in srm data for each sender
@@ -275,6 +266,7 @@ SuData=netMelt(senders, 'targetstate', 'year', Sueffect, rst=FALSE)
 Sueffect2=lapply(Sueffect, function(x) FUN=t(x)) # flipping pos of sen and rec
 SuData2=netMelt(senders, 'targetstate', 'year', Sueffect2, rst=FALSE)
 aData=cbind(aData, SuDataRST, SuData, SuData2)
+summary(aData)
 ###############################################################
 
 ###############################################################

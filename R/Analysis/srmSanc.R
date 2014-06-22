@@ -13,8 +13,8 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 ############################################################
 # Load sanction & compliance network Data
 setwd(pathData)
-load('sanctionNet.rda') #smatList
-load('complianceNet.rda') #cmatList
+load('sanctionNet.rda') #smatList, #csmatlist (cumulative)
+load('complianceNet.rda') #cmatList, #ccmatlist (cumulative)
 ############################################################
 
 ############################################################
