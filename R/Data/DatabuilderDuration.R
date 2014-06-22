@@ -160,10 +160,19 @@ rcvrData=unpackSRM(rcvrEffect)
 colmData=unpackSRM(colmeans, dim=F)
 srmData=data.frame(cbind(actorData[,c(3,1)],actorData[,2], rcvrData[,2], colmData[,2]))
 colnames(srmData)=c('ccode','year','actor','partner','colmean')
-srmData$cyear=paste0(srmData$ccode, srmData$year)
+srmData$cyear=numSM(paste0(srmData$ccode, srmData$year))
 
 # Merge in for targetstate
 aData=merge(aData, srmData[,3:ncol(srmData)], by.x='tyear', by.y='cyear', all.x=T)
+
+# # # # # # # # # # # # # # # # # # 
+# Problems
+diffs=setdiff(aData$tyear, srmData$cyear)
+diffYrs=sort(numSM(unique( substrRight(diffs, 4)  )))
+temp=NULL
+for i in diffs{ temp=append(temp, substr(i, 1, nchar(i)-4)  )}
+diffCnts=unique(temp)
+# # # # # # # # # # # # # # # # # # 
 
 # Merge in for sender states (avg, max)
 # To do so we create a dataframe of just senders and year
