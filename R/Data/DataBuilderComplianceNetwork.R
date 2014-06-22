@@ -54,22 +54,29 @@ names(cmatList)=years
 ####################################################################
 # Cumulative compliance matrices
 ccmatList=list()
-ccmatList[[1]]=cmatList[[ 1 ]]
+for(ii in 1:length(years)){
+	slice=sdata[which(years[ii]>=sdata$startyear),] 
+	ctrs=ctryYr[[ii]] 
+	ccmatList[[ii]]=matrix(0,nrow=length(ctrs),ncol=length(ctrs),dimnames=list(ctrs,ctrs))
 
-for(ii in 1:(length(cmatList)-1)){
-	t0data=ccmatList[[ ii ]]
-	t1data=cmatList[[ ii+1 ]]
-
-	t1rows=rownames(t1data);t1cols=colnames(t1data)
-	t0rows=rownames(t0data);t0cols=colnames(t0data)
-	trows=intersect(t1rows,t0rows);tcols=intersect(t1cols,t0cols)
-
-	Ct1data=t1data[trows, tcols]+t0data[trows, tcols]
-	ccmatList[[ii+1]]=Ct1data
+	for(jj in 1:nrow(slice)){
+		sndrs=NULL; trgt=NULL
+		sndrs=slice[jj,sendIDs]; sndrs=as.character(sndrs[!is.na(sndrs)])
+		sndrs=sndrs[ which( sndrs %in% intersect( sndrs,rownames(ccmatList[[ii]]) ) ) ]
+		trgt=slice[jj,'targetstate_ccode']; trgt=as.character(trgt)
+		if(length(setdiff(trgt,rownames(ccmatList[[ii]])))==0){
+				cmat2=matrix(0, nrow=length(ctrs), ncol=length(ctrs), dimnames=list(ctrs, ctrs))
+				if(years[ii]>=slice[jj,'endyear']){cmat2[trgt, sndrs]=slice[jj,'compliance']}
+				ccmatList[[ii]]=ccmatList[[ii]] + cmat2 			
+			}		
+	}
+	print(years[ii])
 }
 
 names(ccmatList)=years
-
-setwd(pathData)
-save(cmatList, ccmatList, file='complianceNet.rda')
 ####################################################################
+
+####################################################################
+# setwd(pathData)
+save(cmatList, ccmatList, file='complianceNet.rda')
+####################################################################/
