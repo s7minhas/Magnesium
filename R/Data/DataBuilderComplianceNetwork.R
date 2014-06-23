@@ -24,7 +24,7 @@ sdata=sanctionDataFinal[,c('targetstate_ccode',sendIDs,
 setwd(pathPData)
 load('panel.rda')
 # years=seq(1960, 2005, 1)
-years=seq(1960, 2012, 1) # Compliance data extends to 2012
+years=seq(1960, 2013, 1) # Compliance data extends to 2012
 ctryYr=lapply(years, function(x) FUN=panel[panel$year==x,'ccode'])
 sdata$endyear[is.na(sdata$endyear)]=2012
 

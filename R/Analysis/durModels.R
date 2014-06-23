@@ -131,9 +131,10 @@ print.xtable( xtable(durTables, align='llccc',
 
 ############################################################### 
 # Risk ratios
-riskVars=c('uData', 'SuData2',
+riskVars=c('lag1_uData', 'lag1_SuData2',
 	'noS', 'Ddistdata', 'tdata', 'allydata')
-riskRatios=t(mapply(x=riskVars, function(x) FUN=riskRatio(1000, modelFinal, modData, x)))
+riskRatios=t(mapply(x=riskVars, 
+	function(x) FUN=riskRatio(1000, modelFinal, modData, x)))
 riskRatios
 ############################################################### 
 
@@ -184,7 +185,7 @@ par(mfrow=c(1,1))
 
 # pdf(file='oNet2.pdf', height=7, width=10)
 tikz(file='oNet2.tex', height=3, width=8, standAlone=F)
-coefs=c('uData','SuData2')
+coefs=c('lag1_uData','lag1_SuData2')
 cnames=varDef[match(coefs, varDef[,1]), 2]
 cnames=c('Compliance Reciprocity','Sanction Reciprocity')
 par(mfrow=c(1,2))

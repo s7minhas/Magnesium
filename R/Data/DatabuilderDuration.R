@@ -122,12 +122,12 @@ durData <- durData[durData$noS!=0,]
 # Add in monadic variables for target state
 # Choose between imputed and non-imputed versions
 
-# tData=monadData # raw version
-tData=impData # imputed version
-colnames(tData)[1]='cyear'
+# targetData=monadData # raw version
+targetData=impData # imputed version
+colnames(targetData)[1]='cyear'
 
 durData$tyear=numSM(durData$tyear)
-aData <- merge(x=durData, y=tData, by.x='tyear', by.y='cyear', all.x=T)
+aData <- merge(x=durData, y=targetData, by.x='tyear', by.y='cyear', all.x=T)
 ###############################################################
 
 ###############################################################
@@ -266,7 +266,6 @@ SuData=netMelt(senders, 'targetstate', 'year', Sueffect, rst=FALSE)
 Sueffect2=lapply(Sueffect, function(x) FUN=t(x)) # flipping pos of sen and rec
 SuData2=netMelt(senders, 'targetstate', 'year', Sueffect2, rst=FALSE)
 aData=cbind(aData, SuDataRST, SuData, SuData2)
-summary(aData)
 ###############################################################
 
 ###############################################################
@@ -357,6 +356,11 @@ lagVars=which(!names(aData) %in% doNotLag & !substr(names(aData),0,5) %in% 'lag1
 sum(apply(aData[,lagVars],2,class)=='numeric')/length(lagVars)
 
 aData = lagDataSM(aData,'tyear','targetstate',names(aData)[lagVars],1)
+###############################################################
+
+###############################################################
+# Only data up until 2009
+aData = aData[aData$year<=2009,]
 ###############################################################
 
 ###############################################################
