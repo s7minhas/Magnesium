@@ -28,7 +28,6 @@ sanctionData <- sanctionDataFinal[which(sanctionDataFinal$issue1%in%econ |
 # sanctionData=sanctionDataFinal # saved as durDataAll
 ###############################################################
 
-
 ###############################################################
 # Pulling out vars
 # threat timeframe = startyear, endyear
@@ -55,12 +54,19 @@ sanctionSlice$time <- sanctionSlice$endyear - sanctionSlice$startyear + 1
 ###############################################################
 
 ###############################################################
-# Analyzing outcomes of sanction cases
-outcomeData=sanctionSlice[,c('caseid','endyear','finaloutcome','compliance')]
+# Descriptives of data
+temp=sanctionSlice
+dim(sanctionSlice)
 
-outcomeData$noComp = 1
-outcomeData$noComp[ which(outcomeData$endyear==2013 & outcomeData$compliance==0 | outcomeData$compliance==1) ] = 0
-table(outcomeData$finaloutcome[which(outcomeData$noComp==1)])
+# Outcome
+temp$temp='fill me in'
+temp[which(temp$finaloutcome %in% comp), 'temp'] = "rec'r coml'd"
+temp[which(is.na(temp$finaloutcome)), 'temp'] = "ongoing"
+temp$temp[which(temp$temp == 'fill me in')]=temp$finaloutcome[which(temp$temp == 'fill me in')]
+
+table(temp$temp)
+table(temp$temp)/sum(table(temp$temp))
+sum((table(temp$temp)/sum(table(temp$temp)))[2:5])
 ###############################################################
 
 ###############################################################

@@ -15,7 +15,7 @@ To test the effects of network pressures on sanction compliance we use the Threa
 % Need to provide reason for why we are restricting to economic sanctions
 % Economic sanctions are a complex and interdependent phenomenon in which a state or numerous states cut or threaten tocutregulareconomicrelationswithanotherstateinordertoobtainapolicychange.
 
-Restricting our analysis to threats or sanctions stemming from these issues during the period of 1984 to 2005 leaves us with 272 cases. Our unit of analysis is the case-year, providing us with a total of 1,920 observations. For each case in the TIES database a final outcome is recorded to describe how and if the case has been resolved. The purpose of our analysis is to assess the time until a state complies to a threat or sanction and we consider a case to have been resolved in compliance if any of the follwing conditions are met:
+Restricting our analysis to threats or sanctions stemming from these issues during the period of 1960 to 2005 leaves us with over 800 cases. Our unit of analysis is the case-year, providing us with a total of 5,303 observations. For each case in the TIES database a final outcome is recorded to describe how and if the case has been resolved. The purpose of our analysis is to assess the time until a state complies to a threat or sanction and we consider a case to have been resolved in compliance if any of the follwing conditions are met:
 
 \begin{singlespacing}
 \begin{itemize}
@@ -26,7 +26,7 @@ Restricting our analysis to threats or sanctions stemming from these issues duri
 \end{itemize}
 \end{singlespacing}
 	
-In using this definition of compliance, approximately 37\% of cases in our dataset end with a state complying by 2013 while 42\% remain ongoing. The remaining 21\% of cases were terminated for other reasons show below in table \ref{tab:termCases}.
+In using this definition of compliance, approximately 37\% of cases in our dataset end with a state complying by 2013 while 40\% remain ongoing. The remaining 23\% of cases were terminated for other reasons show below in table \ref{tab:termCases}.
 
 \begin{table}[ht]
 	\centering
@@ -34,16 +34,18 @@ In using this definition of compliance, approximately 37\% of cases in our datas
 		\hline\hline
 		Outcome & Frequency \\
 		\hline
-		Capitulation by Sender in Threat Stage & 29 \\
-		Capitulation by Sender After Imposition & 19 \\
-		Stalemate after Sanctions Imposition & 2 \\
-		Stalemate in the Threat Stage & 1 \\
+		Capitulation by Sender in Threat Stage & 77 \\
+		Stalemate in the Threat Stage & 11 \\		
+		Capitulation by Sender After Imposition & 58 \\
+		Stalemate after Sanctions Imposition & 38 \\
 		\hline\hline
 	\end{tabular}
 	\caption{Outcomes of threat and sanction cases no longer ongoing where compliance was not achieved.}
 	\label{tab:termCases}	
 \end{table}
 \FloatBarrier
+
+% Add in something about imputaiton with sbgcop
 
 \subsection*{Modeling Approach} 
 
@@ -53,19 +55,18 @@ Next we discuss our modeling approach. To estimate the effect of network pressur
 	$\log h_{i}(t | \boldsymbol{X}_{i}) \; = \; h_{0}(t) \times \exp(\boldsymbol{X}_{i} \beta)$,
 \end{center}
 
-where the log-hazard rate of compliance in a sanction case, $i$, conditional on having not complied for $t$ years is a function of a common baseline hazard $h_{0}(t)$ and covariates $\boldsymbol{X}$. In employing this approach, we assume no specific functional form for the baseline hazard and instead estimate it non-parametrically from the data. The covariates $\boldsymbol{X}$ operate multiplicatevely on the hazard rate, shifting the expected risk of compliance up or down depending on the value of $\beta$ \citep{crespo2013political}.\footnote{To ensure against bias in our parameter estimates we also included a vector of case-level shared frailties to account for variations in unit-specific factors. However, we found similar results with and without the shared frailities, so we report results without the inclusion of this additional term.} 
+where the log-hazard rate of compliance in a sanction case, $i$, conditional on having not complied for $t$ years is a function of a common baseline hazard $h_{0}(t)$ and covariates $\boldsymbol{X}$. In employing this approach, we assume no specific functional form for the baseline hazard and instead estimate it non-parametrically from the data. The covariates $\boldsymbol{X}$ operate multiplicatevely on the hazard rate, shifting the expected risk of compliance up or down depending on the value of $\beta$ \citep{crespo2013political}.\footnote{To ensure against bias in our parameter estimates we included a vector of case-level shared frailties to account for variations in unit-specific factors. We found similar results with and without the shared frailities, so we report results without the inclusion of this additional term.} 
 
 Providing no specific functional form for the baseline hazard necessitates testing the proportional hazard assumption. \citet{keele2010proportionally} notes that not inspecting this assumption in the covariates can lead to severely biased parameter estimates. To address this issue, we first fit smoothing splines for all continuous covariates. After ascertaining that none of the continuous covariates in our model required modeling with splines, we carried out tests of non-proportionality. For those covariates where the non-proportional effects assumption does not hold, we include interactions between the covariate and spell duration (log scale). The only covariate showing evidence of non-proportionality is the average similarity of religious profiles.
 
 Below we show our full model specification: 
 
 \begin{align*}
-		Compliance_{i,t} =\; & No. \; Senders_{j,t} + Distance_{j,t} + Trade_{j,t}  + \\
-		 &Ally_{j,t} + IGOs_{j,t} + Religion_{j,t} +\\
- 		 &Sanc. \; Sent_{j,t-1} Sanc. \; Rec'd_{i,t} + \\
-		 &Constraints_{i,t} + Ln(GDP \; Capita)_{i,t-1} +\\
-		 &GDP \; Growth_{i,t-1} + Internal \; Stability_{i,t} +\\
-		 &\epsilon_{i,t}
-	\end{align*}
+		Compliance_{i,t} =& \\
+		&Sanction \; Reciprocity_{j,t-1} + Compliance \; Reciprocity_{j,t-1} + \\
+		&No. \; Senders_{j,t} + Distance_{j,t} + Trade_{j,t} + Ally_{j,t} + \\
+		&Constraints_{i,t-1} + Ln(GDP \; Capita)_{i,t-1} +\\
+		&GDP \; Growth_{i,t-1} + Civil \; War_{i,t} + \epsilon_{i,t}
+\end{align*}
 
 where $i$ represents the target of the sanction, $j$ represents the relationship between the set of sender(s) for a particular sanction case and $i$, and $t$ the time period.

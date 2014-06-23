@@ -4,7 +4,7 @@ if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=F
+genTikz=T
 
 ###############################################################
 setwd(pathData)
@@ -41,16 +41,13 @@ aData$uData = aData$uData + abs(minNA(aData$uData))
 aData$SuData2 = aData$SuData2 + abs(minNA(aData$SuData2))
 aData$Sactor = aData$Sactor + abs(minNA(aData$Sactor))
 aData$Spartner = aData$Spartner + abs(minNA(aData$Spartner))
-
-summary(aData[,srmVars])
-cor(aData[,srmVars], use='pairwise.complete.obs')
 ###############################################################
 
 ###############################################################
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
-		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
+		,'noS', 'Ddistdata', 'tdata', 'allydata'
 	 ,'lag1_polconiii'
 	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
 	 ,'lag1_lpopulation'	 
@@ -66,7 +63,7 @@ varDef = cbind (
 	)
 
 # Subsetting to model data
-# aData = aData[aData$year <=2005, ]
+aData = aData[aData$year <=2005, ]
 modData=aData[, c( names(aData)[1:19], varDef[,1] )]
 ###############################################################
 

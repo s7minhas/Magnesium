@@ -157,8 +157,8 @@ digitsep=fullstop
 % define bibliography style
 %\bibliographystyle{/Users/janus829/Documents/APSR}
 
-  \graphicspath{{/Users/cassydorff/Dropbox/Research/Magnesium/Graphics/}}
-%\graphicspath{{/Users/janus829/Dropbox/Research/Magnesium/Graphics/}}
+  % \graphicspath{{/Users/cassydorff/Dropbox/Research/Magnesium/Graphics/}}
+\graphicspath{{/Users/janus829/Dropbox/Research/Magnesium/Graphics/}}
 
 % -------------------------------------------------------- %
 
@@ -171,7 +171,7 @@ digitsep=fullstop
 
 \begin{document}
 
-\maketitle
+\maketitle\thispagestyle{empty}
 
 \begin{abstract}
 
@@ -179,7 +179,7 @@ digitsep=fullstop
 
 \end{abstract}
 
-\newpage
+\newpage\setcounter{page}{1}
 
 %%%%%%%% INTRO %%%%%%%%
 \input{MagnesiumIntro}
