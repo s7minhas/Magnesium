@@ -3,6 +3,8 @@ source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')}
 if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
+# Gen tikz
+genTikz=F
 
 ###############################################################
 setwd(pathData)
@@ -48,7 +50,7 @@ cor(aData[,srmVars], use='pairwise.complete.obs')
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
-		,'noS', 'Ddistdata', 'tdata', 'allydata'
+		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
 	 ,'lag1_polconiii'
 	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
 	 ,'lag1_lpopulation'	 
@@ -64,6 +66,7 @@ varDef = cbind (
 	)
 
 # Subsetting to model data
+# aData = aData[aData$year <=2005, ]
 modData=aData[, c( names(aData)[1:19], varDef[,1] )]
 ###############################################################
 
@@ -148,7 +151,7 @@ vrfn=function(x,lo=0,hi=1){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
 
 setwd(pathTex)
 # pdf(file='nosSurv.pdf', height=4, width=6)
-tikz(file='nosSurv.tex', height=4, width=6, standAlone=F)
+if(genTikz){tikz(file='nosSurv.tex', height=4, width=6, standAlone=F)}
 plot(survfit(simModel, 
 	scenBuild(vi='noS', vRange=vrfn(aData[,'noS']),
 	vars=names(simModel$coefficients), 
@@ -160,10 +163,10 @@ plot(survfit(simModel,
 	ylab='Survival Probability', xlab='Time (Years)', bty='n')
 legend('topright', c("Few Senders", "Many Senders"), 
 	lty = 1, col=pcolors, bty='n')
-dev.off()
+if(genTikz){dev.off()}
 
 # pdf(file='oNet.pdf', height=7, width=10)
-tikz(file='oNet.tex', height=3, width=8, standAlone=F)
+if(genTikz){tikz(file='oNet.tex', height=3, width=8, standAlone=F)}
 coefs=c('Ddistdata','tdata')
 cnames=varDef[match(coefs, varDef[,1]), 2]
 cnames=c('Distance','Trade')
@@ -180,18 +183,18 @@ for(ii in 1:length(coefs)){
 	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
 	if(ii==1){title(ylab='Survival Prob.')} 
 	title(xlab='Time (Years)')  }
-dev.off()
+if(genTikz){dev.off()}
 par(mfrow=c(1,1))
 
 # pdf(file='oNet2.pdf', height=7, width=10)
-tikz(file='oNet2.tex', height=3, width=8, standAlone=F)
+if(genTikz){tikz(file='oNet2.tex', height=3, width=8, standAlone=F)}
 coefs=c('lag1_uData','lag1_SuData2')
 cnames=varDef[match(coefs, varDef[,1]), 2]
 cnames=c('Compliance Reciprocity','Sanction Reciprocity')
 par(mfrow=c(1,2))
 for(ii in 1:length(coefs)){
 	coef=coefs[ii]
-	crange=vrfn(aData[,coef],lo=0,hi=0.75)
+	crange=vrfn(aData[,coef],lo=0,hi=0.9)
 	plot(survfit(simModel, 
 		scenBuild(vi=coef, vRange=crange,
 		vars=names(simModel$coefficients), 
@@ -200,40 +203,6 @@ for(ii in 1:length(coefs)){
 	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
 	if(ii==1){title(ylab='Survival Prob.')} 
 	title(xlab='Time (Years)')  }
-dev.off()
+if(genTikz){dev.off()}
 par(mfrow=c(1,1))
-
-# ###
-# tikz(file='oNet2.tex', height=4, width=6, standAlone=F)
-# coefs=c('lag1_sancRecCnt')
-# cnames=varDef[match(coefs, varDef[,1]), 2]
-# par(mfrow=c(1,1))
-# for(ii in 1:length(coefs)){
-# 	coef=coefs[ii]
-# 	if (coef=='distdata') { crange=c(0.001,0.005)
-# 		} else { crange=vrfn(aData[,coef]) }	
-# 	plot(survfit(simModel, 
-# 		scenBuild(vi=coef, vRange=crange,
-# 		vars=names(simModel$coefficients), 
-# 		ostat=mean, simData=modData) ),
-# 	conf.int=F, col=pcolors, las=1,
-# 	main=cnames[ii], ylim=c(0.4,1), xlim=c(0,30))
-# 	if(ii==1){title(ylab='Survival Prob.')} 
-# 	title(xlab='Time (Years)') } 
-# dev.off()
-# par(mfrow=c(1,1))
-
-# tikz(file='oNet2.tex', height=4, width=6, standAlone=F)
-# plot(survfit(simModel, 
-# 	scenBuild(vi='lag1_sancRecCnt', vRange=vrfn(aData[,'lag1_sancRecCnt']),
-# 	vars=names(simModel$coefficients), 
-# 	ostat=mean, simData=modData) ),
-# 	conf.int=F, col=pcolors, las=1,
-# 	# main='Number of Senders', 
-# 	main='', 
-# 	ylim=c(0.5,1), xlim=c(0,30), 
-# 	ylab='Survival Probability', xlab='Time (Years)', bty='n')
-# legend('topright', c("Few Sanctions", "Many Sanctions"), 
-# 	lty = 1, col=pcolors, bty='n')
-# dev.off()
 ############################################################### 
