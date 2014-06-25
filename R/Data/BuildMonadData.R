@@ -258,7 +258,7 @@ monadData$domSUM=monadData$domestic1+ monadData$domestic2+ monadData$domestic3+
 # Set up imputation
 
 # Drop unnecessary vars
-drop=c('democ','autoc','polity2','durable','xrreg','xrcomp','xropen',
+drop=c('democ','autoc','polity','durable','xrreg','xrcomp','xropen',
 	'xconst','parreg','parcomp','exrec','prior','emonth','eday','eyear',
 	'eprec','interim','bmonth','bday','byear','bprec','post','change',
 	'd4','sf','regtrans','exconst','polcomp',
@@ -270,7 +270,7 @@ monadData = monadData[,which(!names(monadData) %in% drop ) ]
 mdl=monadData
 mdl$cyear=numSM(mdl$cyear)
 lagVars=names(mdl)[5:ncol(monadData)]
-lagVars=lagVars[which(!lagVars %in% c('civwar','polity'))] # not enough variance in polity and civwar
+lagVars=lagVars[which(!lagVars %in% c('civwar','polity2'))] # not enough variance in polity and civwar
 sum(apply(mdl[,lagVars],2,class)=='numeric')/ncol(mdl[,lagVars])
 
 # Set up lags for sbgcop
@@ -282,9 +282,10 @@ mdl=lagDataSM(data=mdl,country_year='cyear',country='ccode',varsTOlag=lagVars,la
 lagVarsAll=as.vector(apply(t(lagVars), 2, 
 	function(x) FUN=paste(paste('lag',1:5,'_',sep=''), x, sep='')))
 
-# Impute missing values
+# Impute missing value
+# This takes time, set it and go for a run
 sbgcopTimeSR <- system.time(
-  sbgData <- sbgcop.mcmc(mdl[,c('ccode','year',lagVars,lagVarsAll,'civwar','polity')]
+  sbgData <- sbgcop.mcmc(mdl[,c('ccode','year',lagVars,lagVarsAll,'civwar','polity2')]
   , nsamp=6000, seed=123455, verb=TRUE) ) # default odens = nsamp/1000  
 
 # Clean

@@ -128,8 +128,8 @@ durData <- durData[durData$noS!=0,]
 # Add in monadic variables for target state
 # Choose between imputed and non-imputed versions
 
-targetData=monadData[,which(!names(monadData) %in% c('year','ccode','cname'))] # raw version 
-# targetData=impData; colnames(targetData)[1]='cyear' # imputed version
+# targetData=monadData[,which(!names(monadData) %in% c('year','ccode','cname'))] # raw version 
+targetData=impData; colnames(targetData)[1]='cyear' # imputed version
 
 durData$tyear=numSM(durData$tyear)
 aData <- merge(x=durData, y=targetData, by.x='tyear', by.y='cyear', all.x=T)
@@ -348,6 +348,9 @@ for(ii in 1:nrow(aData)){
 ###############################################################
 
 ###############################################################
+# Var Mods
+aData$polity2 = aData$polity2 + abs(min(aData$polity2, na.rm=T))
+
 # Lagging variables
 aData$tyear = numSM(aData$tyear)
 
@@ -369,10 +372,37 @@ aData = aData[aData$year<=2009,]
 ###############################################################
 
 ###############################################################
+# Var mods 2
+aData$lag1_polity2sq=aData$lag1_polity2^2
+aData$lag1_ldomsum=log(aData$lag1_domSUM+1)
+
+# SRM measures
+minNA=function(x){min(x,na.rm=T)}
+srmVars=c('actor','partner','colmean',
+	'meanActorSndr','meanPtnrSndr','meanColmSndr',
+	'maxActorSndr','maxPtnrSndr','maxColmSndr',
+	'uDataRST','uData',
+	'SuData2', 'Sactor', 'Spartner')
+
+# scaling above zero
+aData$actor = aData$actor + abs(minNA(aData$actor))
+aData$partner = aData$partner + abs(minNA(aData$partner))
+aData$meanActorSndr = aData$meanActorSndr + abs(minNA(aData$meanActorSndr))
+aData$meanPtnrSndr = aData$meanPtnrSndr + abs(minNA(aData$meanPtnrSndr))
+aData$maxActorSndr = aData$maxActorSndr + abs(minNA(aData$maxActorSndr))
+aData$maxPtnrSndr = aData$maxPtnrSndr + abs(minNA(aData$maxPtnrSndr))
+aData$uData = aData$uData + abs(minNA(aData$uData))
+
+aData$SuData2 = aData$SuData2 + abs(minNA(aData$SuData2))
+aData$Sactor = aData$Sactor + abs(minNA(aData$Sactor))
+aData$Spartner = aData$Spartner + abs(minNA(aData$Spartner))
+###############################################################
+
+###############################################################
 setwd(pathData)
 
-save(aData, file='durDataEcon.rda')
-# save(aData, file='durDataEconImp.rda')
+# save(aData, file='durDataEcon.rda')
+save(aData, file='durDataEconImp.rda')
 
 # save(aData, file='durDataEcon2.rda')
 # save(aData, file='durDataAll.rda')

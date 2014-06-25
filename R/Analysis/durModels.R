@@ -17,45 +17,18 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 ###############################################################
 
 ###############################################################
-# Var mods
-aData$lag1_polity2=aData$lag1_polity^2
-aData$lag1_ldomsum=log(aData$lag1_domSUM+1)
-
-# SRM measures
-minNA=function(x){min(x,na.rm=T)}
-srmVars=c('actor','partner','colmean',
-	'meanActorSndr','meanPtnrSndr','meanColmSndr',
-	'maxActorSndr','maxPtnrSndr','maxColmSndr',
-	'uDataRST','uData',
-	'SuData2', 'Sactor', 'Spartner')
-
-# scaling above zero
-aData$actor = aData$actor + abs(minNA(aData$actor))
-aData$partner = aData$partner + abs(minNA(aData$partner))
-aData$meanActorSndr = aData$meanActorSndr + abs(minNA(aData$meanActorSndr))
-aData$meanPtnrSndr = aData$meanPtnrSndr + abs(minNA(aData$meanPtnrSndr))
-aData$maxActorSndr = aData$maxActorSndr + abs(minNA(aData$maxActorSndr))
-aData$maxPtnrSndr = aData$maxPtnrSndr + abs(minNA(aData$maxPtnrSndr))
-aData$uData = aData$uData + abs(minNA(aData$uData))
-
-aData$SuData2 = aData$SuData2 + abs(minNA(aData$SuData2))
-aData$Sactor = aData$Sactor + abs(minNA(aData$Sactor))
-aData$Spartner = aData$Spartner + abs(minNA(aData$Spartner))
-###############################################################
-
-###############################################################
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
 		,'noS', 'Ddistdata', 'tdata', 'allydata'
-	 ,'lag1_polconiii'
+	 ,'lag1_polity2'
 	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
 	 ,'lag1_lpopulation'	 
-	 ,'lag1_civwar'
+	 ,'lag1_domSUM'
 	 ),
 	c( 'Compliance Reciprocity$_{j,t-1}$', 'Sanction Reciprocity$_{j,t-1}$'
 	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
-	,'Constraints$_{i,t-1}$'
+	,'Polity$_{i,t-1}$'
 	,'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$'
 	,'Population$_{i,t-1}$'	
 	,'Internal Conflict$_{i,t-1}$' 
@@ -80,10 +53,9 @@ if(tableName=='durModelResultsNoImp.tex'){
 ###############################################################
 # Only state-specific measures
 model1 = coxph(Surv(start, stop, compliance) ~ 
-	# + lag1_polity + lag1_polity2
-	+ lag1_polconiii 
+	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
-	+ lag1_civwar
+	+ lag1_domSUM
 	, data=modData)
 summary(model1)
 
@@ -91,9 +63,9 @@ summary(model1)
 model2 = coxph(Surv(start, stop, compliance) ~ 
 	+ noS + Ddistdata + tdata + allydata
 	 # + igodata + Creligdata 
-	+ lag1_polconiii 
+	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
-	+ lag1_civwar
+	+ lag1_domSUM
 	, data=modData)
 summary(model2)
 
@@ -101,9 +73,9 @@ summary(model2)
 modelFinal=coxph(Surv(start,stop,compliance) ~
 	lag1_uData + lag1_SuData2 
 	+ noS + Ddistdata + tdata + allydata
-	+ lag1_polconiii 
+	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
-	+ lag1_civwar
+	+ lag1_domSUM
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)
