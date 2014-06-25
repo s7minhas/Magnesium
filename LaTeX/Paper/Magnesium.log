@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  22 JUN 2014 22:30
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  24 JUN 2014 23:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2129,18 +2129,15 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 8.
 
-[13] [14]) (./MagnesiumFindings.tex
-
-LaTeX Warning: Reference `tab:regResults' on page 15 undefined on input line 4.
-
-
-(../TeXoutput/durModelResults.tex [15]) [16] (../TeXoutput/nosSurv.tex)
-[17] (../TeXoutput/oNet.tex) (../TeXoutput/oNet2.tex)) (./MagnesiumConcl.tex)
-[18] [19] (./Magnesium.bbl [20]
+[13] [14]) (./MagnesiumFindings.tex [15] (../TeXoutput/durModelResults.tex)
+[16] (../TeXoutput/nosSurv.tex) [17] (../TeXoutput/oNet.tex)
+(../TeXoutput/oNet2.tex)) (./MagnesiumConcl.tex [18] [19]
+(../TeXoutput/durModelResultsNoImp.tex) [20]) (./Magnesium.bbl [21] [22]
 Missing character: There is no Ñ in font cmr12!
- [21])
+
+[23])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 212.
- [22]
+ [24]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 212.
  (./Magnesium.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 212.
@@ -2149,18 +2146,18 @@ Package rerunfilecheck Info: File `Magnesium.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 212.
  ) 
 Here is how much of TeX's memory you used:
- 28347 strings out of 493633
- 557828 string characters out of 3143378
- 680360 words of memory out of 3000000
- 31056 multiletter control sequences out of 15000+200000
+ 28372 strings out of 493633
+ 558326 string characters out of 3143378
+ 680960 words of memory out of 3000000
+ 31070 multiletter control sequences out of 15000+200000
  21483 words of font info for 83 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 56i,12n,57p,1719b,982s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,12n,57p,1719b,992s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -2177,10 +2174,10 @@ ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
 e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/
 2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2
 011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (23 pages, 1004679 bytes).
+Output written on Magnesium.pdf (25 pages, 1011026 bytes).
 PDF statistics:
- 359 PDF objects out of 1000 (max. 8388607)
- 294 compressed objects within 3 object streams
- 66 named destinations out of 1000 (max. 500000)
+ 389 PDF objects out of 1000 (max. 8388607)
+ 321 compressed objects within 4 object streams
+ 74 named destinations out of 1000 (max. 500000)
  33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

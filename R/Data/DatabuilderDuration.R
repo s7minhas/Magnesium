@@ -128,9 +128,8 @@ durData <- durData[durData$noS!=0,]
 # Add in monadic variables for target state
 # Choose between imputed and non-imputed versions
 
-# targetData=monadData # raw version
-targetData=impData # imputed version
-colnames(targetData)[1]='cyear'
+targetData=monadData[,which(!names(monadData) %in% c('year','ccode','cname'))] # raw version 
+# targetData=impData; colnames(targetData)[1]='cyear' # imputed version
 
 durData$tyear=numSM(durData$tyear)
 aData <- merge(x=durData, y=targetData, by.x='tyear', by.y='cyear', all.x=T)
@@ -372,8 +371,8 @@ aData = aData[aData$year<=2009,]
 ###############################################################
 setwd(pathData)
 
-# save(aData, file='durDataEcon.rda')
-save(aData, file='durDataEconImp.rda')
+save(aData, file='durDataEcon.rda')
+# save(aData, file='durDataEconImp.rda')
 
 # save(aData, file='durDataEcon2.rda')
 # save(aData, file='durDataAll.rda')

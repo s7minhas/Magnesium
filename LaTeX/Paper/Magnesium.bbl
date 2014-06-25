@@ -71,6 +71,16 @@ Hoff, P.D. \harvardand\ M.D. Ward. 2004.
 \newblock ``Modeling dependencies in international relations networks.'' {\em
   Political Analysis} 12(2):160--175.
 
+\harvarditem{Hoff}{2007}{hoff:2007}
+Hoff, Peter~D. 2007.
+\newblock ``Extending the rank likelihood for semiparametric copula
+  estimation.'' {\em The Annals of Applied Statistics} pp.~265--283.
+
+\harvarditem{Honaker \harvardand\ King}{2010}{honaker2010missing}
+Honaker, James \harvardand\ Gary King. 2010.
+\newblock ``What to do about missing values in time-series cross-section
+  data.'' {\em American Journal of Political Science} 54(2):561--581.
+
 \harvarditem{Keele}{2010}{keele2010proportionally}
 Keele, Luke. 2010.
 \newblock ``Proportionally difficult: testing for nonproportional hazards in
@@ -126,6 +136,10 @@ Morgan, T~Clifton \harvardand\ Valerie~L Schwebach. 1997.
 Rajmaira, Sheen \harvardand\ Michael~D Ward. 1990.
 \newblock ``Evolving foreign policy norms: Reciprocity in the superpower
   triad.'' {\em International Studies Quarterly} pp.~457--475.
+
+\harvarditem{Rubin}{1976}{rubin1976inference}
+Rubin, Donald~B. 1976.
+\newblock ``Inference and missing data.'' {\em Biometrika} 63(3):581--592.
 
 \harvarditem{Ward \harvardand\ Rajmaira}{1992}{ward1992reciprocity}
 Ward, Michael~D \harvardand\ Sheen Rajmaira. 1992.

@@ -59,6 +59,8 @@ where the log-hazard rate of compliance in a sanction case, $i$, conditional on 
 
 Providing no specific functional form for the baseline hazard necessitates testing the proportional hazard assumption. \citet{keele2010proportionally} notes that not inspecting this assumption in the covariates can lead to severely biased parameter estimates. To address this issue, we first fit smoothing splines for all continuous covariates. After ascertaining that none of the continuous covariates in our model required modeling with splines, we carried out tests of non-proportionality. For those covariates where the non-proportional effects assumption does not hold, we include interactions between the covariate and spell duration (log scale). The only covariate showing evidence of non-proportionality is the average similarity of religious profiles.
 
+We also imputed missing values to avoid excluding instances of compliance. If we employed list-wise deletion, we would lose over 438 country-year observations, 32 of which contained instances in which a state complied to a sanction. Previous research (e.g., see \citealp{rubin1976inference,honaker2010missing}) has already highlighted how simply deleting missing observations can lead to biased results. To impute missing values, we use a copula based approach developed by \citet{hoff:2007}. Details on our imputation process and results based on the original unimputed dataset, which are nearly identical, can be found in the appendix. 
+
 Below we show our full model specification: 
 
 \begin{align*}

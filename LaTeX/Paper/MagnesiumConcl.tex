@@ -2,3 +2,17 @@
 \label{conclusion}
 
 In this paper we have shown that network variables do indeed play a substantive role in predicting sanction compliance. This indicates to us that the extant literature's focus on employing models that just capture the situation in the sanctioned country omits important information when it comes to understanding compliance. More work on our part, however, is necessary as well. A key next step is to determine the predictive accuracy of our models incorporating network characteristics, overall, and vis-a-vis models providing determinants at just the level of the sanctioned state. Additionally, we also hope to incorporate more substantive measures of the sanction network so that we can model the complex interdependencies that likely emerge and drive sanction and compliance behavior between states. 
+
+
+\newpage
+\section*{Appendix}
+\label{appendix}
+
+\subsection*{Imputation Procedure}
+
+The copula based approach developed by \citet{hoff:2007} is estimated through a Markov chain Monte Carlo (MCMC) algorithm. We run the MCMC for 6,000 imputations, saving every sixth imputation, using the \texttt{sbgcop.mcmc} function in the \texttt{sbgcop} package in $\mathcal{R}$. To account for time trends and obtain better performance from this imputaiton procedure, we create five lags of each variable prior to imputation. Every imputation of the MCMC leads to the creation of one dataset with all missing values imputed. Running this algorithm on our dataset then produces a total of 1,000 imputed datasets. Results across these 1,000 imputed datasets are then averaged, thereby accounting for a portion of the uncertainty in the imputed values. We then used the average of the results from these 1,000 imputed datasets to generate the regression estimates in table \ref{tab:regResults}. 
+
+Regression results on the unimputed dataset are shown in table \ref{tab:regResultsNoImp}. The results, particularly for our reciprocity variables, are nearly identical. 
+
+\input{../TeXoutput/durModelResultsNoImp}
+\FloatBarrier

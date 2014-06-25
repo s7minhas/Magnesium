@@ -4,12 +4,12 @@ if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=T
+genTikz=F
 
 ###############################################################
 setwd(pathData)
-# load('durDataEcon.rda')
-load('durDataEconImp.rda')
+# load('durDataEcon.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+load('durDataEconImp.rda'); tableName='durModelResults.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
@@ -63,8 +63,18 @@ varDef = cbind (
 	)
 
 # Subsetting to model data
-aData = aData[aData$year <=2005, ]
+# aData = aData[aData$year <=2005, ]
 modData=aData[, c( names(aData)[1:19], varDef[,1] )]
+###############################################################
+
+###############################################################
+# Missingness check
+if(tableName=='durModelResultsNoImp.tex'){
+	aVars=c('start','stop','compliance',varDef[,1])
+	omitComp=na.omit(data.matrix(modData[,aVars]))[,'compliance']
+	fullComp=data.matrix(modData)[,'compliance']
+	table(omitComp); table(fullComp)
+}
 ###############################################################
 
 ###############################################################
@@ -105,11 +115,11 @@ summary(modelFinal)
 # Nonlinearity in continuous covariates
 # pspline
 
-# Testing proportionality assumption, 99% CI
-cox.zph(modelFinal)
-par(mfrow=c(3,4))
-plot(cox.zph(modelFinal, transform='identity'))
-par(mfrow=c(1,1))
+# # Testing proportionality assumption, 99% CI
+# cox.zph(modelFinal)
+# par(mfrow=c(3,4))
+# plot(cox.zph(modelFinal, transform='identity'))
+# par(mfrow=c(1,1))
 
 # No Evid of nonprop, if there was then would interact with log.time
 # modData$gdpGRStop=I(modData$lag1_gdpGR*log(modData$stop))
@@ -120,12 +130,13 @@ par(mfrow=c(1,1))
 setwd(pathTex)
 durTables=durTable(list(model1, model2, modelFinal), varDef)	
 print.xtable( xtable(durTables, align='llccc', 	
-	caption='Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+	caption=caption,
+	label=label
 	),
 	include.rownames=FALSE, sanitize.text.function=identity,
 	hline.after=c(0,0,4,12,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
 	size='normalsize',
-	file='durModelResults.tex'
+	file=tableName
 	)
 ############################################################### 
 
