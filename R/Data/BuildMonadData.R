@@ -292,7 +292,7 @@ sbgcopTimeSR <- system.time(
 impData=data.frame(
 	cbind(
 		mdl[,c('cyear')],
-		sbgData$Y.pmean[,c(lagVars,'civwar','polity')]
+		sbgData$Y.pmean[,c(lagVars,'civwar','polity2')]
 	)
 )
 ###############################################################
