@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  29 JUN 2014 14:03
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  29 JUN 2014 18:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2668,7 +2668,14 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
  [5] [6]
-[7]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 36.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 36.
+ [7]
 </Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf, id=131, 
 547.04375pt x 548.0475pt>
 File: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf Grap
@@ -2676,7 +2683,7 @@ hic file (type pdf)
 
 <use /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf>
 Package pdftex.def Info: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/
-84net-crop.pdf used on input line 49.
+84net-crop.pdf used on input line 73.
 (pdftex.def)             Requested size: 455.24411pt x 456.08351pt.
 
 </Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf, id=132, 3
@@ -2686,23 +2693,23 @@ ic file (type pdf)
 
 <use /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf>
 Package pdftex.def Info: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/
-MapLegend.pdf used on input line 50.
+MapLegend.pdf used on input line 74.
 (pdftex.def)             Requested size: 204.85846pt x 122.9147pt.
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 48--52
+Overfull \hbox (12.0pt too wide) in paragraph at lines 72--76
  [][] 
  []
 
 [8] [9 </Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf> <
 /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf>]
-</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf, id=164, 692.
+</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf, id=165, 692.
 5875pt x 448.67625pt>
 File: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf Graphic 
 file (type pdf)
 
 <use /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf>
 Package pdftex.def Info: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/
-saneti.pdf used on input line 64.
+saneti.pdf used on input line 88.
 (pdftex.def)             Requested size: 455.24411pt x 294.9223pt.
  [10
 
@@ -2710,22 +2717,13 @@ saneti.pdf used on input line 64.
 [11 </Users/cassydorff/Dropbox/Research/Magnesium/Graphics/saneti.pdf>]
 
 Package natbib Warning: Citation `marshall2002polity' on page 12 undefined on i
-nput line 104.
+nput line 128.
 
 
 Package natbib Warning: Citation `banks2011cross' on page 12 undefined on input
- line 104.
+ line 128.
 
-) (./MagnesiumEmp.tex [12]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 8.
-
-(/usr/local/texlive/2012/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 8.
- [13] [14])
-(./MagnesiumFindings.tex [15]
+) (./MagnesiumEmp.tex [12] [13] [14]) (./MagnesiumFindings.tex [15]
 
 Package natbib Warning: Citation `mclean2010friends' on page 16 undefined on in
 put line 8.
@@ -2767,16 +2765,17 @@ sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
 /local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
 ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
 al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
-/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/te
-xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
-ve/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/
-2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2
-012/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (26 pages, 998973 bytes).
+/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
+xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texli
+ve/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
+2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
+012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/201
+2/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2012
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Magnesium.pdf (26 pages, 1009468 bytes).
 PDF statistics:
- 388 PDF objects out of 1000 (max. 8388607)
- 326 compressed objects within 4 object streams
+ 392 PDF objects out of 1000 (max. 8388607)
+ 329 compressed objects within 4 object streams
  80 named destinations out of 1000 (max. 500000)
  28 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex Magnesium"] 1404065018 "Magnesium.aux" "Magnesium.bbl" "Magnesium" 1404065023
+["bibtex Magnesium"] 1404065018 "Magnesium.aux" "Magnesium.bbl" "Magnesium" 1404081994
   "./apsr.bst" 1395234779 25357 c990a86d1a60aa9370f76a9507b609ec ""
-  "Magnesium.aux" 1404065023 8079 e954d64056dd7414a7dd7625efc560b8 ""
+  "Magnesium.aux" 1404081495 8079 e954d64056dd7414a7dd7625efc560b8 ""
   "Magnesium.bcf" 0 -1 0 ""
   "magRefs.bib.bib" 0 -1 0 ""
   (generated)
   "Magnesium.bbl"
   "Magnesium.blg"
-["pdflatex"] 1404065018 "Magnesium.tex" "Magnesium.pdf" "Magnesium" 1404065023
+["pdflatex"] 1404081490 "Magnesium.tex" "Magnesium.pdf" "Magnesium" 1404081994
   "../TeXoutput/durModelResults.tex" 1403704282 1719 47d4f7fb2d09ba4ac0f124a6bc26692b ""
   "../TeXoutput/durModelResultsNoImp.tex" 1403704282 1706 319f0499d942c89a8e19581c190d7b3f ""
   "../TeXoutput/nosSurv.tex" 1403632667 20070 a5f089a4d98e3d3df55347b2dca31a55 ""
@@ -184,16 +184,16 @@
   "/usr/local/texlive/2012/texmf-dist/tex/latex/xcolor/x11nam.def" 1169481954 9040 c0c860499be99a076792194b1d6525a1 ""
   "/usr/local/texlive/2012/texmf-dist/tex/latex/xcolor/xcolor.sty" 1169481954 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
   "Abstract.tex" 1403704383 1409 b658034a73a425fb49d18df4e3357906 ""
-  "Magnesium.aux" 1404065023 8079 e954d64056dd7414a7dd7625efc560b8 ""
+  "Magnesium.aux" 1404081495 8079 e954d64056dd7414a7dd7625efc560b8 ""
   "Magnesium.bbl" 1403704282 7143 60c86da8748b0f3d97ab130e0d79ff55 "bibtex Magnesium"
-  "Magnesium.out" 1404065020 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Magnesium.out" 1404081492 0 d41d8cd98f00b204e9800998ecf8427e ""
   "Magnesium.tex" 1403704444 4956 72dfd7326723616da44e8e0bff05e93b ""
   "MagnesiumConcl.tex" 1403704282 2076 c5d0c8ad044038ca85f3cedd9a425a0f ""
   "MagnesiumEmp.tex" 1403704282 6264 329264cf1fa65bb8c7777e687b1d5b5f ""
   "MagnesiumFindings.tex" 1403704282 5741 bfe9edff02069c1e3c5bdbde70d99a6c ""
   "MagnesiumIntro.tex" 1402672420 4064 145f633d89064632e761454833aee75e ""
   "MagnesiumLit.tex" 1402947390 6764 0c18470d6ad394949dc5ce5349fffdec ""
-  "MagnesiumTheory.tex" 1404065007 14401 cca0ef847c7d12bdc4fca75df321e881 ""
+  "MagnesiumTheory.tex" 1404081485 16573 0c5478b089e7b610a49ad833064318b7 ""
   (generated)
   "Magnesium.log"
   "Magnesium.aux"
