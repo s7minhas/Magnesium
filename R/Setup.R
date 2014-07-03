@@ -20,19 +20,6 @@ if(Sys.info()["user"]=="cassydorff")
 # par(mar=c(4, 4, 2, 0.5), oma=c(2,2,2,2), mfrow=c(1,1), mgp=c(2,.7,0))
 
 # Loading libraries and functions
-# require(igraph)
-# # layout for igraph plot
-# layout.svd3 = function (graph, d = shortest.paths(graph), ...)
-# {
-#   if (!is.igraph(graph)) {
-#     stop("Not a graph object")
-#   }
-#   l = svd(d, 3)$u
-#   l[, 1] = l[, 1]/dist(range(l[, 1]))
-#   l[, 2] = l[, 2]/dist(range(l[, 2]))
-#   l[, 3] = l[, 3]/dist(range(l[, 3]))
-#   l
-# }
 require(network)
 require(igraph)
 require(ggplot2)
@@ -43,15 +30,14 @@ require(doBy)
 require(foreign)
 require(cshapes)
 require(countrycode)
-require(CRISP)
 require(survival)
 require(OIsurv)
 require(eha)
 require(frailtypack)
 require(boot)
-require(pROC)
 require(sbgcop)
 require(survAUC)
+require(survcomp)
 require(xtable)
 require(tikzDevice)
 

@@ -37,7 +37,8 @@ varDef = cbind (
 
 # Subsetting to model data
 # aData = aData[aData$year <=2005, ]
-modData=aData[, c( names(aData)[1:19], varDef[,1] )]
+idVars=names(aData)[1:19]
+modData=aData[, c( idVars, varDef[,1] )]
 ###############################################################
 
 ###############################################################
@@ -79,7 +80,10 @@ modelFinal=coxph(Surv(start,stop,compliance) ~
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)
-############################################################### 
+
+setwd(pathData)
+save(model1, model2, modelFinal, idVars, varDef, modData, file='durModels.rda')
+###############################################################
 
 ############################################################### 
 # Diagnostics
@@ -96,51 +100,6 @@ summary(modelFinal)
 # No Evid of nonprop, if there was then would interact with log.time
 # modData$gdpGRStop=I(modData$lag1_gdpGR*log(modData$stop))
 ############################################################### 
-
-###############################################################
-# Performance
-M1Data=na.omit(modData[,c('start','stop','compliance',varDef[7:nrow(varDef),1]) ])
-M2Data=na.omit(modData[,c('start','stop','compliance',varDef[3:nrow(varDef),1]) ])
-MfinData=na.omit(modData[,c('start','stop','compliance',varDef[,1]) ])
-
-aucM1=AUC.cd(
-	Surv(M1Data$start, M1Data$stop, M1Data$compliance), 
-	Surv(M1Data$start, M1Data$stop, M1Data$compliance), 
-	predict(model1),
-	predict(model1),
-	times=seq(5,50,5)
-	)
-
-aucM2=AUC.cd(
-	Surv(M2Data$start, M2Data$stop, M2Data$compliance), 
-	Surv(M2Data$start, M2Data$stop, M2Data$compliance), 
-	predict(model2),
-	predict(model2),
-	times=seq(5,50,5)
-	)
-
-aucFinal=AUC.cd(
-	Surv(MfinData$start, MfinData$stop, MfinData$compliance), 
-	Surv(MfinData$start, MfinData$stop, MfinData$compliance), 
-	predict(modelFinal),
-	predict(modelFinal),
-	times=seq(5,50,5)
-	)
-
-print(aucM1)
-print(aucM2)
-print(aucFinal)
-
-par(mfrow=c(3,1))
-plot(aucM1)
-plot(aucM2)
-plot(aucFinal)
-par(mfrow=c(1,1))
-
-# Roc plots
-require(survcomp)
-
-###############################################################
 
 ############################################################### 
 # Table for TeX
