@@ -51,6 +51,7 @@ require(frailtypack)
 require(boot)
 require(pROC)
 require(sbgcop)
+require(survAUC)
 require(xtable)
 require(tikzDevice)
 
