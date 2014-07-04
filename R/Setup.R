@@ -38,6 +38,7 @@ require(boot)
 require(sbgcop)
 require(survAUC)
 require(survcomp)
+require(survivalROC)
 require(xtable)
 require(tikzDevice)
 

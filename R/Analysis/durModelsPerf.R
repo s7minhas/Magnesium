@@ -9,13 +9,20 @@ load('durModels.rda')
 ###############################################################
 
 ###############################################################
-# Using survauc
+# Inputs
 idVars=idVars[c(1:10,17:19)]
 m1Data=na.omit(modData[,c(idVars,varDef[7:nrow(varDef),1]) ])
 m2Data=na.omit(modData[,c(idVars,varDef[3:nrow(varDef),1]) ])
 mFData=na.omit(modData[,c(idVars,varDef[,1]) ])
-times=seq(0,25,5)
+times=seq(1,max(modData$slength),5)
 
+predM1 <- predict(model1, type = "risk")
+predM2 <- predict(model2, type = "risk")
+predMF <- predict(modelFinal, type = "risk")
+###############################################################
+
+###############################################################
+# Cumulative AUC
 aucM1=AUC.cd(
 	Surv(m1Data$start, m1Data$stop, m1Data$compliance), 
 	Surv(m1Data$start, m1Data$stop, m1Data$compliance), 
@@ -48,12 +55,7 @@ lines(aucM2$times, aucM2$auc, col='darkblue')
 ###############################################################
 
 ###############################################################
-# Using survcomp
 # Concordance index
-predM1 <- predict(model1, type = "risk")
-predM2 <- predict(model2, type = "risk")
-predMF <- predict(modelFinal, type = "risk")
-
 conc1 = concordance.index(x = predM1, surv.time = m1Data[, "slength"],
 	surv.event = m1Data[, "compliance"], method = "noether", na.rm = TRUE)
 conc2 = concordance.index(x = predM2, surv.time = m2Data[, "slength"],
@@ -61,24 +63,42 @@ conc2 = concordance.index(x = predM2, surv.time = m2Data[, "slength"],
 concF = concordance.index(x = predMF, surv.time = mFData[, "slength"],
 	surv.event = mFData[, "compliance"], method = "noether", na.rm = TRUE)
 
-print(conc1[1:5]); print(conc2[1:5]); print(concF[1:5])
+print(cbind(conc1[1:5])); print(conc2[1:5]); print(concF[1:5])
 
 # ROC plots with survcomp
 sTime = mean(unique(modData$slength))
 
 perfMod1 <- tdrocc(x = predM1, surv.time = m1Data[, "slength"],
-	surv.event = m1Data[, "compliance"], time = 24, na.rm = TRUE)
+	surv.event = m1Data[, "compliance"], time = sTime, na.rm = TRUE)
 perfMod2 <- tdrocc(x = predM2, surv.time = m2Data[, "slength"],
-	surv.event = m2Data[, "compliance"], time = 24, na.rm = TRUE)
+	surv.event = m2Data[, "compliance"], time = sTime, na.rm = TRUE)
 perfFinal <- tdrocc(x = predMF, surv.time = mFData[, "slength"],
-	surv.event = mFData[, "compliance"], time = 24, na.rm = TRUE)
+	surv.event = mFData[, "compliance"], time = sTime, na.rm = TRUE)
 
 print(perfMod1$AUC); print(perfMod2$AUC); print(perfFinal$AUC)
 
 plot(x = 1 - perfFinal$spec, y = perfFinal$sens, type = "l",
 	xlab = "1 - specificity", ylab = "sensitivity", xlim = c(0,1),
-	 ylim = c(0, 1), main = "Time-dependent ROC curve\nat 5 years")
+	 ylim = c(0, 1), main = "Time-dependent ROC curve\nat 24 years")
 lines(x = 1 - perfMod1$spec, y = perfMod1$sens, col='darkblue')
 lines(x = 1 - perfMod2$spec, y = perfMod2$sens, col='darkgreen')
 lines(x = c(0, 1), y = c(0, 1), lty = 3, col = "red")
+###############################################################
+
+###############################################################
+AUCs=matrix(NA,ncol=3,nrow=length(times))
+for(ii in 1:length(times)){
+	auctM1=survivalROC(Stime=m1Data[,'slength'], status=m1Data[,'compliance'],
+		marker=predM1, predict.time=times[ii], method='KM')$AUC
+	auctM2=survivalROC(Stime=m2Data[,'slength'], status=m2Data[,'compliance'],
+		marker=predM2, predict.time=times[ii], method='KM')$AUC
+	auctMF=survivalROC(Stime=mFData[,'slength'], status=mFData[,'compliance'],
+		marker=predMF, predict.time=times[ii], method='KM')$AUC
+	AUCs[ii,]=c(auctM1, auctM2, auctMF)
+	print(paste0('AUC for ', times[ii], ' calculated...'))
+}
+
+plot(times, AUCs[,1], col='darkblue', type='l', ylim=c(0.5, 0.8))
+lines(times, AUCs[,2], col='darkgreen')
+lines(times, AUCs[,3])
 ###############################################################
