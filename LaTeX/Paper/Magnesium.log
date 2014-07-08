@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  8 JUL 2014 17:00
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  8 JUL 2014 18:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2185,16 +2185,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [16]
-(../TeXoutput/durModelResults.tex) [17] (../TeXoutput/cumulAUC.tex)
+(../TeXoutput/durModelResults.tex) [17]
 Underfull \vbox (badness 4048) has occurred while \output is active []
 
  [18]
-(../TeXoutput/nosSurv.tex) [19] (../TeXoutput/oNet.tex) [20]
-(../TeXoutput/oNet2.tex)) (./MagnesiumConcl.tex
-Underfull \vbox (badness 4024) has occurred while \output is active []
 
- [21]
-[22] (../TeXoutput/durModelResultsNoImp.tex) [23]) (./Magnesium.bbl
+Package natbib Warning: Citation `chambless2006estimation' on page 19 undefined
+ on input line 15.
+
+(../TeXoutput/cumulAUC.tex) [19] (../TeXoutput/nosSurv.tex)
+(../TeXoutput/oNet.tex) [20] (../TeXoutput/oNet2.tex)) (./MagnesiumConcl.tex
+[21] [22] (../TeXoutput/durModelResultsNoImp.tex) [23]) (./Magnesium.bbl
 Underfull \vbox (badness 1675) has occurred while \output is active []
 
  [24]
@@ -2206,8 +2207,10 @@ Missing character: There is no Ñ in font cmr12!
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [26])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 221.
 
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 221.
 [27]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 221.
  (./Magnesium.aux)
@@ -2218,11 +2221,11 @@ Package rerunfilecheck Info: File `Magnesium.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
  ) 
 Here is how much of TeX's memory you used:
- 28896 strings out of 493633
- 564653 string characters out of 3143378
- 685171 words of memory out of 3000000
- 31417 multiletter control sequences out of 15000+200000
- 19497 words of font info for 75 fonts, out of 3000000 for 9000
+ 28890 strings out of 493633
+ 564533 string characters out of 3143378
+ 685273 words of memory out of 3000000
+ 31411 multiletter control sequences out of 15000+200000
+ 19805 words of font info for 76 fonts, out of 3000000 for 9000
  992 hyphenation exceptions out of 8191
  56i,12n,57p,1719b,1000s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -2246,10 +2249,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2011/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2011/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (28 pages, 1058082 bytes).
+Output written on Magnesium.pdf (28 pages, 1058360 bytes).
 PDF statistics:
- 445 PDF objects out of 1000 (max. 8388607)
- 376 compressed objects within 4 object streams
+ 449 PDF objects out of 1000 (max. 8388607)
+ 379 compressed objects within 4 object streams
  79 named destinations out of 1000 (max. 500000)
  108 words of extra memory for PDF output out of 10000 (max. 10000000)
 
