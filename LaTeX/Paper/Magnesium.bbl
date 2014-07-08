@@ -1,5 +1,9 @@
 \begin{thebibliography}{xx}
 
+\harvarditem{Banks}{2011}{banks2011cross}
+Banks, Arthur~S. 2011.
+\newblock ``Cross-National Time-Series Data Archive, 1815-[2011].''.
+
 \harvarditem{Bolks \harvardand\ Al-Sowayel}{2000}{bolks2000}
 Bolks, Sean~M \harvardand\ Dina Al-Sowayel. 2000.
 \newblock ``How long do economic sanctions last? Examining the sanctioning
@@ -61,11 +65,6 @@ Greenhill, B. 2010.
 \newblock Norm Transmission in Networks of Intergovermental Organizations PhD
   thesis University of Washington.
 
-\harvarditem{Henisz}{2000}{henisz2000a}
-Henisz, Witold~J. 2000.
-\newblock ``The institutional environment for economic growth.'' {\em Economics
-  \& Politics} 12(1):1--31.
-
 \harvarditem{Hoff \harvardand\ Ward}{2004}{hoff2004modeling}
 Hoff, P.D. \harvardand\ M.D. Ward. 2004.
 \newblock ``Modeling dependencies in international relations networks.'' {\em
@@ -111,10 +110,20 @@ Marinov, Nikolay. 2005.
 \newblock ``Do economic sanctions destabilize country leaders?'' {\em American
   Journal of Political Science} 49(3):564--576.
 
+\harvarditem{Marshall \harvardand\ Jaggers}{2002}{marshall2002polity}
+Marshall, Monty~G \harvardand\ Keith Jaggers. 2002.
+\newblock ``Polity IV project: Political regime characteristics and
+  transitions, 1800-2002.''.
+
 \harvarditem{McGillivray \harvardand\ Stam}{2004}{mcgillivray2004}
 McGillivray, Fiona \harvardand\ Allan~C Stam. 2004.
 \newblock ``Political institutions, coercive diplomacy, and the duration of
   economic sanctions.'' {\em Journal of Conflict Resolution} 48(2):154--172.
+
+\harvarditem{McLean \harvardand\ Whang}{2010}{mclean2010friends}
+McLean, Elena~V \harvardand\ Taehee Whang. 2010.
+\newblock ``Friends or foes? Major trading partners and the success of economic
+  sanctions.'' {\em International Studies Quarterly} 54(2):427--447.
 
 \harvarditem{Miers \harvardand\ Morgan}{2002}{miers2002}
 Miers, Anne \harvardand\ T Morgan. 2002.

@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  1 JUL 2014 07:38
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  8 JUL 2014 17:00
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **Magnesium.tex
 (./Magnesium.tex
@@ -2100,8 +2101,8 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.9 
-     [1]) (./MagnesiumLit.tex [2]
+l.11 
+      [1]) (./MagnesiumLit.tex [2]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
@@ -2121,51 +2122,52 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
- [5]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \vbox (1.1639pt too high) has occurred while \output is active []
 
- [7]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8]
-</Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf, id=173, 54
+[5]
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf, id=152, 54
 7.04375pt x 548.0475pt>
 File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf Graphi
 c file (type pdf)
 
 <use /Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf>
 Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/84
-net-crop.pdf used on input line 73.
+net-crop.pdf used on input line 11.
 (pdftex.def)             Requested size: 455.30013pt x 456.14204pt.
 
-</Users/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf, id=174, 361
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf, id=153, 361
 .35pt x 216.81pt>
 File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf Graphic
  file (type pdf)
 
 <use /Users/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf>
 Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/Ma
-pLegend.pdf used on input line 74.
+pLegend.pdf used on input line 12.
 (pdftex.def)             Requested size: 204.88365pt x 122.93124pt.
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 72--76
+Overfull \hbox (10.0pt too wide) in paragraph at lines 10--14
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 24.17838pt on input line 78.
+LaTeX Warning: Float too large for page by 24.17838pt on input line 16.
 
-[9] [10 </Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf> </
-Users/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf>]
+[6] [7 </Users/janus829/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf> </U
+sers/janus829/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11
+ [8
 
 ]
-</Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf, id=215, 692.58
+Underfull \vbox (badness 6641) has occurred while \output is active []
+
+ [9]
+Underfull \vbox (badness 1394) has occurred while \output is active []
+
+ [10]
+</Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf, id=208, 692.58
 75pt x 448.67625pt>
 File: /Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf Graphic fi
 le (type pdf)
@@ -2174,60 +2176,52 @@ le (type pdf)
 Package pdftex.def Info: /Users/janus829/Dropbox/Research/Magnesium/Graphics/sa
 neti.pdf used on input line 88.
 (pdftex.def)             Requested size: 455.30013pt x 294.96338pt.
- [12 </Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf>]
 
-Package natbib Warning: Citation `marshall2002polity' on page 13 undefined on i
-nput line 128.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Package natbib Warning: Citation `banks2011cross' on page 13 undefined on input
- line 128.
-
-) [13] (./MagnesiumEmp.tex
-Overfull \vbox (1.0751pt too high) has occurred while \output is active []
-
-
-[14] [15]) (./MagnesiumFindings.tex
+ [11]
+[12 </Users/janus829/Dropbox/Research/Magnesium/Graphics/saneti.pdf>]) [13]
+(./MagnesiumEmp.tex [14] [15]) (./MagnesiumFindings.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [16]
+(../TeXoutput/durModelResults.tex) [17] (../TeXoutput/cumulAUC.tex)
+Underfull \vbox (badness 4048) has occurred while \output is active []
 
-Package natbib Warning: Citation `mclean2010friends' on page 17 undefined on in
-put line 8.
+ [18]
+(../TeXoutput/nosSurv.tex) [19] (../TeXoutput/oNet.tex) [20]
+(../TeXoutput/oNet2.tex)) (./MagnesiumConcl.tex
+Underfull \vbox (badness 4024) has occurred while \output is active []
 
-(../TeXoutput/durModelResults.tex) [17] [18] (../TeXoutput/nosSurv.tex)
-[19] (../TeXoutput/oNet.tex) (../TeXoutput/oNet2.tex) [20])
-(./MagnesiumConcl.tex [21] (../TeXoutput/durModelResultsNoImp.tex) [22])
-(./Magnesium.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [23]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ [21]
+[22] (../TeXoutput/durModelResultsNoImp.tex) [23]) (./Magnesium.bbl
+Underfull \vbox (badness 1675) has occurred while \output is active []
 
  [24]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25]
 Missing character: There is no — in font cmr12!
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25])
-
-Package natbib Warning: There were undefined citations.
-
+ [26])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 221.
-[26]
+
+[27]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 221.
  (./Magnesium.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 221.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 221.
 Package rerunfilecheck Info: File `Magnesium.out' has not changed.
-(rerunfilecheck)             Checksum: 4D2DC93B90871AB7AF8D92DAA6D6952E;549.
+(rerunfilecheck)             Checksum: 0480429C94FFA0E1D3DACAFE8CEEEEDC;549.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
  ) 
 Here is how much of TeX's memory you used:
- 28816 strings out of 493633
- 563042 string characters out of 3143378
- 671341 words of memory out of 3000000
- 31344 multiletter control sequences out of 15000+200000
+ 28896 strings out of 493633
+ 564653 string characters out of 3143378
+ 685171 words of memory out of 3000000
+ 31417 multiletter control sequences out of 15000+200000
  19497 words of font info for 75 fonts, out of 3000000 for 9000
  992 hyphenation exceptions out of 8191
  56i,12n,57p,1719b,1000s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2252,10 +2246,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2011/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2011/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (27 pages, 1056641 bytes).
+Output written on Magnesium.pdf (28 pages, 1058082 bytes).
 PDF statistics:
- 431 PDF objects out of 1000 (max. 8388607)
- 363 compressed objects within 4 object streams
- 75 named destinations out of 1000 (max. 500000)
+ 445 PDF objects out of 1000 (max. 8388607)
+ 376 compressed objects within 4 object streams
+ 79 named destinations out of 1000 (max. 500000)
  108 words of extra memory for PDF output out of 10000 (max. 10000000)
 

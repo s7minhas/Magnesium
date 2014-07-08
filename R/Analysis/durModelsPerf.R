@@ -39,7 +39,7 @@ aucM2=AUC.cd(
 	times=times
 	)
 
-aucFinal=AUC.cd(
+aucMF=AUC.cd(
 	Surv(mFData$start, mFData$stop, mFData$compliance), 
 	Surv(mFData$start, mFData$stop, mFData$compliance), 
 	predict(modelFinal),
@@ -47,11 +47,28 @@ aucFinal=AUC.cd(
 	times=times
 	)
 
-print(aucM1$iauc); print(aucM2$iauc); print(aucFinal$iauc)
+print(aucM1$iauc); print(aucM2$iauc); print(aucMF$iauc)
 
-plot(aucFinal, col='black')
-lines(aucM1$times, aucM1$auc, col='darkgreen')
-lines(aucM2$times, aucM2$auc, col='darkblue')
+ggAUC=data.frame( rbind(
+	cbind(aucM1$times, aucM1$auc, 'Model 1\\qquad\\qquad'),
+	cbind(aucM2$times, aucM2$auc, 'Model 2\\qquad\\qquad'),
+	cbind(aucMF$times, aucMF$auc, 'Model 3')
+	) )
+ggAUC$X1=numSM(ggAUC$X1); ggAUC$X2=numSM(ggAUC$X2)
+
+pgg=ggplot(ggAUC, aes(x=X1, y=X2, color=X3, group=X3))
+pgg=pgg+geom_line(lwd=1)+scale_colour_brewer(palette = "Set1")
+pgg=pgg+scale_x_continuous(breaks=seq(0,25,5),limits=c(0,26))
+pgg=pgg+xlab('Time (years)')+ylab('Time-dependent AUC')
+pgg=pgg+theme(legend.position='top', legend.title=element_blank(),
+      axis.ticks=element_blank(), panel.grid.major=element_blank(),
+      panel.grid.minor=element_blank(), panel.border = element_blank(),
+      axis.line = element_line(color = 'black'))
+pgg
+setwd(pathTex)
+tikz(file='cumulAUC.tex', height=4, width=7, standAlone=F)
+pgg
+dev.off()
 ###############################################################
 
 ###############################################################
@@ -63,7 +80,7 @@ conc2 = concordance.index(x = predM2, surv.time = m2Data[, "slength"],
 concF = concordance.index(x = predMF, surv.time = mFData[, "slength"],
 	surv.event = mFData[, "compliance"], method = "noether", na.rm = TRUE)
 
-print(cbind(conc1[1:5])); print(conc2[1:5]); print(concF[1:5])
+print( cbind(conc1[1:5], conc2[1:5], concF[1:5] ) ) 
 
 # ROC plots with survcomp
 sTime = mean(unique(modData$slength))
