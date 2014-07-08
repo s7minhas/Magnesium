@@ -903,6 +903,7 @@
   volume = {25},
   pages = {3474--3486},
   number = {20},
+  __markedentry = {[janus829:1]},
   publisher = {Wiley Online Library}
 }
 
@@ -2050,6 +2051,13 @@
 	social capability exerts little disparate influence among these similarly
 	socially capable economies.},
   publisher = {Elsevier}
+}
+
+@BOOK{kenny1994interpersonal,
+  title = {Interpersonal perception: A social relations analysis},
+  publisher = {Guilford Press},
+  year = {1994},
+  author = {Kenny, David A.}
 }
 
 @ARTICLE{keohane1989reciprocity,

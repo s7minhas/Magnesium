@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Magnesium.aux
 The style file: apsr.bst
 Database file #1: magRefs.bib.bib
-You've used 32 entries,
+You've used 35 entries,
             2874 wiz_defined-function locations,
-            828 strings with 9172 characters,
-and the built_in function-call counts, 112866 in all, are:
-= -- 18265
-> -- 1332
+            848 strings with 9684 characters,
+and the built_in function-call counts, 124070 in all, are:
+= -- 20096
+> -- 1450
 < -- 0
-+ -- 8333
-- -- 482
-* -- 9434
-:= -- 22923
-add.period$ -- 127
-call.type$ -- 32
-change.case$ -- 416
-chr.to.int$ -- 32
-cite$ -- 32
-duplicate$ -- 536
-empty$ -- 1120
-format.name$ -- 510
-if$ -- 20292
++ -- 9174
+- -- 525
+* -- 10377
+:= -- 25189
+add.period$ -- 139
+call.type$ -- 35
+change.case$ -- 455
+chr.to.int$ -- 35
+cite$ -- 35
+duplicate$ -- 582
+empty$ -- 1228
+format.name$ -- 555
+if$ -- 22308
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 31
-newline$ -- 131
-num.names$ -- 366
-pop$ -- 110
+missing$ -- 35
+newline$ -- 145
+num.names$ -- 400
+pop$ -- 125
 preamble$ -- 1
-purify$ -- 480
+purify$ -- 525
 quote$ -- 0
-skip$ -- 516
+skip$ -- 550
 stack$ -- 0
-substring$ -- 25464
-swap$ -- 124
-text.length$ -- 448
+substring$ -- 28037
+swap$ -- 129
+text.length$ -- 490
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 128
+type$ -- 138
 warning$ -- 0
-while$ -- 769
+while$ -- 839
 width$ -- 0
-write$ -- 427
+write$ -- 468
