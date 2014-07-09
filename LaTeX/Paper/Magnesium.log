@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  9 JUL 2014 18:07
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  9 JUL 2014 18:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2689,11 +2689,6 @@ l.11
 Underfull \vbox (badness 7433) has occurred while \output is active []
 
  [2]
-
-Package natbib Warning: Citation `whang2013coercion' on page 3 undefined on inp
-ut line 8.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
@@ -2790,11 +2785,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [26]
 Missing character: There is no Ñ in font cmr12!
 )
-
-Package natbib Warning: There were undefined citations.
-
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 221.
-[27]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27]
+[28]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 221.
  (./Magnesium.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 221.
@@ -2804,10 +2800,10 @@ Package rerunfilecheck Info: File `Magnesium.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
  ) 
 Here is how much of TeX's memory you used:
- 29529 strings out of 493488
- 577370 string characters out of 3141326
- 707793 words of memory out of 3000000
- 32051 multiletter control sequences out of 15000+200000
+ 29533 strings out of 493488
+ 577455 string characters out of 3141326
+ 707822 words of memory out of 3000000
+ 32053 multiletter control sequences out of 15000+200000
  19497 words of font info for 75 fonts, out of 3000000 for 9000
  1118 hyphenation exceptions out of 8191
  56i,12n,57p,1729b,1015s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2853,10 +2849,10 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2012/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2012/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2012/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (28 pages, 1061481 bytes).
+Output written on Magnesium.pdf (29 pages, 1061911 bytes).
 PDF statistics:
- 484 PDF objects out of 1000 (max. 8388607)
- 413 compressed objects within 5 object streams
- 89 named destinations out of 1000 (max. 500000)
+ 490 PDF objects out of 1000 (max. 8388607)
+ 418 compressed objects within 5 object streams
+ 91 named destinations out of 1000 (max. 500000)
  108 words of extra memory for PDF output out of 10000 (max. 10000000)
 
