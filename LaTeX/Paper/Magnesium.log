@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  9 JUL 2014 17:38
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  9 JUL 2014 17:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2685,7 +2685,10 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.11 
-      [1]) (./MagnesiumLit.tex [2]
+      [1]) (./MagnesiumLit.tex
+Underfull \vbox (badness 7433) has occurred while \output is active []
+
+ [2]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
@@ -2706,7 +2709,7 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
 
-</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf, id=140, 
+</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf, id=144, 
 547.04375pt x 548.0475pt>
 File: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/84net-crop.pdf Grap
 hic file (type pdf)
@@ -2716,7 +2719,7 @@ Package pdftex.def Info: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/
 84net-crop.pdf used on input line 9.
 (pdftex.def)             Requested size: 455.30013pt x 456.14204pt.
 
-</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf, id=141, 3
+</Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf, id=145, 3
 61.35pt x 216.81pt>
 File: /Users/cassydorff/Dropbox/Research/Magnesium/Graphics/MapLegend.pdf Graph
 ic file (type pdf)
@@ -2796,7 +2799,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
 Here is how much of TeX's memory you used:
  29528 strings out of 493488
  577351 string characters out of 3141326
- 707771 words of memory out of 3000000
+ 707776 words of memory out of 3000000
  32050 multiletter control sequences out of 15000+200000
  19497 words of font info for 75 fonts, out of 3000000 for 9000
  1118 hyphenation exceptions out of 8191
@@ -2843,7 +2846,7 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2012/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2012/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2012/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (28 pages, 1061492 bytes).
+Output written on Magnesium.pdf (28 pages, 1061379 bytes).
 PDF statistics:
  481 PDF objects out of 1000 (max. 8388607)
  410 compressed objects within 5 object streams
