@@ -18,7 +18,7 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 ###############################################################
 # Splitting up dataframe into random subsets of cases
 caseid=unique(aData$caseid)
-set.seed(6886); rands=sample(rep(1:4, 200)[1:length(caseid)])
+set.seed(2312); rands=sample(rep(1:3, 1000)[1:length(caseid)])
 idsRand=data.frame(cbind(caseid, rands))
 aData=merge(aData, idsRand, by='caseid', all.x=T)
 ###############################################################
@@ -27,7 +27,7 @@ aData=merge(aData, idsRand, by='caseid', all.x=T)
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
-		,'lag1_actor'
+		# ,'lag1_actor'
 		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
 	 ,'lag1_polity2'
 	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
@@ -58,7 +58,7 @@ for( ii in 1:length(unique(modData$rands)) ){
 	slice=modData[which(modData$rands %in% rands[ii]),]
 	modelFinal=coxph(Surv(start,stop,compliance) ~
 		lag1_uData + lag1_SuData2 
-		+ lag1_actor 
+		# + lag1_actor 
 		+ noS + Ddistdata + lag1_tdata + lag1_allydata
 		+ lag1_polity2 
 		+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
