@@ -20,7 +20,8 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
-		,'noS', 'Ddistdata', 'tdata', 'allydata'
+		,'lag1_actor','lag1_partner'
+		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
 	 ,'lag1_polity2'
 	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
 	 ,'lag1_lpopulation'	 
@@ -62,8 +63,7 @@ summary(model1)
 
 # State-specific and rel. measures
 model2 = coxph(Surv(start, stop, compliance) ~ 
-	+ noS + Ddistdata + tdata + allydata
-	 # + igodata + Creligdata 
+	+ noS + Ddistdata + lag1_tdata + lag1_allydata
 	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
 	+ lag1_domSUM
@@ -73,7 +73,8 @@ summary(model2)
 # Incorp reciprocity measure
 modelFinal=coxph(Surv(start,stop,compliance) ~
 	lag1_uData + lag1_SuData2 
-	+ noS + Ddistdata + tdata + allydata
+	+ lag1_actor + lag1_partner
+	+ noS + Ddistdata + lag1_tdata + lag1_allydata
 	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
 	+ lag1_domSUM
@@ -119,7 +120,7 @@ if(genTikz){ print.xtable( xtable(durTables, align='llccc',
 ############################################################### 
 # Risk ratios
 riskVars=c('lag1_uData', 'lag1_SuData2',
-	'noS', 'Ddistdata', 'tdata', 'allydata')
+	'noS', 'Ddistdata', 'lag1_tdata')
 riskRatios=t(mapply(x=riskVars, 
 	function(x) FUN=riskRatio(1000, modelFinal, modData, x)))
 riskRatios
@@ -131,15 +132,17 @@ riskRatios
 	# noS, distance, ally, igo, religion
 simModel=modelFinal
 pcolors=append(brewer.pal(9,'Reds')[8],brewer.pal(9,'Blues')[8])
+pcolors=c('darkgrey','black')
 vrfn=function(x,lo=0,hi=1){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
 
 setwd(pathTex)
 # pdf(file='nosSurv.pdf', height=4, width=6)
 if(genTikz){tikz(file='nosSurv.tex', height=4, width=6, standAlone=F)}
-plot(survfit(simModel, 
-	scenBuild(vi='noS', vRange=vrfn(aData[,'noS']),
-	vars=names(simModel$coefficients), 
-	ostat=mean, simData=modData) ),
+plot(
+	survfit(simModel, 
+		scenBuild(vi='noS', vRange=vrfn(aData[,'noS']),
+		vars=names(simModel$coefficients), 
+		ostat=mean, simData=modData) ),
 	conf.int=F, col=pcolors, las=1, 
 	# main='Number of Senders', 
 	main='', 
@@ -151,7 +154,7 @@ if(genTikz){dev.off()}
 
 # pdf(file='oNet.pdf', height=7, width=10)
 if(genTikz){tikz(file='oNet.tex', height=3, width=8, standAlone=F)}
-coefs=c('Ddistdata','tdata')
+coefs=c('Ddistdata','lag1_tdata')
 cnames=varDef[match(coefs, varDef[,1]), 2]
 cnames=c('Distance','Trade')
 par(mfrow=c(1,2))
@@ -159,10 +162,11 @@ for(ii in 1:length(coefs)){
 	coef=coefs[ii]
 	if (coef=='distdata') { crange=c(0.001,0.005)
 		} else { crange=vrfn(aData[,coef]) }	
-	plot(survfit(simModel, 
-		scenBuild(vi=coef, vRange=crange,
-		vars=names(simModel$coefficients), 
-		ostat=mean, simData=modData) ),
+	plot(
+		survfit(simModel, 
+			scenBuild(vi=coef, vRange=crange,
+			vars=names(simModel$coefficients), 
+			ostat=mean, simData=modData) ),
 	conf.int=F, col=pcolors, las=1,
 	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
 	if(ii==1){title(ylab='Survival Prob.')} 
@@ -179,10 +183,11 @@ par(mfrow=c(1,2))
 for(ii in 1:length(coefs)){
 	coef=coefs[ii]
 	crange=vrfn(aData[,coef],lo=0,hi=0.9)
-	plot(survfit(simModel, 
-		scenBuild(vi=coef, vRange=crange,
-		vars=names(simModel$coefficients), 
-		ostat=mean, simData=modData) ),
+	plot(
+		survfit(simModel, 
+			scenBuild(vi=coef, vRange=crange,
+			vars=names(simModel$coefficients), 
+			ostat=mean, simData=modData) ),
 	conf.int=F, col=pcolors, las=1,
 	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
 	if(ii==1){title(ylab='Survival Prob.')} 

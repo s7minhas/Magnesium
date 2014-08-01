@@ -420,7 +420,7 @@ durTable = function(modResults, varDef, digs=3){
 # Function for risk ratios
 riskRatio=function(sims, model, data, var, seed=6886){
 	set.seed(seed)
-	coefDist=mvrnorm (sims, coef (model), vcov (model))
+	coefDist=mvrnorm( sims, coef(model), vcov(model) )
 	scen=scenBuild(vi=var, vRange=NULL,
 		vars=names(model$coefficients), ostat=mean, simData=data)
 	preds=coefDist%*%t(scen)

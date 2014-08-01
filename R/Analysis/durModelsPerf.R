@@ -57,7 +57,7 @@ ggAUC=data.frame( rbind(
 ggAUC$X1=numSM(ggAUC$X1); ggAUC$X2=numSM(ggAUC$X2)
 
 pgg=ggplot(ggAUC, aes(x=X1, y=X2, color=X3, group=X3))
-pgg=pgg+geom_line(lwd=1)+scale_colour_brewer(palette = "Set1")
+pgg=pgg+geom_line(aes(linetype=X3),lwd=1,color='black')
 pgg=pgg+scale_x_continuous(breaks=seq(0,15,3),limits=c(0,16))
 pgg=pgg+xlab('Time (years)')+ylab('Time-dependent AUC')
 pgg=pgg+theme(legend.position='top', legend.title=element_blank(),
@@ -84,7 +84,7 @@ concF = concordance.index(x = predMF, surv.time = mFData[, "slength"],
 print( cbind(conc1[1:5], conc2[1:5], concF[1:5] ) ) 
 
 # ROC plots with survcomp
-sTime = mean(unique(modData$slength))
+sTime = 10
 
 perfMod1 <- tdrocc(x = predM1, surv.time = m1Data[, "slength"],
 	surv.event = m1Data[, "compliance"], time = sTime, na.rm = TRUE)
@@ -95,28 +95,11 @@ perfFinal <- tdrocc(x = predMF, surv.time = mFData[, "slength"],
 
 print(perfMod1$AUC); print(perfMod2$AUC); print(perfFinal$AUC)
 
-plot(x = 1 - perfFinal$spec, y = perfFinal$sens, type = "l",
-	xlab = "1 - specificity", ylab = "sensitivity", xlim = c(0,1),
-	 ylim = c(0, 1), main = "Time-dependent ROC curve\nat 24 years")
+plot(x = 1 - perfFinal$spec, y = perfFinal$sens,
+	xlab = "False Positive Rate", ylab = "True Positive Rate", 
+	xlim = c(0,1), ylim = c(0, 1), type = "l", las=1,
+	main = paste0("Time-dependent ROC\ncurve at ", sTime, " years"))
 lines(x = 1 - perfMod1$spec, y = perfMod1$sens, col='darkblue')
 lines(x = 1 - perfMod2$spec, y = perfMod2$sens, col='darkgreen')
 lines(x = c(0, 1), y = c(0, 1), lty = 3, col = "red")
-###############################################################
-
-###############################################################
-AUCs=matrix(NA,ncol=3,nrow=length(times))
-for(ii in 1:length(times)){
-	auctM1=survivalROC(Stime=m1Data[,'slength'], status=m1Data[,'compliance'],
-		marker=predM1, predict.time=times[ii], method='KM')$AUC
-	auctM2=survivalROC(Stime=m2Data[,'slength'], status=m2Data[,'compliance'],
-		marker=predM2, predict.time=times[ii], method='KM')$AUC
-	auctMF=survivalROC(Stime=mFData[,'slength'], status=mFData[,'compliance'],
-		marker=predMF, predict.time=times[ii], method='KM')$AUC
-	AUCs[ii,]=c(auctM1, auctM2, auctMF)
-	print(paste0('AUC for ', times[ii], ' calculated...'))
-}
-
-plot(times, AUCs[,1], col='darkblue', type='l', ylim=c(0.5, 0.8))
-lines(times, AUCs[,2], col='darkgreen')
-lines(times, AUCs[,3])
 ###############################################################
