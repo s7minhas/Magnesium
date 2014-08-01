@@ -18,7 +18,7 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 ###############################################################
 # Splitting up dataframe into random subsets of cases
 caseid=unique(aData$caseid)
-set.seed(6886); rands=sample(c(rep(1:5, 130),1:3))
+set.seed(6886); rands=sample(rep(1:4, 200)[1:length(caseid)])
 idsRand=data.frame(cbind(caseid, rands))
 aData=merge(aData, idsRand, by='caseid', all.x=T)
 ###############################################################
@@ -27,7 +27,7 @@ aData=merge(aData, idsRand, by='caseid', all.x=T)
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
-		,'lag1_actor','lag1_partner'
+		,'lag1_actor'
 		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
 	 ,'lag1_polity2'
 	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
@@ -35,7 +35,9 @@ varDef = cbind (
 	 ,'lag1_domSUM'
 	 ),
 	c( 'Compliance Reciprocity$_{j,t-1}$', 'Sanction Reciprocity$_{j,t-1}$'
-	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
+		,'Actor Effect'
+	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 
+	'Trade$_{j,t-1}$', 'Ally$_{j,t-1}$'
 	,'Polity$_{i,t-1}$'
 	,'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$'
 	,'Population$_{i,t-1}$'	
@@ -56,7 +58,7 @@ for( ii in 1:length(unique(modData$rands)) ){
 	slice=modData[which(modData$rands %in% rands[ii]),]
 	modelFinal=coxph(Surv(start,stop,compliance) ~
 		lag1_uData + lag1_SuData2 
-		+ lag1_actor + lag1_partner
+		+ lag1_actor 
 		+ noS + Ddistdata + lag1_tdata + lag1_allydata
 		+ lag1_polity2 
 		+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
@@ -65,9 +67,15 @@ for( ii in 1:length(unique(modData$rands)) ){
 		, data=slice)
 	models[[ii]]=modelFinal
 }
+
+# Pull out results from each model into one dataframe
+coefData=NULL
+for(ii in 1:length(models)){
+	print(coeftest(models[[ii]]))
+}
 ###############################################################
 
 ###############################################################
 # Generate coefficient plot for each model
-
+coeftest(models[[ii]])[1:nrow(varDef),]
 ###############################################################
