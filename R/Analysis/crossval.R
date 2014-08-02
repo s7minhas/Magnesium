@@ -120,7 +120,7 @@ coefp = coefp + theme(legend.position='none', legend.title=element_blank(),
     panel.grid.minor=element_blank())
 coefp
 setwd(pathTex)
-tikz(file='crossval.tex', height=4, width=7, standAlone=F)
+tikz(file='crossval.tex', height=3, width=7, standAlone=F)
 coefp
 dev.off()
 ###############################################################

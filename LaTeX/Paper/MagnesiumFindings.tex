@@ -12,6 +12,14 @@ Like the extant literature (e.g., \citealp{mclean2010friends}), we do find stron
 
 Our third hypothesis posited that when a target state faces sanctions from multiple senders it will comply more quickly. Our key hypothesses related to the effect of compliance and sanction reciprocity. We incorporate these variables in the last column of table \ref{tab:regResults}, and the findings are in line with our expectations. We find that states receiving sanctions from countries with whom they have a stronger history of compliance relative to others in the network will comply to those sanctions more quickly. On the other hand, simply receiving sanctions from a particular sender relative to others in network, without necessarily complying, makes a target state less likely to comply to that state. 
 
+\begin{figure}[ht]
+	\centering
+	\caption{Three-Fold CrossValidation for models shown in Table \ref{tab:crossval}.}
+	\resizebox{0.8\textwidth}{!}{\input{../TeXoutput/crossval.tex}}
+	\label{fig:crossval}
+\end{figure}
+\FloatBarrier
+
 By incorporating our network level covariates we also noticeably improve our ability to predict when states comply. Figure \ref{fig:auc} shows time-dependent AUC (area under the curve) statistics for each model, we vary the time parameter to range from 0 to 15 years.\footnote{Time-dependent AUCs were computed using the formula provided by \citet{chambless2006estimation}.} We set the max for 15 years because only 4\% of sanction cases in our dataset that extend past 15 years end with compliance by a target state. This leads to the AUC statistics for each model after that time point to begin to coalesce. Before the 15 year mark, however, we see noticeable variation in the time-dependent AUC statistics for each model. Most importantly, we can see that Model 3, where we incorporate our network level covariates, provides a noticeably higher AUC than the alternatives that we examined.
 
 \begin{figure}[ht]
