@@ -10,12 +10,14 @@ We find strong support for our third hypothesis which stated that target states 
 \input{../TeXoutput/durModelResults}
 \FloatBarrier
 
-Our key hypotheses relate to the effect of compliance and sanction reciprocity. We incorporate these variables in the last column of table \ref{tab:regResults}, and here we find that target states comply much more quickly to sanctions sent from countries with whom they have a stronger history of compliance relative to others in the network. On the other hand, simply receiving sanctions from a particular sender relative to others in network, without necessarily complying, makes a target state less likely to comply. To assure that a few cases are not responsible for the regression estimates depicted in Table \ref{tab:regResults}, we randomly split our dataset of 653 sanction cases into ten sub-datasets of approximately equal size. We then reran model three . The coefficient estimates for compliance and sanction reciprocity when estimating across each of these subsamples remains consistent providing further confidence to our findings.
+Our key hypotheses relate to the effect of compliance and sanction reciprocity. We incorporate these variables in the last column of table \ref{tab:regResults}, and here we find that target states comply much more quickly to sanctions sent from countries with whom they have a stronger history of compliance relative to others in the network. On the other hand, simply receiving sanctions from a particular sender relative to others in network, without necessarily complying, makes a target state less likely to comply. 
+
+To assure that a few cases are not responsible for the regression estimates depicted in Table \ref{tab:regResults}, we randomly split our dataset of 653 sanction cases into ten sub-datasets of approximately equal size. We then reran model three . The coefficient estimates for compliance and sanction reciprocity when estimating across each of these subsamples remains consistent providing further confidence to our findings.
 
 \begin{figure}[ht]
 	\centering
-	\caption{Three-Fold CrossValidation for models shown in Table \ref{tab:regResults}.}
-	\resizebox{0.8\textwidth}{!}{\input{../TeXoutput/crossval.tex}}
+	\caption{Six-Fold CrossValidation for models shown in Table \ref{tab:regResults}.}
+	\resizebox{0.8\textwidth}{!}{\input{../TeXoutput/crossvalCoef.tex}}
 	\label{fig:crossval}
 \end{figure}
 \FloatBarrier
@@ -24,8 +26,8 @@ A key question that remains, however, is whether we are able to better explain s
 
 \begin{figure}[ht]
 	\centering
-	\caption{Out of Sample Time-Dependent AUC for models shown in Table \ref{tab:regResults}.}
-	\resizebox{0.8\textwidth}{!}{\input{../TeXoutput/cumulAUC.tex}}
+	\caption{Out of Sample Time-Dependent AUC for models shown in Table \ref{tab:regResults} using six-fold cross validation.}
+	\resizebox{0.8\textwidth}{!}{\input{../TeXoutput/crossvalPerf.tex}}
 	\label{fig:auc}
 \end{figure}
 \FloatBarrier

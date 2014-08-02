@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  2 AUG 2014 12:38
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  2 AUG 2014 16:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2184,16 +2184,9 @@ neti.pdf used on input line 82.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [16]
-(../TeXoutput/durModelResults.tex) [17]
-
-LaTeX Warning: Reference `tab:crossval' on page 18 undefined on input line 17.
-
-
-LaTeX Warning: Reference `tab:crossval' on page 18 undefined on input line 17.
-
-(../TeXoutput/crossval.tex) [18] (../TeXoutput/cumulAUC.tex) [19]
-(../TeXoutput/nosSurv.tex) [20] (../TeXoutput/oNet.tex) [21]
-(../TeXoutput/oNet2.tex)) (./MagnesiumConcl.tex
+(../TeXoutput/durModelResults.tex) [17] [18] (../TeXoutput/crossvalCoef.tex)
+(../TeXoutput/crossvalPerf.tex) [19] (../TeXoutput/nosSurv.tex) [20]
+(../TeXoutput/oNet.tex) [21] (../TeXoutput/oNet2.tex)) (./MagnesiumConcl.tex
 Underfull \vbox (badness 4024) has occurred while \output is active []
 
  [22]
@@ -2221,17 +2214,13 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 221.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 221.
 Package rerunfilecheck Info: File `Magnesium.out' has not changed.
 (rerunfilecheck)             Checksum: 59AE4FBA337C853BF6E42357A78BAF79;549.
-
-
-LaTeX Warning: There were undefined references.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
  ) 
 Here is how much of TeX's memory you used:
- 28964 strings out of 493633
- 566062 string characters out of 3143378
- 682348 words of memory out of 3000000
- 31475 multiletter control sequences out of 15000+200000
+ 29365 strings out of 493633
+ 574002 string characters out of 3143378
+ 683344 words of memory out of 3000000
+ 31876 multiletter control sequences out of 15000+200000
  19497 words of font info for 75 fonts, out of 3000000 for 9000
  992 hyphenation exceptions out of 8191
  56i,12n,57p,1719b,1004s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2256,10 +2245,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2011/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2011/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (30 pages, 1064395 bytes).
+Output written on Magnesium.pdf (30 pages, 1069796 bytes).
 PDF statistics:
- 480 PDF objects out of 1000 (max. 8388607)
- 407 compressed objects within 5 object streams
+ 483 PDF objects out of 1000 (max. 8388607)
+ 409 compressed objects within 5 object streams
  86 named destinations out of 1000 (max. 500000)
  108 words of extra memory for PDF output out of 10000 (max. 10000000)
 
