@@ -42,7 +42,7 @@ modData=aData[, c( idVars, varDef[,1] )]
 ###############################################################
 # Train/test
 caseid=unique(modData$caseid)
-set.seed(2312); train=rbinom(length(caseid), 1,0.75)
+set.seed(2312); train=rbinom(length(caseid), 1,0.8)
 idsTrain=data.frame(cbind(caseid, train))
 modData=merge(modData, idsTrain, by='caseid', all.x=T)
 
@@ -53,39 +53,74 @@ test=modData[which(modData$train %in% 0),]
 ###############################################################
 # Inputs
 idVars=idVars[c(1:10,17:19)]
-m1Data=na.omit(modData[,c(idVars,varDef[7:nrow(varDef),1]) ])
-m2Data=na.omit(modData[,c(idVars,varDef[3:nrow(varDef),1]) ])
-mFData=na.omit(modData[,c(idVars,varDef[,1]) ])
-times=seq(1,26,5)
 
-predM1 <- predict(model1, type = "risk")
-predM2 <- predict(model2, type = "risk")
-predMF <- predict(modelFinal, type = "risk")
+m1DataTrain=na.omit(train[,c(idVars,varDef[7:nrow(varDef),1]) ])
+m2DataTrain=na.omit(train[,c(idVars,varDef[3:nrow(varDef),1]) ])
+mFDataTrain=na.omit(train[,c(idVars,varDef[,1]) ])
+
+m1DataTest=na.omit(test[,c(idVars,varDef[7:nrow(varDef),1]) ])
+m2DataTest=na.omit(test[,c(idVars,varDef[3:nrow(varDef),1]) ])
+mFDataTest=na.omit(test[,c(idVars,varDef[,1]) ])
+
+modTrain1 = coxph(Surv(start, stop, compliance) ~ 
+	+ lag1_polity2 
+	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
+	+ lag1_domSUM
+	, data=m1DataTrain)
+
+# State-specific and rel. measures
+modTrain2 = coxph(Surv(start, stop, compliance) ~ 
+	+ noS + Ddistdata + lag1_tdata + lag1_allydata
+	+ lag1_polity2 
+	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
+	+ lag1_domSUM
+	, data=m2DataTrain)
+
+# Incorp reciprocity measure
+modTrainF=coxph(Surv(start,stop,compliance) ~
+	lag1_uData + lag1_SuData2 
+	# + lag1_actor 
+	+ noS + Ddistdata + lag1_tdata + lag1_allydata
+	+ lag1_polity2 
+	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
+	+ lag1_domSUM
+	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
+	, data=mFDataTrain)
+
+predM1 <- predict(modTrain1, type = "risk")
+predM2 <- predict(modTrain2, type = "risk")
+predMF <- predict(modTrainF, type = "risk")
+
+testM1 <- predict(modTrain1, type = "risk", newdata=m1DataTest)
+testM2 <- predict(modTrain2, type = "risk", newdata=m2DataTest)
+testMF <- predict(modTrainF, type = "risk", newdata=mFDataTest)
+
+times=seq(1,26,5)
 ###############################################################
 
 ###############################################################
 # Cumulative AUC
 aucM1=AUC.cd(
-	Surv(m1Data$start, m1Data$stop, m1Data$compliance), 
-	Surv(m1Data$start, m1Data$stop, m1Data$compliance), 
-	predict(model1),
-	predict(model1),
+	Surv(m1DataTrain$start, m1DataTrain$stop, m1DataTrain$compliance), 
+	Surv(m1DataTest$start, m1DataTest$stop, m1DataTest$compliance), 
+	predict(modTrain1),
+	predict(modTrain1, newdata=m1DataTest),
 	times=times
 	)
 
 aucM2=AUC.cd(
-	Surv(m2Data$start, m2Data$stop, m2Data$compliance), 
-	Surv(m2Data$start, m2Data$stop, m2Data$compliance), 
-	predict(model2),
-	predict(model2),
+	Surv(m2DataTrain$start, m2DataTrain$stop, m2DataTrain$compliance), 
+	Surv(m2DataTest$start, m2DataTest$stop, m2DataTest$compliance), 
+	predict(modTrain2),
+	predict(modTrain2, newdata=m2DataTest),
 	times=times
 	)
 
 aucMF=AUC.cd(
-	Surv(mFData$start, mFData$stop, mFData$compliance), 
-	Surv(mFData$start, mFData$stop, mFData$compliance), 
-	predict(modelFinal),
-	predict(modelFinal),
+	Surv(mFDataTrain$start, mFDataTrain$stop, mFDataTrain$compliance), 
+	Surv(mFDataTest$start, mFDataTest$stop, mFDataTest$compliance), 
+	predict(modTrainF),
+	predict(modTrainF, newdata=mFDataTest),
 	times=times
 	)
 
@@ -116,24 +151,24 @@ pgg
 
 ###############################################################
 # Concordance index
-conc1 = concordance.index(x = predM1, surv.time = m1Data[, "slength"],
-	surv.event = m1Data[, "compliance"], method = "noether", na.rm = TRUE)
-conc2 = concordance.index(x = predM2, surv.time = m2Data[, "slength"],
-	surv.event = m2Data[, "compliance"], method = "noether", na.rm = TRUE)
-concF = concordance.index(x = predMF, surv.time = mFData[, "slength"],
-	surv.event = mFData[, "compliance"], method = "noether", na.rm = TRUE)
+conc1 = concordance.index(x = testM1, surv.time = m1DataTest[, "slength"],
+	surv.event = m1DataTest[, "compliance"], method = "noether", na.rm = TRUE)
+conc2 = concordance.index(x = testM2, surv.time = m2DataTest[, "slength"],
+	surv.event = m2DataTest[, "compliance"], method = "noether", na.rm = TRUE)
+concF = concordance.index(x = testMF, surv.time = mFDataTest[, "slength"],
+	surv.event = mFDataTest[, "compliance"], method = "noether", na.rm = TRUE)
 
 print( cbind(conc1[1:5], conc2[1:5], concF[1:5] ) ) 
 
 # ROC plots with survcomp
 sTime = 10
 
-perfMod1 <- tdrocc(x = predM1, surv.time = m1Data[, "slength"],
-	surv.event = m1Data[, "compliance"], time = sTime, na.rm = TRUE)
-perfMod2 <- tdrocc(x = predM2, surv.time = m2Data[, "slength"],
-	surv.event = m2Data[, "compliance"], time = sTime, na.rm = TRUE)
-perfFinal <- tdrocc(x = predMF, surv.time = mFData[, "slength"],
-	surv.event = mFData[, "compliance"], time = sTime, na.rm = TRUE)
+perfMod1 <- tdrocc(x = testM1, surv.time = m1DataTest[, "slength"],
+	surv.event = m1DataTest[, "compliance"], time = sTime, na.rm = TRUE)
+perfMod2 <- tdrocc(x = testM2, surv.time = m2DataTest[, "slength"],
+	surv.event = m2DataTest[, "compliance"], time = sTime, na.rm = TRUE)
+perfFinal <- tdrocc(x = testMF, surv.time = mFDataTest[, "slength"],
+	surv.event = mFDataTest[, "compliance"], time = sTime, na.rm = TRUE)
 
 print(perfMod1$AUC); print(perfMod2$AUC); print(perfFinal$AUC)
 
@@ -149,12 +184,12 @@ lines(x = c(0, 1), y = c(0, 1), lty = 3, col = "red")
 ###############################################################
 AUCs=matrix(NA,ncol=3,nrow=length(times))
 for(ii in 1:length(times)){
-	auctM1=survivalROC(Stime=m1Data[,'slength'], status=m1Data[,'compliance'],
-		marker=predM1, predict.time=times[ii], method='KM')$AUC
-	auctM2=survivalROC(Stime=m2Data[,'slength'], status=m2Data[,'compliance'],
-		marker=predM2, predict.time=times[ii], method='KM')$AUC
-	auctMF=survivalROC(Stime=mFData[,'slength'], status=mFData[,'compliance'],
-		marker=predMF, predict.time=times[ii], method='KM')$AUC
+	auctM1=survivalROC(Stime=m1DataTest[,'slength'], status=m1DataTest[,'compliance'],
+		marker=testM1, predict.time=times[ii], method='KM')$AUC
+	auctM2=survivalROC(Stime=m2DataTest[,'slength'], status=m2DataTest[,'compliance'],
+		marker=testM2, predict.time=times[ii], method='KM')$AUC
+	auctMF=survivalROC(Stime=mFDataTest[,'slength'], status=mFDataTest[,'compliance'],
+		marker=testMF, predict.time=times[ii], method='KM')$AUC
 	AUCs[ii,]=c(auctM1, auctM2, auctMF)
 	print(paste0('AUC for ', times[ii], ' calculated...'))
 }

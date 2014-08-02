@@ -82,9 +82,6 @@ modelFinal=coxph(Surv(start,stop,compliance) ~
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)
-
-setwd(pathData)
-save(model1, model2, modelFinal, idVars, varDef, modData, file='durModels.rda')
 ###############################################################
 
 ############################################################### 
