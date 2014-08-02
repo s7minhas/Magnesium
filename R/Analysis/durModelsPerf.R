@@ -5,7 +5,49 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 ###############################################################
 setwd(pathData)
-load('durModels.rda')
+load('durDataEconImp.rda')
+
+ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
+names(ids)=c('targetstate','fcode')
+aData=merge(aData,ids,by='targetstate',all.x=T)
+###############################################################
+
+###############################################################
+# Variable key
+varDef = cbind (  
+	c( 'lag1_uData', 'lag1_SuData2'
+		# ,'lag1_actor'
+		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
+	 ,'lag1_polity2'
+	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
+	 ,'lag1_lpopulation'	 
+	 ,'lag1_domSUM'
+	 ),
+	c( 'Compliance Reciprocity$_{j,t-1}$', 'Sanction Reciprocity$_{j,t-1}$'
+		# ,'Actor Effect'
+	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
+	,'Polity$_{i,t-1}$'
+	,'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$'
+	,'Population$_{i,t-1}$'	
+	,'Internal Conflict$_{i,t-1}$' 
+	)
+	)
+
+# Subsetting to model data
+# aData = aData[aData$year <=2005, ]
+idVars=names(aData)[1:19]
+modData=aData[, c( idVars, varDef[,1] )]
+###############################################################
+
+###############################################################
+# Train/test
+caseid=unique(modData$caseid)
+set.seed(2312); train=rbinom(length(caseid), 1,0.75)
+idsTrain=data.frame(cbind(caseid, train))
+modData=merge(modData, idsTrain, by='caseid', all.x=T)
+
+train=modData[which(modData$train %in% 1),]
+test=modData[which(modData$train %in% 0),]
 ###############################################################
 
 ###############################################################
@@ -14,7 +56,7 @@ idVars=idVars[c(1:10,17:19)]
 m1Data=na.omit(modData[,c(idVars,varDef[7:nrow(varDef),1]) ])
 m2Data=na.omit(modData[,c(idVars,varDef[3:nrow(varDef),1]) ])
 mFData=na.omit(modData[,c(idVars,varDef[,1]) ])
-times=seq(1,max(modData$slength),5)
+times=seq(1,26,5)
 
 predM1 <- predict(model1, type = "risk")
 predM2 <- predict(model2, type = "risk")
@@ -66,10 +108,10 @@ pgg=pgg+theme(legend.position='top', legend.title=element_blank(),
       axis.line = element_line(color = 'black'),
       axis.title.y=element_text(vjust=1))
 pgg
-setwd(pathTex)
-tikz(file='cumulAUC.tex', height=4, width=7, standAlone=F)
-pgg
-dev.off()
+# setwd(pathTex)
+# tikz(file='cumulAUC.tex', height=4, width=7, standAlone=F)
+# pgg
+# dev.off()
 ###############################################################
 
 ###############################################################
@@ -102,4 +144,22 @@ plot(x = 1 - perfFinal$spec, y = perfFinal$sens,
 lines(x = 1 - perfMod1$spec, y = perfMod1$sens, col='darkblue')
 lines(x = 1 - perfMod2$spec, y = perfMod2$sens, col='darkgreen')
 lines(x = c(0, 1), y = c(0, 1), lty = 3, col = "red")
+###############################################################
+
+###############################################################
+AUCs=matrix(NA,ncol=3,nrow=length(times))
+for(ii in 1:length(times)){
+	auctM1=survivalROC(Stime=m1Data[,'slength'], status=m1Data[,'compliance'],
+		marker=predM1, predict.time=times[ii], method='KM')$AUC
+	auctM2=survivalROC(Stime=m2Data[,'slength'], status=m2Data[,'compliance'],
+		marker=predM2, predict.time=times[ii], method='KM')$AUC
+	auctMF=survivalROC(Stime=mFData[,'slength'], status=mFData[,'compliance'],
+		marker=predMF, predict.time=times[ii], method='KM')$AUC
+	AUCs[ii,]=c(auctM1, auctM2, auctMF)
+	print(paste0('AUC for ', times[ii], ' calculated...'))
+}
+
+plot(times, AUCs[,1], col='darkblue', type='l', ylim=c(0.5, 0.8))
+lines(times, AUCs[,2], col='darkgreen')
+lines(times, AUCs[,3])
 ###############################################################
