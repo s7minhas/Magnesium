@@ -18,7 +18,7 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 ###############################################################
 # Splitting up dataframe into random subsets of cases
 caseid=unique(aData$caseid)
-set.seed(2312); rands=sample(rep(1:3, 1000)[1:length(caseid)])
+set.seed(6886); rands=sample(rep(1:10, 1000)[1:length(caseid)])
 idsRand=data.frame(cbind(caseid, rands))
 aData=merge(aData, idsRand, by='caseid', all.x=T)
 ###############################################################
@@ -50,10 +50,77 @@ modData=aData[, c( idVars, varDef[,1] )]
 ###############################################################
 
 ###############################################################
+# Inputs
+idVars=idVars[c(1:10,17:19)]
+m1V=which(varDef[,1] =='lag1_polity2')
+m2V=which(varDef[,1]=='noS')
+m1F=formula(Surv(start, stop, compliance) ~ lag1_polity2 + lag1_lgdpCAP + lag1_gdpGR + lag1_lpopulation + lag1_domSUM)
+m2F=formula(Surv(start, stop, compliance) ~ noS + Ddistdata + lag1_tdata + lag1_allydata + lag1_polity2 + lag1_lgdpCAP + lag1_gdpGR + lag1_lpopulation + lag1_domSUM)
+m3F=formula(Surv(start,stop,compliance) ~ lag1_uData + lag1_SuData2 + noS + Ddistdata + lag1_tdata + lag1_allydata + lag1_polity2 + lag1_lgdpCAP + lag1_gdpGR + lag1_lpopulation + lag1_domSUM)
+
+# set up null dataframe for auc stats
+
+# first subset to new train and test out of 10 available
+# then run m1, m2, and m3 for each
+# then run AUC.cd stats
+# then save to dataframe
+
+times=seq(1,16,1)
+###############################################################
+
+###############################################################
+# Cumulative AUC
+aucM1=AUC.cd(
+	Surv(m1DataTrain$start, m1DataTrain$stop, m1DataTrain$compliance), 
+	Surv(m1DataTest$start, m1DataTest$stop, m1DataTest$compliance), 
+	predict(modTrain1),
+	predict(modTrain1, newdata=m1DataTest),
+	times=times
+	)
+
+aucM2=AUC.cd(
+	Surv(m2DataTrain$start, m2DataTrain$stop, m2DataTrain$compliance), 
+	Surv(m2DataTest$start, m2DataTest$stop, m2DataTest$compliance), 
+	predict(modTrain2),
+	predict(modTrain2, newdata=m2DataTest),
+	times=times
+	)
+
+aucMF=AUC.cd(
+	Surv(mFDataTrain$start, mFDataTrain$stop, mFDataTrain$compliance), 
+	Surv(mFDataTest$start, mFDataTest$stop, mFDataTest$compliance), 
+	predict(modTrainF),
+	predict(modTrainF, newdata=mFDataTest),
+	times=times
+	)
+
+print(aucM1$iauc); print(aucM2$iauc); print(aucMF$iauc)
+
+ggAUC=data.frame( rbind(
+	cbind(aucM1$times, aucM1$auc, 'Model 1\\qquad\\qquad'),
+	cbind(aucM2$times, aucM2$auc, 'Model 2\\qquad\\qquad'),
+	cbind(aucMF$times, aucMF$auc, 'Model 3')
+	) )
+ggAUC$X1=numSM(ggAUC$X1); ggAUC$X2=numSM(ggAUC$X2)
+
+pgg=ggplot(ggAUC, aes(x=X1, y=X2, color=X3, group=X3))
+pgg=pgg+geom_line(aes(linetype=X3),lwd=1,color='black')
+pgg=pgg+scale_x_continuous(breaks=seq(0,15,3),limits=c(0,16))
+pgg=pgg+scale_y_continuous(breaks=seq(0.6,1,0.1),limits=c(0.59,1.01))
+pgg=pgg+xlab('Time (years)')+ylab('Time-dependent AUC')
+pgg=pgg+theme(legend.position='top', legend.title=element_blank(),
+      axis.ticks=element_blank(), panel.grid.major=element_blank(),
+      panel.grid.minor=element_blank(), panel.border = element_blank(),
+      axis.line = element_line(color = 'black'),
+      axis.title.y=element_text(vjust=1))
+pgg
+###############################################################
+
+###############################################################
 # Run models on subsets
 models=list()
 for( ii in 1:length(unique(modData$rands)) ){
-	slice=modData[which(modData$rands %in% rands[ii]),]
+	slice=modData[which(!modData$rands %in% rands[ii]),]
 	modelFinal=coxph(Surv(start,stop,compliance) ~
 		lag1_uData + lag1_SuData2 
 		+ noS + Ddistdata + lag1_tdata + lag1_allydata
@@ -93,11 +160,16 @@ coefData$sig[coefData$lower95 > 0] = "Positive"
 coefData$sig[coefData$upper90 < 0 & coefData$upper95 > 0] = "Negative at 90"
 coefData$sig[coefData$upper95 < 0] = "Negative"
 coefData$sig[coefData$lower90 < 0 & coefData$upper90 > 0] = "Insig"
-coefp_colors = c("Positive"=rgb(54, 144, 192, maxColorValue=255), 
-                "Negative"= rgb(222, 45, 38, maxColorValue=255),
-                "Positive at 90"=rgb(158, 202, 225, maxColorValue=255), 
-                "Negative at 90"= rgb(252, 146, 114, maxColorValue=255),
-                "Insig" = rgb(150, 150, 150, maxColorValue=255))
+# coefp_colors = c("Positive"=rgb(54, 144, 192, maxColorValue=255), 
+#                 "Negative"= rgb(222, 45, 38, maxColorValue=255),
+#                 "Positive at 90"=rgb(158, 202, 225, maxColorValue=255), 
+#                 "Negative at 90"= rgb(252, 146, 114, maxColorValue=255),
+#                 "Insig" = rgb(150, 150, 150, maxColorValue=255))
+coefp_colors = c("Positive"='black', 
+                "Negative"='black',
+                "Positive at 90"='black', 
+                "Negative at 90"= 'black',
+                "Insig" = 'grey')
 
 coefData=coefData[which(coefData$var %in% c('lag1_uData','lag1_SuData2')),]
 coefData$varName=varDef[,2][match(coefData$var, varDef[,1])]
@@ -113,14 +185,15 @@ coefp = coefp + geom_errorbar(aes(ymin=lower95,ymax=upper95),
 	linetype = 1,width = 0.1)
 coefp = coefp + scale_colour_manual(values = coefp_colors)
 coefp = coefp + xlab("") + ylab("") 
-coefp = coefp + facet_wrap(~varName, scales="free_y", nrow=1,ncol=2)
-coefp = coefp + scale_x_discrete(labels=paste0('Fold ',1:3))
+coefp = coefp + facet_wrap(~varName, scales="free_y")#, nrow=1,ncol=2)
+coefp = coefp + scale_x_discrete(labels=paste0('Fold ',1:10))
 coefp = coefp + theme(legend.position='none', legend.title=element_blank(),
     axis.ticks=element_blank(), panel.grid.major=element_blank(),
-    panel.grid.minor=element_blank())
+    panel.grid.minor=element_blank(), 
+    axis.text.x=element_text(angle=45,hjust=1))
 coefp
 setwd(pathTex)
 tikz(file='crossval.tex', height=3, width=7, standAlone=F)
 coefp
 dev.off()
-###############################################################
+##############################################################

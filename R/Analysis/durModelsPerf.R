@@ -95,7 +95,7 @@ testM1 <- predict(modTrain1, type = "risk", newdata=m1DataTest)
 testM2 <- predict(modTrain2, type = "risk", newdata=m2DataTest)
 testMF <- predict(modTrainF, type = "risk", newdata=mFDataTest)
 
-times=seq(1,26,5)
+times=seq(1,16,1)
 ###############################################################
 
 ###############################################################
@@ -136,7 +136,7 @@ ggAUC$X1=numSM(ggAUC$X1); ggAUC$X2=numSM(ggAUC$X2)
 pgg=ggplot(ggAUC, aes(x=X1, y=X2, color=X3, group=X3))
 pgg=pgg+geom_line(aes(linetype=X3),lwd=1,color='black')
 pgg=pgg+scale_x_continuous(breaks=seq(0,15,3),limits=c(0,16))
-pgg=pgg+scale_y_continuous(breaks=seq(0.6,1,0.05),limits=c(0.59,1.01))
+pgg=pgg+scale_y_continuous(breaks=seq(0.6,1,0.1),limits=c(0.59,1.01))
 pgg=pgg+xlab('Time (years)')+ylab('Time-dependent AUC')
 pgg=pgg+theme(legend.position='top', legend.title=element_blank(),
       axis.ticks=element_blank(), panel.grid.major=element_blank(),

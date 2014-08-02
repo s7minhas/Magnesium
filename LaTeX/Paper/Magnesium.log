@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  2 AUG 2014 12:37
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  2 AUG 2014 12:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2228,10 +2228,10 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
  ) 
 Here is how much of TeX's memory you used:
- 28972 strings out of 493633
- 566218 string characters out of 3143378
+ 28964 strings out of 493633
+ 566062 string characters out of 3143378
  682348 words of memory out of 3000000
- 31483 multiletter control sequences out of 15000+200000
+ 31475 multiletter control sequences out of 15000+200000
  19497 words of font info for 75 fonts, out of 3000000 for 9000
  992 hyphenation exceptions out of 8191
  56i,12n,57p,1719b,1004s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2256,7 +2256,7 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2011/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2011/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Magnesium.pdf (30 pages, 1064512 bytes).
+Output written on Magnesium.pdf (30 pages, 1064395 bytes).
 PDF statistics:
  480 PDF objects out of 1000 (max. 8388607)
  407 compressed objects within 5 object streams
