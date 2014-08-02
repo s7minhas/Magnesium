@@ -20,7 +20,7 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
-		,'lag1_actor','lag1_partner'
+		# ,'lag1_actor'
 		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
 	 ,'lag1_polity2'
 	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
@@ -28,6 +28,7 @@ varDef = cbind (
 	 ,'lag1_domSUM'
 	 ),
 	c( 'Compliance Reciprocity$_{j,t-1}$', 'Sanction Reciprocity$_{j,t-1}$'
+		# ,'Actor Effect'
 	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
 	,'Polity$_{i,t-1}$'
 	,'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$'
@@ -73,7 +74,7 @@ summary(model2)
 # Incorp reciprocity measure
 modelFinal=coxph(Surv(start,stop,compliance) ~
 	lag1_uData + lag1_SuData2 
-	+ lag1_actor + lag1_partner
+	# + lag1_actor 
 	+ noS + Ddistdata + lag1_tdata + lag1_allydata
 	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
