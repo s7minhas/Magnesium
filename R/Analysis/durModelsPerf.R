@@ -136,6 +136,7 @@ ggAUC$X1=numSM(ggAUC$X1); ggAUC$X2=numSM(ggAUC$X2)
 pgg=ggplot(ggAUC, aes(x=X1, y=X2, color=X3, group=X3))
 pgg=pgg+geom_line(aes(linetype=X3),lwd=1,color='black')
 pgg=pgg+scale_x_continuous(breaks=seq(0,15,3),limits=c(0,16))
+pgg=pgg+scale_y_continuous(breaks=seq(0.6,1,0.05),limits=c(0.59,1.01))
 pgg=pgg+xlab('Time (years)')+ylab('Time-dependent AUC')
 pgg=pgg+theme(legend.position='top', legend.title=element_blank(),
       axis.ticks=element_blank(), panel.grid.major=element_blank(),
@@ -143,10 +144,10 @@ pgg=pgg+theme(legend.position='top', legend.title=element_blank(),
       axis.line = element_line(color = 'black'),
       axis.title.y=element_text(vjust=1))
 pgg
-# setwd(pathTex)
-# tikz(file='cumulAUC.tex', height=4, width=7, standAlone=F)
-# pgg
-# dev.off()
+setwd(pathTex)
+tikz(file='cumulAUC.tex', height=4, width=7, standAlone=F)
+pgg
+dev.off()
 ###############################################################
 
 ###############################################################
