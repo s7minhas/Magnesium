@@ -16,15 +16,13 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
-		# ,'lag1_actor'
-		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
-	 ,'lag1_polity2'
-	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
-	 ,'lag1_lpopulation'	 
-	 ,'lag1_domSUM'
+	,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
+	,'lag1_polity2'
+	,'lag1_lgdpCAP', 'lag1_gdpGR'
+	,'lag1_lpopulation'	 
+	,'lag1_domSUM'
 	 ),
 	c( 'Compliance Reciprocity$_{j,t-1}$', 'Sanction Reciprocity$_{j,t-1}$'
-		# ,'Actor Effect'
 	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
 	,'Polity$_{i,t-1}$'
 	,'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$'
@@ -53,13 +51,15 @@ test=modData[which(modData$train %in% 0),]
 ###############################################################
 # Inputs
 idVars=idVars[c(1:10,17:19)]
+m1V=which(varDef[,1] =='lag1_polity2')
+m2V=which(varDef[,1]=='noS')
 
-m1DataTrain=na.omit(train[,c(idVars,varDef[7:nrow(varDef),1]) ])
-m2DataTrain=na.omit(train[,c(idVars,varDef[3:nrow(varDef),1]) ])
+m1DataTrain=na.omit(train[,c(idVars,varDef[m1V:nrow(varDef),1]) ])
+m2DataTrain=na.omit(train[,c(idVars,varDef[m2V:nrow(varDef),1]) ])
 mFDataTrain=na.omit(train[,c(idVars,varDef[,1]) ])
 
-m1DataTest=na.omit(test[,c(idVars,varDef[7:nrow(varDef),1]) ])
-m2DataTest=na.omit(test[,c(idVars,varDef[3:nrow(varDef),1]) ])
+m1DataTest=na.omit(test[,c(idVars,varDef[m1V:nrow(varDef),1]) ])
+m2DataTest=na.omit(test[,c(idVars,varDef[m2V:nrow(varDef),1]) ])
 mFDataTest=na.omit(test[,c(idVars,varDef[,1]) ])
 
 modTrain1 = coxph(Surv(start, stop, compliance) ~ 
@@ -174,10 +174,10 @@ print(perfMod1$AUC); print(perfMod2$AUC); print(perfFinal$AUC)
 
 plot(x = 1 - perfFinal$spec, y = perfFinal$sens,
 	xlab = "False Positive Rate", ylab = "True Positive Rate", 
-	xlim = c(0,1), ylim = c(0, 1), type = "l", las=1,
+	xlim = c(0,1), ylim = c(0, 1), type = "l", las=1, lty=1,
 	main = paste0("Time-dependent ROC\ncurve at ", sTime, " years"))
-lines(x = 1 - perfMod1$spec, y = perfMod1$sens, col='darkblue')
-lines(x = 1 - perfMod2$spec, y = perfMod2$sens, col='darkgreen')
+lines(x = 1 - perfMod1$spec, y = perfMod1$sens, col='darkblue',lty=3)
+lines(x = 1 - perfMod2$spec, y = perfMod2$sens, col='darkgreen',lty=2)
 lines(x = c(0, 1), y = c(0, 1), lty = 3, col = "red")
 ###############################################################
 
