@@ -103,11 +103,14 @@ coefData=coefData[which(coefData$var %in% c('lag1_uData','lag1_SuData2')),]
 coefData$varName=varDef[,2][match(coefData$var, varDef[,1])]
 
 coefp = ggplot(coefData, aes(as.factor(model), Estimate, color = sig))
-coefp = coefp + geom_linerange(aes(ymin=lower95, ymax=upper95), alpha = .3, size = 0.3)
-coefp = coefp + geom_linerange(aes(ymin=lower90, ymax=upper90),alpha = 1, size = 1)
+coefp = coefp + geom_linerange(aes(ymin=lower95, ymax=upper95), 
+	alpha = .3, size = 0.3)
+coefp = coefp + geom_linerange(aes(ymin=lower90, ymax=upper90),
+	alpha = 1, size = 1)
 coefp = coefp + geom_hline(aes(yintercept=0), linetype=2, color = "black")
 coefp = coefp + geom_point(aes(as.factor(model),Estimate), size=4, shape=20)
-coefp = coefp + geom_errorbar(aes(ymin=lower95,ymax=upper95),linetype = 1,width = 0.1)
+coefp = coefp + geom_errorbar(aes(ymin=lower95,ymax=upper95),
+	linetype = 1,width = 0.1)
 coefp = coefp + scale_colour_manual(values = coefp_colors)
 coefp = coefp + xlab("") + ylab("") 
 coefp = coefp + facet_wrap(~varName, scales="free_y", nrow=1,ncol=2)
