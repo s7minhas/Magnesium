@@ -47,21 +47,23 @@ Our sanction reciprocity measure tells a similar story, but focuses on the conse
 
 \subsection*{Performance}
 
-To assess the accuracy and performance of these estimates we employ a six-fold cross validation procedure. To assure that a few cases are not responsible for the regression estimates depicted in Table \ref{tab:regResults}, we randomly split our dataset of 653 sanction cases into ten sub-datasets of approximately equal size. We then reran model three . The coefficient estimates for compliance and sanction reciprocity when estimating across each of these subsamples remains consistent providing further confidence to our findings.
+To assess the accuracy and performance of these estimates we employ a six-fold cross validation procedure.\footnote{Results of analysis were similar when employing a 10-fold cross validation as well, however, we limit to showing six here for the sake of space.} We use this procedure both to determine the robustness of our coefficient estimates when estimated on different subsamples of our dataset, and to assess how well the results of our model would generalize to an independent dataset. To begin the cross-validation, we split the 653 sanction cases in our dataset into six approximately equal subsets. We then ran each model shown in table \ref{tab:regResults} six times, where in each iteration we left out one subsample to use as a test set. This allows us to compare the prediction accuracy of each model, thereby helping us to determine the gains from incorporating the reciprocity covariates that are key to our argument.
+
+First, however, we show the results for our reciprocity covariates when we rerun our survival analysis on each of the six folds from the cross-validation. This analysis helps us to understand whether some of the subsets in our dataset follow a different pattern than what is in the broader set \citep{beck2008time}. Figure \ref{fig:crossval} shows that this is not the case for the analysis we present here, the coefficient estimates for compliance and sanction reciprocity when estimating across each of these subsamples remains consistent.\footnote{The parameter estimates for the other covariates also remain consistent across each of the six folds but we leave them out here due to space constraints.}
 
 \begin{figure}[ht]
 	\centering
-	\caption{Six-Fold CrossValidation for models shown in Table \ref{tab:regResults}.}
+	\caption{Reciprocity coefficient estimates from each of the six-folds of the cross validation procedure..}
 	\resizebox{1\textwidth}{!}{\input{../TeXoutput/crossvalCoef.tex}}
 	\label{fig:crossval}
 \end{figure}
 \FloatBarrier
 
-A key question that remains, however, is whether we are able to better explain sanction compliance through the incorporation of these network level covariates. By incorporating our network level covariates we also noticeably improve our ability to predict when states comply. Figure \ref{fig:auc} shows time-dependent AUC (area under the curve) statistics for each model, we vary the time parameter to range from 0 to 15 years.\footnote{Time-dependent AUCs were computed using the formula provided by \citet{chambless2006estimation}.} We set the max for 15 years because only 4\% of sanction cases in our dataset that extend past 15 years end with compliance by a target state. This leads to the AUC statistics for each model after that time point to begin to coalesce. Before the 15 year mark, however, we see noticeable variation in the time-dependent AUC statistics for each model. Most importantly, we can see that Model 3, where we incorporate our network level covariates, provides a noticeably higher AUC than the alternatives that we examined.
+A key question that remains, however, is whether we are able to better explain sanction compliance through the incorporation of these network level covariates. Figure \ref{fig:auc} shows out-of-sample time-dependent AUC results from the six-fold cross validation procedure. When calculating the time-dependent AUC we vary the time parameter to range from 0 to 15 years.\footnote{Time-dependent AUCs were computed using the formula provided by \citet{chambless2006estimation}.} We set the max for 15 years because only 4\% of sanction cases in our dataset that extend past 15 years end with compliance by a target state. This leads to the AUC statistics for each model after that time point the accuracy of any of the models begin to coalesce. Before the 15 year mark, however, we see noticeable variation in the time-dependent AUC statistics for each model. Most importantly, we can see that Model 3, where we incorporate our network level covariates, provides a noticeably higher AUC than the alternatives that we examined. Even simply accounting for proximate relationships, as we did in Model 2, does not provide a noticeably higher level of performance than target-state focused explanations.
 
 \begin{figure}[ht]
 	\centering
-	\caption{Out of Sample Time-Dependent AUC for models shown in Table \ref{tab:regResults} using six-fold cross validation.}
+	\caption{Out-of-sample time-dependent AUC statistics from six-fold cross validation procedure for each model shown in table \ref{tab:regResults}.}
 	\resizebox{0.8\textwidth}{!}{\input{../TeXoutput/crossvalPerf.tex}}
 	\label{fig:auc}
 \end{figure}

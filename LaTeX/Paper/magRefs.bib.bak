@@ -391,6 +391,15 @@
   number = {2}
 }
 
+@ARTICLE{beck2008time,
+  author = {Beck, Nathaniel},
+  title = {Time-series-cross-section methods},
+  journal = {Oxford Handbook of Political Methodology},
+  year = {2008},
+  pages = {475--93},
+  publisher = {Oxford University Press New York}
+}
+
 @ARTICLE{beck2001new,
   author = {Beck, Thorsten and Clarke, George and Groff, Alberto and Keefer,
 	Philip and Walsh, Patrick},
@@ -1163,8 +1172,8 @@
 
 @ARTICLE{drezner2000bargaining,
   author = {Drezner, Daniel W},
-  title = {Bargaining, enforcement, and multilateral sanctions: when is cooperation
-	counterproductive?},
+  title = {Bargaining, Enforcement, and Multilateral Sanctions: When is Cooperation
+	Counterproductive?},
   journal = {International Organization},
   year = {2000},
   volume = {54},
