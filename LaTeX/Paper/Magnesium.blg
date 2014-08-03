@@ -1,46 +1,46 @@
-This is BibTeX, Version 0.99d (TeX Live 2012)
+This is BibTeX, Version 0.99d (TeX Live 2011)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Magnesium.aux
 The style file: apsr.bst
 Database file #1: magRefs.bib.bib
-You've used 36 entries,
+You've used 37 entries,
             2874 wiz_defined-function locations,
-            853 strings with 9824 characters,
-and the built_in function-call counts, 130159 in all, are:
-= -- 21100
-> -- 1539
+            859 strings with 9948 characters,
+and the built_in function-call counts, 128553 in all, are:
+= -- 20800
+> -- 1482
 < -- 0
-+ -- 9664
-- -- 555
-* -- 10915
-:= -- 26387
-add.period$ -- 143
-call.type$ -- 36
-change.case$ -- 468
-chr.to.int$ -- 36
-cite$ -- 36
-duplicate$ -- 597
-empty$ -- 1262
-format.name$ -- 585
-if$ -- 23403
++ -- 9460
+- -- 539
+* -- 10723
+:= -- 26131
+add.period$ -- 147
+call.type$ -- 37
+change.case$ -- 481
+chr.to.int$ -- 37
+cite$ -- 37
+duplicate$ -- 620
+empty$ -- 1303
+format.name$ -- 573
+if$ -- 23116
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 36
-newline$ -- 149
-num.names$ -- 414
-pop$ -- 127
+missing$ -- 37
+newline$ -- 153
+num.names$ -- 420
+pop$ -- 133
 preamble$ -- 1
-purify$ -- 540
+purify$ -- 555
 quote$ -- 0
-skip$ -- 564
+skip$ -- 588
 stack$ -- 0
-substring$ -- 29472
-swap$ -- 131
-text.length$ -- 504
+substring$ -- 28990
+swap$ -- 141
+text.length$ -- 518
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 142
+type$ -- 146
 warning$ -- 0
-while$ -- 865
+while$ -- 886
 width$ -- 0
-write$ -- 483
+write$ -- 494
