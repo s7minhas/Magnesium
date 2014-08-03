@@ -141,10 +141,10 @@ plot(
 		scenBuild(vi='noS', vRange=vrfn(aData[,'noS']),
 		vars=names(simModel$coefficients), 
 		ostat=mean, simData=modData) ),
-	conf.int=F, col=pcolors, las=1, 
+	conf.int=T, col=pcolors, las=1, 
 	# main='Number of Senders', 
 	main='', 
-	ylim=c(0,1), xlim=c(0,30), 
+	ylim=c(0.2,1), xlim=c(0,30), 
 	ylab='Survival Probability', xlab='Time (Years)', bty='n')
 legend('topright', c("Few Senders", "Many Senders"), 
 	lty = 1, col=pcolors, bty='n')

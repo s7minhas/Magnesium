@@ -1,23 +1,58 @@
 \section*{Results}
 \label{Results} 
 
-Table~\ref{tab:regResults} displays the results from our model. To contrast with findings from the extant literature, we run the model in three ways. The first column tests explanations of sanction compliance centered on target state characteristics. In the second column, we add covariates to account for the relationship that a target state has with the senders of the sanction, and the last incorporates our network level variables. 
-
-As we go from left to right across the table, we see that explanations of sanction compliance centered on the target state become less prominent. We find no support for the argument that high levels of internal stability may prompt a country to comply. In Models 1 and 2, we find that countries with higher levels of GDP per capita take longer to comply to a sanction case, but after accounting for the network level characteristics the coefficient estimate for that variable more than halves. Our findings for the effect of a country's regime type on sanction compliance also diverge from what the extant literature would predict. Instead of finding that democracies are more likely to comply to a sanction case, we see that countries rated as more democratic take longer to comply than countries that are more autocratic. However, this effect is marginal at best, and once we control for the relationship between sender and target states this effect also becomes much weaker. 
-
-We find strong support for our third hypothesis which stated that target states are more likely to comply to sanctions involving multiple actors, and the effect of this variable remains consistent even after controlling for our network level covariates in Model 3. Like the extant literature (e.g., \citealp{mclean2010friends}), we do find strong evidence for the ability of trading partners to obtain quick and successful resolutions to sanction cases. This is in line with our fourth hypothesis, that more proximate relationships between sender and recievers result in quicker compliance by the target state. But support for this general proximity hypothesis is limited to trade. States are not likely to comply more quickly to sanctions sent by allies or neighbors. 
-
 \input{../TeXoutput/durModelResults}
 \FloatBarrier
 
-Our key hypotheses relate to the effect of compliance and sanction reciprocity. We incorporate these variables in the last column of table \ref{tab:regResults}, and here we find that target states comply much more quickly to sanctions sent from countries with whom they have a stronger history of compliance relative to others in the network. On the other hand, simply receiving sanctions from a particular sender relative to others in network, without necessarily complying, makes a target state less likely to comply. 
+Table~\ref{tab:regResults} displays the results from our model. To contrast with findings from the extant literature, we run the model in three ways. The first column tests explanations of sanction compliance centered on target state characteristics. In the second column, we add covariates to account for the relationship that a target state has with the senders of the sanction, and the last incorporates our reciprocity measures. 
 
-To assure that a few cases are not responsible for the regression estimates depicted in Table \ref{tab:regResults}, we randomly split our dataset of 653 sanction cases into ten sub-datasets of approximately equal size. We then reran model three . The coefficient estimates for compliance and sanction reciprocity when estimating across each of these subsamples remains consistent providing further confidence to our findings.
+As we go from left to right across the table, we see that explanations of sanction compliance centered on the target state become less prominent. We find no support for the argument that high levels of internal stability may prompt a country to comply. In Models 1 and 2, we find that countries with higher levels of GDP per capita take longer to comply to a sanction case, but after accounting for the network level characteristics the coefficient estimate for that variable more than halves. Our findings for the effect of a country's regime type on sanction compliance also diverge from what the extant literature would predict. Instead of finding that democracies are more likely to comply to a sanction case, we see that countries rated as more democratic take longer to comply than countries that are more autocratic. However, this effect is marginal at best, and once we control for the relationship between sender and target states this effect also becomes much weaker. 
+
+We find strong support for our third hypothesis which stated that target states are more likely to comply to sanctions involving multiple actors, and the effect of this variable remains consistent even after controlling for our network level covariates in Model 3. Because it is difficult to interpret the substantive meaning of point estimates from the hazard function in table \ref{tab:regResults}, we utilize Kaplan-Meier estimates of survival probabilities in figure \ref{fig:surv1}. The y-axis represents the probability of survival, or in this case the probability that a country will not comply to a sanction, and the x-axis represents time since sanction initiation (measured in years). The grey line represents the scenario where the number of senders variable is set to a low value, in this case one, and the black line represents the scenario where this variable is set to its high value, in this case five. All the other covariates were set to their median. 
+
+Using figure \ref{fig:surv1} we can quickly see that there is a stark difference in the likelihood of non-compliance between a sanction case involving a single and multiple senders. After just five years the probability of non-compliance drops to approximately 50\%, whereas a sanction from a single sender by that time still has almost an 80\% chance of non-compliance. This finding is in sharp contrast to previous research arguing that multilateral sanctions can actually be counterproductive (e.g., see \citealp{drezner2000bargaining}).
+
+\begin{figure}[ht]
+	\centering
+	\caption{Survival probabilities by varying number of senders in a sanction case. Grey designates scenario where the number of senders is set to its low value and black the scenario where it is set to its high value.}
+	% \includegraphics[width=1\textwidth]{nosSurv}
+	\resizebox{0.7\textwidth}{!}{\input{../TeXoutput/nosSurv.tex}}
+	\label{fig:surv1}
+\end{figure}
+\FloatBarrier
+
+Like the extant literature (e.g., \citealp{mclean2010friends}), we do find strong evidence for the ability of trading partners to obtain quick and successful resolutions to sanction cases. This is in line with our fourth hypothesis, that more proximate relationships between sender and recievers result in quicker compliance by the target state. But support for this general proximity hypothesis is limited to trade. States are not likely to comply more quickly to sanctions sent by allies, and are actually less likely to comply to neighbors. The graphs in figure \ref{fig:surv2} demonstrate the effects of the ``proximate'' relationships that were significant in table \ref{tab:regResults}. The panel on the left shows the effect for distance. Here we can see that even though the coefficient estimate for this variable was significant, its substantive meaning is almost nil. For trade, on the other hand, there is a strong effect. We can clearly see that when a target state faces a sanction from countries with whom they frequently trade, they are likely to comply sooner.
+
+\begin{figure}[ht]
+	\centering
+	\caption{Survival probabilities by ``proximity'' covariates. Grey designates scenarios in which covariate is set to its low value and black where it is set to its high value.}
+	% \includegraphics[width=1\textwidth]{oNet}
+	\resizebox{1\textwidth}{!}{\input{../TeXoutput/oNet.tex}}	
+	\label{fig:surv2}
+\end{figure}
+\FloatBarrier
+
+Our key hypotheses relate to the effect of compliance and sanction reciprocity. We incorporate these variables in the last column of table \ref{tab:regResults}, and here we find that target states comply much more quickly to sanctions sent from countries with whom they have a strong history of reciprocal compliance relative to others in the network. On the left side of figure \ref{fig:surv3}, we can see that after just five years, the probability of non-compliance in a sanction cases where target and sender states have a history of reciprocal compliance is approximately 40\%, compared to about 95\% when this history does not exist between senders and receivers. Thus the compliance reciprocity variable tells a story of how friendly reciprocal relations in the past can explain future friendly interaction. 
+
+\begin{figure}[ht]
+	\centering
+	\caption{Survival probabilities by our network level covariates. Grey designates scenario where the number of senders is set to its low value and black the scenario where it is set to its high value.}
+	% \includegraphics[width=1\textwidth]{oNet}
+	\resizebox{1\textwidth}{!}{\input{../TeXoutput/oNet2.tex}}	
+	\label{fig:surv3}	
+\end{figure}
+\FloatBarrier
+
+Our sanction reciprocity measure tells a similar story, but focuses on the consequences of past reciprocal adverse relations. Here we can see that countries whom have sanctioned each other in the past without complying to one another are not likely to comply to one another in the present. On the right side of figure \ref{fig:surv3}, we can again see that within just five years the probability of non-compliance in a case where target and sender states have not had adverse past relations is half that in a case where past adverse relations are present. This points to important consequences for sender states, namely continuous sanctioning of a particular state without that target every compyling  may build up a resistance to compliance to any future sanction. 
+
+\subsection*{Performance}
+
+To assess the accuracy and performance of these estimates we employ a six-fold cross validation procedure. To assure that a few cases are not responsible for the regression estimates depicted in Table \ref{tab:regResults}, we randomly split our dataset of 653 sanction cases into ten sub-datasets of approximately equal size. We then reran model three . The coefficient estimates for compliance and sanction reciprocity when estimating across each of these subsamples remains consistent providing further confidence to our findings.
 
 \begin{figure}[ht]
 	\centering
 	\caption{Six-Fold CrossValidation for models shown in Table \ref{tab:regResults}.}
-	\resizebox{0.8\textwidth}{!}{\input{../TeXoutput/crossvalCoef.tex}}
+	\resizebox{1\textwidth}{!}{\input{../TeXoutput/crossvalCoef.tex}}
 	\label{fig:crossval}
 \end{figure}
 \FloatBarrier
@@ -29,38 +64,5 @@ A key question that remains, however, is whether we are able to better explain s
 	\caption{Out of Sample Time-Dependent AUC for models shown in Table \ref{tab:regResults} using six-fold cross validation.}
 	\resizebox{0.8\textwidth}{!}{\input{../TeXoutput/crossvalPerf.tex}}
 	\label{fig:auc}
-\end{figure}
-\FloatBarrier
-
-Because it is difficult to interpret the substantive meaning of point estimates from the hazard function in table \ref{tab:regResults}, we present graphical interpretations in figures \ref{fig:surv1}, \ref{fig:surv2}, and \ref{fig:surv3}. In each figure, the y-axis represents the probability of survival, or in this case the probability that a country will not comply and the x-axis represents time (measured in years). We use a red and a blue line to represent high and low values in our covariates of interest. In each graph, the red line represents the covariate of interest set to a low value (its lower quartile), and the blue line represents the covariate at a higher value (upper quartile). This allows us to more easily interpret the effects of each covariate. Figure \ref{fig:surv1} captures the ``number of senders'' covariate. In this case, the red line indicates a low number of senders and the blue line, a higher number. It is evident that as the number of senders increase, the liklihood of survival, or time to compliance, substantially decreases and almost halves in a few years. 
-
-\begin{figure}[ht]
-	\centering
-	\caption{Survival probabilities by varying number of senders in a sanction case. Red designates scenario where the number of senders is set to its low value and blue the scenario where it is set to its high value.}
-	% \includegraphics[width=1\textwidth]{nosSurv}
-	\resizebox{0.7\textwidth}{!}{\input{../TeXoutput/nosSurv.tex}}
-	\label{fig:surv1}
-\end{figure}
-\FloatBarrier
-
-The graphs in figure \ref{fig:surv2} demonstrate the effects of the ``proximate'' relationships that were significant in table \ref{tab:regResults}. The panel on the left shows the effect for distance. Here we can see that even though the coefficient estimate for this variable was significant, its substantive meaning is almost nil. For trade, on the other hand, there is a strong effect. We can clearly see that when a target state faces a sanction from countries with whom they frequently trade, they are much more likely to comply in a timely fashion.
-
-\begin{figure}[ht]
-	\centering
-	\caption{Survival probabilities by ``proximity'' covariates. Red designates scenarios in which covariate is set to its low value and blue where it is set to its high value.}
-	% \includegraphics[width=1\textwidth]{oNet}
-	\resizebox{1\textwidth}{!}{\input{../TeXoutput/oNet.tex}}	
-	\label{fig:surv2}
-\end{figure}
-\FloatBarrier
-
-Last, in figure \ref{fig:surv3}, we show the results for our network level covariates. In both cases, we can see that the substantive effects of these variables is quite strong. 
-
-\begin{figure}[ht]
-	\centering
-	\caption{Survival probabilities by our network level covariates. Red designates scenario where the number of senders is set to its low value and blue the scenario where it is set to its high value.}
-	% \includegraphics[width=1\textwidth]{oNet}
-	\resizebox{1\textwidth}{!}{\input{../TeXoutput/oNet2.tex}}	
-	\label{fig:surv3}	
 \end{figure}
 \FloatBarrier

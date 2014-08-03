@@ -122,14 +122,14 @@ pgg=pgg+facet_wrap(~Fold, scales="free_y")
 pgg=pgg+scale_x_continuous(breaks=seq(0,15,3),limits=c(0,16))
 pgg=pgg+scale_y_continuous(breaks=seq(0.6,1,0.1),limits=c(0.59,1.01))
 pgg=pgg+xlab('Time (years)')+ylab('Time-dependent AUC')
-pgg=pgg+theme(legend.position='top', legend.title=element_blank(),
-      axis.ticks=element_blank(), panel.grid.major=element_blank(),
-      panel.grid.minor=element_blank(), panel.border = element_blank(),
-      axis.line = element_line(color = 'black'),
-      axis.title.y=element_text(vjust=1))
+pgg=pgg + theme(legend.position='none', legend.title=element_blank(),
+    axis.ticks=element_blank(), panel.grid.major=element_blank(),
+    panel.grid.minor=element_blank(), 
+    axis.title.y=element_text(vjust=1),
+    axis.title.x=element_text(vjust=-.5))    
 pgg
 setwd(pathTex)
-tikz(file='crossvalPerf.tex', height=5, width=7, standAlone=F)
+tikz(file='crossvalPerf.tex', height=5, width=8, standAlone=F)
 pgg
 dev.off()
 ###############################################################
@@ -178,11 +178,6 @@ coefData$sig[coefData$lower95 > 0] = "Positive"
 coefData$sig[coefData$upper90 < 0 & coefData$upper95 > 0] = "Negative at 90"
 coefData$sig[coefData$upper95 < 0] = "Negative"
 coefData$sig[coefData$lower90 < 0 & coefData$upper90 > 0] = "Insig"
-# coefp_colors = c("Positive"=rgb(54, 144, 192, maxColorValue=255), 
-#                 "Negative"= rgb(222, 45, 38, maxColorValue=255),
-#                 "Positive at 90"=rgb(158, 202, 225, maxColorValue=255), 
-#                 "Negative at 90"= rgb(252, 146, 114, maxColorValue=255),
-#                 "Insig" = rgb(150, 150, 150, maxColorValue=255))
 coefp_colors = c("Positive"='black', 
                 "Negative"='black',
                 "Positive at 90"='black', 
