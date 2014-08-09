@@ -39,3 +39,4 @@ lessThan5<-subset(lessThan5, select=c("id", "year","targetstate", "slength",
 
 write.csv(lessThan5, "shortcases.csv")
 
+#russia, china, Moldova
