@@ -5,15 +5,15 @@ The style file: apsr.bst
 Database file #1: magRefs.bib.bib
 You've used 40 entries,
             2874 wiz_defined-function locations,
-            879 strings with 10341 characters,
-and the built_in function-call counts, 141500 in all, are:
-= -- 22923
-> -- 1638
+            880 strings with 10292 characters,
+and the built_in function-call counts, 140002 in all, are:
+= -- 22670
+> -- 1603
 < -- 0
-+ -- 10463
-- -- 594
-* -- 11829
-:= -- 28731
++ -- 10333
+- -- 583
+* -- 11689
+:= -- 28446
 add.period$ -- 159
 call.type$ -- 40
 change.case$ -- 520
@@ -21,26 +21,26 @@ chr.to.int$ -- 40
 cite$ -- 40
 duplicate$ -- 666
 empty$ -- 1403
-format.name$ -- 630
-if$ -- 25445
+format.name$ -- 621
+if$ -- 25170
 int.to.chr$ -- 5
 int.to.str$ -- 0
 missing$ -- 41
 newline$ -- 166
-num.names$ -- 456
+num.names$ -- 454
 pop$ -- 146
 preamble$ -- 1
 purify$ -- 600
 quote$ -- 0
 skip$ -- 624
 stack$ -- 0
-substring$ -- 31985
+substring$ -- 31629
 swap$ -- 146
 text.length$ -- 560
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 156
 warning$ -- 0
-while$ -- 956
+while$ -- 954
 width$ -- 0
 write$ -- 537

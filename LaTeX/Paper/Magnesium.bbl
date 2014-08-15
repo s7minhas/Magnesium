@@ -1,5 +1,9 @@
 \begin{thebibliography}{xx}
 
+\harvarditem{Author}{2013}{AnneAuthor}
+Author, Anne. 2013.
+\newblock ``A Relevant Paper.'' {\em Political Science Journal} 1.2:159--178.
+
 \harvarditem{Banks}{2011}{banks2011cross}
 Banks, Arthur~S. 2011.
 \newblock ``Cross-National Time-Series Data Archive, 1815-[2011].''.
@@ -54,11 +58,6 @@ Dashti-Gibson, Jaleh, Patricia Davis \harvardand\ Benjamin Radcliff. 1997.
 \newblock ``On the determinants of the success of economic sanctions: An
   empirical analysis.'' {\em American Journal of Political Science}
   pp.~608--618.
-
-\harvarditem{Dorff \harvardand\ Ward}{2013}{dorff2013}
-Dorff, Cassy \harvardand\ Michael~D Ward. 2013.
-\newblock ``Networks, Dyads, and the Social Relations Model.'' {\em Political
-  Science Research Methods} 1.2:159--178.
 
 \harvarditem{Dorussen \harvardand\ Mo}{2001}{dorussen2001}
 Dorussen, Han \harvardand\ Jongryn Mo. 2001.

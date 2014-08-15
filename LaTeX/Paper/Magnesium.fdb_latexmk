@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex Magnesium"] 1407963427 "Magnesium.aux" "Magnesium.bbl" "Magnesium" 1407963433
+["bibtex Magnesium"] 1408124037 "Magnesium.aux" "Magnesium.bbl" "Magnesium" 1408124588
   "./apsr.bst" 1395234779 25357 c990a86d1a60aa9370f76a9507b609ec ""
-  "Magnesium.aux" 1407963432 11549 c2053d98e66c6cffa3ffb59dde85be59 ""
+  "Magnesium.aux" 1408124587 11573 f304e8344551623d145772a59e319fce ""
   "Magnesium.bcf" 0 -1 0 ""
   "magRefs.bib.bib" 0 -1 0 ""
   (generated)
   "Magnesium.bbl"
   "Magnesium.blg"
-["pdflatex"] 1407963427 "Magnesium.tex" "Magnesium.pdf" "Magnesium" 1407963433
+["pdflatex"] 1408124581 "Magnesium.tex" "Magnesium.pdf" "Magnesium" 1408124588
   "../TeXoutput/crossvalCoef.tex" 1407257865 14015 f0f11a1a8d8550db51f77e91fcbbea78 ""
   "../TeXoutput/crossvalPerf.tex" 1407257865 19857 57f9074844f6eefcbf57e1645df4f001 ""
   "../TeXoutput/durModelResults.tex" 1407257865 1680 f1d50acc49a76e369e58464407b0771e ""
@@ -183,17 +183,16 @@
   "/usr/local/texlive/2012/texmf-dist/tex/latex/url/url.sty" 1264379145 21932 e3a9cf32ee9b853b42be14c2f25b873c ""
   "/usr/local/texlive/2012/texmf-dist/tex/latex/xcolor/x11nam.def" 1169481954 9040 c0c860499be99a076792194b1d6525a1 ""
   "/usr/local/texlive/2012/texmf-dist/tex/latex/xcolor/xcolor.sty" 1169481954 55224 a43bab84e0ac5e6efcaf9a98bde73a94 ""
-  "Abstract.tex" 1407338707 1401 fb24618ee6988d5c852645b3fda4cf1e ""
-  "Magnesium.aux" 1407963432 11549 c2053d98e66c6cffa3ffb59dde85be59 ""
-  "Magnesium.bbl" 1407851462 9479 03977dc8c5c72062f5340b002603d9fc "bibtex Magnesium"
-  "Magnesium.out" 1407963432 608 db38544f03edaad55afbdccbae824b64 ""
-  "Magnesium.tex" 1407942528 5495 c43b6e2f9a063518aacbc7d86c780067 ""
+  "Magnesium.aux" 1408124587 11573 f304e8344551623d145772a59e319fce ""
+  "Magnesium.bbl" 1408123726 9393 89cb75cc292b8d251c2a6ca273036f4e "bibtex Magnesium"
+  "Magnesium.out" 1408124587 608 db38544f03edaad55afbdccbae824b64 ""
+  "Magnesium.tex" 1408124037 5523 11c79bd61847a7446aec7ea1782704c1 ""
   "MagnesiumConcl.tex" 1407509932 3003 5a624a2f746d983079c3ed38ca5605a1 ""
-  "MagnesiumEmp.tex" 1407958796 5851 700f41d6518671cda41bfb9fb767f2a1 ""
-  "MagnesiumFindings.tex" 1407963414 10490 811d305ba2584fea635eaf5eda561875 ""
-  "MagnesiumIntro.tex" 1407943383 3655 8ba63df761699d3759e03a206db92a99 ""
-  "MagnesiumLit.tex" 1407944350 7380 91c64a929286d21e384a3f7d90d2199e ""
-  "MagnesiumTheory.tex" 1407945071 16857 651e1e63905462967af6c2fe08df0744 ""
+  "MagnesiumEmp.tex" 1408124538 5849 57a7b3a683b4b61d7387cc1b08e68787 ""
+  "MagnesiumFindings.tex" 1408124575 10515 e9844958db50098c2bb12717d284c3dd ""
+  "MagnesiumIntro.tex" 1408124470 3751 d24babb7b87ad35f1723d41113cac272 ""
+  "MagnesiumLit.tex" 1408123696 7463 92cb57871435358b41ea22d9661f7011 ""
+  "MagnesiumTheory.tex" 1408123788 16849 b4943ea27ed4fd556b00db74888c352c ""
   (generated)
   "Magnesium.log"
   "Magnesium.out"
