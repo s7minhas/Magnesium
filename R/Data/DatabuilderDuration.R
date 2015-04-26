@@ -1,6 +1,8 @@
 # setup workspace
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
-# source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
+if(Sys.info()["user"]=="janus829"){
+source('~/Research/Magnesium/R/Setup.R')}
+if(Sys.info()["user"]=="cassydorff"){
+source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 ###############################################################
 # Loading Excel data from UNC
@@ -33,7 +35,7 @@ sanctionData <- sanctionDataFinal[which(sanctionDataFinal$issue1%in%econ |
 # threat timeframe = startyear, endyear
 # sanction timeframe = sancimpositionstartyear
 vars <- c('caseid', 'startyear', 'endyear', 
-	'targetstate_ccode', 'finaloutcome')
+	'targetstate_ccode', 'finaloutcome', 'imposition')
 sanctionSlice <- sanctionData[,vars]
 names(sanctionSlice) <- c('caseid', 'startyear', 'endyear', 
 	'targetstate', 'finaloutcome')

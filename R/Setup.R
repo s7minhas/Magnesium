@@ -2,12 +2,12 @@
 rm(list=ls())
 # Setting working directory
 if(Sys.info()["user"]=="janus829")
-{pathMain="~/Desktop/Research/Magnesium/R";
-	pathTex="~/Desktop/Research/Magnesium/LaTeX/TeXoutput"
+{pathMain="~/Research/Magnesium/R";
+	pathTex="~/Research/Magnesium/LaTeX/TeXoutput"
 	pathGraphics="~/Dropbox/Research/Magnesium/Graphics";
-	pathFunctions="~/Desktop/Prog Notes/R Functions";
+	pathFunctions="~/Prog Notes/R Functions";
 	pathData="~/Dropbox/Research/Magnesium/Data";
-	pathPData="~/Desktop/Research/Magnesium/R/Data/BuildingPanelData"}
+	pathPData="~/Research/Magnesium/R/Data/BuildingPanelData"}
 
 if(Sys.info()["user"]=="cassydorff")
 {pathMain="~/ProjectsGit/Magnesium/R";
@@ -20,30 +20,23 @@ if(Sys.info()["user"]=="cassydorff")
 # par(mar=c(4, 4, 2, 0.5), oma=c(2,2,2,2), mfrow=c(1,1), mgp=c(2,.7,0))
 
 # Loading libraries and functions
-require(network)
-require(igraph)
-require(ggplot2)
+# General functions/libraries
+loadPkg=function(toLoad){
+	for(lib in toLoad){
+	  if(!(lib %in% installed.packages()[,1])){ 
+	    install.packages(lib, repos='http://cran.rstudio.com/') }
+	  library(lib, character.only=TRUE)
+	}
+}
+
+toLoad = c('network', 'igraph', 'ggplot2', 'RColorBrewer',
+	'reshape', 'doBy', 'foreign', 'cshapes', 'countrycode',
+	'survival', 'OIsurv', 'lmtest', 'eha', 'frailtypack', 
+	'boot', 'sbgcop', 'survAUC', 'survcomp', 'survivalROC',
+	'xtable', 'tikzDevice')
+loadPkg(toLoad)
+
 theme_set(theme_bw())
-require(RColorBrewer)
-require(reshape)
-require(doBy)
-require(foreign)
-require(cshapes)
-require(countrycode)
-
-require(survival)
-require(OIsurv)
-require(lmtest)
-require(eha)
-require(frailtypack)
-require(boot)
-require(sbgcop)
-
-require(survAUC)
-require(survcomp)
-require(survivalROC)
-require(xtable)
-require(tikzDevice)
 
 # Helper functions
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)

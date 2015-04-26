@@ -1,7 +1,7 @@
 if(Sys.info()["user"]=="janus829"){
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')}
+source('~/Research/Magnesium/R/Setup.R')}
 if(Sys.info()["user"]=="cassydorff"){
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
+source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
 genTikz=F
@@ -14,6 +14,15 @@ load('durDataEconImp.rda'); tableName='durModelResults.tex'; label='tab:regResul
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
 aData=merge(aData,ids,by='targetstate',all.x=T)
+###############################################################
+
+###############################################################
+# Add info about sanction imposition
+load('sanctionData.rda')
+aData$imposition = sanctionDataFinal$imposition[match(aData$caseid, sanctionDataFinal$caseid)]
+
+# Split results by imposition and not
+aData = aData[aData$imposition == 0,]
 ###############################################################
 
 ###############################################################
