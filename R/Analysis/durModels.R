@@ -4,12 +4,12 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=F
+genTikz=T
 
 ###############################################################
 setwd(pathData)
 # load('durDataEcon.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
-load('durDataEconImp.rda'); tableName='durModelResults.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+load('durDataEconImp.rda'); tableName='durModelResults_Sanction.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
@@ -22,7 +22,7 @@ load('sanctionData.rda')
 aData$imposition = sanctionDataFinal$imposition[match(aData$caseid, sanctionDataFinal$caseid)]
 
 # Split results by imposition and not
-aData = aData[aData$imposition == 0,]
+aData = aData[aData$imposition == 1,]
 ###############################################################
 
 ###############################################################
