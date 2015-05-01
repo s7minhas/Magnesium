@@ -1,10 +1,10 @@
-if(Sys.info()["user"]=="janus829"){
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
 source('~/Research/Magnesium/R/Setup.R')}
 if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=T
+genTikz=F
 
 ###############################################################
 setwd(pathData)
@@ -29,7 +29,8 @@ aData = aData[aData$imposition == 1,]
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
-		# ,'lag1_actor'
+		,'lag1_actor', 'lag1_Spartner'
+		,'lag1_SmeanActorSndr', 'lag1_meanPtnrSndr'
 		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
 	 ,'lag1_polity2'
 	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
@@ -37,7 +38,8 @@ varDef = cbind (
 	 ,'lag1_domSUM'
 	 ),
 	c( 'Compliance Reciprocity$_{j,t-1}$', 'Sanction Reciprocity$_{j,t-1}$'
-		# ,'Actor Effect'
+		,'Compliant Countries', 'Freq. Sanctioned' 
+		,'Freq. Sanct Senders', 'Effective Sanctioners'
 	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
 	,'Polity$_{i,t-1}$'
 	,'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$'
@@ -91,6 +93,45 @@ modelFinal=coxph(Surv(start,stop,compliance) ~
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)
+
+# Compliance network measures
+modTest=coxph(Surv(start,stop,compliance) ~
+	lag1_uData + lag1_SuData2 
+	+ lag1_actor +  lag1_Spartner
+	# + lag1_meanPtnrSndr + lag1_SmeanActorSndr 	
+	+ noS + Ddistdata + lag1_tdata + lag1_allydata
+	+ lag1_polity2 
+	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
+	+ lag1_domSUM
+	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
+	, data=modData)
+summary(modTest)
+
+# Compliance network measures
+modelComp=coxph(Surv(start,stop,compliance) ~
+	lag1_uData 
+	+ lag1_actor 
+	+  lag1_meanPtnrSndr	
+	+ noS + Ddistdata + lag1_tdata + lag1_allydata
+	+ lag1_polity2 
+	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
+	+ lag1_domSUM
+	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
+	, data=modData)
+summary(modelComp)
+
+# Sanction network measures
+modelSanc=coxph(Surv(start,stop,compliance) ~
+	+ lag1_SuData2 
+	+  lag1_Spartner
+	+ lag1_SmeanActorSndr 	
+	+ noS + Ddistdata + lag1_tdata + lag1_allydata
+	+ lag1_polity2 
+	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
+	+ lag1_domSUM
+	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
+	, data=modData)
+summary(modelSanc)
 ###############################################################
 
 ############################################################### 

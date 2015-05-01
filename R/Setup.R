@@ -1,7 +1,7 @@
 # Clearing workspace
 rm(list=ls())
 # Setting working directory
-if(Sys.info()["user"]=="janus829")
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m")
 {pathMain="~/Research/Magnesium/R";
 	pathTex="~/Research/Magnesium/LaTeX/TeXoutput"
 	pathGraphics="~/Dropbox/Research/Magnesium/Graphics";
