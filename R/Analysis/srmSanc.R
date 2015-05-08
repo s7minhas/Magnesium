@@ -5,7 +5,7 @@
 ###################################################
 
 if(Sys.info()["user"]=="janus829"){
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')}
+source('/Users/janus829/Research/Magnesium/R/Setup.R')}
 
 if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
@@ -20,10 +20,21 @@ load('complianceNet.rda') #cmatList, #ccmatlist (cumulative)
 ############################################################
 # srm
 if(Sys.info()["user"]=="janus829"){
-source('/Users/janus829/Desktop/Research/Magnesium/R/Analysis/SRM.R')}
+source('/Users/janus829/Research/Magnesium/R/Analysis/SRM.R')}
 
 if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Analysis/SRM.R')}
+############################################################
+
+############################################################
+# Reciprocal compliance cases
+lapply()
+tmp = ccmatList[[1]]
+rows=rownames(tmp)[which(tmp == 1, arr.ind=TRUE)[,1]]
+cols=colnames(tmp)[which(tmp == 1, arr.ind=TRUE)[,2]]
+ij = paste(rows, cols, sep='_')
+ji = paste(cols, rows, sep='_')
+
 ############################################################
 
 ############################################################
