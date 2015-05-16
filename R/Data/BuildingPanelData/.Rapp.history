@@ -1,263 +1,0 @@
-Load sanction network Data#
-setwd(pathData)#
-load('sanctionData.rda')
-Clearing workspace#
-rm(list=ls())#
-# Setting working directory#
-if(Sys.info()["user"]=="janus829")#
-{pathMain="~/Desktop/Research/Magnesium/R";#
-	pathGraphics="~/Dropbox/Research/Magnesium/Graphics";#
-	pathFunctions="~/Desktop/Prog Notes/R Functions";#
-	pathData="~/Dropbox/Research/Magnesium/Data";#
-	pathPData="~/Desktop/Research/Magnesium/R/Data/BuildingPanelData"}#
-#
-if(Sys.info()["user"]=="cassydorff")#
-{pathMain="~/ProjectsGit/Magnesium/R";#
-	pathGraphics="~/Dropbox/My Research/Magnesium";#
-	pathData="~/Dropbox/My Research/Magnesium/Data";#
-	pathPData="~/ProjectsGit/Magnesium/R/Data/BuildingPanelData"}
-setwd(pathData)
-getwd
-if(Sys.info()["user"]=="cassydorff")#
-{pathMain="~/ProjectsGit/Magnesium/R";#
-	pathGraphics="~/Dropbox/My Research/Magnesium";#
-	pathData="~/Dropbox/Research/Magnesium/Data";#
-	pathPData="~/ProjectsGit/Magnesium/R/Data/BuildingPanelData"}
-setwd(pathData)
-load('sanctionData.rda')
-sendIDs=paste('sender',1:5,'_ccode',sep='')
-sdata=sanctionDataFinal[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
-sdata=sanctionDataFinal[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
-load('sanctionNet.rda')
-setwd(pathPData)
-load('panel.rda')
-Helper function to create adjacency matrix for plot.igraph#
-creatAdj = function(mat, top=TRUE, mult=1.5){#
-	require(igraph)#
-	setwd(pathPData)#
-	load('panel.rda')#
-	ctrs=panel$CNTRY_NAME[match(rownames(mat),panel$ccode)]#
-	rownames(mat)=ctrs; colnames(mat)=ctrs#
-	# Dropping cases with no send/rec#
-	rows=rowSums(mat)==0#
-	cols=colSums(mat)==0#
-	both=rows*cols#
-	bothsub=both[both==0]#
-	mat=mat[match(names(bothsub),rownames(mat)),#
-		match(names(bothsub),colnames(mat))]#
-#
-	matAdj=graph.adjacency(mat, mode='directed', weighted=T, diag=F)#
-	if(top==TRUE){V(matAdj)[degree(matAdj)<=mult*median(degree(matAdj))]$name=''}#
-	V(matAdj)$name[V(matAdj)$name=='Germany Federal Republic']='W. Germany'#
-	V(matAdj)$name[V(matAdj)$name=='Germany Democratic Republic']='E. Germany'#
-	V(matAdj)$name[V(matAdj)$name=='United Kingdom']='UK'#
-	V(matAdj)$name[V(matAdj)$name=='United States']='USA'#
-	V(matAdj)$name[V(matAdj)$name=='Saudi Arabia']='S. Arab.'#
-	matAdj#
-}
-years = names(smatList)
-head(smatList)
-summary(smatList)
-names(smatList)
-source(SRM.R)
-R source code providing social relations modeling for #
-# network data. #
-##
-# Authors: Cassy Dorff and Michael D. Ward#
-# For more on the SRM in other software#
-# see http://davidakenny.net/srm/srm.htm#
-##
-###################################################################
-#Purpose: SRM function#
-#
-dyads<-#
-function(x){#
-	# diag of x must be zero#
-	 if (dim(x)[1] - dim(x)[2] == 0) {#
-		n<-rd<-dim(x)[1]#
-		cd<-dim(x)[2]#
-		dim<-(dim(x))#
-		diag(x)<-0#
-	d1<-(n-1)#
-	d2<-(n-2)#
-	d3<-(n*(d2))#
-	d4<-((d1)*(d2))#
-	d5<-(((d1)*(d2)/(2))-1)#
-	x_r<-rowSums(x)/(d1)#
-	x_c<-colSums(x)/(d1)#
-	x_t<-sum(x)/(n*(d1))#
-	a_hat<-((d1^2)/(d3) * x_r) + (((d1)/(d3))*x_c) - ((d1)/(d2) *x_t) #actor i perceives others#
-	b_hat<-((d1^2)/(d3) * x_c) + (((d1)/(d3))*x_r) - ((d1)/(d2) * x_t) #actor i is perceieved #
-	g_hat<-matrix(NA, dim(x)[1], dim(x)[2])#
-	diag(g_hat)<-0.0  # enforce diagonal equal to zero#
-	q1<-NULL#
-	q2<-NULL#
-	s_2g<-matrix(NA, dim(x)[1],1, byrow=T) #dyadic variance#
-	s_gg<-matrix(NA, dim(x)[1], dim(x)[2], byrow=T) #dyadic covariance#
-	s_ab<-matrix(NA, dim(x)[1], dim(x)[2], byrow=T)#
-	s_2a<-matrix(NA, dim(x)[1],1, byrow=T) #
-	s_2b<-matrix(NA, dim(x)[1],1, byrow=T)#
-	for (i in 1:dim(x)[1]){#
-				for (j in  1:dim(x)[2]){#
-				g_hat[i,j]<-x[i,j] - a_hat[i] - b_hat[j] - x_t#
-				diag(g_hat)<-0.0#
-				}#
-				}#
-				g_hatdiffs<-g_hat - t(g_hat) #all the differences#
-				diag(g_hatdiffs)<-0.0#
-				g_hatsums<-((g_hat + t(g_hat))/2) #dividing by 2 is in equation #a_hat sums twice as big as g_ij + h_ji /2 #
-				for (i in 1:dim(x)[1]){#
-					for (j in  1:dim(x)[2]){#
-					g_hatsums[i,j]<-g_hatsums[i,j]^2 #making squares#
-					g_hatdiffs[i,j]<-g_hatdiffs[i,j]^2#
-					}#
-					} #getting all individual squares#
-				diag(g_hatsums)<-0.0#
-				q1<-sum(g_hatsums) #summing squares of g_hat sum#
-				q2<-sum(g_hatdiffs)/2#
-				s_2g<-((q1/d5) + (q2/d4))/2 #took out *1/2#
-				s_gg<-((q1/d5) - (q2/d4))/2#
-				s_ab<-((sum(a_hat * b_hat))/(d1)) - ((s_gg*(d1))/(d3)) - (s_2g/(d3))#
-				s_2a<-((sum(a_hat^2)/(d1)) - ((s_2g*(d1))/(d3)) - ((s_gg)/(d3)))#
-				s_2b<-((sum(b_hat^2)/(d1)) - ((s_2g*(d1))/(d3)) - ((s_gg)/(d3)))#
-				a_hat_output<-as.matrix(a_hat, nrow=rd, ncol=1)#
-				rownames(a_hat_output)<-rownames(x)#
-				colnames(a_hat_output)<-list(c("actor effect for i"))#
-				b_hat_output<-as.matrix(b_hat, nrow=1, ncol=cd)#
-				rownames(b_hat_output)<-rownames(x)#
-				colnames(b_hat_output)<-list(c("partner effect for i"))#
-				g_hat_output<-as.matrix(g_hat, nrow=rd, ncol=cd) #relationship effect i->j#
-				rownames(g_hat_output)<-rownames(x)#
-				colnames(g_hat_output)<-rownames(x)#
-				if (sum(abs(x-t(x))) == 0){#
-					s_gg<- 1#
-					s_ab<- 1#
-				}#
-				return(list("actor.effect.i" = a_hat_output, "partner.effect.i" = b_hat_output, "unique.effect.ij"= g_hat_output,  "unique.variance"=s_2g, "relationship.covariance"=s_gg, "actor.variance" =s_2a, "partner.variance" = s_2b, "actor.partner.covariance" =s_ab, "rowmeans" = x_r, "colmeans" = x_c))#
-				}#
-			else {stop("matrix must be square") }#
-}
-out<-dyads(smatList)
-c;as
-class(smatList)
-class(smatList$1987)
-class(smatList$"1987")
-dim(smatList$"1987")[1]
-dim(smatList$"1987")[1]-dim(smatList$"1987")[1]
-out<-dyads(smatList$"1987")
-lapply(smatList, function(x) FUN=dim(x))
-out<_lapply(smatList, function(x) FUN=dyads)
-out<-lapply(smatList, function(x) FUN=dyads)
-out
-out<-lapply(smatList, function(x) FUN=dyads(smatList))
-out<-lapply(smatList, function(x) FUN=dyads(x))
-actor.effect.i <- lapply(output.4, function(year) year$actor.effect.i)
-actor.effect.i <- lapply(out, function(year) year$actor.effect.i)
-partner.effect.i <- lapply(out, function(year) year$partner.effect.i)
-unique.effect.ij <- lapply(out, function(year) year$unique.effect.ij) #mat
-unique.variance<- lapply(out, function(year) year$unique.variance) #1/yr
-relationship.covariance<-lapply(out, function(year) year$relationship.covariance) #1/yr
-relationship.covariance<-lapply(out, function(year) year$relationship.covariance) #1/yr
-actor.variance<- lapply(out, function(year) year$actor.variance) #1/yr
-partner.variance<-lapply(out, function(year) year$partner.variance) #1/yr
-actor.partner.covariance<-lapply(out, function(year) year$actor.partner.covariance)
-colmeans <- lapply(out, function(year) year$colmeans)
-sort.cty.uniq<-out$actor.effect.i[order(out$unique.effect.ij[,1]),]
-actor.effect
-unique.effect.ij
-sort.cty.uniq<-out$actor.effect.i[order(out$unique.effect.ij[,1]),]
-head(out$unique.effect.ij)
-lapply(smatList, function(x) FUN=dim(x))
-out2<-list()#
-year <- 1960#
-		for (i in Soc.Matrix){#
-			print(year)#
-			out2 <- c(out2,list(dyads(i)))#
-			names(out2)[length(out2)] <- paste("year",year, sep="_")#
-			year <- year+1#
-		}#
-out2 <-out2
-out2<-list()#
-year <- 1960#
-		for (i in smatList){#
-			print(year)#
-			out2 <- c(out2,list(dyads(i)))#
-			names(out2)[length(out2)] <- paste("year",year, sep="_")#
-			year <- year+1#
-		}#
-out2 <-out2
-sort.cty.uniq<-out$actor.effect.i[order(out$unique.effect.ij[,1]),]
-actor.effect.i <- lapply(out2, function(year) year$actor.effect.i)
-partner.effect.i <- lapply(out2, function(year) year$partner.effect.i)
-unique.effect.ij <- lapply(out2, function(year) year$unique.effect.ij) #mat
-unique.variance<- lapply(out2, function(year) year$unique.variance) #1/yr
-relationship.covariance<-lapply(out2, function(year) year$relationship.covariance)
-actor.variance<- lapply(out, function(year) year$actor.variance) #1/yr
-partner.variance<-lapply(out, function(year) year$partner.variance) #1/yr
-actor.partner.covariance<-lapply(out, function(year) year$actor.partner.covariance)
-colmeans <- lapply(out, function(year) year$colmeans)
-sort.cty.uniq<-out$actor.effect.i[order(out2$unique.effect.ij[,1]),]
-actor.variance<- lapply(out2, function(year) year$actor.variance) #1/yr
-partner.variance<-lapply(out2, function(year) year$partner.variance) #1/yr
-actor.partner.covariance<-lapply(out2, function(year) year$actor.partner.covariance)
-colmeans <- lapply(out2, function(year) year$colmeans)
-sort.cty.uniq<-out$actor.effect.i[order(out2$unique.effect.ij[,1]),]
-unique.effect.ij <- lapply(out2, function(year) year$unique.effect.ij) #mat
-sort.cty.uniq<-out$actor.effect.i[order(out2$unique.effect.ij[,1]),]
-sort.cty.uniq<-out2$actor.effect.i[order(out2$unique.effect.ij[,1]),]
-out2$unique.effect.ij[,1]
-head(out2)
-actor.effect.i <- lapply(out2, function(year) year$actor.effect.i)
-actor.effect.i
-actor.effect.i <- lapply(out2, function(year) year$actor.effect.i)
-actor.effect.i <- lapply(out2, function(year) year$actor.effect.i)
-actor.effect.i
-partner.effect.i
-unique.effect.ij <- lapply(out2, function(year) year$unique.effect.ij) #mat
-unique.effect.ij
-unique.variance<- lapply(out2, function(year) year$unique.variance) #1/yr
-unique.variance
-relationship.covariance<-lapply(out2, function(year) year$relationship.covariance)
-actor.effect.i <- lapply(out2, function(year), year$actor.effect.i)
-actor.effect.i <- lapply(out2, function(year), year$actor.effect.i)
-actor.effect.i <- lapply(out2, function(year) year$actor.effect.i)
-out2$actor.effect.i
-out2
-sort.cty.uniq<-out2$1990$actor.effect.i[order(out2$unique.effect.ij[,1]),]
-sort.cty.uniq<-out2$year_1990$actor.effect.i[order(out2$unique.effect.ij[,1]),]
-out2
-out2[1]
-sort.cty.uniq<-out2[2][order(out2$unique.effect.ij[,1]),]
-sort.cty.uniq<-out2$year_1990$unique.effect.ij
-sort.cty.uniq[,1]
-sort.cty.uniq
-uniq.net<-as.matrix(out2$year_1990$unique.effect.ij)
-diag(uniq.net)<-0
-plot.network(network(uniq.net, directed=T, usearrows=T,edge.col=8, vertex.col="darkblue",#
-label.col="black", label.pos=1, label.cex=.75, edge.lwd=.1) #label=cty.name#
-library(qgraph)
-library(network)
-plot.network(network(uniq.net, directed=T, usearrows=T,edge.col=8, vertex.col="darkblue",#
-label.col="black", label.pos=1, label.cex=.75, edge.lwd=.1) #label=cty.name#
-library(qgraph)
-plot.network(network(uniq.net, directed=T, usearrows=T,edge.col=8, vertex.col="darkblue",label.col="black", label.pos=1, label.cex=.75, edge.lwd=.1)
-)
-plot.network(network(uniq.net, directed=T, usearrows=T,edge.col=8, vertex.col="darkblue",label.col="black", label.pos=1, label.cex=.75, edge.lwd=.1))
-uniq.net<-network(uniq.net)
-uniq.net
-uniq.net<-network(uniq.net, directed=T)
-plot.network(uniq.net)
-min(uniq.net)
-min(uniq.net)
-min(out2$year_1990$unique.effect.ij)
-library(qgraph)
-qgraph(uniq.net, minimum=-min(out2$year_1990$unique.effect.ij), maximum=  max(out2$year_1990$unique.effect.ij), cut=0, labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE)
-library(qgraph)
-qgraph(uniq.net, minimum=-min(out2$year_1990$unique.effect.ij), maximum=  max(out2$year_1990$unique.effect.ij), cut=0, labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE)
-min(out2$year_1990$unique.effect.ij)
-max(out2$year_1990$unique.effect.ij)
-?qgraph
-qgraph(uniq.net, minimum=-min(out2$year_1990$unique.effect.ij), maximum=  max(out2$year_1990$unique.effect.ij), labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE, diag=FALSE, weighted=TRUE)
-qgraph(uniq.net, minimum=-min(out2$year_1990$unique.effect.ij), maximum=  max(out2$year_1990$unique.effect.ij), cut=0, labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE, diag=FALSE, weighted=TRUE)
-qgraph(uniq.net, minimum=-min(out2$year_1990$unique.effect.ij), maximum=  max(out2$year_1990$unique.effect.ij), cut=0, labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE, diag=FALSE)
-qgraph(uniq.net, minimum=-min(out2$year_1990$unique.effect.ij), maximum=  max(out2$year_1990$unique.effect.ij), labels=rownames(uniq.net), asize= .1, arrows=FALSE, label.scale= TRUE, diag=FALSE)
