@@ -5,10 +5,16 @@
 ###################################################
 
 if(Sys.info()["user"]=="janus829"){
-source('/Users/janus829/Research/Magnesium/R/Setup.R')}
+source('~/Research/Magnesium/R/Setup.R');
+source('~/Research/Magnesium/R/Analysis/SRM.R');
+load('~/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
+}
 
 if(Sys.info()["user"]=="cassydorff"){
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
+source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R');
+load('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/BuildingPanelData/panel.rda');
+source('/Users/cassydorff/ProjectsGit/Magnesium/R/Analysis/SRM.R')
+}
 
 ############################################################
 # Load sanction & compliance network Data
@@ -18,23 +24,35 @@ load('complianceNet.rda') #cmatList, #ccmatlist (cumulative)
 ############################################################
 
 ############################################################
-# srm
-if(Sys.info()["user"]=="janus829"){
-source('/Users/janus829/Research/Magnesium/R/Analysis/SRM.R')}
-
-if(Sys.info()["user"]=="cassydorff"){
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Analysis/SRM.R')}
-############################################################
-
-############################################################
 # Reciprocal compliance cases
-lapply()
-tmp = ccmatList[[1]]
-rows=rownames(tmp)[which(tmp == 1, arr.ind=TRUE)[,1]]
-cols=colnames(tmp)[which(tmp == 1, arr.ind=TRUE)[,2]]
-ij = paste(rows, cols, sep='_')
-ji = paste(cols, rows, sep='_')
+events = lapply(cmatList[-length(cmatList)], function(tmp){
+	rows=rownames(tmp)[which(tmp == 1, arr.ind=TRUE)[,1]]
+	cols=colnames(tmp)[which(tmp == 1, arr.ind=TRUE)[,2]]
+	ij = paste(rows, cols, sep='_')
+	ji = paste(cols, rows, sep='_')
+	return(list(ij=ij, ji=ji))
+} ) 
 
+compEvents = lapply(1:(length(events)-1), function(t){
+	ji = events[[t]]$ji
+	tPost = unlist(lapply(events[(t + 1 ):length(events)], function(x) x$ij))
+	comp = intersect(ji, tPost)
+	info = tPost[which(tPost %in% comp)]
+	names(info) = substr(names(info), 1, 4)
+	return( list(comp=comp, info=info) )
+})
+names(compEvents) = names(events)[1:(length(events)-1)]
+
+# Unique reciprocity events
+ucompEvents = unique( unlist( lapply(compEvents, function(x) x[[1]]) ) )
+tmp = strsplit(ucompEvents, '_')
+result=lapply(tmp, function(event){
+	i=panel$cname[match(event[1], panel$ccode)]
+	j=panel$cname[match(event[2], panel$ccode)]
+	if(!is.na(i) & !is.na(j)){
+		return( paste0(i, ' ---> ', j) ) }
+	})
+print( do.call('rbind', result) )
 ############################################################
 
 ############################################################
