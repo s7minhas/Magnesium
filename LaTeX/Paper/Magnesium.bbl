@@ -4,6 +4,11 @@
 Author, Anne. 2013.
 \newblock ``A Relevant Paper.'' {\em Political Science Journal} 1.2:159--178.
 
+\harvarditem{Axelrod \harvardand\ Keohane}{1985}{axelrod:1985}
+Axelrod, Robert \harvardand\ Robert~O Keohane. 1985.
+\newblock ``Achieving cooperation under anarchy: Strategies and institutions.''
+  {\em World politics} 38(01):226--254.
+
 \harvarditem{Banks}{2011}{banks2011cross}
 Banks, Arthur~S. 2011.
 \newblock ``Cross-National Time-Series Data Archive, 1815-[2011].''.
@@ -13,11 +18,33 @@ Beck, Nathaniel. 2008.
 \newblock ``Time Series Cross Section Methods.'' {\em Oxford Handbook of
   Political Methodology} pp.~475--93.
 
+\harvarditem{Berry \harvardand\ Kalin}{1979}{berry:1979}
+Berry, John~W \harvardand\ Rudolf Kalin. 1979.
+\newblock ``Reciprocity of inter-ethnic attitudes in a multicultural society.''
+  {\em International Journal of Intercultural Relations} 3(1):99--111.
+
 \harvarditem{Bolks \harvardand\ Al-Sowayel}{2000}{bolks2000}
 Bolks, Sean~M \harvardand\ Dina Al-Sowayel. 2000.
 \newblock ``How long do economic sanctions last? Examining the sanctioning
   process through duration.'' {\em Political Research Quarterly}
   53(2):241--265.
+
+\harvarditem[Bolton, Brandts \harvardand\ Ockenfels]{Bolton, Brandts
+  \harvardand\ Ockenfels}{1998}{bolton:1998}
+Bolton, Gary~E, Jordi Brandts \harvardand\ Axel Ockenfels. 1998.
+\newblock ``Measuring motivations for the reciprocal responses observed in a
+  simple dilemma game.'' {\em Experimental Economics} 1(3):207--219.
+
+\harvarditem[Brett, Shapiro \harvardand\ Lytle]{Brett, Shapiro \harvardand\
+  Lytle}{1998}{brett:1998}
+Brett, Jeanne~M, Debra~L Shapiro \harvardand\ Anne~L Lytle. 1998.
+\newblock ``Breaking the bonds of reciprocity in negotiations.'' {\em Academy
+  of Management Journal} 41(4):410--424.
+
+\harvarditem{Campbell~III \harvardand\ Kamlani}{1997}{campbell:1997}
+Campbell~III, Carl~M \harvardand\ Kunal~S Kamlani. 1997.
+\newblock ``The reasons for wage rigidity: evidence from a survey of firms.''
+  {\em The Quarterly Journal of Economics} pp.~759--789.
 
 \harvarditem{Cao}{2009}{cao2009networks}
 Cao, Xun. 2009.
@@ -30,6 +57,16 @@ Chambless, Lloyd~E. \harvardand\ Guoqing Diao. 2006.
 \newblock ``Estimation of Time-Dependent Area Under the ROC Curve for Long-Term
   Risk Prediction.'' {\em Statistics in medicine} 25(20):3474--3486.
 
+\harvarditem{Charness}{2004}{charness:2004}
+Charness, Gary. 2004.
+\newblock ``Attribution and reciprocity in an experimental labor market.'' {\em
+  Journal of Labor Economics} 22(3):665--688.
+
+\harvarditem{Charness \harvardand\ Haruvy}{2002}{charness:2002}
+Charness, Gary \harvardand\ Ernan Haruvy. 2002.
+\newblock ``Altruism, equity, and reciprocity in a gift-exchange experiment: an
+  encompassing approach.'' {\em Games and Economic Behavior} 40(2):203--231.
+
 \harvarditem{Choucri \harvardand\ North}{1972}{choucri:north:1972}
 Choucri, Nazli \harvardand\ Robert~C. North. 1972.
 \newblock ``Dynamics of International Conflict.'' {\em World Politics}
@@ -39,6 +76,17 @@ Choucri, Nazli \harvardand\ Robert~C. North. 1972.
 Christopher, Anthony~John. 1994.
 \newblock ``The pattern of diplomatic sanctions against South Africa
   1948--1994.'' {\em GeoJournal} 34(4):439--446.
+
+\harvarditem{Cox}{2004}{cox:2004}
+Cox, James~C. 2004.
+\newblock ``How to identify trust and reciprocity.'' {\em Games and economic
+  behavior} 46(2):260--281.
+
+\harvarditem[Cox, Friedman \harvardand\ Gjerstad]{Cox, Friedman \harvardand\
+  Gjerstad}{2007}{cox:2007}
+Cox, James~C, Daniel Friedman \harvardand\ Steven Gjerstad. 2007.
+\newblock ``A tractable model of reciprocity and fairness.'' {\em Games and
+  Economic Behavior} 59(1):17--45.
 
 \harvarditem[Cranmer, Heinrich \harvardand\ Desmarais]{Cranmer, Heinrich
   \harvardand\ Desmarais}{2014}{cranmer2014reciprocity}
@@ -94,6 +142,11 @@ Hoff, P.D. \harvardand\ M.D. Ward. 2004.
 Hoff, Peter~D. 2007.
 \newblock ``Extending the rank likelihood for semiparametric copula
   estimation.'' {\em The Annals of Applied Statistics} pp.~265--283.
+
+\harvarditem{Holsti}{1972}{holsti1972}
+Holsti, Ole~R. 1972.
+\newblock {\em Crisis escalation war}.
+\newblock McGill-Queen's Press-MQUP.
 
 \harvarditem{Honaker \harvardand\ King}{2010}{honaker2010missing}
 Honaker, James \harvardand\ Gary King. 2010.
@@ -173,7 +226,12 @@ Morgan, T~Clifton \harvardand\ Valerie~L Schwebach. 1997.
 \newblock ``Fools suffer gladly: The use of economic sanctions in international
   crises.'' {\em International Studies Quarterly} 41(1):27--50.
 
-\harvarditem{Rajmaira \harvardand\ Ward}{1990}{rajmaira1990evolving}
+\harvarditem{Osiel}{2009}{osiel:2009}
+Osiel, Mark. 2009.
+\newblock {\em The end of reciprocity: terror, torture, and the law of war}.
+\newblock Cambridge University Press.
+
+\harvarditem{Rajmaira \harvardand\ Ward}{1990}{rajmaira:1990}
 Rajmaira, Sheen \harvardand\ Michael~D Ward. 1990.
 \newblock ``Evolving foreign policy norms: Reciprocity in the superpower
   triad.'' {\em International Studies Quarterly} pp.~457--475.
@@ -186,6 +244,12 @@ Richardson, Lewis~F. 1960.
 \harvarditem{Rubin}{1976}{rubin1976inference}
 Rubin, Donald~B. 1976.
 \newblock ``Inference and missing data.'' {\em Biometrika} 63(3):581--592.
+
+\harvarditem{Smith}{1990}{smith:1990}
+Smith, Kent~W. 1990.
+\newblock {\em Reciprocity and fairness: Positive incentives for tax
+  compliance}.
+\newblock Number 9025 American Bar Foundation.
 
 \harvarditem[Ward, Ahlquist \harvardand\ Rozenas]{Ward, Ahlquist \harvardand\
   Rozenas}{2012}{ward:rainbow:2013}

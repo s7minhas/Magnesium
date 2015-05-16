@@ -1,46 +1,49 @@
-This is BibTeX, Version 0.99d (TeX Live 2012)
+This is BibTeX, Version 0.99d (TeX Live 2014)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Magnesium.aux
 The style file: apsr.bst
 Database file #1: magRefs.bib.bib
-You've used 40 entries,
+Warning--I didn't find a database entry for "rajmaira1990evolving"
+Warning--there's a number but no series in smith:1990
+You've used 52 entries,
             2874 wiz_defined-function locations,
-            880 strings with 10292 characters,
-and the built_in function-call counts, 140002 in all, are:
-= -- 22670
-> -- 1603
-< -- 0
-+ -- 10333
-- -- 583
-* -- 11689
-:= -- 28446
-add.period$ -- 159
-call.type$ -- 40
-change.case$ -- 520
-chr.to.int$ -- 40
-cite$ -- 40
-duplicate$ -- 666
-empty$ -- 1403
-format.name$ -- 621
-if$ -- 25170
+            945 strings with 11906 characters,
+and the built_in function-call counts, 184146 in all, are:
+= -- 29817
+> -- 2154
+< -- 1
++ -- 13639
+- -- 780
+* -- 15404
+:= -- 37403
+add.period$ -- 207
+call.type$ -- 52
+change.case$ -- 676
+chr.to.int$ -- 52
+cite$ -- 53
+duplicate$ -- 857
+empty$ -- 1819
+format.name$ -- 828
+if$ -- 33094
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 41
-newline$ -- 166
-num.names$ -- 454
-pop$ -- 146
+missing$ -- 56
+newline$ -- 217
+num.names$ -- 594
+pop$ -- 197
 preamble$ -- 1
-purify$ -- 600
+purify$ -- 780
 quote$ -- 0
-skip$ -- 624
+skip$ -- 783
 stack$ -- 0
-substring$ -- 31629
-swap$ -- 146
-text.length$ -- 560
+substring$ -- 41628
+swap$ -- 176
+text.length$ -- 729
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 156
-warning$ -- 0
-while$ -- 954
+type$ -- 198
+warning$ -- 1
+while$ -- 1242
 width$ -- 0
-write$ -- 537
+write$ -- 703
+(There were 2 warnings)
