@@ -38,7 +38,10 @@ vars <- c('caseid', 'startyear', 'endyear',
 	'targetstate_ccode', 'finaloutcome', 'imposition')
 sanctionSlice <- sanctionData[,vars]
 names(sanctionSlice) <- c('caseid', 'startyear', 'endyear', 
-	'targetstate', 'finaloutcome')
+	'targetstate', 'finaloutcome', 'imposition')
+
+# Remove threat cases
+sanctionSlice = sanctionSlice[sanctionSlice$imposition==1,]
 
 sanctionSlice$startyear <- numSM(sanctionSlice$startyear)
 sanctionSlice$endyear <- numSM(sanctionSlice$endyear)
@@ -404,7 +407,7 @@ aData$Spartner = aData$Spartner + abs(minNA(aData$Spartner))
 setwd(pathData)
 
 # save(aData, file='durDataEcon.rda')
-save(aData, file='durDataEconImp.rda')
+save(aData, file='durDataEconImp_SancOnly.rda')
 
 # save(aData, file='durDataEcon2.rda')
 # save(aData, file='durDataAll.rda')

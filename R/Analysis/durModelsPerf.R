@@ -5,7 +5,8 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 ###############################################################
 setwd(pathData)
-load('durDataEconImp.rda')
+# load('durDataEconImp.rda')
+load('durDataEconImp_SancOnly.rda')
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')

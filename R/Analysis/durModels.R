@@ -4,12 +4,13 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=F
+genTikz=T
 
 ###############################################################
 setwd(pathData)
 # load('durDataEcon.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
-load('durDataEconImp.rda'); tableName='durModelResults_Sanction.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+# load('durDataEconImp.rda'); tableName='durModelResults_Sanction.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+load('durDataEconImp_SancOnly.rda'); tableName='durModelResults_Sanction.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
@@ -93,45 +94,6 @@ modelFinal=coxph(Surv(start,stop,compliance) ~
 	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)
-
-# Compliance network measures
-modTest=coxph(Surv(start,stop,compliance) ~
-	lag1_uData + lag1_SuData2 
-	+ lag1_actor +  lag1_Spartner
-	# + lag1_meanPtnrSndr + lag1_SmeanActorSndr 	
-	+ noS + Ddistdata + lag1_tdata + lag1_allydata
-	+ lag1_polity2 
-	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
-	+ lag1_domSUM
-	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
-	, data=modData)
-summary(modTest)
-
-# Compliance network measures
-modelComp=coxph(Surv(start,stop,compliance) ~
-	lag1_uData 
-	+ lag1_actor 
-	+  lag1_meanPtnrSndr	
-	+ noS + Ddistdata + lag1_tdata + lag1_allydata
-	+ lag1_polity2 
-	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
-	+ lag1_domSUM
-	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
-	, data=modData)
-summary(modelComp)
-
-# Sanction network measures
-modelSanc=coxph(Surv(start,stop,compliance) ~
-	+ lag1_SuData2 
-	+  lag1_Spartner
-	+ lag1_SmeanActorSndr 	
-	+ noS + Ddistdata + lag1_tdata + lag1_allydata
-	+ lag1_polity2 
-	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
-	+ lag1_domSUM
-	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
-	, data=modData)
-summary(modelSanc)
 ###############################################################
 
 ############################################################### 
