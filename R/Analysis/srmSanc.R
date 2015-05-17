@@ -4,7 +4,7 @@
 # Load data, create matrices, run SRM, pull out useful measures, plot.
 ###################################################
 
-if(Sys.info()["user"]=="janus829"){
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
 source('~/Research/Magnesium/R/Setup.R');
 source('~/Research/Magnesium/R/Analysis/SRM.R');
 load('~/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
@@ -42,6 +42,14 @@ compEvents = lapply(1:(length(events)-1), function(t){
 	return( list(comp=comp, info=info) )
 })
 names(compEvents) = names(events)[1:(length(events)-1)]
+
+# All events
+aEvents = cbind(table(unlist( lapply(compEvents, function(x) x[[1]]) )))
+aEvents = cbind(aEvents[order(aEvents[,1], decreasing=TRUE),])
+i = unlist(lapply(strsplit(rownames(aEvents), '_'), function(x){ x[1] }))
+j = unlist(lapply(strsplit(rownames(aEvents), '_'), function(x){ x[2] }))
+aEvents = data.frame(aEvents, 
+	i=panel$cname[match(i, panel$ccode)], j=panel$cname[match(j, panel$ccode)])
 
 # Unique reciprocity events
 ucompEvents = unique( unlist( lapply(compEvents, function(x) x[[1]]) ) )
