@@ -39,45 +39,19 @@ In addition to including our two key measures of reciprocity, discussed in the p
 
 By the 1980s, the South African apartheid regime had been in power for over thirty years. The international community moved to sanction the apartheid regime in hopes to end the violence and delegitimize the regime. As unrest intensified international action became inevitable and multilateral economic sanctions were initiated. As \citet{kinne2013dependent} points out, the aim of delegitimizing a regime is a cooperative act between multiple actors, whereby its effectiveness is dependent on coordinated consent and action. To diplomatically exclude South Africa, successful coordination and cooperation amongst sanctioner states was key.\footnote{\cite{kinne2013dependent,christopher1994pattern}} Critical coordination was achieved through this group of state sanctioners. By also looking at the sanction-case network, we are able to capture these state-level to test whether characteristics among sanctioners effect sanction compliance. For example, we might expect that a sanction from Pakistan, India, and Jamaica has substantially different implications than one from largely ``western'' sanctioners such as Sweden, Canada, USA, Finland and Australia. We conceptualize these relationships as composed of ``pressures'' which likely influences the behavior of the target state. It is intuitive that the number of senders should influence the willingness of the target state to comply because as the number of senders increases, the more constraints through multiple relationships the target faces. 
 
-%\begin{figure}[ht]
-%	\centering
-%	\includegraphics[width=1\textwidth]{saneti}
-%	\caption{Network for each sanction case that South Africa faced in 1984.}
-%	\label{fig:saneti}
-%\end{figure}
-%\FloatBarrier
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{saneti}
+	\caption{Network for each sanction case that South Africa faced in 1984.}
+	\label{fig:saneti}
+\end{figure}
+\FloatBarrier
 
 We also expect that these relationships must be meaningful not just plentiful. Just as one would imagine that a person is less swayed by the demands of 10 strangers than the demands of a few close friends, we conceptualize senders as most influential when they interact with the target state on a number of dimensions.  Thus, for each sanction case we determine the number of senders but we also measure other dimensions of each sender's relationship to the target. In addition, we calculate and control for the average number of other sanctions being sent by the senders of each particular sanction case.
-%
-%\begin{quote}
-%\textbf{H3}: As the number of sender states increases for any given sanction case, the time to compliance will decrease. 
-%\end{quote}
 
- We now describe exactly what is meant behind our concept of ``proximity.'' In figure \ref{fig:saneti}, we show the six sanction cases faced by South Africa in 1984.\footnote{Data for sanction cases are from \citet{morgan2009threat} and is explained further in the following section.} For the most part, each sanction case involves a variety of actors with whom South Africa has differing cultural, geographic, diplomatic, and economic relationships. Within any individual sanction case we hypothesize (\textbf{H4}) that the proximity, (i.e. the ways in which the sender and target interact on a number of dimensions) of relationships between sender(s) of a sanction and a receiver influence whether a target state complies. We construct a number of covariates to test this idea that the normative closeness, or general ``proximity'' between sender(s) and receiver(s) increases sanction compliance. 
+We now describe exactly what is meant behind our concept of ``proximity.'' In figure \ref{fig:saneti}, we show the six sanction cases faced by South Africa in 1984.\footnote{Data for sanction cases are from \citet{morgan2009threat} and is explained further in the following section.} For the most part, each sanction case involves a variety of actors with whom South Africa has differing cultural, geographic, diplomatic, and economic relationships. Within any individual sanction case we hypothesize (\textbf{H4}) that the proximity, (i.e. the ways in which the sender and target interact on a number of dimensions) of relationships between sender(s) of a sanction and a receiver influence whether a target state complies. We construct a number of covariates to test this idea that the normative closeness, or general ``proximity'' between sender(s) and receiver(s) increases sanction compliance. 
 
 We focus on five key measures of the ``proximate'' nature of relationships. First, we measure the average distance between sender(s) and receiver.\footnote{To construct this measure we use the minimum distance between countries from the Cshapes Dataset \citep{weidmann2010geography}.} We utilize the Correlates of War (COW) data to construct the remaining four variables. Our second covariate relating to proximity is trade, which we measure as the total share of the receiver's trade in that year accounted for by sender states. Last, we measure alliances as the proportion of sender(s) that are allied with the receiver. 
-
-%\begin{quote}
-%	\textbf{H4}: Sanction cases where relationships between sender(s) and receiver(s) are more proximate will be more quickly resolved.
-%\end{quote}
-
-%%%%%%
-% SM NOTE: commented this out for now since we dont include this variable in the current set of models. also it doesnt load in the current set of models. i'm thinking that we might just want to dump this hypothesis and the corresponding figure (which i think you had suggested already).
-
-% Thus far we have explained how the relationships between sanctioners and target states matter for predicting compliance. This view has focused on the individual sanction case. However, the six separate sanctions that South Africa faced in 1984 can also be thought of within the context of a yearly sanction network. In figure \ref{fig:sanet}, we aggregate the six sanction networks into one where each separate sanction is denoted by a differing color. Here we hypothesize that states under the pressure of a multitude of sanctions will more quickly resolve sanction cases than those facing only a few.
-
-% \begin{quote}
-% 	\textbf{H3}: States facing the pressure of a multitude of sanctions will more quickly resolve any one of those sanction cases.
-% \end{quote}
-
-% \begin{figure}[ht]
-% 	\centering
-% 	\includegraphics[width=0.75\textwidth]{sanet}
-% 	\caption{All sanctions faced by South Africa in 1984 collapsed to one network}
-% 	\label{fig:sanet}
-% \end{figure}
-% \FloatBarrier
-%%%%%%%%
 
 Finally, we include a number of covariates to account for domestic explanations of sanction compliance in the extant literature. First is a measure of the target states' domestic institutions from the Polity IV data.\footnote{See \cite{marshall2002polity}. Specifically, we use the ``polity2'' variable from the Polity IV data.} This measure is computed by subtracting a country's autocracy score from its democracy score, and is scaled from 0 to 20. Previous research has shown that sanctions will be more effective when the target states' domestic institutions are more democratic. Second, we control for the level of internal conflict within  a country using the weighted conflict index from the Cross National Time-series Data Archive.\footnote{\cite{banks2011cross}} The expectation in the extant literature is that countries with higher levels of internal instability would be more likely to comply to sanctions. Finally, we use a logged measure of GDP per capita and the percent change in annual GDP, from the World Bank, to account for the argument that economically successful states are better able to weather the pressures of these agreements.
 Below we show our full model specification: 

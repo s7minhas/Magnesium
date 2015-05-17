@@ -4,7 +4,7 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=TRUE
+genTikz=FALSE
 
 # Use imputed data
 impute=TRUE
@@ -12,7 +12,7 @@ impute=TRUE
 ###############################################################
 setwd(pathData)
 if(!impute){load('durDataEcon_SancOnly.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
-if(impute){load('durDataEconImp_SancOnly.rda'); tableName='durModelResults_Sanction.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
+if(impute){load('durDataEconImp_SancOnly.rda'); tableName='durModelResults.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
@@ -135,7 +135,7 @@ vrfn=function(x,lo=0,hi=1){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
 survPlot = function(
 	model=simModel, coef, data=aData, cRange=vrfn(data[,coef]), 
 	addLegend=FALSE, legLabLo=NULL, legLabHi=NULL, 
-	savePlot=genTikz & impute, pheight=4, pwidth=6, plotName )
+	savePlot=genTikz & impute, pheight=4, pwidth=6, plotName,...)
 	{
 	if(savePlot){tikz(file=plotName, height=pheight, width=pwidth, standAlone=F)}
 	plot(
@@ -146,16 +146,15 @@ survPlot = function(
 		conf.int=F, col=pcolors, las=1, 
 		main='', 
 		ylim=c(0,1), xlim=c(0,30), 
-		ylab='Survival Probability', xlab='Time (Years)', bty='n')
+		ylab='Survival Probability', xlab='Time (Years)', bty='n',...)
 		if(addLegend){
-			legend('topright', c(legLabLo, legLabLo), 
+			legend('topright', c(legLabLo, legLabHi), 
 				lty = 1, col=pcolors, bty='n') }
 	if(savePlot){dev.off()}
 }
 
 setwd(pathTex)
-survPlot(coef='noS', plotName='nosSurv.tex', 
-	addLegend=TRUE, legLabLo='Few Senders', legLabHi='Many Senders')
+survPlot(coef='noS', plotName='nosSurv.tex')
 survPlot(coef='Ddistdata', plotName='distSurv.tex')
 survPlot(coef='lag1_polity2', plotName='polSurv.tex')
 survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv.tex')
