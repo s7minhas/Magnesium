@@ -143,7 +143,7 @@ survPlot = function(
 			scenBuild(vi=coef, vRange=cRange,
 			vars=names(model$coefficients), 
 			ostat=mean, simData=modData) ),
-		conf.int=F, col=pcolors, las=1, 
+		conf.int=T, col=pcolors, las=1, 
 		main='', 
 		ylim=c(0,1), xlim=c(0,30), 
 		ylab='Survival Probability', xlab='Time (Years)', bty='n',...)
