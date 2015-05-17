@@ -4,13 +4,15 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=T
+genTikz=TRUE
+
+# Use imputed data
+impute=TRUE
 
 ###############################################################
 setwd(pathData)
-# load('durDataEcon.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
-# load('durDataEconImp.rda'); tableName='durModelResults_Sanction.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
-load('durDataEconImp_SancOnly.rda'); tableName='durModelResults_Sanction.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+if(!impute){load('durDataEcon_SancOnly.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
+if(impute){load('durDataEconImp_SancOnly.rda'); tableName='durModelResults_Sanction.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
@@ -18,29 +20,16 @@ aData=merge(aData,ids,by='targetstate',all.x=T)
 ###############################################################
 
 ###############################################################
-# Add info about sanction imposition
-load('sanctionData.rda')
-aData$imposition = sanctionDataFinal$imposition[match(aData$caseid, sanctionDataFinal$caseid)]
-
-# Split results by imposition and not
-aData = aData[aData$imposition == 1,]
-###############################################################
-
-###############################################################
 # Variable key
 varDef = cbind (  
 	c( 'lag1_uData', 'lag1_SuData2'
-		,'lag1_actor', 'lag1_Spartner'
-		,'lag1_SmeanActorSndr', 'lag1_meanPtnrSndr'
-		,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
-	 ,'lag1_polity2'
-	 ,'lag1_lgdpCAP', 'lag1_gdpGR'
-	 ,'lag1_lpopulation'	 
-	 ,'lag1_domSUM'
+	,'noS', 'Ddistdata', 'lag1_tdata', 'lag1_allydata'
+	,'lag1_polity2'
+	,'lag1_lgdpCAP', 'lag1_gdpGR'
+	,'lag1_lpopulation'	 
+	,'lag1_domSUM'
 	 ),
 	c( 'Compliance Reciprocity$_{j,t-1}$', 'Sanction Reciprocity$_{j,t-1}$'
-		,'Compliant Countries', 'Freq. Sanctioned' 
-		,'Freq. Sanct Senders', 'Effective Sanctioners'
 	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
 	,'Polity$_{i,t-1}$'
 	,'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$'
@@ -50,7 +39,7 @@ varDef = cbind (
 	)
 
 # Subsetting to model data
-# aData = aData[aData$year <=2005, ]
+aData = aData[aData$year <=2005, ]
 idVars=names(aData)[1:19]
 modData=aData[, c( idVars, varDef[,1] )]
 ###############################################################
@@ -130,78 +119,48 @@ if(genTikz){ print.xtable( xtable(durTables, align='llccc',
 ############################################################### 
 # Risk ratios
 riskVars=c('lag1_uData', 'lag1_SuData2',
-	'noS', 'Ddistdata', 'lag1_tdata')
+	'noS', 'Ddistdata', 'lag1_polity2', 'lag1_lgdpCAP')
 riskRatios=t(mapply(x=riskVars, 
 	function(x) FUN=riskRatio(1000, modelFinal, modData, x)))
 riskRatios
 ############################################################### 
 
 ############################################################### 
-###
-# Vars to generate survival plots for:
-	# noS, distance, ally, igo, religion
+# Survival plots
 simModel=modelFinal
 pcolors=append(brewer.pal(9,'Reds')[8],brewer.pal(9,'Blues')[8])
 pcolors=c('darkgrey','black')
 vrfn=function(x,lo=0,hi=1){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
 
+survPlot = function(
+	model=simModel, coef, data=aData, cRange=vrfn(data[,coef]), 
+	addLegend=FALSE, legLabLo=NULL, legLabHi=NULL, 
+	savePlot=genTikz & impute, pheight=4, pwidth=6, plotName )
+	{
+	if(savePlot){tikz(file=plotName, height=pheight, width=pwidth, standAlone=F)}
+	plot(
+		survfit(model, 
+			scenBuild(vi=coef, vRange=cRange,
+			vars=names(model$coefficients), 
+			ostat=mean, simData=modData) ),
+		conf.int=F, col=pcolors, las=1, 
+		main='', 
+		ylim=c(0,1), xlim=c(0,30), 
+		ylab='Survival Probability', xlab='Time (Years)', bty='n')
+		if(addLegend){
+			legend('topright', c(legLabLo, legLabLo), 
+				lty = 1, col=pcolors, bty='n') }
+	if(savePlot){dev.off()}
+}
+
 setwd(pathTex)
-# pdf(file='nosSurv.pdf', height=4, width=6)
-if(genTikz){tikz(file='nosSurv.tex', height=4, width=6, standAlone=F)}
-plot(
-	survfit(simModel, 
-		scenBuild(vi='noS', vRange=vrfn(aData[,'noS']),
-		vars=names(simModel$coefficients), 
-		ostat=mean, simData=modData) ),
-	conf.int=T, col=pcolors, las=1, 
-	# main='Number of Senders', 
-	main='', 
-	ylim=c(0.2,1), xlim=c(0,30), 
-	ylab='Survival Probability', xlab='Time (Years)', bty='n')
-legend('topright', c("Few Senders", "Many Senders"), 
-	lty = 1, col=pcolors, bty='n')
-if(genTikz){dev.off()}
-
-# pdf(file='oNet.pdf', height=7, width=10)
-if(genTikz){tikz(file='oNet.tex', height=3, width=8, standAlone=F)}
-coefs=c('Ddistdata','lag1_tdata')
-cnames=varDef[match(coefs, varDef[,1]), 2]
-cnames=c('Distance','Trade')
-par(mfrow=c(1,2))
-for(ii in 1:length(coefs)){
-	coef=coefs[ii]
-	if (coef=='distdata') { crange=c(0.001,0.005)
-		} else { crange=vrfn(aData[,coef]) }	
-	plot(
-		survfit(simModel, 
-			scenBuild(vi=coef, vRange=crange,
-			vars=names(simModel$coefficients), 
-			ostat=mean, simData=modData) ),
-	conf.int=F, col=pcolors, las=1,
-	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
-	if(ii==1){title(ylab='Survival Prob.')} 
-	title(xlab='Time (Years)')  }
-if(genTikz){dev.off()}
-par(mfrow=c(1,1))
-
-# pdf(file='oNet2.pdf', height=7, width=10)
-if(genTikz){tikz(file='oNet2.tex', height=3, width=8, standAlone=F)}
-coefs=c('lag1_uData','lag1_SuData2')
-cnames=varDef[match(coefs, varDef[,1]), 2]
-cnames=c('Compliance Reciprocity','Sanction Reciprocity')
-par(mfrow=c(1,2))
-for(ii in 1:length(coefs)){
-	coef=coefs[ii]
-	crange=vrfn(aData[,coef],lo=0,hi=0.9)
-	plot(
-		survfit(simModel, 
-			scenBuild(vi=coef, vRange=crange,
-			vars=names(simModel$coefficients), 
-			ostat=mean, simData=modData) ),
-	conf.int=F, col=pcolors, las=1,
-	main=cnames[ii], ylim=c(0,1), xlim=c(0,30))
-	if(ii==1){title(ylab='Survival Prob.')} 
-	title(xlab='Time (Years)')  }
-if(genTikz){dev.off()}
-par(mfrow=c(1,1))
+survPlot(coef='noS', plotName='nosSurv.tex', 
+	addLegend=TRUE, legLabLo='Few Senders', legLabHi='Many Senders')
+survPlot(coef='Ddistdata', plotName='distSurv.tex')
+survPlot(coef='lag1_polity2', plotName='polSurv.tex')
+survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv.tex')
+survPlot(coef='lag1_uData', plotName='compRecSurv.tex',
+	cRange=vrfn(aData[,'lag1_uData'],lo=0,hi=0.9))
+survPlot(coef='lag1_SuData2', plotName='sancRecSurv.tex', 
+	cRange=vrfn(aData[,'lag1_SuData2'],lo=0,hi=0.9))
 ############################################################### 

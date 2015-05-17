@@ -5,7 +5,7 @@ To test the effects of network pressures on sanction compliance we use the Threa
 
 Restricting our analysis to threats or sanctions stemming from these issues during the period of 1960 to 2005 leaves us with almost 400 cases. Our unit of analysis is the case-year, providing us with a total of 4,879 observations. For each case in the TIES database a final outcome is recorded to describe how and if the case has been resolved. The purpose of our analysis is to assess the time until a state complies to a sanction. We consider a case to have been resolved by compliance if the target state completely or partially acquiesces to the demands of the sanction senders or negotiates a settlement.
 	
-In using this definition of compliance, approximately 37\% of cases in our dataset end with a state complying by 2013 while 40\% remain ongoing. The remaining 23\% of cases were terminated for other reasons show below in Table \ref{tab:termCases}.
+In using this definition of compliance, approximately 27\% of cases in our dataset end with a state complying by 2013 while 53\% remain ongoing. The remaining 20\% of cases were terminated for other reasons show below in Table \ref{tab:termCases}.
 
 \begin{table}[ht]
 	\centering
@@ -13,9 +13,7 @@ In using this definition of compliance, approximately 37\% of cases in our datas
 		\hline\hline
 		Outcome & Frequency \\
 		\hline
-		Capitulation by Sender in Threat Stage & 77 \\
-		Stalemate in the Threat Stage & 11 \\		
-		Capitulation by Sender After Imposition & 58 \\
+		Capitulation by Sender After Imposition & 57 \\
 		Stalemate after Sanctions Imposition & 38 \\
 		\hline\hline
 	\end{tabular}
@@ -35,7 +33,7 @@ where the log-hazard rate of compliance in a sanction case, $i$, conditional on 
 
 Providing no specific functional form for the baseline hazard necessitates testing the proportional hazard assumption. \citet{keele2010proportionally} notes that not inspecting this assumption in the covariates can lead to severely biased parameter estimates. To address this issue, we first fit smoothing splines for all continuous covariates. After ascertaining that none of the continuous covariates in our model required modeling with splines, we carried out tests of non-proportionality. For those covariates where the non-proportional effects assumption does not hold, we include interactions between the covariate and spell duration (log scale). The only covariate showing evidence of non-proportionality is the average similarity of religious profiles.
 
-We also imputed missing values to avoid excluding instances of compliance. If we employed list-wise deletion, we would lose over 438 country-year observations, 32 of which contained instances in which a state complied to a sanction. Previous research has already highlighted how simply deleting missing observations can lead to biased results.\footnote{e.g., see \citealp{rubin1976inference,honaker2010missing}} To impute missing values, we use a copula based approach developed by \citet{hoff:2007}. Details on our imputation process and results based on the original unimputed dataset, which are nearly identical, can be found in the \nameref{appendix}. 
+We also imputed missing values to avoid excluding instances of compliance. If we employed list-wise deletion, we would lose over 438 country-year observations, 32 of which contained instances in which a state complied to a sanction. Previous research has already highlighted how simply deleting missing observations can lead to biased results.\footnote{For example, see \citealp{rubin1976inference,honaker2010missing}.} To impute missing values, we use a copula based approach developed by \citet{hoff:2007}. Details on our imputation process and results based on the original unimputed dataset, which are nearly identical, can be found in the \nameref{appendix}. 
 
 In addition to including our two key measures of reciprocity, discussed in the previous section, we control for a variety of other network-related components of the sanction network. In doing so, we also account for key conditions at the sanction-case level, not just for the sanction-year. To demonstrate, we deconstruct the broader yearly network example of 1984, to zoom in and narrow our focus to observe the individual sanction case of South Africa in 1984. In this case, South Africa is the target of multiple sanctions, as shown in Figure \ref{fig:saneti}. Because of this, we construct a sanction network that represents each sanction South Africa faces during this year. As one can easily see, in most cases during 1984, South Africa faces more than one sanctioner, and these sanctioners vary across each sanction case. For example in the first network graph, in the top left of Figure \ref{fig:saneti}, we see that South Africa faces a sanction from India, Pakistan, and Jamaica. Yet in the top right network graph, we see that South Africa also faces a sanction from Canada, Sweden, the USA, Finland, and Australia. 
 

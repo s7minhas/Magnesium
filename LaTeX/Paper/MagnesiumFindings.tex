@@ -10,7 +10,7 @@ As we go from left to right across the Table, we see that explanations of sancti
 
 We find strong support for our third hypothesis which states that target states are more likely to comply to sanctions involving multiple actors, and the effect of this variable remains consistent even after controlling for our network level covariates in Model 3. Because it is difficult to interpret the substantive meaning of point estimates from the hazard function in Table \ref{tab:regResults}, we utilize Kaplan-Meier estimates of survival probabilities in Figure \ref{fig:surv1}. The y-axis represents the probability of survival, or in this case the probability that a country will not comply to a sanction, and the x-axis represents time since sanction initiation (measured in years). The grey line represents the scenario where the number of senders variable is set to a low value, in this case one, and the black line represents the scenario where this variable is set to its high value, in this case five. All the other covariates were set to their median. 
 
-Using Figure \ref{fig:surv1} we can quickly see that there is a stark difference in the likelihood of non-compliance between a sanction case involving single and multiple senders. After just five years the probability of non-compliance drops to approximately 50\%, whereas a sanction from a single sender by that time still has almost an 80\% chance of non-compliance. This finding is in sharp contrast to previous research arguing that multilateral sanctions can actually be counterproductive.\footnote{e.g., see \citealp{drezner2000bargaining}}
+Using Figure \ref{fig:surv1} we can quickly see that there is a stark difference in the likelihood of non-compliance between a sanction case involving single and multiple senders. After just five years the probability of non-compliance drops to approximately 50\%, whereas a sanction from a single sender by that time still has almost an 80\% chance of non-compliance. This finding is in sharp contrast to previous research arguing that multilateral sanctions can actually be counterproductive.\footnote{For example, see \citealp{drezner2000bargaining}.}
 
 \begin{figure}[ht]
 	\centering
@@ -20,14 +20,28 @@ Using Figure \ref{fig:surv1} we can quickly see that there is a stark difference
 	\label{fig:surv1}
 \end{figure}
 
-Like the extant literature, we do find strong evidence for the ability of trading partners to obtain quick and successful resolutions to sanction cases.\footnote{e.g., \citealp{mclean2010friends}} This is in line with our fourth hypothesis, that more proximate relationships between sender and recievers result in quicker compliance by the target state. But support for this general proximity hypothesis is limited to trade. States are not likely to comply more quickly to sanctions sent by allies, and are actually less likely to comply to neighbors. The graphs in Figure \ref{fig:surv2} demonstrate the effects of the ``proximate'' relationships that were significant in Table \ref{tab:regResults}. The panel on the left shows the effect for distance. Here we can see that even though the coefficient estimate for this variable was significant, its substantive meaning is almost nil. For trade, on the other hand, there is a strong effect. We can clearly see that when a target state faces a sanction from countries with whom they frequently trade, they are likely to comply sooner.
+Like the extant literature, we do find strong evidence for the ability of trading partners to obtain quick and successful resolutions to sanction cases.\footnote{For example, see \citealp{mclean2010friends}.} This is in line with our fourth hypothesis, that more proximate relationships between sender and recievers result in quicker compliance by the target state. But support for this general proximity hypothesis is limited to trade. States are not likely to comply more quickly to sanctions sent by allies, and are actually less likely to comply to neighbors. The graphs in Figure \ref{fig:surv2} demonstrate the effects of the ``proximate'' relationships that were significant in Table \ref{tab:regResults}. The panel on the left shows the effect for distance. Here we can see that even though the coefficient estimate for this variable was significant, its substantive meaning is almost nil. For trade, on the other hand, there is a strong effect. We can clearly see that when a target state faces a sanction from countries with whom they frequently trade, they are likely to comply sooner.
 
 
 \begin{figure}[ht]
 	\centering
 	\caption{Survival probabilities by ``proximity'' covariates. Grey designates scenarios in which the covariate is set to its minimum value and black where it is set to its high value (90th percentile).}
-	% \includegraphics[width=1\textwidth]{oNet}
-	\resizebox{1\textwidth}{!}{\input{../TeXoutput/oNet.tex}}	
+	\begin{tabular}{cc}
+
+	\subfloat[SubFigure 1][Distance]{
+		\resizebox{.45\textwidth}{!}{\input{../TeXoutput/distSurv.tex}}	
+		\label{fig:distSurv}} &
+
+	\subfloat[SubFigure 2][Polity]{
+		\resizebox{.45\textwidth}{!}{\input{../TeXoutput/polSurv.tex}}	
+		\label{fig:polSurv}} \\
+
+    \multicolumn{2}{c}{\subfloat[SubFigure 3][GDP per Capita]{
+        \resizebox{.45\textwidth}{!}{\input{../TeXoutput/gdpSurv.tex}}	
+        \label{fig:gdpSurv}} }
+
+	\end{tabular}
+	
 	\label{fig:surv2}
 \end{figure}
 
@@ -38,8 +52,18 @@ Our key hypotheses relate to the effect of compliance and sanction reciprocity. 
 \begin{figure}[ht]
 	\centering
 	\caption{Survival probabilities predicted by network level covariates. Grey designates the scenario where the number of senders is set to its minimum value and black the scenario where it is set to its high value high value (90th percentile).}
-	% \includegraphics[width=1\textwidth]{oNet}
-	\resizebox{1\textwidth}{!}{\input{../TeXoutput/oNet2.tex}}	
+	\begin{tabular}{cc}
+
+	\subfloat[Subfigure 1][Compliance Reciprocity]{
+		\resizebox{.45\textwidth}{!}{\input{../TeXoutput/compRecSurv.tex}}
+		\label{fig:compSancSurv}} & 
+	
+	\subfloat[Subfigure 2][Sanction Reciprocity]{
+		\resizebox{.45\textwidth}{!}{\input{../TeXoutput/sancRecSurv.tex}}
+		\label{fig:compSancSurv}}	
+
+	\end{tabular}
+
 	\label{fig:surv3}	
 \end{figure}
 

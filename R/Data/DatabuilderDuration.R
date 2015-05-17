@@ -1,5 +1,5 @@
 # setup workspace
-if(Sys.info()["user"]=="janus829"){
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
 source('~/Research/Magnesium/R/Setup.R')}
 if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
@@ -13,6 +13,9 @@ load('sanctionData.rda')
 load('monadData.rda')
 load('dyadMats.rda')
 load('mindistMatrices.rda')
+
+# impute missing data?
+impute=TRUE
 ###############################################################
 
 ###############################################################
@@ -40,7 +43,7 @@ sanctionSlice <- sanctionData[,vars]
 names(sanctionSlice) <- c('caseid', 'startyear', 'endyear', 
 	'targetstate', 'finaloutcome', 'imposition')
 
-# Remove threat cases
+# Only include cases that involve the imposition of sanctions
 sanctionSlice = sanctionSlice[sanctionSlice$imposition==1,]
 
 sanctionSlice$startyear <- numSM(sanctionSlice$startyear)
@@ -71,7 +74,7 @@ temp$temp[which(temp$temp == 'fill me in')]=temp$finaloutcome[which(temp$temp ==
 
 table(temp$temp)
 table(temp$temp)/sum(table(temp$temp))
-sum((table(temp$temp)/sum(table(temp$temp)))[2:5])
+sum((table(temp$temp)/sum(table(temp$temp)))[1:2])
 ###############################################################
 
 ###############################################################
@@ -133,8 +136,8 @@ durData <- durData[durData$noS!=0,]
 # Add in monadic variables for target state
 # Choose between imputed and non-imputed versions
 
-# targetData=monadData[,which(!names(monadData) %in% c('year','ccode','cname'))] # raw version 
-targetData=impData; colnames(targetData)[1]='cyear' # imputed version
+if(!impute){targetData=monadData[,which(!names(monadData) %in% c('year','ccode','cname'))]} # raw version 
+if(impute){targetData=impData; colnames(targetData)[1]='cyear'} # imputed version
 
 durData$tyear=numSM(durData$tyear)
 aData <- merge(x=durData, y=targetData, by.x='tyear', by.y='cyear', all.x=T)
@@ -406,9 +409,6 @@ aData$Spartner = aData$Spartner + abs(minNA(aData$Spartner))
 ###############################################################
 setwd(pathData)
 
-# save(aData, file='durDataEcon.rda')
-save(aData, file='durDataEconImp_SancOnly.rda')
-
-# save(aData, file='durDataEcon2.rda')
-# save(aData, file='durDataAll.rda')
+if(!impute){save(aData, file='durDataEcon_SancOnly.rda')}
+if(impute){save(aData, file='durDataEconImp_SancOnly.rda')}
 ###############################################################
