@@ -47,14 +47,18 @@ V(g)$weight = colSums(abs(compSub))
 # Plot
 set.seed(6886)
 curves = autocurve.edges2(g)
+setwd(pathGraphics)
+pdf(file='compNet_2010.pdf', width=6, height=6)
+par(mar=c(1,1,1,1), mgp=c(1.5,.5,0))		
 plot.igraph(g, 
 	layout=layout.circle,	
-	vertex.color='lightgrey', 
-	vertex.label.cex=(sqrt(V(g)$weight) + 4)/19,
-	vertex.size=sqrt(V(g)$weight) + 4,
+	vertex.color='white', 
+	vertex.label.cex=(sqrt(V(g)$weight) + 5)/19,
+	vertex.size=sqrt(V(g)$weight) + 5,
 	edge.arrow.size=0.5,
 	edge.width=abs(E(g)$weight)/3,
 	edge.curved = curves,
 	asp=FALSE
 	)
+dev.off()
 ###################################################s
