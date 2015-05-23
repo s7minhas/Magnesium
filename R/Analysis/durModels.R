@@ -4,7 +4,7 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=FALSE
+genTikz=TRUE
 
 # Use imputed data
 impute=TRUE
@@ -51,6 +51,32 @@ if(tableName=='durModelResultsNoImp.tex'){
 	omitComp=na.omit(data.matrix(modData[,aVars]))[,'compliance']
 	fullComp=data.matrix(modData)[,'compliance']
 	table(omitComp); table(fullComp)
+}
+###############################################################
+
+###############################################################
+# Summary Statistics
+summStat = function(x){ c(length(x), mean(x), median(x), sd(x), min(x), max(x) ) }
+
+setwd(pathTex)
+if(impute){ summTable='summStatsImp.tex'; summCaption='Summary statistics of parameters included in duration model using imputed data.'; summLabel='tab:summImp' } 
+if(!impute){ summTable='summStatsNoImp.tex'; summCaption='Summary statistics of parameters included in duration model using original data.'; summLabel='tab:summNoImp' } 
+aVars=c('compliance',varDef[,1])
+summData=na.omit(data.matrix(modData[,aVars]))
+summ = apply(summData, 2, summStat)
+summ[1,] = round(summ[1,], 0)
+summ[2:nrow(summ),] = round(summ[2:nrow(summ),], 2)
+rownames(summ) = c('N', 'Mean', 'Median', 'Std. Dev.', 'Min.', 'Max.')
+summ = cbind(Variable=c('Compliance', varDef[,2]), t(summ))
+
+if(genTikz){
+	print.xtable( xtable(summ, align='llcccccc',
+		caption=summCaption,
+		label=summLabel),
+		include.rownames=FALSE, sanitize.text.function=identity,
+		hline.after=c(0,0,nrow(summ),nrow(summ)),
+		size='normalsize', file=summTable
+	)
 }
 ###############################################################
 
