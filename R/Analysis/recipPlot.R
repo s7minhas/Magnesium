@@ -22,43 +22,50 @@ load('compSRM.rda')
 ###################################################
 
 ###################################################
-# Choose comp network to plot
-comp = ueffect$'2010'
+# Add abbreviation column to panel dataset
+panel$abb = countrycode(panel$cname, 'country.name', 'iso3c')
+panel$abb[panel$cname=='German Democratic Republic'] = 'GDR'
+panel$abb[panel$cname=='Zanzibar'] = 'ZNZ'
+panel$abb[panel$cname=='Kosovo'] = 'KOS'
 
-# Set node names
-rownames(comp) = colnames(comp) = panel$cname[match(rownames(comp), panel$ccode)]
-rownames(comp) = colnames(comp) = countrycode(rownames(comp), 'country.name', 'iso3c')
-na = which(is.na(rownames(comp)))
-rownames(comp)[na] = colnames(comp)[na] = 'KOS'
+yrs = as.character(seq(1962, 2012, 10))
+for(yr in yrs){
 
-# Pick most active countries
-topS=names(sort(rowSums(abs(comp)), decreasing=TRUE)[1:5])
-topR=names(sort(colSums(abs(comp)), decreasing=TRUE)[1:5])
-top = unique(c(topS, topR))
-compSub = comp[top, top]
+	# Choose comp network to plot
+	comp = ueffect[[yr]]
 
-# Create igraph object
-g = graph.adjacency(compSub, mode='directed', diag=FALSE, weighted=TRUE)
+	# Set node names
+	rownames(comp) = colnames(comp) = panel$abb[match(rownames(comp), panel$ccode)]
 
-# Define extra attributes
-E(g)$color = ifelse(E(g)$weight<0, "tomato", "lightblue")
-V(g)$weight = colSums(abs(compSub))
+	# Pick most active countries
+	topS=names(sort(rowSums(abs(comp)), decreasing=TRUE)[1:5])
+	topR=names(sort(colSums(abs(comp)), decreasing=TRUE)[1:5])
+	top = unique(c(topS, topR))
+	compSub = comp[top, top]
 
-# Plot
-set.seed(6886)
-curves = autocurve.edges2(g)
-setwd(pathGraphics)
-pdf(file='compNet_2010.pdf', width=6, height=6)
-par(mar=c(1,1,1,1), mgp=c(1.5,.5,0))		
-plot.igraph(g, 
-	layout=layout.circle,	
-	vertex.color='white', 
-	vertex.label.cex=(sqrt(V(g)$weight) + 5)/19,
-	vertex.size=sqrt(V(g)$weight) + 5,
-	edge.arrow.size=0.5,
-	edge.width=abs(E(g)$weight)/3,
-	edge.curved = curves,
-	asp=FALSE
-	)
-dev.off()
+	# Create igraph object
+	g = graph.adjacency(compSub, mode='directed', diag=FALSE, weighted=TRUE)
+
+	# Define extra attributes
+	E(g)$color = ifelse(E(g)$weight<0, "tomato", "lightblue")
+	V(g)$weight = colSums(abs(compSub))
+
+	# Plot
+	set.seed(6886)
+	curves = autocurve.edges2(g)
+	setwd(pathGraphics)
+	pdf(file=paste0('compNet_',yr,'.pdf'), width=6, height=6)
+	par(mar=c(1,1,1,1), mgp=c(1.5,.5,0))		
+	plot.igraph(g, 
+		layout=layout.circle,	
+		vertex.color='white', 
+		vertex.label.cex=(sqrt(V(g)$weight) + 5)/19,
+		vertex.size=sqrt(V(g)$weight) + 5,
+		edge.arrow.size=0.5,
+		edge.width=abs(E(g)$weight)/3,
+		edge.curved = curves,
+		asp=FALSE
+		)
+	dev.off()
+}
 ###################################################s
