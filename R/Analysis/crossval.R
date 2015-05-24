@@ -1,10 +1,10 @@
-if(Sys.info()["user"]=="janus829"){
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')}
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
+source('~/Research/Magnesium/R/Setup.R')}
 if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=F
+genTikz=TRUE
 
 ###############################################################
 setwd(pathData)

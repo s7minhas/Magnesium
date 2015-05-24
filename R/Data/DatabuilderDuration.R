@@ -19,21 +19,6 @@ impute=TRUE
 ###############################################################
 
 ###############################################################
-# Subsetting to economic sanctions
-econ <- c(4, 13, 14) # saved as durDataEcon
-# econ <- c(4, 8, 12, 13, 14) # saved as durDataEcon2
-sanctionDataFinal$issue1[is.na(sanctionDataFinal$issue1)] <- 0
-sanctionDataFinal$issue2[is.na(sanctionDataFinal$issue2)] <- 0
-sanctionDataFinal$issue3[is.na(sanctionDataFinal$issue3)] <- 0
-sanctionData <- sanctionDataFinal[which(sanctionDataFinal$issue1%in%econ |
-	sanctionDataFinal$issue2%in%econ |
-	sanctionDataFinal$issue3%in%econ), ]
-
-# Sanctions covering all issues
-# sanctionData=sanctionDataFinal # saved as durDataAll
-###############################################################
-
-###############################################################
 # Pulling out vars
 # threat timeframe = startyear, endyear
 # sanction timeframe = sancimpositionstartyear
@@ -103,7 +88,7 @@ durData$stop=durData$durationSM
 # Subsetting durationSM dataset
 durData <- durData[durData$year>=1960 & durData$year<=2012,]
 durData <- durData[durData$targetstate!=1000,] # Eliminating cases where EU is sanction target
-senders <- sanctionDataFinal[,c(1,75:80)]
+senders <- sanctionData[,c(1,75:80)]
 
 # Adding sender info
 senders[senders==1000] <- NA # Turning cases where EU is sender to NA

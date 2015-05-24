@@ -1,4 +1,5 @@
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
+source('~/Research/Magnesium/R/Setup.R')}
 
 ####################################################################
 # Load sanction network Data
@@ -9,13 +10,13 @@ load('sanctionData.rda')
 ####################################################################
 # Create compliance variable
 comp <- c(1,2,5,6,7,10)
-sanctionDataFinal$compliance <- 0
-sanctionDataFinal$compliance[which(sanctionDataFinal$finaloutcome %in% comp)] <- 1
-table(sanctionDataFinal$compliance)/nrow(sanctionDataFinal) # ~59% compliance
+sanctionData$compliance <- 0
+sanctionData$compliance[which(sanctionData$finaloutcome %in% comp)] <- 1
+table(sanctionData$compliance)/nrow(sanctionData) # ~73% compliance
 
 # Subset
 sendIDs=paste('sender',1:5,'_ccode',sep='')
-sdata=sanctionDataFinal[,c('targetstate_ccode',sendIDs,
+sdata=sanctionData[,c('targetstate_ccode',sendIDs,
 	'startyear','endyear','caseid','compliance')]
 ####################################################################
 

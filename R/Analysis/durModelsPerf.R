@@ -79,7 +79,6 @@ modTrain2 = coxph(Surv(start, stop, compliance) ~
 # Incorp reciprocity measure
 modTrainF=coxph(Surv(start,stop,compliance) ~
 	lag1_uData + lag1_SuData2 
-	# + lag1_actor 
 	+ noS + Ddistdata + lag1_tdata + lag1_allydata
 	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 

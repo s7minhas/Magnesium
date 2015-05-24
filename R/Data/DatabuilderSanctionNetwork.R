@@ -1,10 +1,14 @@
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
+source('~/Research/Magnesium/R/Setup.R')}
+if(Sys.info()["user"]=="cassydorff"){
+source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Load sanction network Data
 setwd(pathData)
-load('sanctionData.rda')
+load('sanctionData.rda') # Loads object called sanctionDataFinal
+
 sendIDs=paste('sender',1:5,'_ccode',sep='')
-sdata=sanctionDataFinal[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
+sdata=sanctionData[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
 
 # Setting up list of country names in existence for time period of analysis
 setwd(pathPData)

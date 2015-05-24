@@ -4,14 +4,14 @@
 
 if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
 source('~/Research/Magnesium/R/Setup.R');
-source('~/Research/Magnesium/R/Analysis/SRM.R');
+source('~/Research/Magnesium/R/Data/SRM.R');
 load('~/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
 }
 
 if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R');
 load('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/BuildingPanelData/panel.rda');
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Analysis/SRM.R')
+source('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/SRM.R')
 }
 ###################################################
 

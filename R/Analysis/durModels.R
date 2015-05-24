@@ -4,7 +4,7 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=TRUE
+genTikz=FALSE
 
 # Use imputed data
 impute=TRUE
@@ -39,7 +39,7 @@ varDef = cbind (
 	)
 
 # Subsetting to model data
-aData = aData[aData$year <=2005, ]
+aData = aData[aData$year <= 2005, ]
 idVars=names(aData)[1:19]
 modData=aData[, c( idVars, varDef[,1] )]
 ###############################################################
@@ -101,7 +101,6 @@ summary(model2)
 # Incorp reciprocity measure
 modelFinal=coxph(Surv(start,stop,compliance) ~
 	lag1_uData + lag1_SuData2 
-	# + lag1_actor 
 	+ noS + Ddistdata + lag1_tdata + lag1_allydata
 	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
@@ -153,13 +152,12 @@ riskRatios
 
 ############################################################### 
 # Survival plots
-simModel=modelFinal
 pcolors=append(brewer.pal(9,'Reds')[8],brewer.pal(9,'Blues')[8])
-pcolors=c('darkgrey','black')
+# pcolors=c('darkgrey','black')
 vrfn=function(x,lo=0,hi=1){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
 
 survPlot = function(
-	model=simModel, coef, data=aData, cRange=vrfn(data[,coef]), 
+	model=modelFinal, coef, data=aData, cRange=vrfn(data[,coef]), 
 	addLegend=FALSE, legLabLo=NULL, legLabHi=NULL, 
 	savePlot=genTikz & impute, pheight=4, pwidth=6, plotName,...)
 	{
@@ -180,12 +178,12 @@ survPlot = function(
 }
 
 setwd(pathTex)
-survPlot(coef='noS', plotName='nosSurv.tex')
-survPlot(coef='Ddistdata', plotName='distSurv.tex')
-survPlot(coef='lag1_polity2', plotName='polSurv.tex')
-survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv.tex')
+# survPlot(coef='noS', plotName='nosSurv.tex')
+# survPlot(coef='Ddistdata', plotName='distSurv.tex')
+# survPlot(coef='lag1_polity2', plotName='polSurv.tex')
+# survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv.tex')
 survPlot(coef='lag1_uData', plotName='compRecSurv.tex',
-	cRange=vrfn(aData[,'lag1_uData'],lo=0,hi=0.9))
+	cRange=vrfn(aData[,'lag1_uData'],lo=0,hi=1))
 survPlot(coef='lag1_SuData2', plotName='sancRecSurv.tex', 
-	cRange=vrfn(aData[,'lag1_SuData2'],lo=0,hi=0.9))
+	cRange=vrfn(aData[,'lag1_SuData2'],lo=0,hi=1))
 ############################################################### 

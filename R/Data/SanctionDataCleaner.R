@@ -1,10 +1,10 @@
 #Purpose: This file adds country names to the Sanctions dataset
-#Author: CD
-#Date: 07/10/2013
 
 #Setup
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
-load('/Users/janus829/Desktop/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
+source('~/Research/Magnesium/R/Setup.R')
+load('~/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
+}
 
 ###############################################################
 setwd(paste(pathData, '/Components', sep=''))
@@ -79,13 +79,26 @@ colnames(temp1) <- paste(vars, '_cname', sep='')
 temp2 <- apply(sanctionData[,vars], 2, function(x) FUN=addMatcher(sancIDs$ccode, x, sancIDs$cowcodeTIES))
 colnames(temp2) <- paste(vars, '_ccode', sep='')
 
-sanctionDataFinal <- cbind(sanctionData, temp1, temp2)
+sanctionData <- cbind(sanctionData, temp1, temp2)
 ###############################################################
 
 ###############################################################
-# Need to subset by relevant type of sanction and limit to 
-## only vars necessary
+# Subsetting to economic sanctions
+econ <- c(4, 13, 14)
+# econ <- c(4, 8, 12, 13, 14)
+sanctionData$issue1[is.na(sanctionData$issue1)] <- 0
+sanctionData$issue2[is.na(sanctionData$issue2)] <- 0
+sanctionData$issue3[is.na(sanctionData$issue3)] <- 0
+sanctionData <- sanctionData[which(sanctionData$issue1%in%econ |
+	sanctionData$issue2%in%econ |
+	sanctionData$issue3%in%econ), ]
+
+# Sanctions covering all issues
+# sanctionData=sanctionData
+
+# Only include cases that involve the imposition of sanctions
+sanctionData = sanctionData[sanctionData$imposition==1,]
 ###############################################################
 
 setwd(pathData)
-save(sanctionDataFinal, file='sanctionData.rda')
+save(sanctionData, file='sanctionData.rda')
