@@ -20,7 +20,7 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/SRM.R')
 
 # If compliance = TRUE then compliance recip network plots are generated
 ## if false then sanction recip network plots
-compliance=TRUE
+compliance=FALSE
 
 # To print plots set to true
 printPlot=TRUE
@@ -66,9 +66,9 @@ for(yr in yrs){
 	set.seed(6886)
 	curves = autocurve.edges2(g)
 	setwd(pathGraphics)
-	if(printPlot & compliance){
-		pdf(file=paste0('compNet_',yr,'.pdf'), width=6, height=6) } else {
-		pdf(file=paste0('sancNet_',yr,'.pdf'), width=6, height=6) }
+	if(printPlot){
+		if(compliance){ pdf(file=paste0('compNet_',yr,'.pdf'), width=6, height=6) }
+		if(!compliance){ pdf(file=paste0('sancNet_',yr,'.pdf'), width=6, height=6) } }
 	par(mar=c(1,1,1,1), mgp=c(1.5,.5,0))		
 	plot.igraph(g, 
 		layout=layout.circle,	

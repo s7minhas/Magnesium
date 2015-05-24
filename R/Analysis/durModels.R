@@ -4,7 +4,7 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=FALSE
+genTikz=TRUE
 
 # Use imputed data
 impute=TRUE
@@ -39,6 +39,7 @@ varDef = cbind (
 	)
 
 # Subsetting to model data
+# 2005 is the year the TIES database stops tracking compliance events
 aData = aData[aData$year <= 2005, ]
 idVars=names(aData)[1:19]
 modData=aData[, c( idVars, varDef[,1] )]
@@ -152,38 +153,49 @@ riskRatios
 
 ############################################################### 
 # Survival plots
-pcolors=append(brewer.pal(9,'Reds')[8],brewer.pal(9,'Blues')[8])
-# pcolors=c('darkgrey','black')
-vrfn=function(x,lo=0,hi=1){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
-
-survPlot = function(
-	model=modelFinal, coef, data=aData, cRange=vrfn(data[,coef]), 
-	addLegend=FALSE, legLabLo=NULL, legLabHi=NULL, 
-	savePlot=genTikz & impute, pheight=4, pwidth=6, plotName,...)
-	{
-	if(savePlot){tikz(file=plotName, height=pheight, width=pwidth, standAlone=F)}
-	plot(
+vrfn=function(x,lo=.1,hi=.9){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
+survPlot=function(
+	model=modelFinal, coef, data=modData, cRange=vrfn(data[,coef]), 
+	savePlot=genTikz & impute, pheight=4, pwidth=6, plotName){
+	
+	# Create predictions using survfit
+	surv = lapply(c(.95, .9), function(ci){
 		survfit(model, 
-			scenBuild(vi=coef, vRange=cRange,
-			vars=names(model$coefficients), 
-			ostat=mean, simData=modData) ),
-		conf.int=T, col=pcolors, las=1, 
-		main='', 
-		ylim=c(0,1), xlim=c(0,30), 
-		ylab='Survival Probability', xlab='Time (Years)', bty='n',...)
-		if(addLegend){
-			legend('topright', c(legLabLo, legLabHi), 
-				lty = 1, col=pcolors, bty='n') }
-	if(savePlot){dev.off()}
+			scenBuild(vi=coef, vRange=cRange, 
+				vars=names(model$coefficients), 
+				ostat=mean, simData=modData),
+			conf.int=ci ) } )
+	
+	# Organize data
+	survData = do.call('cbind', lapply(surv, function(s){
+		survData=cbind(melt(s$surv)[,2:3], lower=melt(s$lower)[,3], upper=melt(s$upper)[,3])
+		survData$time = rep(s$time, 2)
+		return(survData[survData$time <=20, ])
+		}) )
+	survData=survData[,c(1:4,8:10)]
+	names(survData) = c('scen','surv','lo95','up95','lo90','up90','Time')
+	survData$scen=factor(survData$scen, levels=1:2)
+
+	# Plot
+	gg=ggplot(survData, aes(x=Time, y=surv, fill=scen, color=scen))
+	gg=gg + geom_line() + xlab('Time (Years)') + ylab('Survival Probability')
+	gg=gg + geom_ribbon(aes(ymin=lo95,ymax=up95),alpha=0.05,size=.1)
+	gg=gg + geom_ribbon(aes(ymin=lo90,ymax=up90),alpha=0.2,size=.3)
+	gg=gg + theme(legend.position='none', legend.title=element_blank(),
+		    axis.ticks=element_blank(), panel.grid.major=element_blank(),
+		    panel.grid.minor=element_blank(), panel.border = element_blank(),
+		    axis.line = element_line(color = 'black'))
+	if(savePlot){
+		tikz(file=plotName, height=pheight, width=pwidth, standAlone=F)
+		print(gg); dev.off() } else { print( gg ) }
 }
 
 setwd(pathTex)
-# survPlot(coef='noS', plotName='nosSurv.tex')
-# survPlot(coef='Ddistdata', plotName='distSurv.tex')
-# survPlot(coef='lag1_polity2', plotName='polSurv.tex')
-# survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv.tex')
-survPlot(coef='lag1_uData', plotName='compRecSurv.tex',
-	cRange=vrfn(aData[,'lag1_uData'],lo=0,hi=1))
-survPlot(coef='lag1_SuData2', plotName='sancRecSurv.tex', 
-	cRange=vrfn(aData[,'lag1_SuData2'],lo=0,hi=1))
+survPlot(coef='noS', plotName='nosSurv.tex', 
+	cRange=vrfn(aData[,'noS'],lo=0,hi=1)) # sig | T
+survPlot(coef='Ddistdata', plotName='distSurv.tex') # sig | T
+survPlot(coef='lag1_polity2', plotName='polSurv.tex') # sig | T
+survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv.tex') # not sig
+survPlot(coef='lag1_uData', plotName='compRecSurv.tex') # sig | T
+survPlot(coef='lag1_SuData2', plotName='sancRecSurv.tex') # sig | T
 ############################################################### 
