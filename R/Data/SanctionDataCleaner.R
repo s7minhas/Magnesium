@@ -83,15 +83,15 @@ sanctionData <- cbind(sanctionData, temp1, temp2)
 ###############################################################
 
 ###############################################################
-# Subsetting to economic sanctions
-econ <- c(4, 13, 14)
-# econ <- c(4, 8, 12, 13, 14)
-sanctionData$issue1[is.na(sanctionData$issue1)] <- 0
-sanctionData$issue2[is.na(sanctionData$issue2)] <- 0
-sanctionData$issue3[is.na(sanctionData$issue3)] <- 0
-sanctionData <- sanctionData[which(sanctionData$issue1%in%econ |
-	sanctionData$issue2%in%econ |
-	sanctionData$issue3%in%econ), ]
+# # Subsetting to economic sanctions
+# econ <- c(4, 13, 14)
+# # econ <- c(4, 8, 12, 13, 14)
+# sanctionData$issue1[is.na(sanctionData$issue1)] <- 0
+# sanctionData$issue2[is.na(sanctionData$issue2)] <- 0
+# sanctionData$issue3[is.na(sanctionData$issue3)] <- 0
+# sanctionData <- sanctionData[which(sanctionData$issue1%in%econ |
+# 	sanctionData$issue2%in%econ |
+# 	sanctionData$issue3%in%econ), ]
 
 # Sanctions covering all issues
 # sanctionData=sanctionData

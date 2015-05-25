@@ -14,8 +14,9 @@ load('monadData.rda')
 load('dyadMats.rda')
 load('mindistMatrices.rda')
 
+for(imputeLogical in c(TRUE, FALSE)){
 # impute missing data?
-impute=TRUE
+impute=imputeLogical
 ###############################################################
 
 ###############################################################
@@ -397,3 +398,4 @@ setwd(pathData)
 if(!impute){save(aData, file='durDataEcon_SancOnly.rda')}
 if(impute){save(aData, file='durDataEconImp_SancOnly.rda')}
 ###############################################################
+}

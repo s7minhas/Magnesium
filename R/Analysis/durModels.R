@@ -6,8 +6,9 @@ source('~/ProjectsGit/Magnesium/R/Setup.R')}
 # Gen tikz
 genTikz=TRUE
 
+for(imputeLogical in c(TRUE, FALSE)){
 # Use imputed data
-impute=TRUE
+impute=imputeLogical
 
 ###############################################################
 setwd(pathData)
@@ -156,10 +157,11 @@ riskRatios
 vrfn=function(x,lo=.1,hi=.9){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
 survPlot=function(
 	model=modelFinal, coef, data=modData, cRange=vrfn(data[,coef]), 
+	confInts = c(.95, .9), timeOut = 20, 
 	savePlot=genTikz & impute, pheight=4, pwidth=6, plotName){
 	
 	# Create predictions using survfit
-	surv = lapply(c(.95, .9), function(ci){
+	surv = lapply(confInts, function(ci){
 		survfit(model, 
 			scenBuild(vi=coef, vRange=cRange, 
 				vars=names(model$coefficients), 
@@ -170,7 +172,7 @@ survPlot=function(
 	survData = do.call('cbind', lapply(surv, function(s){
 		survData=cbind(melt(s$surv)[,2:3], lower=melt(s$lower)[,3], upper=melt(s$upper)[,3])
 		survData$time = rep(s$time, 2)
-		return(survData[survData$time <=20, ])
+		return(survData[survData$time <=timeOut, ])
 		}) )
 	survData=survData[,c(1:4,8:10)]
 	names(survData) = c('scen','surv','lo95','up95','lo90','up90','Time')
@@ -179,8 +181,8 @@ survPlot=function(
 	# Plot
 	gg=ggplot(survData, aes(x=Time, y=surv, fill=scen, color=scen))
 	gg=gg + geom_line() + xlab('Time (Years)') + ylab('Survival Probability')
-	gg=gg + geom_ribbon(aes(ymin=lo95,ymax=up95),alpha=0.05,size=.1)
-	gg=gg + geom_ribbon(aes(ymin=lo90,ymax=up90),alpha=0.2,size=.3)
+	gg=gg + geom_ribbon(aes(ymin=lo95,ymax=up95),alpha=0.1,color=NA)
+	gg=gg + geom_ribbon(aes(ymin=lo90,ymax=up90),alpha=0.2,color=NA)
 	gg=gg + theme(legend.position='none', legend.title=element_blank(),
 		    axis.ticks=element_blank(), panel.grid.major=element_blank(),
 		    panel.grid.minor=element_blank(), panel.border = element_blank(),
@@ -198,4 +200,5 @@ survPlot(coef='lag1_polity2', plotName='polSurv.tex') # sig | T
 survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv.tex') # not sig
 survPlot(coef='lag1_uData', plotName='compRecSurv.tex') # sig | T
 survPlot(coef='lag1_SuData2', plotName='sancRecSurv.tex') # sig | T
-############################################################### 
+###############################################################
+}
