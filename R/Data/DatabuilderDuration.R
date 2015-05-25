@@ -14,9 +14,10 @@ load('monadData.rda')
 load('dyadMats.rda')
 load('mindistMatrices.rda')
 
-for(imputeLogical in c(TRUE, FALSE)){
+# for(imputeLogical in c(TRUE, FALSE)){
 # impute missing data?
-impute=imputeLogical
+# impute=imputeLogical
+impute=TRUE	
 ###############################################################
 
 ###############################################################
@@ -61,6 +62,50 @@ temp$temp[which(temp$temp == 'fill me in')]=temp$finaloutcome[which(temp$temp ==
 table(temp$temp)
 table(temp$temp)/sum(table(temp$temp))
 sum((table(temp$temp)/sum(table(temp$temp)))[1:2])
+
+slice = sanctionData[
+	sanctionData$startyear>2000,
+	c('targetstate_cname',
+		paste0('sender',1:5,'_cname'), 
+		'startyear', 'endyear' ) ]
+slice$endyear[is.na(slice$endyear)] = 3000
+tmp = na.omit(melt(slice, id=c('targetstate_cname', 'startyear', 'endyear')))
+tmp$id = paste(tmp$targetstate_cname, tmp$value, sep='_')
+sort(table(tmp$id)[table(tmp$id)>1], decreasing=TRUE)
+
+ic = panel$ccode[match('CANADA', panel$cname)]
+slice=sanctionData[sanctionData$targetstate_ccode==ic,]
+slice[,c('startyear','endyear',paste0('sender',1:5))]
+
+slice = sanctionData[
+	sanctionData$startyear<2000 & sanctionData$startyear>1990,
+	c('targetstate_cname',
+		paste0('sender',1:5,'_cname'), 
+		'startyear', 'endyear' ) ]
+slice$endyear[is.na(slice$endyear)] = 3000
+tmp = na.omit(melt(slice, id=c('targetstate_cname', 'startyear', 'endyear')))
+tmp$id = paste(tmp$targetstate_cname, tmp$value, sep='_')
+sort(table(tmp$id)[table(tmp$id)>1], decreasing=TRUE)
+
+slice = sanctionData[
+	sanctionData$startyear<1990 & sanctionData$startyear>1980,
+	c('targetstate_cname',
+		paste0('sender',1:5,'_cname'), 
+		'startyear', 'endyear' ) ]
+slice$endyear[is.na(slice$endyear)] = 3000
+tmp = na.omit(melt(slice, id=c('targetstate_cname', 'startyear', 'endyear')))
+tmp$id = paste(tmp$targetstate_cname, tmp$value, sep='_')
+sort(table(tmp$id)[table(tmp$id)>1], decreasing=TRUE)
+
+slice = sanctionData[
+	sanctionData$startyear<1980 & sanctionData$startyear>1970,
+	c('targetstate_cname',
+		paste0('sender',1:5,'_cname'), 
+		'startyear', 'endyear' ) ]
+slice$endyear[is.na(slice$endyear)] = 3000
+tmp = na.omit(melt(slice, id=c('targetstate_cname', 'startyear', 'endyear')))
+tmp$id = paste(tmp$targetstate_cname, tmp$value, sep='_')
+sort(table(tmp$id)[table(tmp$id)>1], decreasing=TRUE)
 ###############################################################
 
 ###############################################################

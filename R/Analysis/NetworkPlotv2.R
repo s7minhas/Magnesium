@@ -1,10 +1,11 @@
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
+source('~/Research/Magnesium/R/Setup.R')}
 
 # Load sanction network Data
 setwd(pathData)
 load('sanctionData.rda')
 sendIDs=paste('sender',1:5,'_ccode',sep='')
-sdata=sanctionDataFinal[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
+sdata=sanctionData[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
 load('sanctionNet.rda')
 setwd(pathPData)
 load('panel.rda')
@@ -174,7 +175,7 @@ plot(safMatAdj,
           edge.arrow.size=0.7, edge.label='',
           edge.color=E(safMatAdj)$color,
           edge.width=E(safMatAdj)$weight,
-          edge.curved=F)
+          edge.curved=T)
 # dev.off()
 ###################################################
 

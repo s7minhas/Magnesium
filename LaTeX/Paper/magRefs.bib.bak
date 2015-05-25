@@ -4110,37 +4110,6 @@
   publisher = {Cambridge Univ Press}
 }
 
-@BOOK{ward2008spatial,
-  title = {Spatial regression models},
-  publisher = {Sage Publications, Inc},
-  year = {2008},
-  author = {Ward, M.D. and Gleditsch, K.S.},
-  volume = {155}
-}
-
-@ARTICLE{ward2007persistent,
-  author = {Ward, M.D. and Hoff, P.D.},
-  title = {Persistent patterns of international commerce},
-  journal = {Journal of Peace Research},
-  year = {2007},
-  volume = {44},
-  pages = {157--175},
-  number = {2},
-  publisher = {Sage Publications}
-}
-
-@ARTICLE{ward2007disputes,
-  author = {Ward, M.D. and Siverson, R.M. and Cao, X.},
-  title = {Disputes, democracies, and dependencies: A reexamination of the Kantian
-	peace},
-  journal = {American Journal of Political Science},
-  year = {2007},
-  volume = {51},
-  pages = {583--601},
-  number = {3},
-  publisher = {Wiley Online Library}
-}
-
 @ARTICLE{ward:rainbow:2013,
   author = {Michael D. Ward and John S. Ahlquist and Arturas Rozenas},
   title = {Gravity's Rainbow: A Dynamic Latent Space Model for the World Trade
@@ -4155,15 +4124,46 @@
   date-modified = {2013-04-25 00:21:11 +0000}
 }
 
+@BOOK{ward2008spatial,
+  title = {Spatial regression models},
+  publisher = {Sage Publications, Inc},
+  year = {2008},
+  author = {Ward, Michael D. and Gleditsch, Kristian S.},
+  volume = {155}
+}
+
+@ARTICLE{ward2007persistent,
+  author = {Ward, Michael D. and Hoff, Peter D.},
+  title = {Persistent patterns of international commerce},
+  journal = {Journal of Peace Research},
+  year = {2007},
+  volume = {44},
+  pages = {157--175},
+  number = {2},
+  publisher = {Sage Publications}
+}
+
 @ARTICLE{ward1992reciprocity,
   author = {Ward, Michael D and Rajmaira, Sheen},
-  title = {Reciprocity and norms in US-Soviet foreign policy},
+  title = {Reciprocity and Norms in United States-Soviet foreign policy},
   journal = {Journal of Conflict Resolution},
   year = {1992},
   volume = {36},
   pages = {342--368},
   number = {2},
   publisher = {Sage Publications}
+}
+
+@ARTICLE{ward2007disputes,
+  author = {Ward, Michael D. and Siverson, R.M. and Cao, X.},
+  title = {Disputes, democracies, and dependencies: A reexamination of the Kantian
+	peace},
+  journal = {American Journal of Political Science},
+  year = {2007},
+  volume = {51},
+  pages = {583--601},
+  number = {3},
+  publisher = {Wiley Online Library}
 }
 
 @ARTICLE{warren2010geometry,

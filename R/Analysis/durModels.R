@@ -181,7 +181,7 @@ survPlot=function(
 	# Plot
 	gg=ggplot(survData, aes(x=Time, y=surv, fill=scen, color=scen))
 	gg=gg + geom_line() + xlab('Time (Years)') + ylab('Survival Probability')
-	gg=gg + geom_ribbon(aes(ymin=lo95,ymax=up95),alpha=0.1,color=NA)
+	gg=gg + geom_ribbon(aes(ymin=lo95,ymax=up95),alpha=0.15,color=NA)
 	gg=gg + geom_ribbon(aes(ymin=lo90,ymax=up90),alpha=0.2,color=NA)
 	gg=gg + theme(legend.position='none', legend.title=element_blank(),
 		    axis.ticks=element_blank(), panel.grid.major=element_blank(),
