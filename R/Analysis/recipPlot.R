@@ -20,7 +20,7 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/SRM.R')
 
 # If compliance = TRUE then compliance recip network plots are generated
 ## if false then sanction recip network plots
-compliance=FALSE
+compliance=TRUE
 
 # To print plots set to true
 printPlot=TRUE
