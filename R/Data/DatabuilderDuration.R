@@ -14,10 +14,9 @@ load('monadData.rda')
 load('dyadMats.rda')
 load('mindistMatrices.rda')
 
-# for(imputeLogical in c(TRUE, FALSE)){
+for(imputeLogical in c(TRUE, FALSE)){
 # impute missing data?
-# impute=imputeLogical
-impute=TRUE	
+impute=imputeLogical
 ###############################################################
 
 ###############################################################
@@ -73,32 +72,8 @@ tmp = na.omit(melt(slice, id=c('targetstate_cname', 'startyear', 'endyear')))
 tmp$id = paste(tmp$targetstate_cname, tmp$value, sep='_')
 sort(table(tmp$id)[table(tmp$id)>1], decreasing=TRUE)
 
-ic = panel$ccode[match('CANADA', panel$cname)]
-slice=sanctionData[sanctionData$targetstate_ccode==ic,]
-slice[,c('startyear','endyear',paste0('sender',1:5))]
-
 slice = sanctionData[
 	sanctionData$startyear<2000 & sanctionData$startyear>1990,
-	c('targetstate_cname',
-		paste0('sender',1:5,'_cname'), 
-		'startyear', 'endyear' ) ]
-slice$endyear[is.na(slice$endyear)] = 3000
-tmp = na.omit(melt(slice, id=c('targetstate_cname', 'startyear', 'endyear')))
-tmp$id = paste(tmp$targetstate_cname, tmp$value, sep='_')
-sort(table(tmp$id)[table(tmp$id)>1], decreasing=TRUE)
-
-slice = sanctionData[
-	sanctionData$startyear<1990 & sanctionData$startyear>1980,
-	c('targetstate_cname',
-		paste0('sender',1:5,'_cname'), 
-		'startyear', 'endyear' ) ]
-slice$endyear[is.na(slice$endyear)] = 3000
-tmp = na.omit(melt(slice, id=c('targetstate_cname', 'startyear', 'endyear')))
-tmp$id = paste(tmp$targetstate_cname, tmp$value, sep='_')
-sort(table(tmp$id)[table(tmp$id)>1], decreasing=TRUE)
-
-slice = sanctionData[
-	sanctionData$startyear<1980 & sanctionData$startyear>1970,
 	c('targetstate_cname',
 		paste0('sender',1:5,'_cname'), 
 		'startyear', 'endyear' ) ]
@@ -352,9 +327,15 @@ DdistMats <- lapply(distMats, function(x){
 	x <- ifelse(x<=200,1,0); diag(x) <- 0; x })
 Ddistdata=netMelt(senders, 'targetstate', 'year', DdistMats, rst=FALSE)
 
+s3unData = netMelt(senders, 'targetstate', 'year', s3unMats)
+agree3unData = netMelt(senders, 'targetstate', 'year', agree3unMats)
+s3unData2 = netMelt(senders, 'targetstate', 'year', s3unMats, rst=FALSE)
+agree3unData2 = netMelt(senders, 'targetstate', 'year', agree3unMats, rst=FALSE)
+
 rownames(aData) <- 1:nrow(aData)
 aData <- cbind(aData, edata, tdata, allydata, igodata, 
-	religdata, Creligdata, distdata, Ddistdata)
+	religdata, Creligdata, distdata, Ddistdata, 
+	s3unData, agree3unData, s3unData2, agree3unData2)
 
 # Other Network Variables
 # Number of senders
@@ -431,6 +412,8 @@ aData$meanPtnrSndr = aData$meanPtnrSndr + abs(minNA(aData$meanPtnrSndr))
 aData$maxActorSndr = aData$maxActorSndr + abs(minNA(aData$maxActorSndr))
 aData$maxPtnrSndr = aData$maxPtnrSndr + abs(minNA(aData$maxPtnrSndr))
 aData$uData = aData$uData + abs(minNA(aData$uData))
+aData$s3unData = aData$s3unData + abs(minNA(aData$s3unData))
+aData$s3unData2 = aData$s3unData2 + abs(minNA(aData$s3unData2))
 
 aData$SuData2 = aData$SuData2 + abs(minNA(aData$SuData2))
 aData$Sactor = aData$Sactor + abs(minNA(aData$Sactor))

@@ -9,7 +9,7 @@ genTikz=TRUE
 for(imputeLogical in c(TRUE, FALSE)){
 # Use imputed data
 impute=imputeLogical
-
+# impute=TRUE
 ###############################################################
 setwd(pathData)
 if(!impute){load('durDataEcon_SancOnly.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}

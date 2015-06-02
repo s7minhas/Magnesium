@@ -2,10 +2,8 @@
 #Date: 07/11/2013
 
 #Setup
-source('/Users/janus829/Desktop/Research/Magnesium/R/Setup.R')
-load('/Users/janus829/Desktop/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
-# source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')
-# load('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/BuildingPanelData/panel.rda')
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
+	source('~/Research/Magnesium/R/Setup.R') }
 
 ###############################################################
 # Load Data
@@ -113,8 +111,8 @@ tradeTot <- trade3[,c(
 alliance$ccode1<-as.numeric(as.character(alliance$ccode1))
 alliance$ccode2<-as.numeric(as.character(alliance$ccode2))
 
-ctyNameA<-(countrycode(alliance$ccode1, "cown", "country.name"))
-ctyNameB<-(countrycode(alliance$ccode2, "cown", "country.name"))
+ctyNameA<-countrycode(alliance$ccode1, "cown", "country.name")
+ctyNameB<-countrycode(alliance$ccode2, "cown", "country.name")
 
 sancIDs<-data.frame(unique(cbind(alliance$ccode1, alliance$ccode2, ctyNameA, ctyNameB)))
 
@@ -256,8 +254,8 @@ warMats <- DyadBuild(variable='war', dyadData=warFINAL,
 igo$ccode1<-as.numeric(as.character(igo$ccode1))
 igo$ccode2<-as.numeric(as.character(igo$ccode2))
 
-ctyNameA<-(countrycode(igo$ccode1, "cown", "country.name"))
-ctyNameB<-(countrycode(igo$ccode2, "cown", "country.name"))
+ctyNameA<-countrycode(igo$ccode1, "cown", "country.name")
+ctyNameB<-countrycode(igo$ccode2, "cown", "country.name")
 
 sancIDs<-data.frame(unique(cbind(igo$ccode1, igo$ccode2, ctyNameA, ctyNameB)))
 
@@ -352,7 +350,7 @@ igoMats <- DyadBuild(variable='igo', dyadData=igoDataFINAL,
 ###############################################################
 # Clean religion data [extends from 1945 to 2010]
 religion$state<-as.numeric(as.character(religion$state))
-ctyNameA<-(countrycode(religion$state, "cown", "country.name"))
+ctyNameA<-countrycode(religion$state, "cown", "country.name")
 sancIDs<-data.frame(unique(cbind(religion$state, ctyNameA)))
 sancIDs$V1<- as.numeric(as.character(sancIDs$V1))
 sancIDs$ctyNameA <-as.character(sancIDs$ctyNameA)
@@ -393,6 +391,7 @@ majorRelig[[1481]] <- 'noMajor'
 majorRelig <- unlist(majorRelig)
 religionFINAL <- cbind(religionData[,1:2], majRelig=majorRelig)
 religionFINAL <- religionFINAL[religionFINAL$year>=1960 & religionFINAL$year<=2010,]
+religionFINAL = na.omit(religionFINAL)
 
 years <- seq(1960,2010,5)
 cntryList <- lapply(years, function(x) FUN=religionFINAL[religionFINAL$year==x,'ccode'])
@@ -421,8 +420,48 @@ names(CreligMats) <- years
 ###############################################################
 
 ###############################################################
+# Voeten Data
+load(paste0(pathData, '/Components/Voeten/session_affinity_scores_un_67_02132013-cow.RData'))
+voeten = x ; rm(list='x')
+voeten = voeten[voeten$year>=1960,]
+
+# Match with panel country names
+cntries = data.frame(
+	vcnts = unique(voeten$stateaname),
+	ccnts = cname(unique(voeten$stateaname) ) )
+cntries$ccnts = char(cntries$ccnts); cntries$vcnts = char(cntries$vcnts)
+
+cntries$ccnts[cntries$vcnts == 'Germany, East'] = "German Democratic Republic"
+cntries$ccnts[cntries$vcnts == 'Yemen PDR (South)'] = "S. YEMEN"
+cntries$ccnts[cntries$vcnts == 'Yemen PDR (South)'] = "S. YEMEN"
+cntries$ccnts[cntries$ccnts == 'Czechoslovakia'] = "CZECH REPUBLIC"
+cntries$ccode = panel$ccode[match(cntries$ccnts, panel$cname)]
+cntries = na.omit(cntries)
+
+# Merge back with Voeten data
+voeten = voeten[which(voeten$stateaname %in% cntries$vcnts), ]
+voeten = voeten[which(voeten$statebname %in% cntries$vcnts), ]
+voeten$cname_1 = cntries$ccnts[match(voeten$stateaname, cntries$vcnts)]
+voeten$cname_2 = cntries$ccnts[match(voeten$statebname, cntries$vcnts)]
+voeten$ccode_1 = cntries$ccode[match(voeten$stateaname, cntries$vcnts)]
+voeten$ccode_2 = cntries$ccode[match(voeten$statebname, cntries$vcnts)]
+
+# Convert to numeric
+affVars = c('s3un', 'agree3un')
+for(v in affVars){ voeten[,v] = numSM(voeten[,v]) }
+
+# Create matrices
+s3unMats = DyadBuild(variable='s3un', dyadData=voeten,
+	time=1960:2009, panel=panel, directed=TRUE)
+agree3unMats = DyadBuild(variable='agree3un', dyadData=voeten,
+	time=1960:2009, panel=panel, directed=TRUE)
+###############################################################
+
+###############################################################
 #saving cleaned data
 setwd(pathData)
-save(exportMats, tradeTotMats, allyMats, warMats, igoMats, religMats, CreligMats
-	,file='dyadMats.rda')
+save(exportMats, tradeTotMats, allyMats, 
+	warMats, igoMats, religMats, 
+	CreligMats, s3unMats, agree3unMats,
+	file='dyadMats.rda')
 ###############################################################

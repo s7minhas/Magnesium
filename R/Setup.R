@@ -1,13 +1,15 @@
 # Clearing workspace
 rm(list=ls())
 # Setting working directory
-if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m")
-{pathMain="~/Research/Magnesium/R";
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
+	pathMain="~/Research/Magnesium/R";
 	pathTex="~/Research/Magnesium/LaTeX/TeXoutput"
 	pathGraphics="~/Dropbox/Research/Magnesium/Graphics";
 	pathFunctions="~/Prog Notes/R Functions";
 	pathData="~/Dropbox/Research/Magnesium/Data";
-	pathPData="~/Research/Magnesium/R/Data/BuildingPanelData"}
+	pathPData="~/Research/Magnesium/R/Data/BuildingPanelData";
+	load('~/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
+}
 
 if(Sys.info()["user"]=="cassydorff")
 {pathMain="~/ProjectsGit/Magnesium/R";
@@ -58,7 +60,8 @@ rescale <- function(x,new_max,new_min){
  xResc }
 
 # turn variables into numeric
-numSM <- function(x){ as.numeric(as.character(x)) }
+char = function(x){ as.character(x) }
+numSM <- function(x){ as.numeric(char(x)) }
 
 # Convert to cname
 cname <- function(x){
