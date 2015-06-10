@@ -27,7 +27,7 @@ We develop two reciprocity concepts that allow us to analyze the interdependenci
 
  Our measure of reciprocity allows us to capture whether those who have a history of cooperative behavior with each other also tend to have more cooperative behavior in the future with partner states. In a duration context, states who receive sanctions from those with whom they have a history of reciprocal compliance are likely to comply sooner to those states than they would with lower compliance reciprocity. Notably, this measure is different from a simple conceptualization of past interactions which might simply control for the number of times a state has complied. Such a simple measure completely ignores the fact that each state's actions are conditional on all other interactions between states. For example, if state $i$ complies often to state $j$, is state $i$ also more likely to comply with all other partner states? Or, relative to all other interactions, does state $i$ comply more frequently and uniquely with state $j$? The latter idea is the one explicated within our  concept of compliance reciprocity. Thus, reciprocity tells us information about the interactions between country $i$ and $j$ over time, relative to how country $i$ interacts with all other partners over time. 
 
-We draw our measure of reciprocity from the Social Relations Model developed by \citet{kenny1994interpersonal} and presented as a tool for political scientists by \cite{AnneAuthor}. To illustrate, consider the matrix $X_{ij}$ below, in which we have six actors in a round robin (dyadic) format. These data are represented by the matrix below, which has the value for each of the thirty interactions, with the main diagonal remaining empty:
+We draw our measure of reciprocity from the Social Relations Model developed by \citet{kenny1994interpersonal} and presented as a tool for political scientists by \cite{AnneAuthor}. To illustrate, consider the matrix $X_{ij}$ below, in which we have six actors in a round robin (dyadic) format. These data are represented by the matrix below, which has a value for each of the thirty interactions, with the main diagonal remaining empty:
 
 \singlespacing
 \[
@@ -45,30 +45,29 @@ X_{61}  & X_{62}  & X_{63}  & X_{64} & X_{65} &   \\
 
 \doublespacing
 First, we begin with calculating the row column and total sums:
+
 \begin{itemize}
-\item The totals for each \emph{ row} are denoted $X_{i \cdot}$ where $i$ is the row number, i.e.,
-~\\
-$X_{i \cdot} = \sum_{j=1}^{J} X_{ij}$;
-\item For each column the totals are denoted
- $X_{\cdot i}$ where $i$ is the \emph{column} number; and 
- \item The total over all rows and columns is given by $X_{\cdot \cdot} = \sum_i \sum_j X_{i,j}$.
+	\item The totals for each \emph{ row} are denoted $X_{i \cdot}$ where $i$ is the row number, i.e.,
+	~\\
+	$X_{i \cdot} = \sum_{j=1}^{J} X_{ij}$;
+	\item For each column the totals are denoted
+	 $X_{\cdot i}$ where $i$ is the \emph{column} number; and 
+	 \item The total over all rows and columns is given by $X_{\cdot \cdot} = \sum_i \sum_j X_{i,j}$.
  \end{itemize}
  
 Given these quantities, one can calculate individual effects for a variety of concepts, such as the actor, partner, and unique dyadic effects, (as well as the variances attributed to each of these effects). The unique dyadic effects, or the reciprocal interactions between two countries within one pair, are calculated accounting for the general behavior of each country within the pair. Or, in other words, this measure captures how likely country $i$ is to comply with country $j$; and the likelihood that country $j$ is to comply with country $i$ is calculated relative to how often country $i$ tends to comply with all of the other countries, as well as how likely country $j$ is to comply to all others. 
 
  \begin{itemize}
- \item The actor effect for observation $i$ is the total of $i$'s row mean and column mean, minus the overall mean.  The means are just the sums, corrected for degrees of freedom, yielding an average row effect:\\
- $\hat{a}_i = \frac{(n-1)^2}{n(n-2)} X_{i \cdot} + \frac{(n-1)}{n(n-2)} X_{\cdot i} -  \frac{n-1}{n-2} X_{\cdot \cdot} $
-\item Similarly the column mean for actor $i$ is \\
- $\hat{b}_i = \frac{(n-1)^2}{n(n-2)} X_{\cdot i} + \frac{(n-1)}{n(n-2)} X_{i \cdot } -  \frac{n-1}{n-2} X_{\cdot \cdot} $.\\ For a symmetric matrix, the row effect and the column effect will be identical.
-\item The unique dyadic effect, or reciprocity for specific dyad $ij$, simply subtracts the row and column effects along with the overall mean out of the value for dyad $ij$. \\
-$\hat{g}_{ij} = X_{ij} - \hat{a}_i - \hat{b}_j - X_{\cdot \cdot}$
+	 \item The actor effect for observation $i$ is the total of $i$'s row mean and column mean, minus the overall mean.  The means are just the sums, corrected for degrees of freedom, yielding an average row effect:\\
+	 $\hat{a}_i = \frac{(n-1)^2}{n(n-2)} X_{i \cdot} + \frac{(n-1)}{n(n-2)} X_{\cdot i} -  \frac{n-1}{n-2} X_{\cdot \cdot} $
+	\item Similarly the column mean for actor $i$ is \\
+	 $\hat{b}_i = \frac{(n-1)^2}{n(n-2)} X_{\cdot i} + \frac{(n-1)}{n(n-2)} X_{i \cdot } -  \frac{n-1}{n-2} X_{\cdot \cdot} $.\\ For a symmetric matrix, the row effect and the column effect will be identical.
+	\item The unique dyadic effect, or reciprocity for specific dyad $ij$, simply subtracts the row and column effects along with the overall mean out of the value for dyad $ij$. \\
+	$\hat{g}_{ij} = X_{ij} - \hat{a}_i - \hat{b}_j - X_{\cdot \cdot}$
  \end{itemize}
 
 \doublespacing
-The first two equations show how the final equation for reciprocity is calculated relative to the general actor and partner effects (or actor and partner average behavior) for each country.\footnote{\cite{kenny1994interpersonal} would suggest including the full compliment of the SRM into our model. We originally explored this approach, but gained little empirical leverage from it, and thus focus instead on the concept of reciprocity.} 
-
-We extend this intuition to our second key measure, \textit{sanction reciprocity}. Following the same idea as compliance reciprocity, this is a measure of how often a target state has received sanctions from the senders of any given sanction case--relative to all other sanction interactions of states. The intuition behind this measure is to capture the concept of resolve: states who have been sanctioned multiple times by a sender state are likely to build up a willingness of resistance and not cooperation.  This suggests that states receiving sanctions from those with whom they have been sanctioned before are likely to more slowly comply to those states. 
+The first two equations show how the final equation for reciprocity is calculated relative to the general actor and partner effects (or actor and partner average behavior) for each country.\footnote{\cite{kenny1994interpersonal} would suggest including the full compliment of the SRM into our model. We originally explored this approach, but gained little empirical leverage from it, and thus focus instead on the concept of reciprocity.} In figure \ref{fig:recipNet}, we provide a visualization of the \textit{compliance reciprocity} measure generated using the approach laid out above for 1972, 1992, and 2012. In each panel, we include the reciprocity scores for the ten countries that were most active in the sanctioning network at that year. Each of the edges here are directional and indicate how likely a country is to reciprocate compliance from another, reciprocity scores that are negative are designated in red and positive in blue. For example, in every panel shown here, Israel exclusively has negative incoming edges, indicating that the countries shown in the panels here are all unlikely to reciprocate a compliant action from Israel. On the other hand, in each panel the United States almost exclusively has positive incoming edges, indicating that countries are very likely to reciprocate compliance behavior from the United States. More interesting, however, is the fact that there exists significant variation in whether countries reciprocate behavior. 
 
 \begin{figure}[ht]
 	\centering
@@ -85,28 +84,31 @@ We extend this intuition to our second key measure, \textit{sanction reciprocity
 
 	\subfloat[sub1][Compliance: 2012]{
 		\includegraphics[width=.33\textwidth]{compNet_2012}
-		\label{fig:comp02}} \\
+		\label{fig:comp02}}
 
-	\subfloat[sub1][Sanction: 1972]{
-		\includegraphics[width=.33\textwidth]{sancNet_1972}
-		\label{fig:sanc72}} & 
+	% \subfloat[sub1][Sanction: 1972]{
+	% 	\includegraphics[width=.33\textwidth]{sancNet_1972}
+	% 	\label{fig:sanc72}} & 
 
-	\subfloat[sub1][Sanction: 1992]{
-		\includegraphics[width=.33\textwidth]{sancNet_1992}
-		\label{fig:sanc92}} & 
+	% \subfloat[sub1][Sanction: 1992]{
+	% 	\includegraphics[width=.33\textwidth]{sancNet_1992}
+	% 	\label{fig:sanc92}} & 
 
-	\subfloat[sub1][Sanction: 2012]{
-		\includegraphics[width=.33\textwidth]{sancNet_2012}
-		\label{fig:sanc02}}
+	% \subfloat[sub1][Sanction: 2012]{
+	% 	\includegraphics[width=.33\textwidth]{sancNet_2012}
+	% 	\label{fig:sanc02}}
 
 	\end{tabular}
 	\label{fig:recipNet}
 \end{figure}
+\FloatBarrier
+
+We extend this intuition to our second key measure, \textit{sanction reciprocity}. Following the same idea as compliance reciprocity, this is a measure of how often a target state has received sanctions from the senders of any given sanction case--relative to all other sanction interactions of states. The intuition behind this measure is to capture the concept of resolve: states who have been sanctioned multiple times by a sender state are likely to build up a willingness of resistance and not cooperation.  This suggests that states receiving sanctions from those with whom they have been sanctioned before are likely to more slowly comply to those states. 
 
 The basic insight is that states whom continually reciprocate sanctioning behavior are signaling more conflictual rather than cooperative form of interaction over time. This endogenously formed strategic environment is a dominating factor for the initiation of sanction compliance. Thus, in a world of changing information and strategic incentives, a country will not continue to repetitively comply to a partner state simply out of perceived strategic ties. Countries require continuous signals to build trust and cooperation over time and to maintain a shared understanding of strategic importance to one another. For this reason, we argue that reciprocity is an essential component endogenous to the strategic environment whereby an increase in reciprocity results in an increase in the likelihood of sanction compliance. 
 
 
-% I dont think we need to list out our hypothesis like this
+% I dont think we need to list out our hypothesis like this, you stated it clearly enough in this section. 
 % \begin{quote}
 % 	\textbf{H1}: states that receive sanctions from senders with a history of reciprocal compliance are most likely to quickly comply. 
 
