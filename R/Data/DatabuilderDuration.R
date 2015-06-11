@@ -14,10 +14,9 @@ load('monadData.rda')
 load('dyadMats.rda')
 load('mindistMatrices.rda')
 
-# for(imputeLogical in c(TRUE, FALSE)){
+for(imputeLogical in c(TRUE, FALSE)){
 # impute missing data?
-# impute=imputeLogical
-impute=TRUE
+impute=imputeLogical
 ###############################################################
 
 ###############################################################
@@ -41,7 +40,7 @@ sanctionSlice$endyear[is.na(sanctionSlice$endyear)] <- 2013
 comp <- c(1,2,5,6,7,10)
 sanctionSlice$compliance <- 0
 sanctionSlice$compliance[which(sanctionSlice$finaloutcome %in% comp)] <- 1
-table(sanctionSlice$compliance)/nrow(sanctionSlice) # prop. compliance
+table(sanctionSlice$compliance)/nrow(sanctionSlice) # compliance
 table(sanctionSlice$finaloutcome[which(sanctionSlice$compliance==1)])
 
 sanctionSlice$time <- NA
@@ -61,7 +60,7 @@ temp$temp[which(temp$temp == 'fill me in')]=temp$finaloutcome[which(temp$temp ==
 
 table(temp$temp)
 table(temp$temp)/sum(table(temp$temp))
-sum((table(temp$temp)/sum(table(temp$temp)))[1:2])
+sum((table(temp$temp)/sum(table(temp$temp)))[1:3])
 
 slice = sanctionData[
 	sanctionData$startyear>2000,

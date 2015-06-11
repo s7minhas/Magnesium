@@ -13,6 +13,17 @@ Axelrod, Robert \harvardand\ Robert~O Keohane. 1985.
 Banks, Arthur~S. 2011.
 \newblock ``Cross-National Time-Series Data Archive, 1815-[2011].''.
 
+\harvarditem{Bapat \harvardand\ Clifton~Morgan}{2009}{bapat2009multilateral}
+Bapat, Navin~A \harvardand\ T Clifton~Morgan. 2009.
+\newblock ``Multilateral versus unilateral sanctions reconsidered: A test using
+  new data.'' {\em International Studies Quarterly} 53(4):1075--1094.
+
+\harvarditem[Barbieri, Keshk \harvardand\ Pollins]{Barbieri, Keshk \harvardand\
+  Pollins}{2009}{barbieri2009trading}
+Barbieri, Katherine, Omar~MG Keshk \harvardand\ Brian~M Pollins. 2009.
+\newblock ``Trading data evaluating our assumptions and coding rules.'' {\em
+  Conflict Management and Peace Science} 26(5):471--491.
+
 \harvarditem{Beck}{2008}{beck2008time}
 Beck, Nathaniel. 2008.
 \newblock ``Time Series Cross Section Methods.'' {\em Oxford Handbook of
@@ -72,11 +83,6 @@ Choucri, Nazli \harvardand\ Robert~C. North. 1972.
 \newblock ``Dynamics of International Conflict.'' {\em World Politics}
   24(2):80--122.
 
-\harvarditem{Christopher}{1994}{christopher1994pattern}
-Christopher, Anthony~John. 1994.
-\newblock ``The pattern of diplomatic sanctions against South Africa
-  1948--1994.'' {\em GeoJournal} 34(4):439--446.
-
 \harvarditem{Cox}{2004}{cox:2004}
 Cox, James~C. 2004.
 \newblock ``How to identify trust and reciprocity.'' {\em Games and economic
@@ -123,6 +129,12 @@ Drezner, Daniel~W. 2000.
   Cooperation Counterproductive?'' {\em International Organization}
   54(01):73--102.
 
+\harvarditem[Erikson, Pinto \harvardand\ Rader]{Erikson, Pinto \harvardand\
+  Rader}{2014}{erikson2014dyadic}
+Erikson, Robert~S., Pablo~M. Pinto \harvardand\ Kelly~T. Rader. 2014.
+\newblock ``Dyadic Analysis in International Relations: A Cautionary Tale.''
+  {\em Political Analysis} 22(4):457--463.
+
 \harvarditem{Escrib{\`a}-Folch \harvardand\ Wright}{2010}{escriba2010dealing}
 Escrib{\`a}-Folch, Abel \harvardand\ Joseph Wright. 2010.
 \newblock ``Dealing with tyranny: International sanctions and the survival of
@@ -134,6 +146,12 @@ Foley, Hamilton. 1923.
 \newblock {\em Woodrow Wilson's Case for teh League of Nations, Compiled with
   Approval by Hamilton Foley}.
 \newblock Princeton University Press.
+
+\harvarditem{Gibler \harvardand\ Sarkees}{2004}{gibler2004measuring}
+Gibler, Douglas~M \harvardand\ Meredith~Reid Sarkees. 2004.
+\newblock ``Measuring alliances: The correlates of war formal interstate
+  alliance dataset, 1816--2000.'' {\em Journal of Peace Research}
+  41(2):211--222.
 
 \harvarditem{Goldstein}{1991}{goldstein1991reciprocity}
 Goldstein, Joshua~S. 1991.
@@ -191,11 +209,6 @@ Kenny, David~A. 1994.
 Keohane, Robert~O. 1989.
 \newblock ``Reciprocity in international relations.'' {\em International
   organization} 40(1).
-
-\harvarditem{Kinne}{2013}{kinne2013dependent}
-Kinne, Brandon~J. 2013.
-\newblock ``Dependent diplomacy: Signaling, strategy, and prestige in the
-  diplomatic network.'' {\em International Studies Quarterly} .
 
 \harvarditem{Lam}{1990}{lam1990}
 Lam, Sam~Ling. 1990.
@@ -283,7 +296,7 @@ Ward, Michael~D., John~S. Ahlquist \harvardand\ Arturas Rozenas. 2012.
 
 \harvarditem{Ward \harvardand\ Rajmaira}{1992}{ward1992reciprocity}
 Ward, Michael~D \harvardand\ Sheen Rajmaira. 1992.
-\newblock ``Reciprocity and Norms in United States-Soviet foreign policy.''
+\newblock ``Reciprocity and Norms in United States-Soviet Foreign Policy.''
   {\em Journal of Conflict Resolution} 36(2):342--368.
 
 \harvarditem{Warren}{2010}{warren2010geometry}

@@ -4,12 +4,12 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=FALSE
+genTikz=TRUE
 
-# for(imputeLogical in c(TRUE, FALSE)){
+for(imputeLogical in c(TRUE, FALSE)){
 # Use imputed data
-# impute=imputeLogical
-impute=TRUE
+impute=imputeLogical
+# impute=TRUE
 ###############################################################
 setwd(pathData)
 if(!impute){load('durDataEcon_SancOnly.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
@@ -187,7 +187,9 @@ survPlot=function(
 	gg=gg + theme(legend.position='none', legend.title=element_blank(),
 		    axis.ticks=element_blank(), panel.grid.major=element_blank(),
 		    panel.grid.minor=element_blank(), panel.border = element_blank(),
-		    axis.line = element_line(color = 'black'))
+		    axis.line = element_line(color = 'black'),
+		    axis.title.y = element_text(vjust=1.5)
+		    )
 	if(savePlot){
 		tikz(file=plotName, height=pheight, width=pwidth, standAlone=F)
 		print(gg); dev.off() } else { print( gg ) }

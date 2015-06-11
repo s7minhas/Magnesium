@@ -1,20 +1,22 @@
 \section*{Results}
 \label{Results} 
 
-Table~\ref{tab:regResults} displays the results from our model. To contrast with findings from the extant literature, we run the model in three ways. The first column tests the literature's explanations of sanction compliance centered on target state characteristics. In the second column, we add covariates to account for a target's relationships with sender states. The final model incorporates our reciprocity measures. 
+Table~\ref{tab:regResults} displays the results from our model. To contrast with findings from the extant literature, we run the model in three ways. The first column tests the explanations of sanction compliance centered on target state characteristics. In the second column, we add covariates to account for a target's relationships with sender states. The final model incorporates our reciprocity measures. 
 
 \input{../TeXoutput/durModelResults}
 
-We find no support for the argument that high levels of internal stability may prompt a country to comply. Across each specification, we find that countries with higher levels of GDP per capita take longer to comply to a sanction case, indicating that wealthier countries are able to resist complying to sanctions for lengthier durations. Additionally, like previous work in the literature, we find that more democratic countries are likely to take a shorter time to comply to sanctions. Because it is difficult to interpret the substantive meaning of point estimates from the hazard function in Table~\ref{tab:regResults}, we visualize Kaplan-Meier estimates of survival probabilities. The y-axis in these charts represents the probability of survival, or in this case the probability that a country will not comply to a sanction, and the x-axis represents time since sanction initiation (measured in years). The grey line represents the scenario where the number of senders variable is set to a low value, in this case one, and the black line represents the scenario where this variable is set to its high value, in this case five. All the other covariates were set to their median. Using these estimates, we trace the effect of GDP per capita and polity on the probability of sanction compliance as a function of time; the results are shown in Figure~\ref{fig:monSurv}. In the case of polity, we can see that its effect on the timing of sanction compliance is actually quite minimal. Even 15 years after sanction initiation, the difference in the probability of a completely democratic regime, polity score of 10, relative to a completely authoritarian regime, polity score of -10, complying to a sanction is only 15\%. The predicted difference in compliance probabilities between regimes of different GDP per capitas, however, is quite stark. Just five years after a sanction was initiated, extremely poor regimes are almost a coin's toss away from compliance, whereas well-off regimes are extremely unlikely to comply. 
+We find no support for the argument that high levels of internal stability may prompt a country to comply. Across each specification, we do find that countries with higher levels of GDP per capita take longer to comply to a sanction case, indicating that wealthier countries are able to resist complying to sanctions for lengthier durations. Additionally, like previous work in the literature, when we control for the relationships that a sanctioned state has with its senders, we find that more democratic countries are likely to take a shorter time to comply to sanctions. However, this effect becomes insignificant once we incorporate our network-related covariates. 
+
+Since it is difficult to interpret the substantive meaning of point estimates from the hazard function in Table~\ref{tab:regResults}, we depict Kaplan-Meier estimates of survival probabilities. The y-axis in these charts represents the probability of survival, or in this case the probability that a country will not comply to a sanction, and the x-axis represents time since sanction initiation (measured in years). To depict the substantive effect of our covariates, we set up two scenarios, one in which the value for the covariate of interest is set to its minimum value, depicted in red, and another where it is set to its maximum, depicted in blue. All the other covariates are set to their median. The darker shaded area around the line represents the 90\% confidence interval and the lighter shaded area the 95\% confidence interval. Using these plots, we trace the effect of GDP per capita, in Model 3, on the probability of sanction compliance as a function of time; the results are shown in Figure~\ref{fig:monSurv}. The predicted difference in compliance probabilities between regimes with varying levels of GDP per capita, on the other hand, is quite stark. Just five years after sanction initiation, extremely poor regimes are 15\% more likely to comply than wealthier regimes. 
 
 \begin{figure}[ht]
 	\centering
-	\caption{Survival probabilities by ``proximity'' covariates. Grey designates scenarios in which the covariate is set to its minimum value and black where it is set to its maximum value.}
+	\caption{Survival probabilities over time by $Ln(GDP \; Capita)_{i,t-1}$. Red designates scenarios in which the covariate is set to its minimum value and blue where it is set to its maximum value. Darker shaded around each line represents the 90\% confidence interval and the lighter shaded area the 95\% confidence interval.}
 	% \begin{tabular}{cc}
 
     % \subfloat[SubFigure 1][Log(GDP per Capita)]{
         \resizebox{.55\textwidth}{!}{\input{../TeXoutput/gdpSurv.tex}}	
-        % \label{fig:gdpSurv}} & 
+        % \label{fig:gdpSurv}}
 
 	% \subfloat[SubFigure 2][Polity]{
 	% 	\resizebox{.45\textwidth}{!}{\input{../TeXoutput/polSurv.tex}}	
@@ -25,29 +27,16 @@ We find no support for the argument that high levels of internal stability may p
 	\label{fig:monSurv}
 \end{figure}
 
-
-We also find strong support for the argument that states are more likely to comply to sanctions involving multiple actors, and the effect of this variable remains consistent even after controlling for our network level covariates in Model 3. Using Figure~\ref{fig:nosSurv} we can quickly see that there is a stark difference in the likelihood of non-compliance between a sanction case involving single and multiple senders. After just five years the probability of non-compliance drops to approximately 60\%, whereas a sanction from a single sender by that time still has almost a 95\% chance of non-compliance. This finding is in sharp contrast to previous research arguing that multilateral sanctions can actually be counterproductive.\footnote{For example, see \citealp{drezner2000bargaining}.} Unlike the extant literature, we do not find strong evidence for the ability of trading partners to obtain quick and successful resolutions to sanction cases. States are also not likely to comply more quickly to sanctions sent by allies, and are actually less likely to comply to neighbors. 
+We also find strong support for the argument that states are more likely to comply to sanctions involving multiple actors, and the effect of this variable remains consistent even after controlling for our network level covariates in Model 3. Using Figure~\ref{fig:nosSurv} we can quickly see that there is a stark difference in the likelihood of non-compliance between a sanction case involving single and multiple senders. After just five years the probability of non-compliance drops to approximately 60\%, whereas a sanction from a single sender by that time still has an 85\% chance of non-compliance. Unlike the extant literature, we do not find strong evidence for the ability of trading partners to obtain quick and successful resolutions to sanction cases. States are also not likely to comply more quickly to sanctions sent by allies, and are actually less likely to comply to sanctions sent from neighbors. 
 
 \begin{figure}[ht]
 	\centering
-	\caption{Survival probabilities reflecting variation in the number of senders in a sanction case. Grey designates the scenario where the number of senders is set to its minimum value and black the scenario where it is set to its high value (90th percentile).}
-	% \includegraphics[width=1\textwidth]{nosSurv}
+	\caption{Survival probabilities reflecting variation in the number of senders in a sanction case.}
 	\resizebox{0.55\textwidth}{!}{\input{../TeXoutput/nosSurv.tex}}
 	\label{fig:nosSurv}
 \end{figure}
 
-% In Figure~\ref{fig:distSurv}, we show the survival probabilities for the distance variable. 
-
-% \begin{figure}[ht]
-% 	\centering
-% 	\caption{Survival probabilities by ``proximity'' covariates. Grey designates scenarios in which the covariate is set to its minimum value and black where it is set to its high value (90th percentile).}
-% 	\resizebox{.65\textwidth}{!}{\input{../TeXoutput/distSurv.tex}}	
-% 		\label{fig:distSurv}}
-% 	\label{fig:distSurv}
-% \end{figure}
-
-
-Our key hypotheses relate to the effect of compliance and sanction reciprocity. We incorporate these variables in the last column of Table~\ref{tab:regResults}, and here we find that target states comply much more quickly to sanctions sent from countries with whom they have a strong history of reciprocal compliance relative to others in the network. On the left side of Figure~\ref{fig:surv3}, we can see that after just five years, the probability of non-compliance in sanction cases where target and sender states have a history of reciprocal compliance is approximately 65\%, compared to about 98\% when this history does not exist between senders and receivers. 
+Our key hypotheses relate to the effect of compliance and sanction reciprocity. We incorporate these variables in the last column of Table~\ref{tab:regResults} and here we find that target states comply much more quickly to sanctions sent from countries with whom they have a strong history of reciprocal compliance relative to others in the network. On the left side of Figure~\ref{fig:surv3}, we can see that after just five years, the probability of non-compliance in sanction cases where target and sender states have a history of reciprocal compliance is approximately 60\%, compared to about 90\% when this history does not exist between senders and receivers. 
 
 \begin{figure}[ht]
 	\centering

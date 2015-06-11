@@ -350,6 +350,18 @@
   publisher = {Databanks International}
 }
 
+@ARTICLE{bapat2009multilateral,
+  author = {Bapat, Navin A and Clifton Morgan, T},
+  title = {Multilateral versus unilateral sanctions reconsidered: A test using
+	new data},
+  journal = {International Studies Quarterly},
+  year = {2009},
+  volume = {53},
+  pages = {1075--1094},
+  number = {4},
+  publisher = {Wiley Online Library}
+}
+
 @ARTICLE{barbieri2009trading,
   author = {Barbieri, Katherine and Keshk, Omar MG and Pollins, Brian M},
   title = {Trading data evaluating our assumptions and coding rules},
@@ -1425,6 +1437,17 @@
   year = {2004},
   volume = {98},
   pages = {171--190}
+}
+
+@ARTICLE{erikson2014dyadic,
+  author = {Erikson, Robert S. and Pinto, Pablo M. and Rader, Kelly T.},
+  title = {Dyadic Analysis in International Relations: A Cautionary Tale},
+  journal = {Political Analysis},
+  year = {2014},
+  volume = {22},
+  pages = {457--463},
+  number = {4},
+  publisher = {SPM-PMSAPSA}
 }
 
 @ARTICLE{escriba2010dealing,

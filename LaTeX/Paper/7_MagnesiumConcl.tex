@@ -15,6 +15,7 @@ We find strong support for the influence of reciprocal compliance as well as the
 \label{appendix}
 
 \subsection*{Imputation Procedure}
+\label{appImp}
 
 The copula based approach developed by \citet{hoff:2007} is estimated through a Markov chain Monte Carlo (MCMC) algorithm. We run the MCMC for 6,000 imputations, saving every sixth imputation, using the \texttt{sbgcop.mcmc} function in the \texttt{sbgcop} package in $\mathcal{R}$. To account for time trends and obtain better performance from this imputation procedure, we create five lags of each variable, except for polity, prior to imputation. Every imputation of the MCMC leads to the creation of one dataset with all missing values imputed. Running this algorithm on our dataset then produces a total of 1,000 imputed datasets. Results across these 1,000 imputed datasets are then averaged, thereby accounting for a portion of the uncertainty in the imputed values. We then used the average of the results from these 1,000 imputed datasets to generate the regression estimates in table \ref{tab:regResults}. 
 
@@ -24,6 +25,7 @@ Regression results on the original dataset are shown in table \ref{tab:regResult
 \FloatBarrier
 
 \subsection*{Summary Statistics}
+\label{appSumm}
 
 \input{../TeXoutput/summStatsImp}
 \FloatBarrier
