@@ -14,9 +14,10 @@ load('monadData.rda')
 load('dyadMats.rda')
 load('mindistMatrices.rda')
 
-for(imputeLogical in c(TRUE, FALSE)){
+# for(imputeLogical in c(TRUE, FALSE)){
 # impute missing data?
-impute=imputeLogical
+# impute=imputeLogical
+impute=TRUE
 ###############################################################
 
 ###############################################################
@@ -40,7 +41,7 @@ sanctionSlice$endyear[is.na(sanctionSlice$endyear)] <- 2013
 comp <- c(1,2,5,6,7,10)
 sanctionSlice$compliance <- 0
 sanctionSlice$compliance[which(sanctionSlice$finaloutcome %in% comp)] <- 1
-table(sanctionSlice$compliance)/nrow(sanctionSlice) # ~58% compliance
+table(sanctionSlice$compliance)/nrow(sanctionSlice) # prop. compliance
 table(sanctionSlice$finaloutcome[which(sanctionSlice$compliance==1)])
 
 sanctionSlice$time <- NA

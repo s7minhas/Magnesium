@@ -20,6 +20,10 @@ echo '	...Building duration data'
 
 Rscript R/Data/DatabuilderDuration.R
 
+echo '	...Reciprocity plots'
+
+Rscript R/Analysis/recipPlot.R
+
 echo 'Running sanction compliance analysis'
 
 echo '	...Running models'
@@ -29,10 +33,6 @@ Rscript R/Analysis/durModels.R
 echo '	...Running performance analysis'
 
 Rscript R/Analysis/durModelsPerf.R
-
-echo '	...Reciprocity plots'
-
-Rscript R/Analysis/recipPlot.R
 
 echo '	...Running cross-validation'
 

@@ -4,12 +4,12 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=TRUE
+genTikz=FALSE
 
-for(imputeLogical in c(TRUE, FALSE)){
+# for(imputeLogical in c(TRUE, FALSE)){
 # Use imputed data
-impute=imputeLogical
-# impute=TRUE
+# impute=imputeLogical
+impute=TRUE
 ###############################################################
 setwd(pathData)
 if(!impute){load('durDataEcon_SancOnly.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
@@ -18,6 +18,7 @@ if(impute){load('durDataEconImp_SancOnly.rda'); tableName='durModelResults.tex';
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
 aData=merge(aData,ids,by='targetstate',all.x=T)
+length(unique(aData$caseid))
 ###############################################################
 
 ###############################################################
