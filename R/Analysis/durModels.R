@@ -32,7 +32,7 @@ varDef = cbind (
 	,'lag1_domSUM'
 	 ),
 	c( 'Compliance Reciprocity$_{j,t-1}$', 'Sanction Reciprocity$_{j,t-1}$'
-	,'Number of Senders$_{j,t}$', 'Distance$_{j,t}$', 'Trade$_{j,t}$', 'Ally$_{j,t}$'
+	,'Number of Senders$_{j}$', 'Distance$_{j}$', 'Trade$_{j,t-1}$', 'Ally$_{j,t-1}$'
 	,'Polity$_{i,t-1}$'
 	,'Ln(GDP per capita)$_{i,t-1}$', 'GDP Growth$_{i,t-1}$'
 	,'Population$_{i,t-1}$'	
