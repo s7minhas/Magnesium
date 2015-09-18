@@ -3,7 +3,7 @@
 
 To test the effects of network pressures on sanction compliance we use the Threat and Imposition of Sanctions (TIES) Database developed by \citet{morgan2009threat}. This database includes over 1,400 sanction case threats and initiations from 1945 to 2013. Only sanction cases initiated by 2005 are included but outcomes for cases are recorded until 2013. Our focus here is restricted to sanctions that have actually been imposed rather than simply threatened. Restricting our analysis to sanctions that have been imposed during the period of 1960 to 2005 still leaves us with over 800 unique cases. Our unit of analysis is the case-year, providing us with over 7,500 observations. For each case in the TIES database a final outcome is recorded to describe how and if the case has been resolved. We consider the target of a sanction to have complied, if the target state completely or partially acquiesces to the demands of the sanction senders or negotiates a settlement.
 	
-In using this definition of compliance, approximately 36\% of cases in our dataset end with a state complying by 2013 while another 36\% remain ongoing. The remaining 27\% of cases were terminated for other reasons show below in Table \ref{tab:termCases}. Our focus here is on modeling the time until a country complies to a sanction using the definition described above.
+In using this definition of compliance, approximately 36\% of cases in our dataset end with a state complying by 2013 while another 36\% remain ongoing. The remaining 27\% of cases were terminated for other reasons show below in Table \ref{tab:termCases}. Our focus here is on modeling the time until a country complies to a sanction using the definition described above.  
 
 \begin{table}[ht]
 	\centering
@@ -47,4 +47,4 @@ Below we show our full model specification:
 		&GDP \; Growth_{i,t-1} + Internal \; Conflict_{i,t-1} + \epsilon_{i,t}
 \end{align*}
 
-where $i$ represents the target of the sanction, $j$ represents the relationship between the set of sender(s) for a particular sanction case and $i$, and $t$ the time period -- $No. \; Senders_{j}$ + $Distance_{j}$ are time-invariant variables.
+where $i$ represents the target of the sanction, $j$ represents the relationship between the set of sender(s) for a particular sanction case and $i$, and $t$ the time period -- variables without a $t$ subscript are time-invariant.
