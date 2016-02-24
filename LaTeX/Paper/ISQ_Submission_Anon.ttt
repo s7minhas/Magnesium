@@ -1,0 +1,159 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{lc}
+\hline\hline
+Outcome & Frequency \\
+\hline
+Capitulation by Sender After Imposition & 160 \\
+Stalemate after Sanctions Imposition & 71 \\
+\hline\hline
+\end{tabular}
+\caption{Outcomes of sanction cases no longer ongoing where compliance was not achieved.}
+\label{tab:termCases}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[ht]
+\centering
+{\normalsize
+\begin{tabular}{lccc}
+ Variable & Model 1 & Model 2 & Model 3 \\
+  \hline
+\hline
+Compliance Reciprocity$_{j,t-1}$ &  &  & $0.508^{\ast\ast}$ \\
+   &  &  & (0.1) \\
+  Sanction Reciprocity$_{j,t-1}$ &  &  & $-0.218^{\ast\ast}$ \\
+   &  &  & (0.056) \\
+   \hline
+Number of Senders$_{j}$ &  & $0.216^{\ast\ast}$ & $0.193^{\ast\ast}$ \\
+   &  & (0.048) & (0.048) \\
+  Distance$_{j}$ &  & $0.85^{\ast\ast}$ & $0.825^{\ast\ast}$ \\
+   &  & (0.186) & (0.188) \\
+  Trade$_{j,t-1}$ &  & -3.677 & -2.464 \\
+   &  & (5.351) & (4.149) \\
+  Ally$_{j,t-1}$ &  & -0.029 & 0.026 \\
+   &  & (0.166) & (0.166) \\
+   \hline
+Polity$_{i,t-1}$ & 0.016 & $0.028^{\ast\ast}$ & 0.022 \\
+   & (0.014) & (0.014) & (0.014) \\
+  Ln(GDP per capita)$_{i,t-1}$ & $-0.269^{\ast\ast}$ & $-0.269^{\ast\ast}$ & $-0.22^{\ast\ast}$ \\
+   & (0.057) & (0.059) & (0.062) \\
+  GDP Growth$_{i,t-1}$ & 0.003 & 0.007 & 0.003 \\
+   & (0.014) & (0.014) & (0.014) \\
+  Population$_{i,t-1}$ & $-0.18^{\ast\ast}$ & $-0.189^{\ast\ast}$ & $-0.112^{\ast\ast}$ \\
+   & (0.043) & (0.046) & (0.05) \\
+  Internal Conflict$_{i,t-1}$ & 0.017 & 0.018 & 0.013 \\
+   & (0.012) & (0.012) & (0.013) \\
+   \hline
+n & 6206 & 6183 & 6183 \\
+  Events & 190 & 189 & 189 \\
+  Likelihood ratio test & 54.73 (0) & 89.16 (0) & 117.21 (0) \\
+   \hline
+\hline
+\end{tabular}
+}
+\caption{Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.}
+\label{tab:regResults}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[ht]
+\centering
+{\normalsize
+\begin{tabular}{lccc}
+ Variable & Model 1 & Model 2 & Model 3 \\
+  \hline
+\hline
+Compliance Reciprocity$_{j,t-1}$ &  &  & $0.545^{\ast\ast}$ \\
+   &  &  & (0.112) \\
+  Sanction Reciprocity$_{j,t-1}$ &  &  & $-0.235^{\ast\ast}$ \\
+   &  &  & (0.061) \\
+   \hline
+Number of Senders$_{j}$ &  & $0.282^{\ast\ast}$ & $0.251^{\ast\ast}$ \\
+   &  & (0.055) & (0.055) \\
+  Distance$_{j}$ &  & $0.814^{\ast\ast}$ & $0.775^{\ast\ast}$ \\
+   &  & (0.212) & (0.215) \\
+  Trade$_{j,t-1}$ &  & -3.4 & -2.566 \\
+   &  & (5.944) & (4.978) \\
+  Ally$_{j,t-1}$ &  & -0.045 & 0.004 \\
+   &  & (0.181) & (0.182) \\
+   \hline
+Polity$_{i,t-1}$ & 0.014 & $0.029^{\ast}$ & 0.017 \\
+   & (0.016) & (0.017) & (0.017) \\
+  Ln(GDP per capita)$_{i,t-1}$ & $-0.265^{\ast\ast}$ & $-0.274^{\ast\ast}$ & $-0.213^{\ast\ast}$ \\
+   & (0.061) & (0.063) & (0.066) \\
+  GDP Growth$_{i,t-1}$ & -0.002 & 0.003 & -0.002 \\
+   & (0.015) & (0.015) & (0.015) \\
+  Population$_{i,t-1}$ & $-0.207^{\ast\ast}$ & $-0.212^{\ast\ast}$ & $-0.114^{\ast}$ \\
+   & (0.053) & (0.056) & (0.06) \\
+  Internal Conflict$_{i,t-1}$ & $0.024^{\ast}$ & 0.022 & 0.016 \\
+   & (0.014) & (0.014) & (0.014) \\
+   \hline
+n & 5342 & 5279 & 5279 \\
+  Events & 150 & 148 & 148 \\
+  Likelihood ratio test & 46.93 (0) & 83.77 (0) & 109.96 (0) \\
+   \hline
+\hline
+\end{tabular}
+}
+\caption{Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.}
+\label{tab:regResultsNoImp}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[ht]
+\centering
+{\normalsize
+\begin{tabular}{lcccccc}
+ Variable & N & Mean & Median & Std. Dev. & Min. & Max. \\
+  \hline
+\hline
+Compliance & 6183 & 0.03 & 0 & 0.17 & 0 & 1 \\
+  Compliance Reciprocity$_{j,t-1}$ & 6183 & 0.53 & -0.01 & 1.05 & -0.81 & 4.15 \\
+  Sanction Reciprocity$_{j,t-1}$ & 6183 & 3.36 & 1.9 & 4.21 & -1.1 & 21.19 \\
+  Number of Senders$_{j}$ & 6183 & 1.51 & 1 & 1.24 & 1 & 5 \\
+  Distance$_{j}$ & 6183 & 0.14 & 0 & 0.34 & 0 & 1 \\
+  Trade$_{j,t-1}$ & 6183 & 0.01 & 0.01 & 0.02 & 0 & 1 \\
+  Ally$_{j,t-1}$ & 6183 & 0.44 & 0 & 0.49 & 0 & 1 \\
+  Polity$_{i,t-1}$ & 6183 & 14.45 & 18 & 6.96 & 0 & 20 \\
+  Ln(GDP per capita)$_{i,t-1}$ & 6183 & 8.23 & 8.19 & 1.72 & 3.86 & 11.22 \\
+  GDP Growth$_{i,t-1}$ & 6183 & 3.6 & 3.66 & 4.5 & -42.45 & 46.5 \\
+  Population$_{i,t-1}$ & 6183 & 17.42 & 17.63 & 1.64 & 11.14 & 20.99 \\
+  Internal Conflict$_{i,t-1}$ & 6183 & 3.04 & 1 & 5.34 & 0 & 87 \\
+   \hline
+\hline
+\end{tabular}
+}
+\caption{Summary statistics of parameters included in duration model using imputed data.}
+\label{tab:summImp}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[ht]
+\centering
+{\normalsize
+\begin{tabular}{lcccccc}
+ Variable & N & Mean & Median & Std. Dev. & Min. & Max. \\
+  \hline
+\hline
+Compliance & 5279 & 0.03 & 0 & 0.17 & 0 & 1 \\
+  Compliance Reciprocity$_{j,t-1}$ & 5279 & 0.56 & -0.01 & 1.07 & -0.81 & 4.15 \\
+  Sanction Reciprocity$_{j,t-1}$ & 5279 & 3.61 & 1.96 & 4.35 & -1.1 & 21.19 \\
+  Number of Senders$_{j}$ & 5279 & 1.45 & 1 & 1.17 & 1 & 5 \\
+  Distance$_{j}$ & 5279 & 0.14 & 0 & 0.34 & 0 & 1 \\
+  Trade$_{j,t-1}$ & 5279 & 0.01 & 0.01 & 0.02 & 0 & 1 \\
+  Ally$_{j,t-1}$ & 5279 & 0.48 & 0 & 0.5 & 0 & 1 \\
+  Polity$_{i,t-1}$ & 5279 & 15.53 & 19 & 6.32 & 0 & 20 \\
+  Ln(GDP per capita)$_{i,t-1}$ & 5279 & 8.45 & 8.49 & 1.67 & 3.86 & 10.94 \\
+  GDP Growth$_{i,t-1}$ & 5279 & 3.55 & 3.48 & 4.37 & -42.45 & 34.8 \\
+  Population$_{i,t-1}$ & 5279 & 17.68 & 17.77 & 1.49 & 13.49 & 20.99 \\
+  Internal Conflict$_{i,t-1}$ & 5279 & 3.18 & 2 & 5.46 & 0 & 87 \\
+   \hline
+\hline
+\end{tabular}
+}
+\caption{Summary statistics of parameters included in duration model using original data.}
+\label{tab:summNoImp}
+\end{table}
+\efloatseparator
+ 

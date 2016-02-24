@@ -69,8 +69,6 @@ digitsep=fullstop
 \usepackage{tikz}
 % \usepackage{pgfplots}
 
-\usepackage{endfloat}
-
 % Spacing
 \usepackage[doublespacing]{setspace}
 
@@ -82,7 +80,7 @@ digitsep=fullstop
 	pdffitwindow=false,     % window fit to page when opened
 	pdfstartview={FitH},    % fits the width of the page to the window
 	pdfnewwindow=true,%
-	% pdfauthor={Cassy Dorff and Shahryar Minhas},%
+	pdfauthor={Cassy Dorff and Shahryar Minhas},%
 	pdftitle={Title},%
 	colorlinks,%
 	citecolor=black,%
@@ -125,28 +123,28 @@ digitsep=fullstop
 \title[Network Dependence and Sanction Compliance]{When Do States Say Uncle? Network Dependence and Sanction Compliance}
 % \date{Draft Copy \today}
 
-% \author[Dorff]{Cassy Dorff}
+\author[Dorff]{Cassy Dorff}
 % \address{Cassy Dorff: Department of Political Science}
 % \curraddr{Duke University, Durham, NC, 27708, USA}
 % \email{cassy.dorff@duke.edu}
 
-% \author[Minhas]{Shahryar Minhas}
+\author[Minhas]{Shahryar Minhas}
 % \address{Shahryar Minhas: Department of Political Science}
 % \curraddr{Duke University, Durham, NC, 27708, USA}
 % \email{shahryar.minhas@duke.edu}
 
-% \thanks{ This paper was prepared for 72$^{nd}$ annual Midwest Political Science Association Conference in Chicago, April 2-6 2014. We are grateful for comments on earlier versions of this paper received at the ISSS-ISAC Conference in Washington, D.C., October 4-6 2013. Alphabetical order implies equal authorship, all mistakes are our own.}
+%\thanks{This paper was prepared for 72$^{nd}$ annual Midwest Political Science Association Conference in Chicago, April 2-6 2014. We are grateful for comments on earlier versions of this paper received at the ISSS-ISAC Conference in Washington, D.C., October 4-6 2013. }
 
-\setlength{\headheight}{15pt}
-\setlength{\headsep}{20pt}
-\pagestyle{fancyplain}
+% \setlength{\headheight}{15pt}
+% \setlength{\headsep}{20pt}
+% \pagestyle{fancyplain}
  
-\fancyhf{}
+% \fancyhf{}
  
-\lhead{\fancyplain{}{}}
-\chead{\fancyplain{}{}}
-\rhead{\fancyplain{}{\thepage}}
-\rfoot{\fancyplain{}{}}
+% \lhead{\fancyplain{}{}}
+% \chead{\fancyplain{}{}}
+% \rhead{\fancyplain{}{}}
+% \rfoot{\fancyplain{}{}}
 
 % ----------------------------------------------- %
 
@@ -165,7 +163,11 @@ digitsep=fullstop
 % easy command for boldface math symbols
 \newcommand{\mbs}[1]{\boldsymbol{#1}}
 
-\graphicspath{{/Users/s7m/Dropbox/Research/Magnesium/Graphics/}, {/Users/janus829/Dropbox/Research/Magnesium/Graphics/}, {/Users/cassydorff/Dropbox/Research/Magnesium/Graphics/}}
+% define bibliography style
+%\bibliographystyle{/Users/janus829/Documents/APSR}
+
+\graphicspath{{/Users/cassydorff/Dropbox/Research/Magnesium/Graphics/}}
+%\graphicspath{{/Users/janus829/Dropbox/Research/Magnesium/Graphics/}}
 
 % -------------------------------------------------------- %
 
@@ -188,32 +190,5 @@ digitsep=fullstop
 
 \newpage\setcounter{page}{1} 
 
-%%%%%%%% INTRO %%%%%%%%
-\input{2_MagnesiumIntro}
-%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%% Lit Review %%%%%
-\input{3_MagnesiumLit}
-%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%% Theory %%%%%
-\input{4_MagnesiumTheory}
-%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%% Empirics %%%%%
-\input{5_MagnesiumEmp}
-%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%% Empirics %%%%%
-\input{6_MagnesiumFindings}
-%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%% Conclusion %%%%%
-\input{7_MagnesiumConcl}
-%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
-\bibliographystyle{APSR}
-\bibliography{magRefs.bib}
-
-\end{document} 
+\end{document}
