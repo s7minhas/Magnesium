@@ -11,40 +11,6 @@
  
 \begin{figure}[ht]
 \centering
-\caption{Reciprocity plots}
-\begin{tabular}{ccc}
-
-\subfloat[sub1][Compliance: 1972]{
-\includegraphics[width=.5\textwidth]{compNet_1972}
-\label{fig:comp72}} &
-
-\subfloat[sub1][Compliance: 1992]{
-\includegraphics[width=.5\textwidth]{compNet_1992}
-\label{fig:comp92}} \\
-
-\multicolumn{2}{c}{\subfloat[sub1][Compliance: 2012]{
-\includegraphics[width=.5\textwidth]{compNet_2012}
-\label{fig:comp02}}}
-
-% \subfloat[sub1][Sanction: 1972]{
-%  \includegraphics[width=.33\textwidth]{sancNet_1972}
-%  \label{fig:sanc72}} &
-
-% \subfloat[sub1][Sanction: 1992]{
-%  \includegraphics[width=.33\textwidth]{sancNet_1992}
-%  \label{fig:sanc92}} &
-
-% \subfloat[sub1][Sanction: 2012]{
-%  \includegraphics[width=.33\textwidth]{sancNet_2012}
-%  \label{fig:sanc02}}
-
-\end{tabular}
-\label{fig:recipNet}
-\end{figure}
-\efloatseparator
- 
-\begin{figure}[ht]
-\centering
 \caption{Survival probabilities over time by $Ln(GDP \; Capita)_{i,t-1}$. Red designates scenarios in which the covariate is set to its minimum value and blue where it is set to its maximum value. Darker shaded around each line represents the 90\% confidence interval and the lighter shaded area the 95\% confidence interval.}
 % \begin{tabular}{cc}
 
