@@ -116,8 +116,8 @@ names(sancData)[3] = 'sancFromSender'
 ###################################################
 
 ###################################################
-sancSender = 2
-sancReceiver = 560 # 740, 666, 560
+sancSender = 740 # 2
+sancReceiver = 732 # 740, 666, 560
 sendName = panel$cname[match(sancSender, panel$ccode)]
 recName = panel$cname[match(sancReceiver, panel$ccode)]
 
@@ -182,4 +182,9 @@ grid.arrange(ggActual, ggScores, nrow=2)
 
 compCnt[which(compCnt$ccodeR==2 & compCnt$ccodeS==666),]
 sancCnt[which(sancCnt$ccodeS==2 & sancCnt$ccodeR==666),]
+
+tmp = compScore[which(compScore$ccodeS %in% c(sancSender,sancReceiver) & compScore$ccodeR %in% c(sancSender,sancReceiver)),]
+tmp = tmp[tmp$ccodeS != tmp$ccodeR,]
+tmp = tmp[order(tmp$ccodeS),1:6]
+
 ###################################################
