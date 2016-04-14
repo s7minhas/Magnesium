@@ -132,7 +132,7 @@ ggData$sanc = ifelse(grepl('sanc', ggData$variable)*1==1, 'Sanction Cases', 'Com
 ggData$sender = ifelse(grepl('Sender', ggData$variable)*1==1, paste0('from ', sendName), paste0('from ', recName))
 
 theme_set(theme_grey())
-ggplot(ggData, aes(x=year, y=factor(value), color=factor(sender), group=variable, shape=factor(sender), alpha=factor(sender) )) +
+ggActual=ggplot(ggData, aes(x=year, y=factor(value), color=factor(sender), group=variable, shape=factor(sender), alpha=factor(sender) )) +
 	xlab('') + ylab('') +
 	geom_point(size=3) +
 	facet_wrap(~sanc) + 
@@ -158,10 +158,10 @@ slice = sancData[
 		)
 	]
 ggData = melt(slice, id=names(slice)[1:5])
-ggData$sanc = ifelse(grepl('sanc', ggData$variable)*1==1, 'Sanction Cases', 'Compliance Cases')
+ggData$sanc = ifelse(grepl('sanc', ggData$variable)*1==1, 'Sanction Reciprocity Score', 'Compliance Reciprocity Score')
 ggData$sender = ifelse(grepl('Sender', ggData$variable)*1==1, paste0('from ', sendName), paste0('from ', recName))
 
-ggplot(ggData, aes(x=year, y=value, color=factor(sender), group=variable, shape=factor(sender), alpha=factor(sender) )) +
+ggScores=ggplot(ggData, aes(x=year, y=value, color=factor(sender), group=variable, shape=factor(sender), alpha=factor(sender) )) +
 	xlab('') + ylab('') +
 	geom_line() +
 	facet_wrap(~sanc) + 
@@ -174,6 +174,9 @@ ggplot(ggData, aes(x=year, y=value, color=factor(sender), group=variable, shape=
 		panel.border=element_blank(),
 		axis.ticks=element_blank()
 		)
+
+loadPkg('gridExtra')
+grid.arrange(ggActual, ggScores, nrow=2)
 
 compCnt[which(compCnt$ccodeR==2 & compCnt$ccodeS==666),]
 sancCnt[which(sancCnt$ccodeS==2 & sancCnt$ccodeR==666),]
