@@ -31,9 +31,7 @@ To establish the existence of reciprocity we assume that (1) reciprocity is best
 
 Reciprocity captures the development of strategic expectations that shape state's compliance behavior during sanctions. Overtime, previous reciprocal interactions inform a target state's decision to comply. Our basic intuition is that when a target state has a richer history of reciprocal compliance with sender states, they will more swiftly comply with the senders' demands. This intuition generates the primary hypothesis of this study, that \textit{reciprocity creates an underlying level of expected behavior which influences patterns of compliance among target states.} Importantly, our claim does not demand that reciprocity always work in some inherently ``good'' or ``bad'' way, but instead can prolong or shorten sanctions depending on which kind of past reciprocal behavior has occurred. This concept thus requires that we specify which forms of reciprocity should matter in the case of sanctions. We argue that reciprocity influences sanction outcomes through two forms: \textit{compliance reciprocity} and \textit{sanction reciprocity}. 
 
-Compliance reciprocity represents a target states' cumulative history of compliance with a particular sender relative to all others in the network. We consider this relative history of compliance to indicate an established norm of cooperation between states. Thus, compliance reciprocity allows us to account for whether those who have a history of cooperative behavior with each other also tend to have more cooperative behavior in the future. In the sanction-duration context, states who receive sanctions from those with whom they have a history of reciprocal compliance are likely to comply sooner than they would with lower states to whom they have not had positive reciprocal interactions. 
-
-Notably, this concept is distinct from a simple consideration of past instances of compliance with another state. Such a measure would completely ignore the fact that each state's actions are conditional on all other interactions between states. For example, if state $i$ complies often to state $j$, is state $i$ also more likely to comply with all other partner states? Or, relative to all other interactions, does state $i$ comply more frequently and uniquely with state $j$? The latter idea is the one explicated within our  concept of compliance reciprocity. Thus, reciprocity tells us information about the behavior between country $i$ and $j$ over time, relative to how country $i$ interacts with all other partners over time. 
+Compliance reciprocity represents a target states' cumulative history of compliance with a particular sender relative to all others in the network. We consider this relative history of compliance to indicate an established norm of cooperation between states. Thus, compliance reciprocity allows us to account for whether those who have a history of cooperative behavior with each other also tend to have more cooperative behavior in the future. In the sanction-duration context, states who receive sanctions from those with whom they have a history of reciprocal compliance are likely to comply sooner than they would with lower states to whom they have not had positive reciprocal interactions. Notably, this concept is distinct from a simple consideration of past instances of compliance with another state. Such a measure would completely ignore the fact that each state's actions are conditional on all other interactions between states. For example, if state $i$ complies often to state $j$, is state $i$ also more likely to comply with all other partner states? Or, relative to all other interactions, does state $i$ comply more frequently and uniquely with state $j$? The latter idea is the one explicated within our  concept of compliance reciprocity. Thus, reciprocity tells us information about the behavior between country $i$ and $j$ over time, relative to how country $i$ interacts with all other partners over time. 
 
 %CD: dotchart or some plot of COMPLIANCE reciprocity over time goes HERE
 
@@ -85,4 +83,36 @@ Given these quantities, one can calculate individual effects for a variety of co
 \doublespacing
 The first two equations show how the final equation for reciprocity is calculated relative to the general actor and partner effects (or actor and partner average behavior) for each country.\footnote{\cite{kenny1994interpersonal} would suggest including the full compliment of the SRM into our model. We originally explored this approach, but gained little empirical leverage from it, and thus focus instead on the concept of reciprocity.} In figure \ref{fig:recipNet}, we provide a visualization of the \textit{compliance reciprocity} measure generated using the approach laid out above for 1972, 1992, and 2012. In each panel, we include the reciprocity scores for the ten countries that were most active in the sanctioning network at that year. Each of the edges are directional and indicate how likely a country is to reciprocate compliance from another; reciprocity scores that are negative are designated in red and positive are in blue. For example, in every panel shown here, Israel exclusively has negative incoming edges, indicating that the countries shown in these panels are all unlikely to reciprocate a compliant action from Israel. On the other hand, across all panels the United States almost exclusively has positive incoming edges, indicating that countries are very likely to reciprocate compliance behavior from the United States. More interesting, however, is the fact that there exists significant variation in whether countries reciprocate behavior. Canada is likely to reciprocate the actions of the United Kingdom but not Russia or Japan, while others countries like France are likely to reciprocate the behavior of Japan but not others like Germany.
 
+\begin{figure}[ht]
+	\centering
+	\caption{Reciprocity plots}
+	\begin{tabular}{ccc}
 
+	\subfloat[sub1][Compliance: 1972]{
+		\includegraphics[width=.5\textwidth]{compNet_1972}
+		\label{fig:comp72}} & 
+
+	\subfloat[sub1][Compliance: 1992]{
+		\includegraphics[width=.5\textwidth]{compNet_1992}
+		\label{fig:comp92}} \\
+
+	\multicolumn{2}{c}{\subfloat[sub1][Compliance: 2012]{
+			\includegraphics[width=.5\textwidth]{compNet_2012}
+			\label{fig:comp02}}}
+
+	% \subfloat[sub1][Sanction: 1972]{
+	% 	\includegraphics[width=.33\textwidth]{sancNet_1972}
+	% 	\label{fig:sanc72}} & 
+
+	% \subfloat[sub1][Sanction: 1992]{
+	% 	\includegraphics[width=.33\textwidth]{sancNet_1992}
+	% 	\label{fig:sanc92}} & 
+
+	% \subfloat[sub1][Sanction: 2012]{
+	% 	\includegraphics[width=.33\textwidth]{sancNet_2012}
+	% 	\label{fig:sanc02}}
+
+	\end{tabular}
+	\label{fig:recipNet}
+\end{figure}
+\FloatBarrier
