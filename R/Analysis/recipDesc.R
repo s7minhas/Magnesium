@@ -117,7 +117,7 @@ names(sancData)[3] = 'sancFromSender'
 
 ###################################################
 sancSender = 2
-sancReceiver = 740
+sancReceiver = 560 # 740, 666, 560
 sendName = panel$cname[match(sancSender, panel$ccode)]
 recName = panel$cname[match(sancReceiver, panel$ccode)]
 
@@ -128,7 +128,8 @@ slice = sancData[
 		)
 	]
 ggData = melt(slice, id=names(slice)[1:5])
-ggData$sanc = ifelse(grepl('sanc', ggData$variable)*1==1, 'Sanction Cases', 'Compliance Cases')
+ggData$sanc = ifelse(grepl('sanc', ggData$variable)*1==1, 'Sanction Cases', 'Compliance Cases') %>% factor()
+ggData$sanc = factor(ggData$sanc, levels=rev(levels(ggData$sanc)))
 ggData$sender = ifelse(grepl('Sender', ggData$variable)*1==1, paste0('from ', sendName), paste0('from ', recName))
 
 theme_set(theme_grey())
@@ -158,7 +159,8 @@ slice = sancData[
 		)
 	]
 ggData = melt(slice, id=names(slice)[1:5])
-ggData$sanc = ifelse(grepl('sanc', ggData$variable)*1==1, 'Sanction Reciprocity Score', 'Compliance Reciprocity Score')
+ggData$sanc = ifelse(grepl('sanc', ggData$variable)*1==1, 'Sanction Reciprocity Score', 'Compliance Reciprocity Score') %>% factor()
+ggData$sanc = factor(ggData$sanc, levels=rev(levels(ggData$sanc)))
 ggData$sender = ifelse(grepl('Sender', ggData$variable)*1==1, paste0('from ', sendName), paste0('from ', recName))
 
 ggScores=ggplot(ggData, aes(x=year, y=value, color=factor(sender), group=variable, shape=factor(sender), alpha=factor(sender) )) +
