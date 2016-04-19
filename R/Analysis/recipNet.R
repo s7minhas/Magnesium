@@ -49,8 +49,8 @@ for(yr in yrs){
 	rownames(adj) = colnames(adj) = panel$abb[match(rownames(adj), panel$ccode)]
 
 	# Pick most active countries
-	topS=names(sort(rowSums(abs(adj)), decreasing=TRUE)[1:5])
-	topR=names(sort(colSums(abs(adj)), decreasing=TRUE)[1:5])
+	topS=names(sort(rowSums(abs(adj)), decreasing=TRUE)[1:3])
+	topR=names(sort(colSums(abs(adj)), decreasing=TRUE)[1:3])
 	top = unique(c(topS, topR))
 	adjSub = adj[top, top]
 
@@ -67,8 +67,8 @@ for(yr in yrs){
 	curves = autocurve.edges2(g)
 	setwd(pathGraphics)
 	if(printPlot){
-		if(compliance){ pdf(file=paste0('compNet_',yr,'.pdf'), width=6, height=6) }
-		if(!compliance){ pdf(file=paste0('sancNet_',yr,'.pdf'), width=6, height=6) } }
+		if(compliance){ pdf(file=paste0('compNet3_',yr,'.pdf'), width=6, height=6) }
+		if(!compliance){ pdf(file=paste0('sancNet3_',yr,'.pdf'), width=6, height=6) } }
 	par(mar=c(1,1,1,1), mgp=c(1.5,.5,0))		
 	plot.igraph(g, 
 		layout=layout.circle,	
@@ -77,7 +77,7 @@ for(yr in yrs){
 		vertex.label.color='black',
 		vertex.size=sqrt(V(g)$weight) + 18,
 		edge.width=E(g)$weight,
-		edge.arrow.size=.5,
+		edge.arrow.size=.7,
 		edge.curved = curves,
 		asp=FALSE
 		)
