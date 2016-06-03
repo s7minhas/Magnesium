@@ -4,12 +4,12 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=TRUE
+genTikz=FALSE
 
-for(imputeLogical in c(TRUE, FALSE)){
+# for(imputeLogical in c(TRUE, FALSE)){
 # Use imputed data
-impute=imputeLogical
-# impute=TRUE
+# impute=imputeLogical
+impute=TRUE
 ###############################################################
 setwd(pathData)
 if(!impute){load('durDataEcon_SancOnly.rda'); tableName='durModelResultsNoImp.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
@@ -112,22 +112,6 @@ modelFinal=coxph(Surv(start,stop,compliance) ~
 	, data=modData)
 summary(modelFinal)
 ###############################################################
-
-############################################################### 
-# Diagnostics
-
-# Nonlinearity in continuous covariates
-# pspline
-
-# # Testing proportionality assumption, 99% CI
-# cox.zph(modelFinal)
-# par(mfrow=c(3,4))
-# plot(cox.zph(modelFinal, transform='identity'))
-# par(mfrow=c(1,1))
-
-# No Evid of nonprop, if there was then would interact with log.time
-# modData$gdpGRStop=I(modData$lag1_gdpGR*log(modData$stop))
-############################################################### 
 
 ############################################################### 
 # Table for TeX

@@ -4,7 +4,7 @@ if(Sys.info()["user"]=="cassydorff"){
 source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=TRUE
+genTikz=FALSE
 
 ###############################################################
 setwd(pathData)

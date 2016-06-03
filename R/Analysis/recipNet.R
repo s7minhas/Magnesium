@@ -23,7 +23,7 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/SRM.R')
 compliance=TRUE
 
 # To print plots set to true
-printPlot=TRUE
+printPlot=FALSE
 
 setwd(pathData)
 if(compliance){ 
@@ -49,8 +49,8 @@ for(yr in yrs){
 	rownames(adj) = colnames(adj) = panel$abb[match(rownames(adj), panel$ccode)]
 
 	# Pick most active countries
-	topS=names(sort(rowSums(abs(adj)), decreasing=TRUE)[1:3])
-	topR=names(sort(colSums(abs(adj)), decreasing=TRUE)[1:3])
+	topS=names(sort(rowSums(abs(adj)), decreasing=TRUE)[1:4])
+	topR=names(sort(colSums(abs(adj)), decreasing=TRUE)[1:4])
 	top = unique(c(topS, topR))
 	adjSub = adj[top, top]
 

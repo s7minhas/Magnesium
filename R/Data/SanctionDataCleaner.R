@@ -93,7 +93,7 @@ sanctionData <- cbind(sanctionData, temp1, temp2)
 # 	sanctionData$issue2%in%econ |
 # 	sanctionData$issue3%in%econ), ]
 
-# Sanctions covering all issues
+# # Sanctions covering all issues
 # sanctionData=sanctionData
 
 # Only include cases that involve the imposition of sanctions
