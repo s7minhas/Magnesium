@@ -15,8 +15,9 @@
 \usepackage{fancyhdr}
 \usepackage{parallel}
 \usepackage{parcolumns}
-\renewcommand{\abstractname}{\vspace{-\baselineskip}}
-
+%\usepackage{abstract}
+%\renewcommand{\abstractname}{}    % clear the title
+%\renewcommand{\absnamepos}{empty} % originally center
 
 % math typesetting
 \usepackage{array}
@@ -194,11 +195,11 @@ Shahryar Minhas\\
 \doublespacing 
 
 \begin{document}
-
+\renewcommand{\abstractname}{ }
 \maketitle\thispagestyle{empty}
 
 \begin{abstract}
-
+\abstractname{}
 \singlespacing{\input{1_Abstract}}
 
 \end{abstract}
