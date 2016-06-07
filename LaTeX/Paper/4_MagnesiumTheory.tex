@@ -71,12 +71,19 @@ First, we begin with calculating the row column and total sums:
 Given these quantities, one can calculate individual effects for a variety of concepts, such as the actor, partner, and unique dyadic effects, (as well as the variances attributed to each of these effects). The unique dyadic effects, or the reciprocal interactions between two countries within one pair, are calculated accounting for the general behavior of each country within the pair. Or, in other words, this measure captures the likelihood of $i$ complying to $j$ while controlling for the tendency of $i$ to comply to others and for $j$ to have had its sanctions complied to from other countries. By calculating the likelihood of a pair of countries complying to each other relative to how likely they are to comply to any other country we are able to control for nodal specific effects that often arise in networks. Specifically, we are able to account for the fact that some countries might simply be more likely to comply or refuse to comply to a sanction than others. Accounting for reciprocity in this way enables us to better measure the concept of reciprocity. 
 
  \begin{itemize}
-	 \item The actor effect for observation $i$ is the total of $i$'s row mean and column mean, minus the overall mean.  The means are just the sums, corrected for degrees of freedom, yielding an average row effect:\\
-	 $\hat{a}_i = \frac{(n-1)^2}{n(n-2)} X_{i \cdot} + \frac{(n-1)}{n(n-2)} X_{\cdot i} -  \frac{n-1}{n-2} X_{\cdot \cdot} $
-	\item Similarly the column mean for actor $i$ is \\
-	 $\hat{b}_i = \frac{(n-1)^2}{n(n-2)} X_{\cdot i} + \frac{(n-1)}{n(n-2)} X_{i \cdot } -  \frac{n-1}{n-2} X_{\cdot \cdot} $.\\ For a symmetric matrix, the row effect and the column effect will be identical.
-	\item The unique dyadic effect, or reciprocity for specific dyad $ij$, simply subtracts the row and column effects along with the overall mean out of the value for dyad $ij$. \\
-	$\hat{g}_{ij} = X_{ij} - \hat{a}_i - \hat{b}_j - X_{\cdot \cdot}$
+	 \item []The actor effect for observation $i$ is the total of $i$'s row mean and column mean, minus the overall mean.  The means are just the sums, corrected for degrees of freedom, yielding an average row effect:\\
+	\begin{equation}
+	{\hat{a}_i = \frac{(n-1)^2}{n(n-2)} X_{i \cdot} + \frac{(n-1)}{n(n-2)} X_{\cdot i} -  \frac{n-1}{n-2} X_{\cdot \cdot} }
+	\end{equation}
+	\item[] Similarly the column mean for actor $i$ is \\
+	\begin{equation}
+	 \hat{b}_i = \frac{(n-1)^2}{n(n-2)} X_{\cdot i} + \frac{(n-1)}{n(n-2)} X_{i \cdot } -  \frac{n-1}{n-2} X_{\cdot \cdot}.\\
+	 \end{equation}
+	  For a symmetric matrix, the row effect and the column effect will be identical.
+	\item[] The unique dyadic effect, or reciprocity for specific dyad $ij$, simply subtracts the row and column effects along with the overall mean out of the value for dyad $ij$. \\
+	\begin{equation}
+	\hat{g}_{ij} = X_{ij} - \hat{a}_i - \hat{b}_j - X_{\cdot \cdot}
+	\end{equation}
  \end{itemize}
 
 \doublespacing
