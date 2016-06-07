@@ -39,6 +39,7 @@ digitsep=fullstop
 
 % to adapt caption style
 \usepackage[font={small},labelfont=bf]{caption}
+
  
 % references
 \usepackage[longnamesfirst]{natbib}
@@ -127,6 +128,9 @@ digitsep=fullstop
 \patchcmd{\@setauthors}{\MakeUppercase}{}{}{}
 \patchcmd{\section}{\scshape}{}{}{}
 \makeatother
+
+\usepackage{caption}
+\captionsetup[FLOAT_TYPE]{labelsep=empty}
 
 % -------------------------------------------------- %
 
