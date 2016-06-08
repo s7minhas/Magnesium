@@ -3,10 +3,10 @@ source('~/Research/Magnesium/R/Setup.R')}
 
 # Load sanction network Data
 setwd(pathData)
-load('sanctionData.rda')
+load('sanctionData_all.rda')
 sendIDs=paste('sender',1:5,'_ccode',sep='')
 sdata=sanctionData[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
-load('sanctionNet.rda')
+load('sanctionNet_all.rda')
 setwd(pathPData)
 load('panel.rda')
 ###################################################
@@ -84,17 +84,17 @@ V(smatAdj)$name[ which( ! V(smatAdj)$name %in% keep) ]=""
 
 setwd(pathGraphics)
 # pdf(file='84net.pdf',height=10,width=15)
-set.seed(12345)
+set.seed(6886)
 plot(smatAdj, 
 	# layout=layout.kamada.kawai, 
 	layout=layout.fruchterman.reingold,
 		  # main=paste(years[ii], 'Sanction Network'),
 		  main='',
           vertex.label=V(smatAdj)$name, vertex.size=2,
-          vertex.label.dist=0.5, vertex.label.cex=.7,
+          vertex.label.dist=0.25, vertex.label.cex=.7,
           vertex.color=matColors,
            vertex.label.color="black", 
-          edge.arrow.size=0.5, edge.color=brewer.pal(8,'Greys')[3],
+          edge.arrow.size=0.5, edge.color=brewer.pal(8,'Greys')[2],
           edge.width=E(smatAdj)$weight,
           edge.curved=F)
 # dev.off()

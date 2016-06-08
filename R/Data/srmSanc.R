@@ -19,8 +19,8 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/SRM.R')
 ############################################################
 # Load sanction & compliance network Data
 setwd(pathData)
-load('sanctionNet.rda') #smatList, #csmatlist (cumulative)
-load('complianceNet.rda') #cmatList, #ccmatlist (cumulative)
+load('sanctionNet_all.rda') #smatList, #csmatlist (cumulative)
+load('complianceNet_all.rda') #cmatList, #ccmatlist (cumulative)
 ############################################################
 
 ############################################################
@@ -75,7 +75,7 @@ colmeans=lapply(compNet, function(x) FUN=x$colmeans)
 
 # Save data
 setwd(pathData)
-save(actorEffect, rcvrEffect, ueffect, colmeans, file='compSRM.rda')
+save(actorEffect, rcvrEffect, ueffect, colmeans, file='compSRM_all.rda')
 ############################################################
 
 ############################################################
@@ -90,5 +90,5 @@ Scolmeans=lapply(sancNet, function(x) FUN=x$colmeans)
 
 # Save data
 setwd(pathData)
-save(SactorEffect, SrcvrEffect, Sueffect, Scolmeans, file='sancSRM.rda')
+save(SactorEffect, SrcvrEffect, Sueffect, Scolmeans, file='sancSRM_all.rda')
 ############################################################

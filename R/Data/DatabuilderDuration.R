@@ -9,7 +9,7 @@ source('~/ProjectsGit/Magnesium/R/Setup.R')}
 setwd(pathPData)
 load('panel.rda')
 setwd(pathData)
-load('sanctionData.rda')
+load('sanctionData_all.rda')
 load('monadData.rda')
 load('dyadMats.rda')
 load('mindistMatrices.rda')
@@ -152,7 +152,7 @@ aData <- merge(x=durData, y=targetData, by.x='tyear', by.y='cyear', all.x=T)
 ###############################################################
 # Compliance Node level network measures from SRM
 setwd(pathData)
-load('compSRM.rda') # contains actorEffect, rcvrEffect, ueffect, colmeans
+load('compSRM_all.rda') # contains actorEffect, rcvrEffect, ueffect, colmeans
 
 unpackSRM=function(srmObject, dim=T){
 
@@ -232,7 +232,7 @@ aData=cbind(aData, uDataRST, uData, uData2)
 ###############################################################
 # Sanction  Node level network measures from SRM
 setwd(pathData)
-load('sancSRM.rda') # contains SactorEffect, SrcvrEffect, Sueffect, Scolmeans
+load('sancSRM_all.rda') # contains SactorEffect, SrcvrEffect, Sueffect, Scolmeans
 
 SactorData=unpackSRM(SactorEffect)
 SrcvrData=unpackSRM(SrcvrEffect)
@@ -423,7 +423,7 @@ aData$Spartner = aData$Spartner + abs(minNA(aData$Spartner))
 ###############################################################
 setwd(pathData)
 
-if(!impute){save(aData, file='durDataEcon_SancOnly.rda')}
-if(impute){save(aData, file='durDataEconImp_SancOnly.rda')}
+if(!impute){save(aData, file='durData_SancOnly_all.rda')}
+if(impute){save(aData, file='durDataImp_SancOnly_all.rda')}
 ###############################################################
 }

@@ -27,8 +27,8 @@ printPlot=FALSE
 
 setwd(pathData)
 if(compliance){ 
-	load('compSRM_all.rda') } else { 
-	load('sancSRM_all.rda'); ueffect=Sueffect }
+	load('compSRM.rda') } else { 
+	load('sancSRM.rda'); ueffect=Sueffect }
 ###################################################
 
 ###################################################
@@ -38,7 +38,8 @@ panel$abb[panel$cname=='German Democratic Republic'] = 'GDR'
 panel$abb[panel$cname=='Zanzibar'] = 'ZNZ'
 panel$abb[panel$cname=='Kosovo'] = 'KOS'
 
-yrs = char(seq(1962, 2012, 10))
+yrs = as.character(seq(1962, 2012, 10))
+yrs = char(c(1972, 1992, 2012))
 ecols = brewer.pal(3, 'RdBu')[c(1,3)]
 for(yr in yrs){
 
@@ -67,8 +68,8 @@ for(yr in yrs){
 	curves = autocurve.edges2(g)
 	setwd(pathGraphics)
 	if(printPlot){
-		if(compliance){ pdf(file=paste0('compNet_',yr,'.pdf'), width=6, height=6) }
-		if(!compliance){ pdf(file=paste0('sancNet_',yr,'.pdf'), width=6, height=6) } }
+		if(compliance){ pdf(file=paste0('compNet3_',yr,'.pdf'), width=6, height=6) }
+		if(!compliance){ pdf(file=paste0('sancNet3_',yr,'.pdf'), width=6, height=6) } }
 	par(mar=c(1,1,1,1), mgp=c(1.5,.5,0))		
 	plot.igraph(g, 
 		layout=layout.circle,	

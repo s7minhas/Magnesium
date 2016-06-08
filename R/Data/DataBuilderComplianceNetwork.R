@@ -4,7 +4,7 @@ source('~/Research/Magnesium/R/Setup.R')}
 ####################################################################
 # Load sanction network Data
 setwd(pathData)
-load('sanctionData.rda')
+load('sanctionData_all.rda')
 ####################################################################
 
 ####################################################################
@@ -79,5 +79,5 @@ names(ccmatList)=years
 
 ####################################################################
 setwd(pathData)
-save(cmatList, ccmatList, file='complianceNet.rda')
+save(cmatList, ccmatList, file='complianceNet_all.rda')
 ####################################################################/

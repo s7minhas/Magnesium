@@ -5,7 +5,7 @@ source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Load sanction network Data
 setwd(pathData)
-load('sanctionData.rda') # Loads object called sanctionDataFinal
+load('sanctionData_all.rda') # Loads object called sanctionData
 
 sendIDs=paste('sender',1:5,'_ccode',sep='')
 sdata=sanctionData[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
@@ -67,5 +67,5 @@ names(csmatList)=years
 ####################################################################
 # Saving results
 setwd(pathData)
-save(smatList, csmatList, file='sanctionNet.rda')
+save(smatList, csmatList, file='sanctionNet_all.rda')
 ####################################################################

@@ -1,10 +1,7 @@
-#Purpose: This file adds country names to the Sanctions dataset
-
 #Setup
-if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
-source('~/Research/Magnesium/R/Setup.R')
-load('~/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
-}
+if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){ 
+	source('~/Research/Magnesium/R/Setup.R') 
+	load('~/Research/Magnesium/R/Data/BuildingPanelData/panel.rda') }
 
 ###############################################################
 setwd(paste(pathData, '/Components', sep=''))
@@ -83,22 +80,31 @@ sanctionData <- cbind(sanctionData, temp1, temp2)
 ###############################################################
 
 ###############################################################
-# # Subsetting to economic sanctions
-# econ <- c(4, 13, 14)
-# # econ <- c(4, 8, 12, 13, 14)
-# sanctionData$issue1[is.na(sanctionData$issue1)] <- 0
-# sanctionData$issue2[is.na(sanctionData$issue2)] <- 0
-# sanctionData$issue3[is.na(sanctionData$issue3)] <- 0
-# sanctionData <- sanctionData[which(sanctionData$issue1%in%econ |
-# 	sanctionData$issue2%in%econ |
-# 	sanctionData$issue3%in%econ), ]
-
-# # Sanctions covering all issues
-# sanctionData=sanctionData
-
 # Only include cases that involve the imposition of sanctions
 sanctionData = sanctionData[sanctionData$imposition==1,]
-###############################################################
 
-setwd(pathData)
-save(sanctionData, file='sanctionData.rda')
+# Choose which set of sanctions to focus on
+# sanctionData.rda = all imposed sanctions
+# sanctionData_econ.rda = all econ-related imposed sanctions
+# sanctionData_secur.rda = all security-related imposed sanctions
+choice = 'all' # all, secur, or econ
+
+if(choice=='all'){
+	save(sanctionData, file=paste0(pathData, '/sanctionData_all.rda'))
+}
+
+if(choice=='secur'){
+	issueSubset <- c(1:3,5:11)
+	fname=paste0(pathData, '/sanctionData_secur.rda')
+
+	# Subset
+	sanctionData$issue1[is.na(sanctionData$issue1)] <- 0
+	sanctionData$issue2[is.na(sanctionData$issue2)] <- 0
+	sanctionData$issue3[is.na(sanctionData$issue3)] <- 0
+	sanctionData <- sanctionData[which(sanctionData$issue1%in%issueSubset |
+		sanctionData$issue2%in%issueSubset |
+		sanctionData$issue3%in%issueSubset), ]
+
+	save(sanctionData, file=fname)
+}
+###############################################################
