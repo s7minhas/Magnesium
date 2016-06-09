@@ -1,0 +1,44 @@
+% latex table generated in R 3.3.0 by xtable 1.8-2 package
+% Wed Jun  8 19:20:39 2016
+\begin{table}[ht]
+\centering
+\begingroup\normalsize
+\begin{tabular}{lcc}
+ Variable & Model 1 & Model 2 \\ 
+  \hline
+\hline
+Compliance Reciprocity$_{j,t-1}$ & $0.685^{\ast\ast}$ & $0.752^{\ast\ast}$ \\ 
+   & (0.341) & (0.245) \\ 
+  Sanction Reciprocity$_{j,t-1}$ & $-0.521^{\ast\ast}$ & $-0.476^{\ast\ast}$ \\ 
+   & (0.234) & (0.18) \\ 
+   \hline
+Number of Senders$_{j}$ & 0.097 & $0.107^{\ast}$ \\ 
+   & (0.075) & (0.061) \\ 
+  Distance$_{j}$ & 0.387 & $0.511^{\ast}$ \\ 
+   & (0.341) & (0.285) \\ 
+  Trade$_{j,t-1}$ & -2.992 & -2.731 \\ 
+   & (5.723) & (4.876) \\ 
+  Ally$_{j,t-1}$ & -0.312 & -0.184 \\ 
+   & (0.287) & (0.252) \\ 
+   \hline
+Polity$_{i,t-1}$ & 0.02 & 0.015 \\ 
+   & (0.021) & (0.017) \\ 
+  Ln(GDP per capita)$_{i,t-1}$ & -0.016 & -0.035 \\ 
+   & (0.1) & (0.092) \\ 
+  GDP Growth$_{i,t-1}$ & -0.002 & 0.003 \\ 
+   & (0.018) & (0.017) \\ 
+  Population$_{i,t-1}$ & -0.045 & -0.024 \\ 
+   & (0.089) & (0.071) \\ 
+  Internal Conflict$_{i,t-1}$ & 0.005 & 0.003 \\ 
+   & (0.018) & (0.016) \\ 
+   \hline
+n & 1535 & 2245 \\ 
+  Events & 71 & 101 \\ 
+  Likelihood ratio test & 12.17 (0.35) & 17.02 (0.11) \\ 
+   \hline
+\hline
+\end{tabular}
+\endgroup
+\caption{Here we focus on predicting the time until compliance for sanctions not related to economic issues. The first column shows duration model results on unimputed data with time varying covariates estimated using Cox Proportional Hazards, and the second with using imputed data. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.} 
+\label{tab:regResultsNonEconSanctions}
+\end{table}

@@ -1,10 +1,4 @@
-if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
-source('~/Research/Magnesium/R/Setup.R')}
-if(Sys.info()["user"]=="cassydorff"){
-source('~/ProjectsGit/Magnesium/R/Setup.R')}
-
-# Gen tikz
-genTikz=TRUE
+source('Setup.R')
 
 ###############################################################
 # Variable key
@@ -23,9 +17,9 @@ varDef = cbind (
 	,'Internal Conflict$_{i,t-1}$' ) )
 
 # Load data and run models
-securDataPath = paste0(pathData, c('/durData_SancOnly_secur.rda', '/durDataImp_SancOnly_secur.rda') )
+pathDataSecur = paste0(pathData, c('durData_SancOnly_secur.rda', 'durDataImp_SancOnly_secur.rda') )
 
-mods = lapply(securDataPath, function(x){
+mods = lapply(pathDataSecur, function(x){
 	load(x)
 	ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 	names(ids)=c('targetstate','fcode')
@@ -51,10 +45,10 @@ mods = lapply(securDataPath, function(x){
 ############################################################### 
 # Table for TeX
 durTables=durTable(mods, varDef)
-tableName=paste0(pathTex, '/durModelResultsNoImp_secur.tex')
+tableName=paste0(pathGraphics, 'durModelResultsNoImp_secur.tex')
 label='tab:regResultsNonEconSanctions'
-caption='Here we focus on predicting the time until compliance for sanctions not related to economic issues. The first column shows duration model results on unimputed data with time varying covariates estimated using Cox Proportional Hazards, and the second with using imputed data. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
-if(genTikz){ print.xtable( xtable(durTables, align='llcc', 	
+caption='Here we focus on predicting the time until compliance for sanctions not related to economic issues. The first column shows duration model results on unimputed data with time varying covariates estimated using Cox Proportional Hazards, and the second with using imputed data. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+print.xtable( xtable(durTables, align='llcc', 	
 	caption=caption,
 	label=label
 	),
@@ -62,5 +56,5 @@ if(genTikz){ print.xtable( xtable(durTables, align='llcc',
 	hline.after=c(0,0,4,12,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
 	size='normalsize',
 	file=tableName
-	) }
+	)
 ############################################################### 

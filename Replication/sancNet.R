@@ -1,21 +1,16 @@
-if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
-source('~/Research/Magnesium/R/Setup.R')}
+source('Setup.R')
 
 # Load sanction network Data
-setwd(pathData)
-load('sanctionData_all.rda')
+load( paste0(pathData, 'sanctionData_all.rda') )
 sendIDs=paste('sender',1:5,'_ccode',sep='')
 sdata=sanctionData[,c('targetstate_ccode',sendIDs,'startyear','endyear','caseid')]
-load('sanctionNet_all.rda')
-setwd(pathPData)
-load('panel.rda')
+load( paste0(pathData, 'sanctionNet_all.rda') )
+load( paste0(pathData, 'panel.rda') ) 
 ###################################################
 
 ###################################################
 # Helper function to create adjacency matrix for plot.igraph
 creatAdj = function(mat, top=TRUE, mult=1.5, shortName=TRUE){
-	setwd(pathPData)
-	load('panel.rda')
 	ctrs=panel$CNTRY_NAME[match(rownames(mat),panel$ccode)]
 	rownames(mat)=ctrs; colnames(mat)=ctrs
 	# Dropping cases with no send/rec
@@ -57,12 +52,12 @@ netColors$X1=as.character(netColors$X1);netColors$X2=as.character(netColors$X2)
 netColors$X1[netColors$X1=='Congo, DRC'] = "Congo, Democratic Republic of"
 netColors$ccode=panel$ccode[match(netColors$X1, panel$CNTRY_NAME)]
 
-# ## Plot map with colors
-# setwd(pathGraphics)
-# pdf('MapLegend.pdf', width = 5, height = 3)
-# par(mar=c(0,0,0,0), oma=c(0,0,0,0))
-# plot(map84, col=farben, lwd=1e-200)
+## Plot map with colors
+# pdf(paste0(pathGraphics, 'MapLegend.pdf'), width = 5, height = 3)
+par(mar=c(0,0,0,0), oma=c(0,0,0,0))
+plot(map84, col=farben, lwd=1e-200)
 # dev.off()
+# system(paste0('pdfcrop ', paste0(pathGraphics, 'MapLegend.pdf '), paste0(pathGraphics, 'MapLegend.pdf')))
 
 # Plot network
 par(mar=c(0,0,0,0), oma=c(0,0,0,0), mfrow=c(1,1))
@@ -82,13 +77,11 @@ V(smatAdj)$name[V(smatAdj)$name=='South Africa']='S. Africa'
 keep=names(degree(smatAdj)[degree(smatAdj)>quantile(degree(smatAdj),0.8)])
 V(smatAdj)$name[ which( ! V(smatAdj)$name %in% keep) ]=""
 
-setwd(pathGraphics)
-pdf(file='84net.pdf',height=10,width=15)
+fname = paste0(pathGraphics, '84net.pdf')
+# pdf(file=fname,height=10,width=15)
 set.seed(12345)
 plot(smatAdj, 
-	# layout=layout.kamada.kawai, 
 	layout=layout.fruchterman.reingold,
-		  # main=paste(years[ii], 'Sanction Network'),
 		  main='',
           vertex.label=V(smatAdj)$name, vertex.size=2,
           vertex.label.dist=0.25, vertex.label.cex=.5,
@@ -97,5 +90,6 @@ plot(smatAdj,
           edge.arrow.size=0.5, edge.color=brewer.pal(9,'Greys')[3],
           edge.width=E(smatAdj)$weight,
           edge.curved=F)
-dev.off()
+# dev.off()
+# system(paste0('pdfcrop ', fname, ' ', fname ))
 ###################################################

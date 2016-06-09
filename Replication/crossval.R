@@ -1,11 +1,7 @@
-if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
-source('~/Research/Magnesium/R/Setup.R')}
-if(Sys.info()["user"]=="cassydorff"){
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
+source('Setup.R')
 
 ###############################################################
-setwd(pathData)
-load('durData_SancOnly_all.rda'); tableName='durModelResults.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+load(paste0(pathData, 'durData_SancOnly_all.rda'))
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
@@ -120,16 +116,15 @@ pgg=pgg+facet_wrap(~Fold, scales="free_y")
 pgg=pgg+scale_x_continuous(breaks=seq(0,15,3),limits=c(0,16))
 pgg=pgg+scale_y_continuous(breaks=seq(0.6,1,0.1),limits=c(0.59,1.01))
 pgg=pgg+xlab('Time (years)')+ylab('Time-dependent AUC')
-pgg=pgg + theme(legend.position='none', legend.title=element_blank(),
-    axis.ticks=element_blank(), panel.grid.major=element_blank(),
-    panel.grid.minor=element_blank(), 
+pgg=pgg + theme(
+	legend.position='none', legend.title=element_blank(),
+	panel.border=element_blank(),
+    axis.ticks=element_blank(), 
     axis.title.y=element_text(vjust=1),
     axis.title.x=element_text(vjust=-.5))    
-pgg
-setwd(pathTex)
-tikz(file='crossvalPerf.tex', height=5, width=8, standAlone=F)
-pgg
-dev.off()
+fname = paste0(pathGraphics, 'crossvalPerf.pdf')
+ggsave(file=fname, height=5, width=8)
+system(paste0('pdfcrop ', fname, ' ', fname))
 ###############################################################
 
 ###############################################################
@@ -143,7 +138,6 @@ for( ii in 1:length(unique(modData$rands)) ){
 		+ lag1_polity2 
 		+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
 		+ lag1_domSUM
-		# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 		, data=slice)
 	models[[ii]]=modelFinal
 }
@@ -198,13 +192,12 @@ coefp = coefp + scale_colour_manual(values = coefp_colors)
 coefp = coefp + xlab("") + ylab("") 
 coefp = coefp + facet_wrap(~varName, scales="free_y")#, nrow=1,ncol=2)
 coefp = coefp + scale_x_discrete(labels=paste0('Fold ',1:10))
-coefp = coefp + theme(legend.position='none', legend.title=element_blank(),
-    axis.ticks=element_blank(), panel.grid.major=element_blank(),
-    panel.grid.minor=element_blank(), 
+coefp = coefp + theme(
+	legend.position='none', legend.title=element_blank(),
+	panel.border=element_blank(),
+    axis.ticks=element_blank(), 
     axis.text.x=element_text(angle=45,hjust=1))
-coefp
-setwd(pathTex)
-tikz(file='crossvalCoef.tex', height=3, width=7, standAlone=F)
-coefp
-dev.off()
+fname=paste0(pathGraphics, 'crossvalCoef.pdf')
+ggsave(file=fname, height=3, width=7)
+system(paste0('pdfcrop ', fname, ' ', fname))
 ##############################################################

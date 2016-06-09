@@ -1,10 +1,4 @@
-if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
-source('~/Research/Magnesium/R/Setup.R')}
-if(Sys.info()["user"]=="cassydorff"){
-source('~/ProjectsGit/Magnesium/R/Setup.R')}
-
-# Gen tikz
-genTikz=FALSE
+source('Setup.R')
 
 # Variable key
 varDef = cbind (  
@@ -24,13 +18,19 @@ varDef = cbind (
 # helper fn
 summStat = function(x){ c(length(x), mean(x), median(x), sd(x), min(x), max(x) ) }
 
-for(imputeLogical in c(TRUE, FALSE)){
-# Use imputed data
-impute=imputeLogical
+for(impute in c(TRUE, FALSE)){
+
 ###############################################################
-setwd(pathData)
-if(!impute){load('durData_SancOnly_all.rda'); tableName='durModelResultsNoImp_all.tex'; label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
-if(impute){load('durDataImp_SancOnly_all.rda'); tableName='durModelResults_all.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'}
+if(!impute){
+	load(paste0(pathData, 'durData_SancOnly_all.rda'))
+	tableName=paste0(pathGraphics, 'durModelResultsNoImp_all.tex')
+	label='tab:regResultsNoImp'; caption='Duration model on unimputed data with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+}
+if(impute){
+	load(paste0(pathData, 'durDataImp_SancOnly_all.rda'))
+	tableName=paste0(pathGraphics, 'durModelResults_all.tex')
+	label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+}
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')
@@ -45,9 +45,15 @@ modData=aData[, c( idVars, varDef[,1] )]
 
 ###############################################################
 # Summary Statistics
-setwd(pathTex)
-if(impute){ summTable='summStatsImp_all.tex'; summCaption='Summary statistics of parameters included in duration model using imputed data.'; summLabel='tab:summImp' } 
-if(!impute){ summTable='summStatsNoImp_all.tex'; summCaption='Summary statistics of parameters included in duration model using original data.'; summLabel='tab:summNoImp' } 
+if(impute){ 
+	summTable=paste0(pathGraphics, 'summStatsImp_all.tex')
+	summCaption='Summary statistics of parameters included in duration model using imputed data.'; summLabel='tab:summImp'
+} 
+if(!impute){ 
+	summTable=paste0(pathGraphics, 'summStatsNoImp_all.tex')
+	summCaption='Summary statistics of parameters included in duration model using original data.'; summLabel='tab:summNoImp'
+} 
+
 aVars=c('compliance',varDef[,1])
 summData=na.omit(data.matrix(modData[,aVars]))
 summ = apply(summData, 2, summStat)
@@ -56,15 +62,13 @@ summ[2:nrow(summ),] = round(summ[2:nrow(summ),], 2)
 rownames(summ) = c('N', 'Mean', 'Median', 'Std. Dev.', 'Min.', 'Max.')
 summ = cbind(Variable=c('Compliance', varDef[,2]), t(summ))
 
-if(genTikz){
-	print.xtable( xtable(summ, align='llcccccc',
-		caption=summCaption,
-		label=summLabel),
-		include.rownames=FALSE, sanitize.text.function=identity,
-		hline.after=c(0,0,nrow(summ),nrow(summ)),
-		size='normalsize', file=summTable
-	)
-}
+print.xtable( xtable(summ, align='llcccccc',
+	caption=summCaption,
+	label=summLabel),
+	include.rownames=FALSE, sanitize.text.function=identity,
+	hline.after=c(0,0,nrow(summ),nrow(summ)),
+	size='normalsize', file=summTable
+)
 ###############################################################
 
 ###############################################################
@@ -74,7 +78,6 @@ model1 = coxph(Surv(start, stop, compliance) ~
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
 	+ lag1_domSUM
 	, data=modData)
-summary(model1)
 
 # State-specific and rel. measures
 model2 = coxph(Surv(start, stop, compliance) ~ 
@@ -83,7 +86,6 @@ model2 = coxph(Surv(start, stop, compliance) ~
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
 	+ lag1_domSUM
 	, data=modData)
-summary(model2)
 
 # Incorp reciprocity measure
 modelFinal=coxph(Surv(start,stop,compliance) ~
@@ -92,17 +94,13 @@ modelFinal=coxph(Surv(start,stop,compliance) ~
 	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
 	+ lag1_domSUM
-	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
-summary(modelFinal)
 ###############################################################
 
 ############################################################### 
 # Table for TeX
-setwd(pathTex)
-durTables=durTable(list(model1, model2, modelFinal), varDef)	
-durTables
-if(genTikz){ print.xtable( xtable(durTables, align='llccc', 	
+durTables=durTable(list(model1, model2, modelFinal), varDef)
+print.xtable( xtable(durTables, align='llccc', 	
 	caption=caption,
 	label=label
 	),
@@ -110,7 +108,7 @@ if(genTikz){ print.xtable( xtable(durTables, align='llccc',
 	hline.after=c(0,0,4,12,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
 	size='normalsize',
 	file=tableName
-	) }
+	)
 ############################################################### 
 
 ############################################################### 
@@ -120,7 +118,7 @@ vrfn=function(x,lo=.1,hi=.9){numSM(quantile(x,probs=c(lo,hi),na.rm=T))}
 survPlot=function(
 	model=modelFinal, coef, data=modData, cRange=vrfn(data[,coef]), 
 	confInts = c(.95, .9), timeOut = 20, 
-	savePlot=genTikz & impute, pheight=4, pwidth=6, plotName){
+	pheight=4, pwidth=6, plotName, path=pathGraphics){
 	
 	# Create predictions using survfit
 	surv = lapply(confInts, function(ci){
@@ -146,24 +144,20 @@ survPlot=function(
 	gg=gg + geom_ribbon(aes(ymin=lo95,ymax=up95),alpha=0.15,color=NA)
 	gg=gg + geom_ribbon(aes(ymin=lo90,ymax=up90),alpha=0.2,color=NA)
 	gg=gg + theme(legend.position='none', legend.title=element_blank(),
-		    axis.ticks=element_blank(), panel.grid.major=element_blank(),
-		    panel.grid.minor=element_blank(), panel.border = element_blank(),
-		    axis.line = element_line(color = 'black'),
+		    axis.ticks=element_blank(), 
+		    panel.border = element_blank(),
 		    axis.title.y = element_text(vjust=1.5)
 		    )
-	if(savePlot){
-		tikz(file=plotName, height=pheight, width=pwidth, standAlone=F)
-		print(gg); dev.off() } else { print( gg ) }
+	fname = paste0(pathGraphics, plotName)
+	ggsave(file=fname, height=pheight, width=pwidth)
+	system(paste0('pdfcrop ', fname, ' ', fname))
 }
 
-setwd(pathTex)
-survPlot(coef='noS', plotName='nosSurv_all.tex', 
-	cRange=vrfn(aData[,'noS'],lo=0,hi=1)) # sig | T
-survPlot(coef='Ddistdata', plotName='distSurv_all.tex') # sig | T
-survPlot(coef='lag1_polity2', plotName='polSurv_all.tex') # sig | T
-survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv_all.tex') # not sig
-survPlot(coef='lag1_uData', plotName='compRecSurv_all.tex') # sig | T
-survPlot(coef='lag1_SuData2', plotName='sancRecSurv_all.tex') # sig | T
+survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv_all.pdf') 
+survPlot(coef='noS', plotName='nosSurv_all.pdf', 
+	cRange=vrfn(aData[,'noS'],lo=0,hi=1)) 
+survPlot(coef='lag1_uData', plotName='compRecSurv_all.pdf') 
+survPlot(coef='lag1_SuData2', plotName='sancRecSurv_all.pdf') 
 }
 ###############################################################
 }

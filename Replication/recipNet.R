@@ -1,34 +1,8 @@
-##################################################
-# Purpose: create a recip network plot
-# CD & SM
-
-if(Sys.info()["user"]=="janus829" | Sys.info()["user"]=="s7m"){
-source('~/Research/Magnesium/R/Setup.R');
-source('~/Research/Magnesium/R/Data/SRM.R');
-load('~/Research/Magnesium/R/Data/BuildingPanelData/panel.rda')
-}
-
-if(Sys.info()["user"]=="cassydorff"){
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R');
-load('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/BuildingPanelData/panel.rda');
-source('/Users/cassydorff/ProjectsGit/Magnesium/R/Data/SRM.R')
-}
-###################################################
+source('Setup.R')
 
 ###################################################
 # Load SRM network data
-
-# If compliance = TRUE then compliance recip network plots are generated
-## if false then sanction recip network plots
-compliance=TRUE
-
-# To print plots set to true
-printPlot=FALSE
-
-setwd(pathData)
-if(compliance){ 
-	load('compSRM.rda') } else { 
-	load('sancSRM.rda'); ueffect=Sueffect }
+load(paste0(pathData, 'compSRM_all.rda'))
 ###################################################
 
 ###################################################
@@ -38,7 +12,6 @@ panel$abb[panel$cname=='German Democratic Republic'] = 'GDR'
 panel$abb[panel$cname=='Zanzibar'] = 'ZNZ'
 panel$abb[panel$cname=='Kosovo'] = 'KOS'
 
-yrs = as.character(seq(1962, 2012, 10))
 yrs = char(c(1972, 1992, 2012))
 ecols = brewer.pal(3, 'RdBu')[c(1,3)]
 for(yr in yrs){
@@ -66,10 +39,8 @@ for(yr in yrs){
 	# Plot
 	set.seed(6886)
 	curves = autocurve.edges2(g)
-	setwd(pathGraphics)
-	if(printPlot){
-		if(compliance){ pdf(file=paste0('compNet3_',yr,'.pdf'), width=6, height=6) }
-		if(!compliance){ pdf(file=paste0('sancNet3_',yr,'.pdf'), width=6, height=6) } }
+	fname = paste0(pathGraphics, 'compNet_',yr,'.pdf')
+	pdf(file=fname, width=6, height=6)
 	par(mar=c(1,1,1,1), mgp=c(1.5,.5,0))		
 	plot.igraph(g, 
 		layout=layout.circle,	
@@ -82,6 +53,7 @@ for(yr in yrs){
 		edge.curved = curves,
 		asp=FALSE
 		)
-	if(printPlot){ dev.off() }
+	dev.off()
+	system(paste0('pdfcrop ', fname, ' ', fname))
 }
 ###################################################s

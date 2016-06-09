@@ -5,7 +5,7 @@ source('/Users/cassydorff/ProjectsGit/Magnesium/R/Setup.R')}
 
 ###############################################################
 setwd(pathData)
-load('durData_SancOnly_all.rda'); tableName='durModelResults.tex'; label='tab:regResults'; caption = 'Duration model with time varying covariates estimated using Cox Proportional Hazards. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.'
+load('durData_SancOnly_all.rda')
 
 ids=data.frame(cbind(unique(aData$targetstate),1:length(unique(aData$targetstate))))
 names(ids)=c('targetstate','fcode')

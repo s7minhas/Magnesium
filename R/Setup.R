@@ -54,11 +54,6 @@ logNeg <- function(z){
 	z[!is.na(z)] <- y; z
 }
 
-# Rescaling variables
-rescale <- function(x,new_max,new_min){
- xResc <- (new_max - new_min) / (max(x,na.rm=T) - min(x,na.rm=T))*(x - min(x,na.rm=T)) + new_min
- xResc }
-
 # turn variables into numeric
 char = function(x){ as.character(x) }
 numSM <- function(x){ as.numeric(char(x)) }
