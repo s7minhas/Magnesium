@@ -1,0 +1,12 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces Here we show the sanction network in 1984, nodes are colored by geographic coordinates of countries. Data for sanction cases comes from \citet {morgan2009threat}.\relax }}{31}{figure.caption.13}
+\contentsline {figure}{\numberline {2}{\ignorespaces Reciprocity plots\relax }}{32}{figure.caption.14}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces sub1}}{32}{subfigure.3.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces sub1}}{32}{subfigure.3.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces sub1}}{32}{subfigure.3.3}
+\contentsline {figure}{\numberline {3}{\ignorespaces Survival probabilities over time by $Ln(GDP \tmspace +\thickmuskip {.2777em} Capita)_{i,t-1}$. Red designates scenarios in which the covariate is set to its minimum value and blue where it is set to its maximum value. Darker shaded around each line represents the 90\% confidence interval and the lighter shaded area the 95\% confidence interval.\relax }}{33}{figure.caption.15}
+\contentsline {figure}{\numberline {4}{\ignorespaces Survival probabilities over time by the number of senders in a sanction case.\relax }}{34}{figure.caption.16}
+\contentsline {figure}{\numberline {5}{\ignorespaces Survival probabilities reflecting over time by network level covariates.\relax }}{35}{figure.caption.17}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces Subfigure 1}}{35}{subfigure.6.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces Subfigure 2}}{35}{subfigure.6.2}
+\contentsline {figure}{\numberline {6}{\ignorespaces Reciprocity coefficient estimates from each of the six-folds of the cross validation procedure.\relax }}{36}{figure.caption.18}
+\contentsline {figure}{\numberline {7}{\ignorespaces Out-of-sample time-dependent AUC statistics from six-fold cross validation procedure for each model shown in Table\nonbreakingspace \ref {tab:regResults}. The solid line represents Model 1, the dotted line represents Model 2, and the dashed line represents Model 3.\relax }}{37}{figure.caption.19}

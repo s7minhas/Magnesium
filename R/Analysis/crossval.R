@@ -121,8 +121,7 @@ pgg=pgg+scale_x_continuous(breaks=seq(0,15,3),limits=c(0,16))
 pgg=pgg+scale_y_continuous(breaks=seq(0.6,1,0.1),limits=c(0.59,1.01))
 pgg=pgg+xlab('Time (years)')+ylab('Time-dependent AUC')
 pgg=pgg + theme(legend.position='none', legend.title=element_blank(),
-    axis.ticks=element_blank(), panel.grid.major=element_blank(),
-    panel.grid.minor=element_blank(), 
+    axis.ticks=element_blank(), panel.border=element_blank(),
     axis.title.y=element_text(vjust=1),
     axis.title.x=element_text(vjust=-.5))    
 pgg
@@ -199,8 +198,7 @@ coefp = coefp + xlab("") + ylab("")
 coefp = coefp + facet_wrap(~varName, scales="free_y")#, nrow=1,ncol=2)
 coefp = coefp + scale_x_discrete(labels=paste0('Fold ',1:10))
 coefp = coefp + theme(legend.position='none', legend.title=element_blank(),
-    axis.ticks=element_blank(), panel.grid.major=element_blank(),
-    panel.grid.minor=element_blank(), 
+    axis.ticks=element_blank(), panel.border=element_blank(),
     axis.text.x=element_text(angle=45,hjust=1))
 coefp
 setwd(pathTex)

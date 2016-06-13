@@ -145,9 +145,7 @@ survPlot=function(
 	gg=gg + geom_ribbon(aes(ymin=lo95,ymax=up95),alpha=0.15,color=NA)
 	gg=gg + geom_ribbon(aes(ymin=lo90,ymax=up90),alpha=0.2,color=NA)
 	gg=gg + theme(legend.position='none', legend.title=element_blank(),
-		    axis.ticks=element_blank(), panel.grid.major=element_blank(),
-		    panel.grid.minor=element_blank(), panel.border = element_blank(),
-		    axis.line = element_line(color = 'black'),
+		    axis.ticks=element_blank(), panel.border = element_blank(),
 		    axis.title.y = element_text(vjust=1.5)
 		    )
 	if(savePlot){
