@@ -4,7 +4,7 @@ if(Sys.info()["user"]=="cassydorff"){
 source('~/ProjectsGit/Magnesium/R/Setup.R')}
 
 # Gen tikz
-genTikz=FALSE
+genTikz=TRUE
 
 # Variable key
 varDef = cbind (  
@@ -56,15 +56,15 @@ summ[2:nrow(summ),] = round(summ[2:nrow(summ),], 2)
 rownames(summ) = c('N', 'Mean', 'Median', 'Std. Dev.', 'Min.', 'Max.')
 summ = cbind(Variable=c('Compliance', varDef[,2]), t(summ))
 
-if(genTikz){
-	print.xtable( xtable(summ, align='llcccccc',
-		caption=summCaption,
-		label=summLabel),
-		include.rownames=FALSE, sanitize.text.function=identity,
-		hline.after=c(0,0,nrow(summ),nrow(summ)),
-		size='normalsize', file=summTable
-	)
-}
+# if(genTikz){
+# 	print.xtable( xtable(summ, align='llcccccc',
+# 		caption=summCaption,
+# 		label=summLabel),
+# 		include.rownames=FALSE, sanitize.text.function=identity,
+# 		hline.after=c(0,0,nrow(summ),nrow(summ)),
+# 		size='normalsize', file=summTable
+# 	)
+# }
 ###############################################################
 
 ###############################################################
@@ -100,17 +100,16 @@ summary(modelFinal)
 ############################################################### 
 # Table for TeX
 setwd(pathTex)
-durTables=durTable(list(model1, model2, modelFinal), varDef)	
-durTables
-if(genTikz){ print.xtable( xtable(durTables, align='llccc', 	
-	caption=caption,
-	label=label
-	),
-	include.rownames=FALSE, sanitize.text.function=identity,
-	hline.after=c(0,0,4,12,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
-	size='normalsize',
-	file=tableName
-	) }
+durTables=durTable(list(model1, model2, modelFinal), varDef)
+# if(genTikz){ print.xtable( xtable(durTables, align='llccc', 	
+# 	caption=caption,
+# 	label=label
+# 	),
+# 	include.rownames=FALSE, sanitize.text.function=identity,
+# 	hline.after=c(0,0,4,12,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
+# 	size='normalsize',
+# 	file=tableName
+# 	) }
 ############################################################### 
 
 ############################################################### 
