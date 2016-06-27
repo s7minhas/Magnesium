@@ -196,7 +196,7 @@ n & 1535 & 2245 \\
 \hline
 \end{tabular}
 }
-\caption{Here we focus on predicting the time until compliance for sanctions not related to economic issues. The first column shows duration model results on unimputed data with time varying covariates estimated using Cox Proportional Hazards, and the second on imputed data. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.}
+\caption{Here we focus on predicting the time until compliance for sanctions related to security issues. The first column shows duration model results on unimputed data with time varying covariates estimated using Cox Proportional Hazards, and the second on imputed data. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.}
 \label{tab:regResultsNonEconSanctions}
 \end{table}
 \efloatseparator
