@@ -22,8 +22,10 @@
 % math typesetting
 \usepackage{array}
 \usepackage{amsmath}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} % eqn numbering for align
 \usepackage{amssymb}
 \usepackage{amsfonts}
+
 
 % tables
 \usepackage{tabularx}
@@ -39,8 +41,8 @@ digitsep=fullstop
 
 % to adapt caption style
 \usepackage[font={small},labelfont=bf]{caption}
+\captionsetup{labelsep=space}
 
- 
 % references
 \usepackage[longnamesfirst]{natbib}
 \bibpunct{(}{)}{;}{a}{}{,}
@@ -156,7 +158,7 @@ Shahryar Minhas\\
 % \curraddr{Duke University, Durham, NC, 27708, USA}
 % \email{shahryar.minhas@duke.edu}
 
- \thanks{$^{1}$This paper was prepared for 72$^{nd}$ annual Midwest Political Science Association Conference in Chicago, April 2-6 2014. We are grateful for comments on earlier versions of this paper received at the ISSS-ISAC Conference in Washington, D.C., October 4-6 2013. This publication was made possible (in part) by a grant from the Carnegie Corporation of New York. The statements made and views expressed are solely the responsibility of the author. Alphabetical order implies equal authorship, all mistakes are our own.}
+ \thanks{\singlespacing{$^{1}$This paper was prepared for 72$^{nd}$ annual Midwest Political Science Association Conference in Chicago, April 2-6 2014. We are grateful for comments on earlier versions of this paper received at the ISSS-ISAC Conference in Washington, D.C., October 4-6 2013. This publication was made possible (in part) by a grant from the Carnegie Corporation of New York. The statements made and views expressed are solely the responsibility of the author. Alphabetical order implies equal authorship, all mistakes are our own.}}
 
 \setlength{\headheight}{15pt}
 \setlength{\headsep}{20pt}
@@ -198,14 +200,11 @@ Shahryar Minhas\\
 \doublespacing 
 
 \begin{document}
-\renewcommand{\abstractname}{ }
 \maketitle\thispagestyle{empty}
 
-\begin{abstract}
-\abstractname{}
-\singlespacing{\input{1_Abstract}}
-
-\end{abstract}
+\begin{quote}
+\small{\singlespacing{\input{1_Abstract}}}
+\end{quote}
 
 \newpage\setcounter{page}{1} 
 
@@ -234,7 +233,7 @@ Shahryar Minhas\\
 %%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
-\bibliographystyle{APSR}
+\bibliographystyle{ii}
 \bibliography{magRefs.bib}
 
 \end{document} 
