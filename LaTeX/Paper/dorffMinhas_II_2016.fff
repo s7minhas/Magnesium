@@ -26,17 +26,6 @@
 \includegraphics[width=.5\textwidth]{compNet_2012}
 \label{fig:comp02}}}
 
-% \subfloat[sub1][Sanction: 1972]{
-%  \includegraphics[width=.33\textwidth]{sancNet_1972}
-%  \label{fig:sanc72}} &
-
-% \subfloat[sub1][Sanction: 1992]{
-%  \includegraphics[width=.33\textwidth]{sancNet_1992}
-%  \label{fig:sanc92}} &
-
-% \subfloat[sub1][Sanction: 2012]{
-%  \includegraphics[width=.33\textwidth]{sancNet_2012}
-%  \label{fig:sanc02}}
 
 \end{tabular}
 \label{fig:recipNet}

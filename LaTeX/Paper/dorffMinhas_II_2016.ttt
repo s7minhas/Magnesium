@@ -20,30 +20,30 @@ Stalemate after Sanctions Imposition & 71 \\
  Variable & Model 1 & Model 2 & Model 3 \\
   \hline
 \hline
-Compliance Reciprocity$_{j,t-1}$ &  &  & $0.508^{\ast\ast}$ \\
+Compliance Reciprocity$_{j,t-1}$ &  &  & $0.51^{\ast\ast}$ \\
    &  &  & (0.1) \\
-  Sanction Reciprocity$_{j,t-1}$ &  &  & $-0.218^{\ast\ast}$ \\
-   &  &  & (0.056) \\
+  Sanction Reciprocity$_{j,t-1}$ &  &  & $-0.22^{\ast\ast}$ \\
+   &  &  & (0.06) \\
    \hline
-Number of Senders$_{j}$ &  & $0.216^{\ast\ast}$ & $0.193^{\ast\ast}$ \\
-   &  & (0.048) & (0.048) \\
-  Distance$_{j}$ &  & $0.85^{\ast\ast}$ & $0.825^{\ast\ast}$ \\
-   &  & (0.186) & (0.188) \\
-  Trade$_{j,t-1}$ &  & -3.677 & -2.464 \\
-   &  & (5.351) & (4.149) \\
-  Ally$_{j,t-1}$ &  & -0.029 & 0.026 \\
-   &  & (0.166) & (0.166) \\
+Number of Senders$_{j}$ &  & $0.22^{\ast\ast}$ & $0.19^{\ast\ast}$ \\
+   &  & (0.05) & (0.05) \\
+  Distance$_{j}$ &  & $0.85^{\ast\ast}$ & $0.82^{\ast\ast}$ \\
+   &  & (0.19) & (0.19) \\
+  Trade$_{j,t-1}$ &  & -3.68 & -2.46 \\
+   &  & (5.35) & (4.15) \\
+  Ally$_{j,t-1}$ &  & -0.03 & 0.03 \\
+   &  & (0.17) & (0.17) \\
    \hline
-Polity$_{i,t-1}$ & 0.016 & $0.028^{\ast\ast}$ & 0.022 \\
-   & (0.014) & (0.014) & (0.014) \\
-  Ln(GDP per capita)$_{i,t-1}$ & $-0.269^{\ast\ast}$ & $-0.269^{\ast\ast}$ & $-0.22^{\ast\ast}$ \\
-   & (0.057) & (0.059) & (0.062) \\
-  GDP Growth$_{i,t-1}$ & 0.003 & 0.007 & 0.003 \\
-   & (0.014) & (0.014) & (0.014) \\
-  Population$_{i,t-1}$ & $-0.18^{\ast\ast}$ & $-0.189^{\ast\ast}$ & $-0.112^{\ast\ast}$ \\
-   & (0.043) & (0.046) & (0.05) \\
-  Internal Conflict$_{i,t-1}$ & 0.017 & 0.018 & 0.013 \\
-   & (0.012) & (0.012) & (0.013) \\
+Polity$_{i,t-1}$ & 0.02 & $0.03^{\ast\ast}$ & 0.02 \\
+   & (0.01) & (0.01) & (0.01) \\
+  Ln(GDP per capita)$_{i,t-1}$ & $-0.27^{\ast\ast}$ & $-0.27^{\ast\ast}$ & $-0.22^{\ast\ast}$ \\
+   & (0.06) & (0.06) & (0.06) \\
+  GDP Growth$_{i,t-1}$ & 0 & 0.01 & 0 \\
+   & (0.01) & (0.01) & (0.01) \\
+  Population$_{i,t-1}$ & $-0.18^{\ast\ast}$ & $-0.19^{\ast\ast}$ & $-0.11^{\ast\ast}$ \\
+   & (0.04) & (0.05) & (0.05) \\
+  Internal Conflict$_{i,t-1}$ & 0.02 & 0.02 & 0.01 \\
+   & (0.01) & (0.01) & (0.01) \\
    \hline
 n & 6206 & 6183 & 6183 \\
   Events & 190 & 189 & 189 \\
@@ -64,34 +64,34 @@ n & 6206 & 6183 & 6183 \\
  Variable & Model 1 & Model 2 & Model 3 \\
   \hline
 \hline
-Compliance Reciprocity$_{j,t-1}$ &  &  & $0.545^{\ast\ast}$ \\
-   &  &  & (0.112) \\
-  Sanction Reciprocity$_{j,t-1}$ &  &  & $-0.235^{\ast\ast}$ \\
-   &  &  & (0.061) \\
+Compliance Reciprocity$_{j,t-1}$ &  &  & $0.53^{\ast\ast}$ \\
+   &  &  & (0.11) \\
+  Sanction Reciprocity$_{j,t-1}$ &  &  & $-0.22^{\ast\ast}$ \\
+   &  &  & (0.06) \\
    \hline
-Number of Senders$_{j}$ &  & $0.282^{\ast\ast}$ & $0.251^{\ast\ast}$ \\
-   &  & (0.055) & (0.055) \\
-  Distance$_{j}$ &  & $0.814^{\ast\ast}$ & $0.775^{\ast\ast}$ \\
-   &  & (0.212) & (0.215) \\
-  Trade$_{j,t-1}$ &  & -3.4 & -2.566 \\
-   &  & (5.944) & (4.978) \\
-  Ally$_{j,t-1}$ &  & -0.045 & 0.004 \\
-   &  & (0.181) & (0.182) \\
+Number of Senders$_{j}$ &  & $0.28^{\ast\ast}$ & $0.25^{\ast\ast}$ \\
+   &  & (0.05) & (0.05) \\
+  Distance$_{j}$ &  & $0.85^{\ast\ast}$ & $0.81^{\ast\ast}$ \\
+   &  & (0.21) & (0.21) \\
+  Trade$_{j,t-1}$ &  & -2.95 & -2.31 \\
+   &  & (4.86) & (4.33) \\
+  Ally$_{j,t-1}$ &  & -0.06 & -0.01 \\
+   &  & (0.18) & (0.18) \\
    \hline
-Polity$_{i,t-1}$ & 0.014 & $0.029^{\ast}$ & 0.017 \\
-   & (0.016) & (0.017) & (0.017) \\
-  Ln(GDP per capita)$_{i,t-1}$ & $-0.265^{\ast\ast}$ & $-0.274^{\ast\ast}$ & $-0.213^{\ast\ast}$ \\
-   & (0.061) & (0.063) & (0.066) \\
-  GDP Growth$_{i,t-1}$ & -0.002 & 0.003 & -0.002 \\
-   & (0.015) & (0.015) & (0.015) \\
-  Population$_{i,t-1}$ & $-0.207^{\ast\ast}$ & $-0.212^{\ast\ast}$ & $-0.114^{\ast}$ \\
-   & (0.053) & (0.056) & (0.06) \\
-  Internal Conflict$_{i,t-1}$ & $0.024^{\ast}$ & 0.022 & 0.016 \\
-   & (0.014) & (0.014) & (0.014) \\
+Polity$_{i,t-1}$ & 0.01 & $0.03^{\ast}$ & 0.02 \\
+   & (0.02) & (0.02) & (0.02) \\
+  Ln(GDP per capita)$_{i,t-1}$ & $-0.27^{\ast\ast}$ & $-0.27^{\ast\ast}$ & $-0.21^{\ast\ast}$ \\
+   & (0.06) & (0.06) & (0.07) \\
+  GDP Growth$_{i,t-1}$ & 0 & 0 & 0 \\
+   & (0.02) & (0.01) & (0.02) \\
+  Population$_{i,t-1}$ & $-0.21^{\ast\ast}$ & $-0.21^{\ast\ast}$ & $-0.12^{\ast\ast}$ \\
+   & (0.05) & (0.06) & (0.06) \\
+  Internal Conflict$_{i,t-1}$ & $0.02^{\ast}$ & 0.02 & 0.02 \\
+   & (0.01) & (0.01) & (0.01) \\
    \hline
-n & 5342 & 5279 & 5279 \\
-  Events & 150 & 148 & 148 \\
-  Likelihood ratio test & 46.93 (0) & 83.77 (0) & 109.96 (0) \\
+n & 5342 & 5324 & 5324 \\
+  Events & 150 & 149 & 149 \\
+  Likelihood ratio test & 46.93 (0) & 83.49 (0) & 108.17 (0) \\
    \hline
 \hline
 \end{tabular}
@@ -136,18 +136,18 @@ Compliance & 6183 & 0.03 & 0 & 0.17 & 0 & 1 \\
  Variable & N & Mean & Median & Std. Dev. & Min. & Max. \\
   \hline
 \hline
-Compliance & 5279 & 0.03 & 0 & 0.17 & 0 & 1 \\
-  Compliance Reciprocity$_{j,t-1}$ & 5279 & 0.56 & -0.01 & 1.07 & -0.81 & 4.15 \\
-  Sanction Reciprocity$_{j,t-1}$ & 5279 & 3.61 & 1.96 & 4.35 & -1.1 & 21.19 \\
-  Number of Senders$_{j}$ & 5279 & 1.45 & 1 & 1.17 & 1 & 5 \\
-  Distance$_{j}$ & 5279 & 0.14 & 0 & 0.34 & 0 & 1 \\
-  Trade$_{j,t-1}$ & 5279 & 0.01 & 0.01 & 0.02 & 0 & 1 \\
-  Ally$_{j,t-1}$ & 5279 & 0.48 & 0 & 0.5 & 0 & 1 \\
-  Polity$_{i,t-1}$ & 5279 & 15.53 & 19 & 6.32 & 0 & 20 \\
-  Ln(GDP per capita)$_{i,t-1}$ & 5279 & 8.45 & 8.49 & 1.67 & 3.86 & 10.94 \\
-  GDP Growth$_{i,t-1}$ & 5279 & 3.55 & 3.48 & 4.37 & -42.45 & 34.8 \\
-  Population$_{i,t-1}$ & 5279 & 17.68 & 17.77 & 1.49 & 13.49 & 20.99 \\
-  Internal Conflict$_{i,t-1}$ & 5279 & 3.18 & 2 & 5.46 & 0 & 87 \\
+Compliance & 5324 & 0.03 & 0 & 0.16 & 0 & 1 \\
+  Compliance Reciprocity$_{j,t-1}$ & 5324 & 0.56 & 0 & 1.08 & -0.81 & 4.15 \\
+  Sanction Reciprocity$_{j,t-1}$ & 5324 & 3.66 & 1.96 & 4.45 & -1.1 & 21.19 \\
+  Number of Senders$_{j}$ & 5324 & 1.45 & 1 & 1.17 & 1 & 5 \\
+  Distance$_{j}$ & 5324 & 0.14 & 0 & 0.34 & 0 & 1 \\
+  Trade$_{j,t-1}$ & 5324 & 0.01 & 0.01 & 0.02 & 0 & 1 \\
+  Ally$_{j,t-1}$ & 5324 & 0.48 & 0 & 0.5 & 0 & 1 \\
+  Polity$_{i,t-1}$ & 5324 & 15.56 & 19 & 6.3 & 0 & 20 \\
+  Ln(GDP per capita)$_{i,t-1}$ & 5324 & 8.46 & 8.51 & 1.68 & 3.86 & 10.94 \\
+  GDP Growth$_{i,t-1}$ & 5324 & 3.54 & 3.48 & 4.36 & -42.45 & 34.8 \\
+  Population$_{i,t-1}$ & 5324 & 17.68 & 17.79 & 1.49 & 13.49 & 20.99 \\
+  Internal Conflict$_{i,t-1}$ & 5324 & 3.16 & 1 & 5.45 & 0 & 87 \\
    \hline
 \hline
 \end{tabular}
@@ -164,30 +164,30 @@ Compliance & 5279 & 0.03 & 0 & 0.17 & 0 & 1 \\
  Variable & Model 1 & Model 2 \\
   \hline
 \hline
-Compliance Reciprocity$_{j,t-1}$ & $0.685^{\ast\ast}$ & $0.752^{\ast\ast}$ \\
-   & (0.341) & (0.245) \\
-  Sanction Reciprocity$_{j,t-1}$ & $-0.521^{\ast\ast}$ & $-0.476^{\ast\ast}$ \\
-   & (0.234) & (0.18) \\
+Compliance Reciprocity$_{j,t-1}$ & $0.68^{\ast\ast}$ & $0.75^{\ast\ast}$ \\
+   & (0.34) & (0.25) \\
+  Sanction Reciprocity$_{j,t-1}$ & $-0.52^{\ast\ast}$ & $-0.48^{\ast\ast}$ \\
+   & (0.23) & (0.18) \\
    \hline
-Number of Senders$_{j}$ & 0.097 & $0.107^{\ast}$ \\
-   & (0.075) & (0.061) \\
-  Distance$_{j}$ & 0.387 & $0.511^{\ast}$ \\
-   & (0.341) & (0.285) \\
-  Trade$_{j,t-1}$ & -2.992 & -2.731 \\
-   & (5.723) & (4.876) \\
-  Ally$_{j,t-1}$ & -0.312 & -0.184 \\
-   & (0.287) & (0.252) \\
+Number of Senders$_{j}$ & 0.1 & $0.11^{\ast}$ \\
+   & (0.07) & (0.06) \\
+  Distance$_{j}$ & 0.39 & $0.51^{\ast}$ \\
+   & (0.34) & (0.28) \\
+  Trade$_{j,t-1}$ & -2.99 & -2.73 \\
+   & (5.72) & (4.88) \\
+  Ally$_{j,t-1}$ & -0.31 & -0.18 \\
+   & (0.29) & (0.25) \\
    \hline
-Polity$_{i,t-1}$ & 0.02 & 0.015 \\
-   & (0.021) & (0.017) \\
-  Ln(GDP per capita)$_{i,t-1}$ & -0.016 & -0.035 \\
-   & (0.1) & (0.092) \\
-  GDP Growth$_{i,t-1}$ & -0.002 & 0.003 \\
-   & (0.018) & (0.017) \\
-  Population$_{i,t-1}$ & -0.045 & -0.024 \\
-   & (0.089) & (0.071) \\
-  Internal Conflict$_{i,t-1}$ & 0.005 & 0.003 \\
-   & (0.018) & (0.016) \\
+Polity$_{i,t-1}$ & 0.02 & 0.02 \\
+   & (0.02) & (0.02) \\
+  Ln(GDP per capita)$_{i,t-1}$ & -0.02 & -0.03 \\
+   & (0.1) & (0.09) \\
+  GDP Growth$_{i,t-1}$ & 0 & 0 \\
+   & (0.02) & (0.02) \\
+  Population$_{i,t-1}$ & -0.05 & -0.02 \\
+   & (0.09) & (0.07) \\
+  Internal Conflict$_{i,t-1}$ & 0.01 & 0 \\
+   & (0.02) & (0.02) \\
    \hline
 n & 1535 & 2245 \\
   Events & 71 & 101 \\
@@ -196,7 +196,7 @@ n & 1535 & 2245 \\
 \hline
 \end{tabular}
 }
-\caption{Here we focus on predicting the time until compliance for sanctions related to security issues. The first column shows duration model results on unimputed data with time varying covariates estimated using Cox Proportional Hazards, and the second on imputed data. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.}
+\caption{Here we focus on predicting the time until compliance for sanctions not related to economic issues. The first column shows duration model results on unimputed data with time varying covariates estimated using Cox Proportional Hazards, and the second with using imputed data. Standard errors in parentheses. $^{**}$ and $^{*}$ indicate significance at $p< 0.05 $ and $p< 0.10 $, respectively.}
 \label{tab:regResultsNonEconSanctions}
 \end{table}
 \efloatseparator

@@ -83,9 +83,9 @@ durTable = function(modResults, varDef, digs=3){
 		n = modResults[[ii-1]]$n-length(modResults[[ii-1]]$coefficients)
 		temp = temp[match(tableResults[,'Variable'], rownames(temp)),]
 		estims = temp[1:length(varsTable),'coef']
-		estims = round(as.numeric(as.character(estims)),digs)
+		estims = round(as.numeric(as.character(estims)),digs-1)
 		pvals = abs(temp[1:length(varsTable),'Pr(>|z|)'])
-		pvals = round(as.numeric(as.character(pvals)),digs)
+		pvals = round(as.numeric(as.character(pvals)),digs-1)
 		estims = ifelse(pvals<=0.10 & !is.na(pvals) & pvals>0.05, 
 			paste('$', estims,'^{\\ast}$',sep=''), estims)
 		estims = ifelse(pvals<0.10 & !is.na(pvals) & pvals<=0.05, 
@@ -93,7 +93,7 @@ durTable = function(modResults, varDef, digs=3){
 		estims = ifelse(is.na(estims),'',estims)
 		tableResults[1:length(varsTable),ii] = estims
 		serrors = temp[(length(varsTable)+1):nrow(tableResults),'se(coef)']
-		serrors = round(as.numeric(as.character(serrors)),digs)
+		serrors = round(as.numeric(as.character(serrors)),digs-1)
 		serrors = paste('(',serrors,')',sep='')
 		serrors = ifelse(serrors=='(NA)','',serrors)
 		tableResults[(length(varsTable)+1):nrow(tableResults),ii] = serrors

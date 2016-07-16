@@ -351,7 +351,7 @@ scenBuild=function(vi, vRange, vars, ostat, simData){
 
 # Function to create APSR tables for duration object
 # modelResults= list object of models
-durTable = function(modResults, varDef, digs=3){
+durTable = function(modResults, varDef, digs=2){
 	modSumm=lapply(modResults, 
 		function(x) FUN=summary(x)$coefficients[,c('coef','se(coef)','Pr(>|z|)')])
 	noModels=length(modSumm)
@@ -393,12 +393,13 @@ durTable = function(modResults, varDef, digs=3){
 		function(x) FUN=x$n))))
 	events = cbind('Events', t(as.vector(mapply(x=modResults, 
 		function(x) FUN=x$nevent))))
+	if(digs<=2){ digBotRow = digs } else { digBotRow = digs -1 }
 	logtest = cbind('Likelihood ratio test', 
 		t(as.vector( 
 			mapply(x=modResults, function(x) 
 				FUN=paste(
-					round(summary(x)$logtest[1], digs-1),
-					paste0('(',round(summary(x)$logtest[3], digs-1),')')
+					round(summary(x)$logtest[1], digBotRow),
+					paste0('(',round(summary(x)$logtest[3], digBotRow),')')
 				 ) 
 				)
 			) ) )

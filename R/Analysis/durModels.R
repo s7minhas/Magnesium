@@ -56,15 +56,15 @@ summ[2:nrow(summ),] = round(summ[2:nrow(summ),], 2)
 rownames(summ) = c('N', 'Mean', 'Median', 'Std. Dev.', 'Min.', 'Max.')
 summ = cbind(Variable=c('Compliance', varDef[,2]), t(summ))
 
-# if(genTikz){
-# 	print.xtable( xtable(summ, align='llcccccc',
-# 		caption=summCaption,
-# 		label=summLabel),
-# 		include.rownames=FALSE, sanitize.text.function=identity,
-# 		hline.after=c(0,0,nrow(summ),nrow(summ)),
-# 		size='normalsize', file=summTable
-# 	)
-# }
+if(genTikz){
+	print.xtable( xtable(summ, align='llcccccc',
+		caption=summCaption,
+		label=summLabel),
+		include.rownames=FALSE, sanitize.text.function=identity,
+		hline.after=c(0,0,nrow(summ),nrow(summ)),
+		size='normalsize', file=summTable
+	)
+}
 ###############################################################
 
 ###############################################################
@@ -92,7 +92,6 @@ modelFinal=coxph(Surv(start,stop,compliance) ~
 	+ lag1_polity2 
 	+ lag1_lgdpCAP + lag1_gdpGR	+ lag1_lpopulation	 
 	+ lag1_domSUM
-	# + frailty.gamma(as.factor(targetstate), sparse=FALSE)
 	, data=modData)
 summary(modelFinal)
 ###############################################################
@@ -101,15 +100,15 @@ summary(modelFinal)
 # Table for TeX
 setwd(pathTex)
 durTables=durTable(list(model1, model2, modelFinal), varDef)
-# if(genTikz){ print.xtable( xtable(durTables, align='llccc', 	
-# 	caption=caption,
-# 	label=label
-# 	),
-# 	include.rownames=FALSE, sanitize.text.function=identity,
-# 	hline.after=c(0,0,4,12,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
-# 	size='normalsize',
-# 	file=tableName
-# 	) }
+if(genTikz){ print.xtable( xtable(durTables, align='llccc', 	
+	caption=caption,
+	label=label
+	),
+	include.rownames=FALSE, sanitize.text.function=identity,
+	hline.after=c(0,0,4,12,nrow(varDef)*2, nrow(varDef)*2+3,nrow(varDef)*2+3),
+	size='normalsize',
+	file=tableName
+	) }
 ############################################################### 
 
 ############################################################### 
@@ -155,12 +154,12 @@ survPlot=function(
 
 setwd(pathTex)
 survPlot(coef='noS', plotName='nosSurv_all.tex', 
-	cRange=vrfn(aData[,'noS'],lo=0,hi=1)) # sig | T
-survPlot(coef='Ddistdata', plotName='distSurv_all.tex') # sig | T
-survPlot(coef='lag1_polity2', plotName='polSurv_all.tex') # sig | T
-survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv_all.tex') # not sig
-survPlot(coef='lag1_uData', plotName='compRecSurv_all.tex') # sig | T
-survPlot(coef='lag1_SuData2', plotName='sancRecSurv_all.tex') # sig | T
+	cRange=vrfn(aData[,'noS'],lo=0,hi=1)) 
+survPlot(coef='Ddistdata', plotName='distSurv_all.tex') 
+survPlot(coef='lag1_polity2', plotName='polSurv_all.tex') 
+survPlot(coef='lag1_lgdpCAP', plotName='gdpSurv_all.tex') 
+survPlot(coef='lag1_uData', plotName='compRecSurv_all.tex') 
+survPlot(coef='lag1_SuData2', plotName='sancRecSurv_all.tex') 
 }
 ###############################################################
 }
