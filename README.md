@@ -2,7 +2,7 @@
 
 Authors
 ---
-[Cassy Dorff](cassydorff.com) & [Shahryar Minhas](s7minhas.com)
+[Cassy Dorff](cassydorff.com) & [Shahryar Minhas](http://s7minhas.com/)
 
 Abstract
 ---
